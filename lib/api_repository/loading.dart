@@ -14,7 +14,7 @@ class Loading {
       ..lineWidth = 2
       ..radius = 15
       ..progressColor = appColors.whiteColor
-      ..backgroundColor = appColors.orangeColor
+      ..backgroundColor = appColors.appColor
       ..indicatorColor = appColors.whiteColor
       ..textColor = appColors.whiteColor
       ..maskColor = appColors.blackColor.withOpacity(0.4)

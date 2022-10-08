@@ -25,10 +25,6 @@ class HttpUtil {
       baseUrl: apiUrl,
       connectTimeout: 10000,
       receiveTimeout: 10000,
-      headers: {
-        'key': Constants.apiKey,
-        'token': token,
-      },
       contentType: 'application/json; charset=utf-8',
       responseType: ResponseType.json,
     );

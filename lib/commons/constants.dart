@@ -7,31 +7,14 @@ class Constants {
   static const String HH_MM_A = 'hh:mm a';
 
   // Font Name .....
-  static const String appName = 'Landlord Alerts';
-  static const String fontFamily = 'Manrope';
-  static const String klasik = 'Klasik';
+  static const String appName = 'Beep';
+  static const String fontFamily = 'NunitoSans';
 
   // Api credential .....
-  static const String baseUrl = 'https://client.appmania.co.in/LandlordAlerts/api/';
-  static const String apiKey = '2b223e5ceVT713815ha54rc20uBQ4e9M123709798VT';
-  static const String login = 'login';
-  static const String signUp = 'signUp';
-  static const String resendConfirm = 'resendConfirm';
-  static const String forgotPassword = 'forgotPassword';
-  static const String updateProfile = 'updateProfile';
-  static const String changePassword = 'changePassword';
-  static const String logOut = 'logOut';
-  static const String contactUs = 'contactUs';
-  static const String createTenant = 'createTenant';
-  static const String deleteTenant = 'deleteTenant';
-  static const String updateTenant = 'updateTenant';
-  static const String createBuilding = 'createBuilding';
-  static const String getHomeDetails = 'getHomeDetails';
-  static const String getNotificationList = 'getNotificationList';
-  static const String getTenantContract = 'getTenantContract';
+  static const String baseUrl = 'https://codewithwaqas.com/beep/api/';
 
   // About app .....
-  static const String AboutUsLink = "https://client.appmania.co.in/LandlordAlerts/abutus.html";
-  static const String PrivacyPolicyLink = "https://client.appmania.co.in/LandlordAlerts/privacy_policy.html";
-  static const String TermsAndConditionLink = "https://client.appmania.co.in/LandlordAlerts/terms_of_use.html";
+  static const String AboutUsLink = "";
+  static const String PrivacyPolicyLink = "";
+  static const String TermsAndConditionLink = "";
 }
