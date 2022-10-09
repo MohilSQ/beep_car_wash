@@ -1,6 +1,8 @@
+import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sizer/sizer.dart';
 
 /// <<< To get text View --------- >>>
 class MyTextView extends Text {
@@ -66,4 +68,28 @@ class MyTextStyle extends TextStyle {
           height: textHeight,
           fontStyle: textStyle,
         );
+}
+
+/// ----- Common Check Box -------------------->>>
+Widget commonCheckBox({
+  BuildContext? context,
+  bool? value = true,
+}) {
+  AppColors appColors = AppColors();
+  return Container(
+    height: 2.6.h,
+    width: 2.6.h,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(0.7.h),
+      border: Border.all(width: 1, color: appColors.appColor),
+      color: value! ? appColors.transparentColor : appColors.appColor,
+    ),
+    child: value
+        ? Container()
+        : Icon(
+            Icons.check_rounded,
+            color: appColors.whiteColor,
+            size: 1.4.h,
+          ),
+  );
 }

@@ -90,30 +90,51 @@ class RegisterScreen extends GetView<RegisterController> {
                             textColor: controller.emailError!.value ? appColors.errorColor : appColors.darkTextColor,
                           );
                         }),
-                        RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            text: "By creating an account you agree to beep ",
-                            style: MyTextStyle(
-                              textWeight: FontWeight.w600,
-                              textSize: 12.sp,
-                              textColor: appColors.lightTextColor,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: "Terms of Service and Privacy Policy",
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    // Get.to(() => const RegisterScreen(), binding: RegisterBindings());
-                                  },
-                                style: MyTextStyle(
-                                  textWeight: FontWeight.bold,
-                                  textSize: 12.sp,
-                                  textColor: appColors.appColor,
+                        const Spacer(`),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Obx(() {
+                              return GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+                                onTap: () {
+                                  controller.termsAndPrivacy!.value = !controller.termsAndPrivacy!.value;
+                                },
+                                child: commonCheckBox(
+                                  context: context,
+                                  value: controller.termsAndPrivacy!.value,
                                 ),
-                              )
-                            ],
-                          ),
+                              );
+                            }),
+                            SizedBox(width: 1.2.h),
+                            Expanded(
+                              child: RichText(
+                                textAlign: TextAlign.start,
+                                text: TextSpan(
+                                  text: "By creating an account you agree to beep ",
+                                  style: MyTextStyle(
+                                    textWeight: FontWeight.w600,
+                                    textSize: 12.sp,
+                                    textColor: appColors.blackColor,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: "Terms of Service and Privacy Policy",
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          // Get.to(() => const RegisterScreen(), binding: RegisterBindings());
+                                        },
+                                      style: MyTextStyle(
+                                        textWeight: FontWeight.bold,
+                                        textSize: 12.sp,
+                                        textColor: appColors.appColor,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(height: 3.h),
                         CustomButton(
