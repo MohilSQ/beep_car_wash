@@ -13,4 +13,7 @@ class ImagePath {
   static String google = "${base}ic_google.png";
   static String facebook = "${base}ic_facebook.png";
   static String apple = "${base}ic_apple.png";
+
+  /// ------ SignIn otp Screen ------------------>>>>
+  static String signInOTP = "${base}sign_in_otp.png";
 }

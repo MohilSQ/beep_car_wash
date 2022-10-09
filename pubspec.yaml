@@ -59,6 +59,7 @@ dependencies:
   sizer: ^2.0.15
 
   country_calling_code_picker: ^2.0.1
+  pin_code_fields: ^7.4.0
 
 dev_dependencies:
   flutter_test:

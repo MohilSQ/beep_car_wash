@@ -77,8 +77,8 @@ Widget commonCheckBox({
 }) {
   AppColors appColors = AppColors();
   return Container(
-    height: 2.6.h,
-    width: 2.6.h,
+    height: 2.8.h,
+    width: 2.8.h,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(0.7.h),
       border: Border.all(width: 1, color: appColors.appColor),
@@ -89,7 +89,7 @@ Widget commonCheckBox({
         : Icon(
             Icons.check_rounded,
             color: appColors.whiteColor,
-            size: 1.4.h,
+            size: 1.8.h,
           ),
   );
 }

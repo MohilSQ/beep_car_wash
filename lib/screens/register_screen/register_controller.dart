@@ -9,5 +9,5 @@ class RegisterController extends GetxController {
   RxBool? lastNameError = false.obs;
   RxBool? emailError = false.obs;
 
-  RxBool? termsAndPrivacy = false.obs;
+  RxBool? termsAndPrivacy = true.obs;
 }
