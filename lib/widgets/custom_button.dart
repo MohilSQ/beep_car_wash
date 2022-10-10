@@ -21,10 +21,13 @@ class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
   final VoidCallback? onLongPress;
   final Widget? child;
+  final double? widgetSpace;
+  final MainAxisAlignment? widgetMainAxis;
   final IconData? icon;
   final Color? iconColor;
   final String? image;
   final double? imageSize;
+  final Color? imageColor;
   final String? text;
   final Color? textColor;
   final TextStyle? style;
@@ -48,10 +51,13 @@ class CustomButton extends StatelessWidget {
     this.onLongPress,
     required this.onPressed,
     this.child,
+    this.widgetSpace,
+    this.widgetMainAxis,
     this.icon,
     this.iconColor,
     this.image,
     this.imageSize,
+    this.imageColor,
     this.text,
     this.textColor,
     this.style,
@@ -109,13 +115,18 @@ class CustomButton extends StatelessWidget {
       onLongPress: onLongPress,
       child: child ??
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: widgetMainAxis ?? MainAxisAlignment.center,
             children: [
               if (icon != null)
-                Icon(
-                  icon,
-                  color: iconColor ?? appColors.whiteColor,
-                  size: 24,
+                Row(
+                  children: [
+                    Icon(
+                      icon,
+                      color: iconColor ?? appColors.whiteColor,
+                      size: 24,
+                    ),
+                    SizedBox(width: widgetSpace ?? 0)
+                  ],
                 )
               else
                 const SizedBox(),
@@ -125,8 +136,9 @@ class CustomButton extends StatelessWidget {
                     Image.asset(
                       image!,
                       height: imageSize ?? 22,
+                      color: imageColor,
                     ),
-                    SizedBox(width: 0.9.h)
+                    SizedBox(width: widgetSpace ?? 0)
                   ],
                 )
               else
