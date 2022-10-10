@@ -32,6 +32,7 @@ class AppColors {
 
   Color appColor = const Color(0xFF00DD8D);
   Color lightAppColor = const Color(0xFFDFF1EA);
+  Color darkAppColor = const Color(0xFF025839);
 
   ///************** Text Color **************///
   Color darkTextColor = const Color(0xFF212121);

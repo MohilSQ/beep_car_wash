@@ -9,12 +9,14 @@ class CustomAppBar extends StatelessWidget {
   final String? title;
   final bool? shadowVisible;
   final Color? appBarColor;
+  final Color? textColor;
   final Widget? suffixIcon;
   const CustomAppBar({
     Key? key,
     this.title,
     this.shadowVisible = true,
     this.appBarColor,
+    this.textColor,
     this.suffixIcon,
   }) : super(key: key);
 
@@ -51,14 +53,14 @@ class CustomAppBar extends StatelessWidget {
               height: 4.6.h,
               padding: EdgeInsets.symmetric(horizontal: 1.2.h),
               decoration: const BoxDecoration(shape: BoxShape.circle),
-              child: Image.asset(ImagePath.drawer),
+              child: Image.asset(ImagePath.drawer, color: textColor),
             ),
           ),
           SizedBox(width: 2.6.w),
           MyTextView(
             title!,
             textStyleNew: MyTextStyle(
-              textColor: appColors.darkTextColor,
+              textColor: textColor ?? appColors.darkTextColor,
               textWeight: FontWeight.bold,
               textSize: 14.6.sp,
             ),

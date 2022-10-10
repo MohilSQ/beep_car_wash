@@ -37,6 +37,19 @@ class ImagePath {
   static String smallMachineImage = "${base}small_machine_image.png";
   static String address = "${base}ic_adress.png";
 
+  /// ------ How It Work Screen ------------------>>>>
+  static String howItWork1 = "${base}how_it_work1.png";
+  static String howItWork2 = "${base}how_it_work2.png";
+  static String howItWork3 = "${base}how_it_work3.png";
+  static String howItWork4 = "${base}how_it_work4.png";
+  static String howItWork5 = "${base}how_it_work5.png";
+  static String howItWork6 = "${base}how_it_work6.png";
+  static String checkMark = "${base}check_mark.png";
+
+  /// ------ Setting Screen ------------------>>>>
+  static String camera = "${base}ic_camera.png";
+
   /// ------ Dummy Image Screen ------------------>>>>
   static String dummyImage1 = "${base}dummy_image1.png";
+  static String dummyImage2 = "${base}dummy_image2.png";
 }
