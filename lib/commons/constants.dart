@@ -1,5 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:flutter/material.dart';
+
 class Constants {
   // Time Format .....
   static const String YYYY_MM_DD_HH_MM_SS = 'yyyy-MM-dd hh:mm:ss';
@@ -17,4 +19,7 @@ class Constants {
   static const String AboutUsLink = "";
   static const String PrivacyPolicyLink = "";
   static const String TermsAndConditionLink = "";
+
+  // Global Variable .....
+  static final scaffoldKey = GlobalKey<ScaffoldState>();
 }

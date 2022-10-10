@@ -46,4 +46,15 @@ class Strings {
   static const String verifyNumber2 = " Please enter the four number of verification code below";
   static const String doNotReceiveTheOTP = "Don’t receive the OTP?";
   static const String resendCode = "Resend Code";
+
+  /// ------ Drawer Screen ------------------>>>>
+  static const String findABeep = "Find a Beep";
+  static const String washHistory = "Wash History";
+  static const String payment = "Payments";
+  static const String notification = "Notifications";
+  static const String howItWork = "How it Works";
+  static const String setting = "Settings";
+  static const String referAndEarn = "Refer and Earn \$100";
+  static const String startMyCarWash = "Start My Car Wash";
+  static const String becomeAnOperatorAndEarnPassiveIncome = "Become an operator and earn passive income";
 }

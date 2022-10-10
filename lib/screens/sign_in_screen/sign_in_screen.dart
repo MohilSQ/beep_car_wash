@@ -90,6 +90,7 @@ class SignInScreen extends GetView<SignInController> {
                                   controller.showCountryCodePicker();
                                 },
                                 child: CustomContainer(
+                                  borderVisible: true,
                                   horizontalPadding: 1.2.h,
                                   child: controller.selectedCountry == null
                                       ? const SizedBox()

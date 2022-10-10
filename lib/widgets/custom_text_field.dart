@@ -11,7 +11,9 @@ class CustomTextField extends StatelessWidget {
   final String? hintText;
   final Color? hintColor;
   final Color? textColor;
+  final double? textSize;
   final bool? enabled;
+  final bool? isDense;
   final TextAlign? textAlign;
   final TextInputType? inputType;
   final List<TextInputFormatter>? inputFormat;
@@ -26,6 +28,8 @@ class CustomTextField extends StatelessWidget {
   final int? minLines;
   final int? maxLines;
   final bool? isError;
+  final bool? borderVisible;
+  final bool? containerVisible;
 
   const CustomTextField({
     Key? key,
@@ -33,8 +37,10 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.hintText,
     this.textColor,
+    this.textSize,
     this.hintColor,
     this.enabled = true,
+    this.isDense = false,
     this.textAlign = TextAlign.start,
     this.inputType = TextInputType.text,
     this.inputFormat,
@@ -49,50 +55,59 @@ class CustomTextField extends StatelessWidget {
     this.minLines,
     this.maxLines = 1,
     this.isError = false,
+    this.borderVisible = true,
+    this.containerVisible = true,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return containerVisible!
+        ? CustomContainer(
+            borderVisible: borderVisible!,
+            errorView: isError,
+            child: textField(),
+          )
+        : textField();
+  }
+
+  Widget textField() {
     AppColors appColors = AppColors();
-    return CustomContainer(
-      isError: isError,
-      child: TextField(
-        controller: controller,
-        cursorColor: appColors.appColor,
-        cursorWidth: 2,
-        keyboardType: inputType,
-        enabled: enabled,
-        obscureText: obscureText!,
-        textInputAction: textInputAction,
-        onSubmitted: onSubmit,
-        onChanged: onChange,
-        onTap: onTap,
-        textAlign: textAlign!,
-        autocorrect: false,
-        autofocus: false,
-        focusNode: focusNode,
-        textCapitalization: textCapitalization ?? TextCapitalization.sentences,
-        maxLines: isMaxLines! ? null : maxLines,
-        maxLength: maxLength,
-        minLines: minLines,
-        inputFormatters: inputFormat,
-        style: MyTextStyle(
+    return TextField(
+      controller: controller,
+      cursorColor: appColors.appColor,
+      cursorWidth: 2,
+      keyboardType: inputType,
+      enabled: enabled,
+      obscureText: obscureText!,
+      textInputAction: textInputAction,
+      onSubmitted: onSubmit,
+      onChanged: onChange,
+      onTap: onTap,
+      textAlign: textAlign!,
+      autocorrect: false,
+      autofocus: false,
+      focusNode: focusNode,
+      textCapitalization: textCapitalization ?? TextCapitalization.sentences,
+      maxLines: isMaxLines! ? null : maxLines,
+      maxLength: maxLength,
+      minLines: minLines,
+      inputFormatters: inputFormat,
+      style: MyTextStyle(
+        textWeight: FontWeight.w600,
+        textSize: textSize ?? 12.sp,
+        textColor: textColor ?? appColors.blackColor,
+      ),
+      decoration: InputDecoration(
+        isDense: isDense,
+        border: InputBorder.none,
+        contentPadding: const EdgeInsets.all(0),
+        hintText: hintText,
+        counter: null,
+        counterText: "",
+        hintStyle: MyTextStyle(
           textWeight: FontWeight.w600,
-          textSize: 12.sp,
-          textColor: textColor ?? appColors.blackColor,
-        ),
-        decoration: InputDecoration(
-          isDense: false,
-          border: InputBorder.none,
-          contentPadding: const EdgeInsets.all(0),
-          hintText: hintText,
-          counter: null,
-          counterText: "",
-          hintStyle: MyTextStyle(
-            textWeight: FontWeight.w600,
-            textSize: 12.sp,
-            textColor: hintColor ?? appColors.lightTextColor,
-          ),
+          textSize: textSize ?? 12.sp,
+          textColor: hintColor ?? appColors.lightTextColor,
         ),
       ),
     );

@@ -2,8 +2,8 @@ import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
-import 'package:beep_car_wash/screens/find_a_beep_screen/find_a_beep_binding.dart';
-import 'package:beep_car_wash/screens/find_a_beep_screen/find_a_beep_screen.dart';
+import 'package:beep_car_wash/screens/drawer_screen/drawer_binding.dart';
+import 'package:beep_car_wash/screens/drawer_screen/drawer_screen.dart';
 import 'package:beep_car_wash/screens/sign_in_otp_screen/sign_in_otp_controller.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -149,7 +149,7 @@ class SignInOTPScreen extends GetView<SignInOTPController> {
                           CustomButton(
                             text: Strings.continueString,
                             onPressed: () {
-                              Get.to(() => const FindABeepScreen(), binding: FindABeepBindings());
+                              Get.to(() => const DrawerScreen(), binding: DrawerBindings());
                             },
                           ),
                           SizedBox(height: MediaQuery.of(context).padding.bottom + 2.2.h),
