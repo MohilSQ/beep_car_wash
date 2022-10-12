@@ -7,7 +7,6 @@ import 'package:beep_car_wash/screens/drawer_screen/drawer_screen.dart';
 import 'package:beep_car_wash/screens/sign_in_otp_screen/sign_in_otp_controller.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sizer/sizer.dart';

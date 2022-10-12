@@ -12,6 +12,8 @@ class CustomTextField extends StatelessWidget {
   final Color? hintColor;
   final Color? textColor;
   final double? textSize;
+  final bool? isTitle;
+  final String? title;
   final bool? enabled;
   final bool? isDense;
   final TextAlign? textAlign;
@@ -30,6 +32,7 @@ class CustomTextField extends StatelessWidget {
   final bool? isError;
   final bool? borderVisible;
   final bool? containerVisible;
+  final Widget? suffix;
 
   const CustomTextField({
     Key? key,
@@ -39,8 +42,10 @@ class CustomTextField extends StatelessWidget {
     this.textColor,
     this.textSize,
     this.hintColor,
+    this.isTitle = false,
+    this.title,
     this.enabled = true,
-    this.isDense = false,
+    this.isDense = true,
     this.textAlign = TextAlign.start,
     this.inputType = TextInputType.text,
     this.inputFormat,
@@ -57,17 +62,35 @@ class CustomTextField extends StatelessWidget {
     this.isError = false,
     this.borderVisible = true,
     this.containerVisible = true,
+    this.suffix,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return containerVisible!
-        ? CustomContainer(
-            borderVisible: borderVisible!,
-            errorView: isError,
-            child: textField(),
-          )
-        : textField();
+    AppColors appColors = AppColors();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        isTitle!
+            ? MyTextView(
+                title!,
+                textStyleNew: MyTextStyle(
+                  textColor: appColors.darkTextColor,
+                  textWeight: FontWeight.bold,
+                  textSize: 12.sp,
+                ),
+              )
+            : const SizedBox(),
+        isTitle! ? SizedBox(height: 1.h) : const SizedBox(),
+        containerVisible!
+            ? CustomContainer(
+                borderVisible: borderVisible!,
+                errorView: isError,
+                child: textField(),
+              )
+            : textField(),
+      ],
+    );
   }
 
   Widget textField() {
@@ -78,6 +101,7 @@ class CustomTextField extends StatelessWidget {
       cursorWidth: 2,
       keyboardType: inputType,
       enabled: enabled,
+      textAlignVertical: TextAlignVertical.center,
       obscureText: obscureText!,
       textInputAction: textInputAction,
       onSubmitted: onSubmit,
@@ -98,6 +122,8 @@ class CustomTextField extends StatelessWidget {
         textColor: textColor ?? appColors.blackColor,
       ),
       decoration: InputDecoration(
+        // suffix: suffix ?? const SizedBox(),
+        suffixIcon: suffix ?? const SizedBox(),
         isDense: isDense,
         border: InputBorder.none,
         contentPadding: const EdgeInsets.all(0),

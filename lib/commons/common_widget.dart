@@ -1,7 +1,6 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 
 /// <<< To get text View --------- >>>

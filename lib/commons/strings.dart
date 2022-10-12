@@ -57,4 +57,13 @@ class Strings {
   static const String referAndEarn = "Refer and Earn \$100";
   static const String startMyCarWash = "Start My Car Wash";
   static const String becomeAnOperatorAndEarnPassiveIncome = "Become an operator and earn passive income";
+
+  /// ------ Setting Screen ------------------>>>>
+  static const String phoneNumber = "Phone Number";
+  static const String password = "Password";
+  static const String save = "Save";
+  static const String termsOfService = "Terms of Service";
+  static const String privacyAndPolicy = "Privacy and Policy";
+  static const String customerSupport = "Customer Support";
+  static const String logOut = "Log Out";
 }

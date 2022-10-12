@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Loading();
-    AppColors appColor = AppColors();
     Utils.darkStatusBar();
     Utils.screenPortrait();
     return Sizer(

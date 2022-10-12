@@ -38,10 +38,12 @@ class AppColors {
   Color darkTextColor = const Color(0xFF212121);
   Color lightTextColor = const Color(0xFF898989);
   Color appColorText = const Color(0xFF00AB6C);
+  Color blueText = const Color(0xFF0997B8);
 
   ///************** button Color **************///
   Color buttonColor = const Color(0xFF00AB6C);
   Color borderColor = const Color(0xFFEAEAEA);
   Color grayBorderColor = const Color(0xFFD9D9D9);
   Color errorColor = const Color(0xFFDE2800);
+  Color lightBlueColor = const Color(0xFFDFF3F8);
 }

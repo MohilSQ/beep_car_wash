@@ -9,8 +9,8 @@ import 'package:beep_car_wash/screens/notification_screen/notification_bindings.
 import 'package:beep_car_wash/screens/notification_screen/notification_screen.dart';
 import 'package:beep_car_wash/screens/payment_screen/payment_bindings.dart';
 import 'package:beep_car_wash/screens/payment_screen/payment_screen.dart';
-import 'package:beep_car_wash/screens/refer_and_earn_screen/settings_bindings.dart';
-import 'package:beep_car_wash/screens/refer_and_earn_screen/settings_screen.dart';
+import 'package:beep_car_wash/screens/refer_and_earn_screen/refer_and_earn_bindings.dart';
+import 'package:beep_car_wash/screens/refer_and_earn_screen/refer_and_earn_screen.dart';
 import 'package:beep_car_wash/screens/settings_screen/settings_bindings.dart';
 import 'package:beep_car_wash/screens/settings_screen/settings_screen.dart';
 import 'package:beep_car_wash/screens/wash_history_screen/wash_history_bindings.dart';
@@ -28,6 +28,8 @@ class DrawerScreenController extends GetxController {
     CommonModel(title: Strings.setting, image: ImagePath.setting, isSelected: false.obs, screen: const SettingsScreen(), bindings: SettingsBindings()),
     CommonModel(title: Strings.referAndEarn, image: ImagePath.referAndEarn, isSelected: false.obs, screen: const ReferAndEarnScreen(), bindings: ReferAndEarnBindings()),
   ].obs;
+
+  Future onWillPop() async {}
 
   @override
   void onInit() {

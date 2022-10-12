@@ -13,7 +13,6 @@ import 'package:beep_car_wash/widgets/custom_text_field.dart';
 import 'package:country_calling_code_picker/country_code_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
