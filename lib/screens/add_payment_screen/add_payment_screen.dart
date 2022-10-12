@@ -25,7 +25,7 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
             ListView(
               padding: EdgeInsets.symmetric(vertical: 1.6.h, horizontal: 6.w).copyWith(top: MediaQuery.of(Get.context!).padding.top + AppBar().preferredSize.height + 2.h),
               children: [
-                SizedBox(height: 2.h),
+                SizedBox(height: 1.4.h),
                 MyTextView(
                   "Choose a Payment Method",
                   textStyleNew: MyTextStyle(
@@ -34,15 +34,16 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                     textSize: 14.sp,
                   ),
                 ),
-                SizedBox(height: 4.h),
+                SizedBox(height: 3.h),
                 Row(
                   children: [
                     Container(
-                      height: 27.33.w,
+                      height: 26.w,
                       width: 27.33.w,
                       decoration: BoxDecoration(
+                        color: const Color(0xFFE7FBF4),
                         borderRadius: BorderRadius.circular(1.8.h),
-                        border: Border.all(color: appColors.appColorText, width: 0.2.h),
+                        border: Border.all(color: appColors.appColorText, width: 0.15.h),
                       ),
                       child: Stack(
                         children: [
@@ -51,29 +52,32 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                             top: 2.w,
                             child: Image.asset(
                               ImagePath.checkMark,
-                              width: 2.8.h,
+                              width: 2.2.h,
                             ),
                           ),
                           Align(
                             alignment: Alignment.center,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  ImagePath.card,
-                                  color: appColors.appColorText,
-                                  width: 4.8.h,
-                                ),
-                                MyTextView(
-                                  "Credit Card",
-                                  textStyleNew: MyTextStyle(
-                                    textColor: appColors.appColorText,
-                                    textWeight: FontWeight.bold,
-                                    textSize: 12.sp,
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 2.6.w),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    ImagePath.card,
+                                    color: appColors.appColorText,
+                                    width: 4.h,
                                   ),
-                                ),
-                              ],
+                                  MyTextView(
+                                    "Credit Card",
+                                    textStyleNew: MyTextStyle(
+                                      textColor: appColors.appColorText,
+                                      textWeight: FontWeight.bold,
+                                      textSize: 12.sp,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -81,58 +85,64 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                     ),
                     SizedBox(width: 3.w),
                     Container(
-                      height: 27.33.w,
+                      height: 26.w,
                       width: 27.33.w,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(1.8.h),
-                        border: Border.all(color: appColors.lightGreyColor, width: 0.2.h),
+                        border: Border.all(color: appColors.lightGreyColor, width: 0.1.h),
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            ImagePath.payPal,
-                            color: appColors.lightTextColor,
-                            width: 4.2.h,
-                          ),
-                          MyTextView(
-                            "Pay Pal",
-                            textStyleNew: MyTextStyle(
-                              textColor: appColors.lightTextColor,
-                              textWeight: FontWeight.bold,
-                              textSize: 12.sp,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 2.w),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              ImagePath.payPal,
+                              color: appColors.lightTextColor,
+                              width: 3.6.h,
                             ),
-                          ),
-                        ],
+                            MyTextView(
+                              "Pay Pal",
+                              textStyleNew: MyTextStyle(
+                                textColor: appColors.lightTextColor,
+                                textWeight: FontWeight.bold,
+                                textSize: 12.sp,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(width: 3.w),
                     Container(
-                      height: 27.33.w,
+                      height: 26.w,
                       width: 27.33.w,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(1.8.h),
-                        border: Border.all(color: appColors.lightGreyColor, width: 0.2.h),
+                        border: Border.all(color: appColors.lightGreyColor, width: 0.1.h),
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            ImagePath.applePayment,
-                            color: appColors.lightTextColor,
-                            width: 4.2.h,
-                          ),
-                          MyTextView(
-                            "Apple Pay",
-                            textStyleNew: MyTextStyle(
-                              textColor: appColors.lightTextColor,
-                              textWeight: FontWeight.bold,
-                              textSize: 12.sp,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 1.4.w),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              ImagePath.applePayment,
+                              color: appColors.lightTextColor,
+                              width: 3.6.h,
                             ),
-                          ),
-                        ],
+                            MyTextView(
+                              "Apple Pay",
+                              textStyleNew: MyTextStyle(
+                                textColor: appColors.lightTextColor,
+                                textWeight: FontWeight.bold,
+                                textSize: 12.sp,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -178,11 +188,9 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                     isError: controller.expirationDateError.value,
                     hintColor: controller.expirationDateError.value ? appColors.errorColor : appColors.lightTextColor,
                     textColor: controller.expirationDateError.value ? appColors.errorColor : appColors.darkTextColor,
-                    suffix: Padding(
-                      padding: EdgeInsets.all(1.2.h),
-                      child: Image.asset(
-                        ImagePath.date,
-                      ),
+                    suffix: Image.asset(
+                      ImagePath.date,
+                      height: 3.2.h,
                     ),
                   );
                 }),
@@ -198,11 +206,9 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                     isError: controller.cvvError.value,
                     hintColor: controller.cvvError.value ? appColors.errorColor : appColors.lightTextColor,
                     textColor: controller.cvvError.value ? appColors.errorColor : appColors.darkTextColor,
-                    suffix: Padding(
-                      padding: EdgeInsets.all(1.4.h),
-                      child: Image.asset(
-                        ImagePath.cardSmall,
-                      ),
+                    suffix: Image.asset(
+                      ImagePath.cardSmall,
+                      width: 3.h,
                     ),
                   );
                 }),

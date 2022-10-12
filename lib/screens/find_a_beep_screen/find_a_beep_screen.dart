@@ -1,9 +1,11 @@
+import 'package:beep_car_wash/bottom_sheet/nearest_beep.dart';
 import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/find_a_beep_controller.dart';
 import 'package:beep_car_wash/widgets/custom_container.dart';
+import 'package:beep_car_wash/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -63,7 +65,14 @@ class FindABeepScreen extends GetView<FindABeepController> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      controller.mapView.value = !controller.mapView.value;
+                      controller.mapView.value = true;
+
+                      showModalBottomSheet(
+                        context: context,
+                        backgroundColor: appColors.transparentColor,
+                        barrierColor: appColors.transparentColor,
+                        builder: (context) => const NearestBeep(),
+                      );
                     },
                     child: CustomContainer(
                       height: 5.h,
@@ -103,41 +112,15 @@ class FindABeepScreen extends GetView<FindABeepController> {
                         ),
                         SizedBox(width: 0.8.h),
                         Expanded(
-                          child: TextField(
+                          child: CustomTextField(
                             controller: controller.searchController,
-                            cursorColor: appColors.appColor,
-                            cursorWidth: 2,
-                            autocorrect: false,
-                            autofocus: false,
-                            textCapitalization: TextCapitalization.sentences,
-                            style: MyTextStyle(
-                              textWeight: FontWeight.w600,
-                              textSize: 10.sp,
-                              textColor: appColors.blackColor,
-                            ),
-                            decoration: InputDecoration(
-                              isDense: true,
-                              border: InputBorder.none,
-                              contentPadding: const EdgeInsets.all(0),
-                              hintText: "Your Location",
-                              counter: null,
-                              counterText: "",
-                              hintStyle: MyTextStyle(
-                                textWeight: FontWeight.w600,
-                                textSize: 10.sp,
-                                textColor: appColors.lightTextColor,
-                              ),
-                            ),
+                            textInputAction: TextInputAction.done,
+                            hintText: "Your Location",
+                            textSize: 10.sp,
+                            isDense: true,
+                            containerVisible: false,
+                            borderVisible: false,
                           ),
-                          // child: CustomTextField(
-                          //   controller: controller.searchController,
-                          //   textInputAction: TextInputAction.done,
-                          //   hintText: "Your Location",
-                          //   textSize: 10.sp,
-                          //   isDense: true,
-                          //   containerVisible: false,
-                          //   borderVisible: false,
-                          // ),
                         ),
                       ],
                     ),

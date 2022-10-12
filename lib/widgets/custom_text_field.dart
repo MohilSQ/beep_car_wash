@@ -30,9 +30,11 @@ class CustomTextField extends StatelessWidget {
   final int? minLines;
   final int? maxLines;
   final bool? isError;
+  final bool? isHight;
   final bool? borderVisible;
   final bool? containerVisible;
   final Widget? suffix;
+  final EdgeInsets? padding;
 
   const CustomTextField({
     Key? key,
@@ -60,9 +62,11 @@ class CustomTextField extends StatelessWidget {
     this.minLines,
     this.maxLines = 1,
     this.isError = false,
+    this.isHight = true,
     this.borderVisible = true,
     this.containerVisible = true,
     this.suffix,
+    this.padding,
   }) : super(key: key);
 
   @override
@@ -86,7 +90,14 @@ class CustomTextField extends StatelessWidget {
             ? CustomContainer(
                 borderVisible: borderVisible!,
                 errorView: isError,
-                child: textField(),
+                isHeight: isHight,
+                padding: padding,
+                child: Row(
+                  children: [
+                    Expanded(child: textField()),
+                    suffix ?? const SizedBox(),
+                  ],
+                ),
               )
             : textField(),
       ],
@@ -101,7 +112,6 @@ class CustomTextField extends StatelessWidget {
       cursorWidth: 2,
       keyboardType: inputType,
       enabled: enabled,
-      textAlignVertical: TextAlignVertical.center,
       obscureText: obscureText!,
       textInputAction: textInputAction,
       onSubmitted: onSubmit,
@@ -122,8 +132,6 @@ class CustomTextField extends StatelessWidget {
         textColor: textColor ?? appColors.blackColor,
       ),
       decoration: InputDecoration(
-        // suffix: suffix ?? const SizedBox(),
-        suffixIcon: suffix ?? const SizedBox(),
         isDense: isDense,
         border: InputBorder.none,
         contentPadding: const EdgeInsets.all(0),

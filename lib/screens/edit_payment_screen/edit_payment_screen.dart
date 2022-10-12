@@ -66,11 +66,9 @@ class EditPaymentScreen extends GetView<EditPaymentController> {
                     isError: controller.expirationDateError.value,
                     hintColor: controller.expirationDateError.value ? appColors.errorColor : appColors.lightTextColor,
                     textColor: controller.expirationDateError.value ? appColors.errorColor : appColors.darkTextColor,
-                    suffix: Padding(
-                      padding: EdgeInsets.all(1.2.h),
-                      child: Image.asset(
-                        ImagePath.date,
-                      ),
+                    suffix: Image.asset(
+                      ImagePath.date,
+                      height: 3.2.h,
                     ),
                   );
                 }),
@@ -86,11 +84,9 @@ class EditPaymentScreen extends GetView<EditPaymentController> {
                     isError: controller.cvvError.value,
                     hintColor: controller.cvvError.value ? appColors.errorColor : appColors.lightTextColor,
                     textColor: controller.cvvError.value ? appColors.errorColor : appColors.darkTextColor,
-                    suffix: Padding(
-                      padding: EdgeInsets.all(1.4.h),
-                      child: Image.asset(
-                        ImagePath.cardSmall,
-                      ),
+                    suffix: Image.asset(
+                      ImagePath.cardSmall,
+                      width: 3.h,
                     ),
                   );
                 }),

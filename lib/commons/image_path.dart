@@ -21,6 +21,11 @@ class ImagePath {
   static String drawer = "${base}ic_drawer.png";
   static String location = "${base}ic_location.png";
   static String appNameImageShadow = "${base}app_name_image_shadow.png";
+  static String navigation = "${base}ic_navigation.png";
+  static String qrScan = "${base}qr_scan.png";
+  static String reserve = "${base}reserve.png";
+  static String report = "${base}report.png";
+  static String tablerPhoto = "${base}tabler_photo.png";
 
   /// ------ Drawer Screen ------------------>>>>
   static String findABeep = "${base}find_a_beep.png";
@@ -66,14 +71,12 @@ class ImagePath {
   static String paymentsBG = "${base}payments_bg.png";
   static String icEdit = "${base}ic_edit.png";
 
-  /// ------ Add Payment Screen ------------------>>>>
+  /// ------ Add and Edit Payment Screen ------------------>>>>
   static String card = "${base}ic_card.png";
   static String payPal = "${base}ic_pay_pal.png";
   static String applePayment = "${base}ic_apple_payment.png";
   static String date = "${base}date.png";
   static String cardSmall = "${base}ic_card_small.png";
-
-  /// ------ Add Payment Screen ------------------>>>>
 
   /// ------ Dummy Image Screen ------------------>>>>
   static String dummyImage1 = "${base}dummy_image1.png";
