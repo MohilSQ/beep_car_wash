@@ -1,15 +1,17 @@
-import 'package:beep_car_wash/bottom_sheet/report.dart';
-import 'package:beep_car_wash/bottom_sheet/reserve.dart';
 import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
-import 'package:beep_car_wash/model/common_model.dart';
+import 'package:beep_car_wash/commons/strings.dart';
+import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/nearest_beep_sheet/nearest_beep_controller.dart';
+import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/report_sheet/report_sheet.dart';
+import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/reserve_sheet/reserve_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-class NearestBeep extends StatelessWidget {
-  const NearestBeep({super.key});
+class NearestBeepSheet extends GetView<NearestBeepController> {
+  const NearestBeepSheet({super.key});
+w
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class NearestBeep extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: MyTextView(
-                        "Nearest Beep",
+                        Strings.nearestBeep,
                         textStyleNew: MyTextStyle(
                           textSize: 15.sp,
                           textWeight: FontWeight.bold,
@@ -74,31 +76,26 @@ class NearestBeep extends StatelessWidget {
                 height: 10.h,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CommonModel(index: 0.obs, image: ImagePath.navigation, title: "Navigation"),
-                    CommonModel(index: 1.obs, image: ImagePath.qrScan, title: "Scan to Start"),
-                    CommonModel(index: 2.obs, image: ImagePath.reserve, title: "Reserve"),
-                    CommonModel(index: 3.obs, image: ImagePath.report, title: "Report"),
-                  ]
+                  children: controller.actionList
                       .map((e) => GestureDetector(
                             onTap: () {
-                              if (e.index!.value == 0) {
-                              } else if (e.index!.value == 1) {
-                              } else if (e.index!.value == 2) {
+                              if (e.index! == 0) {
+                              } else if (e.index == 1) {
+                              } else if (e.index == 2) {
                                 showModalBottomSheet(
                                   context: context,
                                   backgroundColor: appColors.transparentColor,
                                   barrierColor: appColors.transparentColor,
                                   isScrollControlled: true,
-                                  builder: (context) => StatefulBuilder(builder: (context, setState) => const Reserve()),
+                                  builder: (context) => StatefulBuilder(builder: (context, setState) => const ReserveSheet()),
                                 );
-                              } else if (e.index!.value == 3) {
+                              } else if (e.index == 3) {
                                 showModalBottomSheet(
                                   context: context,
                                   backgroundColor: appColors.transparentColor,
                                   barrierColor: appColors.transparentColor,
                                   isScrollControlled: true,
-                                  builder: (context) => StatefulBuilder(builder: (context, setState) => Report()),
+                                  builder: (context) => StatefulBuilder(builder: (context, setState) => const ReportSheet()),
                                 );
                               }
                             },
@@ -110,10 +107,10 @@ class NearestBeep extends StatelessWidget {
                                     height: 6.6.h,
                                     width: 6.6.h,
                                     decoration: BoxDecoration(
-                                      color: e.index!.value == 0 ? appColors.appColorText : appColors.whiteColor,
+                                      color: e.index == 0 ? appColors.appColorText : appColors.whiteColor,
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: e.index!.value == 0 ? appColors.appColorText : appColors.grayBorderColor,
+                                        color: e.index == 0 ? appColors.appColorText : appColors.grayBorderColor,
                                         width: 0.1.h,
                                       ),
                                     ),

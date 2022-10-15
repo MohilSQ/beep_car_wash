@@ -2,13 +2,14 @@ import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
+import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/reserve_sheet/reserve_controller.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-class Reserve extends StatelessWidget {
-  const Reserve({super.key});
+class ReserveSheet extends GetView<ReserveController> {
+  const ReserveSheet({super.key});
 
   @override
   Widget build(BuildContext context) {

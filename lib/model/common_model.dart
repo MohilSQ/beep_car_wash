@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CommonModel {
-  RxInt? index = 0.obs;
+  int? index = 0;
   String? image = '';
   String? title = '';
   String? subtitle = '';

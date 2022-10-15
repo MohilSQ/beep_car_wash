@@ -3,22 +3,17 @@ import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/model/common_model.dart';
+import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/report_sheet/report_controller.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:beep_car_wash/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-class Report extends StatelessWidget {
-  Report({super.key});
+class ReportSheet extends GetView<ReportController> {
+  const ReportSheet({super.key});
 
-  List<CommonModel> reportList = [
-    CommonModel(isSelected: true.obs, title: "Water/Foam pump"),
-    CommonModel(isSelected: false.obs, title: "Air Blower"),
-    CommonModel(isSelected: false.obs, title: "Vaccum"),
-    CommonModel(isSelected: false.obs, title: "Machine won’t turn on"),
-    CommonModel(isSelected: false.obs, title: "Other Issue"),
-  ];
+  
   @override
   Widget build(BuildContext context) {
     AppColors appColors = AppColors();
@@ -68,13 +63,13 @@ class Report extends StatelessWidget {
                 itemBuilder: (context, index) => Row(
                   children: [
                     Icon(
-                      reportList[index].isSelected!.value ? Icons.radio_button_checked : Icons.radio_button_off,
+                      controller.reportList[index].isSelected!.value ? Icons.radio_button_checked : Icons.radio_button_off,
                       color: appColors.appColorText,
                       size: 3.h,
                     ),
                     SizedBox(width: 2.w),
                     MyTextView(
-                      reportList[index].title,
+                      controller.wreportList[index].title,
                       isMaxLineWrap: true,
                       textStyleNew: MyTextStyle(
                         textColor: appColors.darkTextColor,

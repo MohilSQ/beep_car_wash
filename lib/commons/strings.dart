@@ -58,6 +58,24 @@ class Strings {
   static const String startMyCarWash = "Start My Car Wash";
   static const String becomeAnOperatorAndEarnPassiveIncome = "Become an operator and earn passive income";
 
+  /// ------ Find A Beep Screen ------------------>>>>
+  static const String setALocation = "Set a location";
+  static const String yourLocation = "Your Location";
+  static const String nearestBeep = "Nearest Beep";
+
+  /// ------ Nerest Beep Sheet ------------------>>>>
+  static const String navigation = "Navigation";
+  static const String scanToStart = "Scan to Start";
+  static const String reserve = "Reserve";
+  static const String report = "Report";
+  
+
+
+
+
+  
+
+
   /// ------ Setting Screen ------------------>>>>
   static const String phoneNumber = "Phone Number";
   static const String password = "Password";

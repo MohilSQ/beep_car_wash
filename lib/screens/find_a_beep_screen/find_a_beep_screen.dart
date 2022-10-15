@@ -1,8 +1,9 @@
-import 'package:beep_car_wash/bottom_sheet/nearest_beep.dart';
 import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
+import 'package:beep_car_wash/commons/strings.dart';
+import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/nearest_beep_sheet/nearest_beep_sheet.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/find_a_beep_controller.dart';
 import 'package:beep_car_wash/widgets/custom_container.dart';
 import 'package:beep_car_wash/widgets/custom_text_field.dart';
@@ -71,7 +72,7 @@ class FindABeepScreen extends GetView<FindABeepController> {
                         context: context,
                         backgroundColor: appColors.transparentColor,
                         barrierColor: appColors.transparentColor,
-                        builder: (context) => const NearestBeep(),
+                        builder: (context) => const NearestBeepSheet(),
                       );
                     },
                     child: CustomContainer(
@@ -95,7 +96,7 @@ class FindABeepScreen extends GetView<FindABeepController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     MyTextView(
-                      "Set a location",
+                      Strings.setALocation,
                       textStyleNew: MyTextStyle(
                         textColor: appColors.appColor,
                         textWeight: FontWeight.w600,
@@ -115,7 +116,7 @@ class FindABeepScreen extends GetView<FindABeepController> {
                           child: CustomTextField(
                             controller: controller.searchController,
                             textInputAction: TextInputAction.done,
-                            hintText: "Your Location",
+                            hintText: Strings.yourLocation,
                             textSize: 10.sp,
                             isDense: true,
                             containerVisible: false,
