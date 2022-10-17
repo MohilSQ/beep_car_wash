@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 class WashHistoryBindings implements Bindings {
   @override
   void dependencies() {
-    // TODO: implement dependencies
     Get.put<WashHistoryController>(WashHistoryController());
   }
 }

@@ -5,6 +5,5 @@ class OnBoardingBindings implements Bindings {
   @override
   void dependencies() {
     Get.put<OnBoardingController>(OnBoardingController());
-    // TODO: implement dependencies
   }
 }

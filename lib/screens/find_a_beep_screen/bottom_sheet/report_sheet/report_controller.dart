@@ -1,6 +1,6 @@
 import 'package:beep_car_wash/model/common_model.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+
 
 class ReportController extends GetxController{
   List<CommonModel> reportList = [

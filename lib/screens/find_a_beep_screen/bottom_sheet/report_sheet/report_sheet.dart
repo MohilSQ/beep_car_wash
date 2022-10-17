@@ -2,7 +2,6 @@ import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
-import 'package:beep_car_wash/model/common_model.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/report_sheet/report_controller.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:beep_car_wash/widgets/custom_text_field.dart';
@@ -17,6 +16,7 @@ class ReportSheet extends GetView<ReportController> {
   @override
   Widget build(BuildContext context) {
     AppColors appColors = AppColors();
+    Get.put(ReportController());
     return Wrap(
       children: [
         Container(
@@ -69,7 +69,7 @@ class ReportSheet extends GetView<ReportController> {
                     ),
                     SizedBox(width: 2.w),
                     MyTextView(
-                      controller.wreportList[index].title,
+                      controller.reportList[index].title,
                       isMaxLineWrap: true,
                       textStyleNew: MyTextStyle(
                         textColor: appColors.darkTextColor,

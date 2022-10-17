@@ -151,7 +151,7 @@ class SignInOTPScreen extends GetView<SignInOTPController> {
                               Get.to(() => const DrawerScreen(), binding: DrawerBindings());
                             },
                           ),
-                          SizedBox(height: MediaQuery.of(context).padding.bottom + 2.2.h),
+                          SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),
                         ],
                       ),
                     ),

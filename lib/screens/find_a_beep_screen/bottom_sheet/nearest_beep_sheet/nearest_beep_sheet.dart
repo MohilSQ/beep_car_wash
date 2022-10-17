@@ -11,11 +11,11 @@ import 'package:sizer/sizer.dart';
 
 class NearestBeepSheet extends GetView<NearestBeepController> {
   const NearestBeepSheet({super.key});
-w
 
   @override
   Widget build(BuildContext context) {
     AppColors appColors = AppColors();
+    Get.put(NearestBeepController());
     return Wrap(
       children: [
         Container(
@@ -142,7 +142,7 @@ w
                       .toList(),
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).padding.bottom + 2.h),
+              SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),
             ],
           ),
         ),

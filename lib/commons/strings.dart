@@ -69,7 +69,12 @@ class Strings {
   static const String reserve = "Reserve";
   static const String report = "Report";
   
+  /// ------ Payment Screen ------------------>>>>
+  static const String currentBalance = "Current Balance";
+  static const String primary = "Primary";
+  static const String addNewPayment = "Add New Payment";
 
+  /// ------ Edit Payment Screen ------------------>>>>
 
 
 

@@ -11,7 +11,6 @@ class SignInController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     initCountry();
     super.onInit();
   }

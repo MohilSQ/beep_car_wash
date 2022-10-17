@@ -5,6 +5,5 @@ class SignInOTPBindings implements Bindings {
   @override
   void dependencies() {
     Get.put<SignInOTPController>(SignInOTPController());
-    // TODO: implement dependencies
   }
 }
