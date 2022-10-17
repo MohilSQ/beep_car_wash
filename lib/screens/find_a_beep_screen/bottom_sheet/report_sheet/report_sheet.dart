@@ -69,7 +69,7 @@ class ReportSheet extends GetView<ReportController> {
                     ),
                     SizedBox(width: 2.w),
                     MyTextView(
-                      controller.wreportList[index].title,
+                      controller.reportList[index].title,
                       isMaxLineWrap: true,
                       textStyleNew: MyTextStyle(
                         textColor: appColors.darkTextColor,
