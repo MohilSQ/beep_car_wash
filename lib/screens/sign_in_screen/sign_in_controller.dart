@@ -1,10 +1,13 @@
+import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:country_calling_code_picker/picker.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Response, FormData, MultipartFile;
 import 'package:sizer/sizer.dart';
 
 class SignInController extends GetxController {
+  Utils utils = Utils();
+
   Country? selectedCountry;
   TextEditingController phoneNumberController = TextEditingController();
   RxBool? phoneNumberError = false.obs;
@@ -15,6 +18,7 @@ class SignInController extends GetxController {
     super.onInit();
   }
 
+  /// ---- Show Defult Country ------------>>>
   void initCountry() async {
     printAction("initCountry");
     final country = await getDefaultCountry(Get.context!);
@@ -22,11 +26,12 @@ class SignInController extends GetxController {
     update();
   }
 
+  /// ---- Show Country Code Picker ------------>>>
   void showCountryCodePicker() async {
     final country = await showCountryPickerSheet(
       Get.context!,
       title: Text(
-        'Choose Country',
+        Strings.chooseCountry,
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: 20.sp,
@@ -39,7 +44,7 @@ class SignInController extends GetxController {
         bottom: 0,
         child: TextButton(
           child: Text(
-            'Cancel',
+            Strings.cancel,
             style: TextStyle(
               fontSize: 11.sp,
               fontWeight: FontWeight.w600,
@@ -59,8 +64,10 @@ class SignInController extends GetxController {
   bool validation() {
     if (phoneNumberController.text.isEmpty) {
       phoneNumberError!.value = true;
-    } else if (phoneNumberController.text.length <= 5) {
+      utils.showSnackBar(context: Get.context!, message: "Plese enter phone number");
+    } else if (utils.phoneValidator(phoneNumberController.text)) {
       phoneNumberError!.value = true;
+      utils.showSnackBar(context: Get.context!, message: "Plese enter valid phone number");
     } else {
       phoneNumberError!.value = false;
       return true;

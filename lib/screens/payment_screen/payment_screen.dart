@@ -89,7 +89,7 @@ class PaymentScreen extends GetView<PaymentController> {
             itemBuilder: (context, index) => SizedBox(
               height: 10.h,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 6.w),
+                padding: EdgeInsets.symmetric(horizontal: 6.w).copyWith(right: 1.w),
                 child: Row(
                   children: [
                     Image.asset(
@@ -139,6 +139,21 @@ class PaymentScreen extends GetView<PaymentController> {
                             ),
                           )
                         : const SizedBox(),
+                    PopupMenuButton<int>(
+                      itemBuilder: (context) => [
+                        PopupMenuItem(value: 1, textStyle: MyTextStyle(textSize: 10.sp, textWeight: FontWeight.w600), height: 3.4.h, child: const Text("Primary")),
+                        PopupMenuItem(value: 2, textStyle: MyTextStyle(textSize: 10.sp, textWeight: FontWeight.w600), height: 3.4.h, child: const Text("Edit")),
+                        PopupMenuItem(value: 3, textStyle: MyTextStyle(textSize: 10.sp, textWeight: FontWeight.w600), height: 3.4.h, child: const Text("Deleat")),
+                      ],
+                      offset: const Offset(-30, 40),
+                      color: Colors.white,
+                      onSelected: (data) {
+                        if (data == 1) {
+                        } else if (data == 2) {
+                          Get.to(() => const EditPaymentScreen(), binding: EditPaymentBindings());
+                        } else if (data == 3) {}
+                      },
+                    ),
                   ],
                 ),
               ),

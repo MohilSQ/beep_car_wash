@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:cookie_jar/cookie_jar.dart';
@@ -10,9 +11,9 @@ import '../commons/utils.dart';
 import 'loading.dart';
 
 class HttpUtil {
-  factory HttpUtil(String token, bool isLoading, BuildContext context) => _instance(token, isLoading, context);
+  factory HttpUtil( bool isLoading, BuildContext context) => _instance( isLoading, context);
 
-  static HttpUtil _instance(token, isLoading, context) => HttpUtil._internal(token: token, isLoading: isLoading, context: context);
+  static HttpUtil _instance( isLoading, context) => HttpUtil._internal( isLoading: isLoading, context: context);
 
   late Dio dio;
   CancelToken cancelToken = CancelToken();
@@ -20,7 +21,7 @@ class HttpUtil {
   Utils utils = Utils();
   BuildContext? context;
 
-  HttpUtil._internal({String? token, bool? isLoading, required BuildContext context}) {
+  HttpUtil._internal({ bool? isLoading, required BuildContext context}) {
     BaseOptions options = BaseOptions(
       baseUrl: apiUrl,
       connectTimeout: 10000,
@@ -159,7 +160,8 @@ class HttpUtil {
   /// restful post
   Future post(
     String path, {
-    FormData? data,
+    dynamic data,
+    bool? isFromData = false,
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
@@ -167,7 +169,7 @@ class HttpUtil {
 
     var response = await dio.post(
       path,
-      data: data,
+      data: isFromData! ? data : json.encode(data),
       queryParameters: queryParameters,
       options: requestOptions,
       cancelToken: cancelToken,

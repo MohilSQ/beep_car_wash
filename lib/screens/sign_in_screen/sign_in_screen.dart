@@ -2,8 +2,6 @@ import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
-import 'package:beep_car_wash/screens/register_screen/register_binding.dart';
-import 'package:beep_car_wash/screens/register_screen/register_screen.dart';
 import 'package:beep_car_wash/screens/sign_in_otp_screen/sign_in_otp_binding.dart';
 import 'package:beep_car_wash/screens/sign_in_otp_screen/sign_in_otp_screen.dart';
 import 'package:beep_car_wash/screens/sign_in_screen/sign_in_controller.dart';
@@ -11,7 +9,6 @@ import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:beep_car_wash/widgets/custom_container.dart';
 import 'package:beep_car_wash/widgets/custom_text_field.dart';
 import 'package:country_calling_code_picker/country_code_picker.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -134,6 +131,7 @@ class SignInScreen extends GetView<SignInController> {
                           CustomButton(
                             text: Strings.continueString,
                             onPressed: () {
+                              // if (controller.validation()) {}
                               Get.to(() => const SignInOTPScreen(), binding: SignInOTPBindings());
                             },
                           ),
@@ -183,35 +181,35 @@ class SignInScreen extends GetView<SignInController> {
                             elevation: 0,
                             onPressed: () {},
                           ),
-                          const Spacer(),
-                          Align(
-                            alignment: Alignment.center,
-                            child: RichText(
-                              textAlign: TextAlign.center,
-                              text: TextSpan(
-                                text: Strings.doNotHaveAnAccount,
-                                style: MyTextStyle(
-                                  textWeight: FontWeight.w600,
-                                  textSize: 12.sp,
-                                  textColor: appColors.lightTextColor,
-                                ),
-                                children: [
-                                  TextSpan(
-                                    text: Strings.spaceRegister,
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        Get.to(() => const RegisterScreen(), binding: RegisterBindings());
-                                      },
-                                    style: MyTextStyle(
-                                      textWeight: FontWeight.bold,
-                                      textSize: 12.sp,
-                                      textColor: appColors.appColorText,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
+                          // const Spacer(),
+                          // Align(
+                          //   alignment: Alignment.center,
+                          //   child: RichText(
+                          //     textAlign: TextAlign.center,
+                          //     text: TextSpan(
+                          //       text: Strings.doNotHaveAnAccount,
+                          //       style: MyTextStyle(
+                          //         textWeight: FontWeight.w600,
+                          //         textSize: 12.sp,
+                          //         textColor: appColors.lightTextColor,
+                          //       ),
+                          //       children: [
+                          //         TextSpan(
+                          //           text: Strings.spaceRegister,
+                          //           recognizer: TapGestureRecognizer()
+                          //             ..onTap = () {
+                          //               Get.to(() => const RegisterScreen(), binding: RegisterBindings());
+                          //             },
+                          //           style: MyTextStyle(
+                          //             textWeight: FontWeight.bold,
+                          //             textSize: 12.sp,
+                          //             textColor: appColors.appColorText,
+                          //           ),
+                          //         )
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
                           SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),
                         ],
                       ),

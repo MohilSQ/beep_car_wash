@@ -15,6 +15,7 @@ class Strings {
   static const String submit = "submit";
   static const String search = "Search";
   static const String logoutString = "Are you sure you want to logout";
+  static const String noInternatAvilable = "No Internat avilable";
 
   /// ------ onBoarding Screen ------------------>>>>
   static const String washYourCar = "Wash Your Car";
@@ -23,6 +24,7 @@ class Strings {
   /// ------ Sign In Screen ------------------>>>>
   static const String enterYourPhoneNumber = "Enter your phone number";
   static const String inputPhoneNumber = "Input Phone Number";
+  static const String chooseCountry = "Choose Country";
   static const String continueString = "Continue";
   static const String orSignInWith = "Or Sign In With";
   static const String google = "Google";
