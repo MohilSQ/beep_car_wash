@@ -19,7 +19,7 @@ class WashHistoryScreen extends GetView<WashHistoryController> {
       children: [
         ListView.separated(
           itemCount: 15,
-          padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h).copyWith(top: MediaQuery.of(context).padding.top + AppBar().preferredSize.height + 2.h),
+          padding: EdgeInsets.symmetric(horizontal: 6.w).copyWith(top: MediaQuery.of(context).padding.top + AppBar().preferredSize.height + 2.h, bottom: MediaQuery.of(context).padding.bottom + 1.6.h),
           separatorBuilder: (context, index) => SizedBox(height: 2.h),
           itemBuilder: (context, index) => Column(
             children: [

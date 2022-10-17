@@ -14,6 +14,7 @@ class ReserveSheet extends GetView<ReserveController> {
   @override
   Widget build(BuildContext context) {
     AppColors appColors = AppColors();
+    Get.put(ReserveController());
     return Wrap(
       children: [
         Container(

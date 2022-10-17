@@ -5,6 +5,5 @@ class RegisterBindings implements Bindings {
   @override
   void dependencies() {
     Get.put<RegisterController>(RegisterController());
-    // TODO: implement dependencies
   }
 }

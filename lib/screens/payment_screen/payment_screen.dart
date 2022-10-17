@@ -39,18 +39,18 @@ class PaymentScreen extends GetView<PaymentController> {
                     shadowVisible: false,
                     appBarColor: appColors.transparentColor,
                     textColor: appColors.whiteColor,
-                    suffixIcon: Padding(
-                      padding: EdgeInsets.only(right: 3.w),
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.to(() => const EditPaymentScreen(), binding: EditPaymentBindings());
-                        },
-                        child: Image.asset(
-                          ImagePath.icEdit,
-                          height: 4.w,
-                        ),
-                      ),
-                    ),
+                    // suffixIcon: Padding(
+                    //   padding: EdgeInsets.only(right: 3.w),
+                    //   child: GestureDetector(
+                    //     onTap: () {
+                    //       Get.to(() => const EditPaymentScreen(), binding: EditPaymentBindings());
+                    //     },
+                    //     child: Image.asset(
+                    //       ImagePath.icEdit,
+                    //       height: 4.w,
+                    //     ),
+                    //   ),
+                    // ),
                   ),
                   const Spacer(),
                   MyTextView(
@@ -63,7 +63,7 @@ class PaymentScreen extends GetView<PaymentController> {
                   ),
                   SizedBox(height: 0.4.h),
                   MyTextView(
-                    "Current Balance",
+                    Strings.currentBalance,
                     textStyleNew: MyTextStyle(
                       textColor: appColors.whiteColor,
                       textWeight: FontWeight.bold,
@@ -130,7 +130,7 @@ class PaymentScreen extends GetView<PaymentController> {
                               borderRadius: BorderRadius.circular(0.8.h),
                             ),
                             child: MyTextView(
-                              "Primary",
+                              Strings.primary,
                               textStyleNew: MyTextStyle(
                                 textColor: appColors.blueText,
                                 textWeight: FontWeight.bold,
@@ -149,10 +149,10 @@ class PaymentScreen extends GetView<PaymentController> {
           onPressed: () {
             Get.to(() => const AddPaymentScreen(), binding: AddPaymentBindings());
           },
-          text: "Add New Payment",
+          text: Strings.addNewPayment,
           horizontalPadding: 6.w,
         ),
-        SizedBox(height: MediaQuery.of(context).padding.bottom + 2.h),
+        SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),
       ],
     );
   }

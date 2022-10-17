@@ -18,6 +18,7 @@ import 'package:sizer/sizer.dart';
 
 class SignInScreen extends GetView<SignInController> {
   const SignInScreen({Key? key}) : super(key: key);
+  static const routeName = "/SignInScreen";
 
   @override
   Widget build(BuildContext context) {
@@ -211,7 +212,7 @@ class SignInScreen extends GetView<SignInController> {
                               ),
                             ),
                           ),
-                          SizedBox(height: MediaQuery.of(context).padding.bottom + 2.2.h),
+                          SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),
                         ],
                       ),
                     ),

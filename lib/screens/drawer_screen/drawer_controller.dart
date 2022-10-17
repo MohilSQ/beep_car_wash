@@ -33,7 +33,6 @@ class DrawerScreenController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     drawerList[0].bindings!.dependencies();
     super.onInit();
   }

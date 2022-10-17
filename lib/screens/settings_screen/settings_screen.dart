@@ -261,7 +261,7 @@ class SettingsScreen extends GetView<SettingsController> {
                   ],
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).padding.bottom + 2.h),
+              SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),
             ],
           ),
         ),

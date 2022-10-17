@@ -11,8 +11,8 @@ import 'package:get/get.dart';
 class AppPages {
   static var list = [
     GetPage(name: SplashScreen.routeName, page: () => const SplashScreen(), binding: SplashBindings()),
-    GetPage(name: SplashScreen.routeName, page: () => const OnBoardingScreen(), binding: OnBoardingBindings()),
-    GetPage(name: SplashScreen.routeName, page: () => const SignInScreen(), binding: SignInBindings()),
-    GetPage(name: SplashScreen.routeName, page: () => const SettingsScreen(), binding: SettingsBindings()),
+    GetPage(name: OnBoardingScreen.routeName, page: () => const OnBoardingScreen(), binding: OnBoardingBindings()),
+    GetPage(name: SignInScreen.routeName, page: () => const SignInScreen(), binding: SignInBindings()),
+    GetPage(name: SettingsScreen.routeName, page: () => const SettingsScreen(), binding: SettingsBindings()),
   ];
 }
