@@ -15,7 +15,6 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     return Scaffold(
       body: SafeArea(
         top: false,
@@ -29,7 +28,7 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                 MyTextView(
                   "Choose a Payment Method",
                   textStyleNew: MyTextStyle(
-                    textColor: appColors.darkTextColor,
+                    textColor: AppColors.darkTextColor,
                     textWeight: FontWeight.bold,
                     textSize: 14.sp,
                   ),
@@ -43,7 +42,7 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                       decoration: BoxDecoration(
                         color: const Color(0xFFE7FBF4),
                         borderRadius: BorderRadius.circular(1.8.h),
-                        border: Border.all(color: appColors.appColorText, width: 0.15.h),
+                        border: Border.all(color: AppColors.appColorText, width: 0.15.h),
                       ),
                       child: Stack(
                         children: [
@@ -65,13 +64,13 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                                 children: [
                                   Image.asset(
                                     ImagePath.card,
-                                    color: appColors.appColorText,
+                                    color: AppColors.appColorText,
                                     width: 4.h,
                                   ),
                                   MyTextView(
                                     "Credit Card",
                                     textStyleNew: MyTextStyle(
-                                      textColor: appColors.appColorText,
+                                      textColor: AppColors.appColorText,
                                       textWeight: FontWeight.bold,
                                       textSize: 12.sp,
                                     ),
@@ -89,7 +88,7 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                       width: 27.33.w,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(1.8.h),
-                        border: Border.all(color: appColors.lightGreyColor, width: 0.1.h),
+                        border: Border.all(color: AppColors.lightGreyColor, width: 0.1.h),
                       ),
                       child: Padding(
                         padding: EdgeInsets.only(top: 2.w),
@@ -99,13 +98,13 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                           children: [
                             Image.asset(
                               ImagePath.payPal,
-                              color: appColors.lightTextColor,
+                              color: AppColors.lightTextColor,
                               width: 3.6.h,
                             ),
                             MyTextView(
                               "Pay Pal",
                               textStyleNew: MyTextStyle(
-                                textColor: appColors.lightTextColor,
+                                textColor: AppColors.lightTextColor,
                                 textWeight: FontWeight.bold,
                                 textSize: 12.sp,
                               ),
@@ -120,7 +119,7 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                       width: 27.33.w,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(1.8.h),
-                        border: Border.all(color: appColors.lightGreyColor, width: 0.1.h),
+                        border: Border.all(color: AppColors.lightGreyColor, width: 0.1.h),
                       ),
                       child: Padding(
                         padding: EdgeInsets.only(top: 1.4.w),
@@ -130,13 +129,13 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                           children: [
                             Image.asset(
                               ImagePath.applePayment,
-                              color: appColors.lightTextColor,
+                              color: AppColors.lightTextColor,
                               width: 3.6.h,
                             ),
                             MyTextView(
                               "Apple Pay",
                               textStyleNew: MyTextStyle(
-                                textColor: appColors.lightTextColor,
+                                textColor: AppColors.lightTextColor,
                                 textWeight: FontWeight.bold,
                                 textSize: 12.sp,
                               ),
@@ -157,8 +156,8 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                     inputType: TextInputType.number,
                     controller: controller.cardNumberController,
                     isError: controller.cardNumberError.value,
-                    hintColor: controller.cardNumberError.value ? appColors.errorColor : appColors.lightTextColor,
-                    textColor: controller.cardNumberError.value ? appColors.errorColor : appColors.darkTextColor,
+                    hintColor: controller.cardNumberError.value ? AppColors.errorColor : AppColors.lightTextColor,
+                    textColor: controller.cardNumberError.value ? AppColors.errorColor : AppColors.darkTextColor,
                   );
                 }),
                 SizedBox(height: 1.6.h),
@@ -172,8 +171,8 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                     textCapitalization: TextCapitalization.words,
                     controller: controller.cardHolderNameController,
                     isError: controller.cardHolderNameError.value,
-                    hintColor: controller.cardHolderNameError.value ? appColors.errorColor : appColors.lightTextColor,
-                    textColor: controller.cardHolderNameError.value ? appColors.errorColor : appColors.darkTextColor,
+                    hintColor: controller.cardHolderNameError.value ? AppColors.errorColor : AppColors.lightTextColor,
+                    textColor: controller.cardHolderNameError.value ? AppColors.errorColor : AppColors.darkTextColor,
                   );
                 }),
                 SizedBox(height: 1.6.h),
@@ -186,8 +185,8 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                     inputType: TextInputType.datetime,
                     controller: controller.expirationDateController,
                     isError: controller.expirationDateError.value,
-                    hintColor: controller.expirationDateError.value ? appColors.errorColor : appColors.lightTextColor,
-                    textColor: controller.expirationDateError.value ? appColors.errorColor : appColors.darkTextColor,
+                    hintColor: controller.expirationDateError.value ? AppColors.errorColor : AppColors.lightTextColor,
+                    textColor: controller.expirationDateError.value ? AppColors.errorColor : AppColors.darkTextColor,
                     suffix: Image.asset(
                       ImagePath.date,
                       height: 3.2.h,
@@ -204,8 +203,8 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                     inputType: TextInputType.number,
                     controller: controller.cvvController,
                     isError: controller.cvvError.value,
-                    hintColor: controller.cvvError.value ? appColors.errorColor : appColors.lightTextColor,
-                    textColor: controller.cvvError.value ? appColors.errorColor : appColors.darkTextColor,
+                    hintColor: controller.cvvError.value ? AppColors.errorColor : AppColors.lightTextColor,
+                    textColor: controller.cvvError.value ? AppColors.errorColor : AppColors.darkTextColor,
                     suffix: Image.asset(
                       ImagePath.cardSmall,
                       width: 3.h,
@@ -218,7 +217,7 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                     MyTextView(
                       "Set as Primary Payment",
                       textStyleNew: MyTextStyle(
-                        textColor: appColors.darkTextColor,
+                        textColor: AppColors.darkTextColor,
                         textWeight: FontWeight.bold,
                         textSize: 12.sp,
                       ),
@@ -231,7 +230,7 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                           controller.primaryPayment.value = value;
                         },
                         thumbColor: CupertinoColors.white,
-                        activeColor: appColors.appColorText,
+                        activeColor: AppColors.appColorText,
                       );
                     }),
                   ],

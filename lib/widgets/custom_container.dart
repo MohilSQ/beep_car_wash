@@ -34,18 +34,17 @@ class CustomContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     return Container(
       height: isHeight! ? height ?? 6.h : null,
       width: width,
       alignment: Alignment.center,
       padding: padding ?? EdgeInsets.symmetric(horizontal: horizontalPadding ?? (circleView! ? 0 : 1.8.h)),
       decoration: BoxDecoration(
-        color: containerColor ?? appColors.whiteColor,
+        color: containerColor ?? AppColors.whiteColor,
         borderRadius: circleView! ? null : BorderRadius.circular(borderRadius ?? 1.6.h),
         border: borderVisible!
             ? Border.all(
-                color: errorView! ? appColors.errorColor : appColors.borderColor,
+                color: errorView! ? AppColors.errorColor : AppColors.borderColor,
                 width: 1.2,
               )
             : null,
@@ -53,7 +52,7 @@ class CustomContainer extends StatelessWidget {
         boxShadow: boxShadowVisible!
             ? [
                 BoxShadow(
-                  color: appColors.lightGreyColor,
+                  color: AppColors.lightGreyColor,
                   blurRadius: 8,
                   spreadRadius: 0,
                   offset: const Offset(0, 4),

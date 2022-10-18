@@ -12,10 +12,8 @@ import 'package:sizer/sizer.dart';
 class ReportSheet extends GetView<ReportController> {
   const ReportSheet({super.key});
 
-  
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     Get.put(ReportController());
     return Wrap(
       children: [
@@ -23,7 +21,7 @@ class ReportSheet extends GetView<ReportController> {
           width: double.infinity,
           padding: EdgeInsets.all(2.h),
           decoration: BoxDecoration(
-            color: appColors.whiteColor,
+            color: AppColors.whiteColor,
             borderRadius: BorderRadius.only(topLeft: Radius.circular(3.h), topRight: Radius.circular(3.h)),
           ),
           child: Column(
@@ -34,7 +32,7 @@ class ReportSheet extends GetView<ReportController> {
                   MyTextView(
                     "Report",
                     textStyleNew: MyTextStyle(
-                      textColor: appColors.darkTextColor,
+                      textColor: AppColors.darkTextColor,
                       textWeight: FontWeight.bold,
                       textSize: 15.sp,
                     ),
@@ -48,7 +46,7 @@ class ReportSheet extends GetView<ReportController> {
                 "What issue are you facing?",
                 isMaxLineWrap: true,
                 textStyleNew: MyTextStyle(
-                  textColor: appColors.darkTextColor,
+                  textColor: AppColors.darkTextColor,
                   textWeight: FontWeight.bold,
                   textSize: 14.sp,
                 ),
@@ -64,7 +62,7 @@ class ReportSheet extends GetView<ReportController> {
                   children: [
                     Icon(
                       controller.reportList[index].isSelected!.value ? Icons.radio_button_checked : Icons.radio_button_off,
-                      color: appColors.appColorText,
+                      color: AppColors.appColorText,
                       size: 3.h,
                     ),
                     SizedBox(width: 2.w),
@@ -72,7 +70,7 @@ class ReportSheet extends GetView<ReportController> {
                       controller.reportList[index].title,
                       isMaxLineWrap: true,
                       textStyleNew: MyTextStyle(
-                        textColor: appColors.darkTextColor,
+                        textColor: AppColors.darkTextColor,
                         textWeight: FontWeight.w600,
                         textSize: 12.sp,
                       ),
@@ -85,7 +83,7 @@ class ReportSheet extends GetView<ReportController> {
                 "Attach Photo",
                 isMaxLineWrap: true,
                 textStyleNew: MyTextStyle(
-                  textColor: appColors.darkTextColor,
+                  textColor: AppColors.darkTextColor,
                   textWeight: FontWeight.bold,
                   textSize: 14.sp,
                 ),
@@ -96,10 +94,10 @@ class ReportSheet extends GetView<ReportController> {
                 alignment: Alignment.center,
                 padding: EdgeInsets.symmetric(horizontal: 1.8.h),
                 decoration: BoxDecoration(
-                  color: appColors.whiteColor,
+                  color: AppColors.whiteColor,
                   borderRadius: BorderRadius.circular(1.6.h),
                   border: Border.all(
-                    color: appColors.borderColor,
+                    color: AppColors.borderColor,
                     width: 1.2,
                   ),
                 ),
@@ -114,7 +112,7 @@ class ReportSheet extends GetView<ReportController> {
                       "Update",
                       isMaxLineWrap: true,
                       textStyleNew: MyTextStyle(
-                        textColor: appColors.appColorText,
+                        textColor: AppColors.appColorText,
                         textWeight: FontWeight.bold,
                         textSize: 12.sp,
                       ),
@@ -135,8 +133,8 @@ class ReportSheet extends GetView<ReportController> {
                 isMaxLines: true,
                 padding: EdgeInsets.all(1.8.h),
                 // isError: controller.phoneNumberError.value,
-                // hintColor: controller.phoneNumberError.value ? appColors.errorColor : appColors.lightTextColor,
-                // textColor: controller.phoneNumberError.value ? appColors.errorColor : appColors.darkTextColor,
+                // hintColor: controller.phoneNumberError.value ? AppColors.errorColor : AppColors.lightTextColor,
+                // textColor: controller.phoneNumberError.value ? AppColors.errorColor : AppColors.darkTextColor,
               ),
               SizedBox(height: 2.h),
               Row(
@@ -147,12 +145,12 @@ class ReportSheet extends GetView<ReportController> {
                         Get.back();
                       },
                       elevation: 0,
-                      backgroundColor: appColors.transparentColor,
+                      backgroundColor: AppColors.transparentColor,
                       text: Strings.cancel,
-                      textColor: appColors.appColorText,
+                      textColor: AppColors.appColorText,
                       borderSide: BorderSide(
                         width: 0.1.h,
-                        color: appColors.lightGreyColor,
+                        color: AppColors.lightGreyColor,
                       ),
                     ),
                   ),

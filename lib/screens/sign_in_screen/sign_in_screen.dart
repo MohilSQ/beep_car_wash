@@ -2,8 +2,6 @@ import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
-import 'package:beep_car_wash/screens/sign_in_otp_screen/sign_in_otp_binding.dart';
-import 'package:beep_car_wash/screens/sign_in_otp_screen/sign_in_otp_screen.dart';
 import 'package:beep_car_wash/screens/sign_in_screen/sign_in_controller.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:beep_car_wash/widgets/custom_container.dart';
@@ -19,7 +17,6 @@ class SignInScreen extends GetView<SignInController> {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     return GetBuilder(
       assignId: true,
       init: SignInController(),
@@ -30,14 +27,14 @@ class SignInScreen extends GetView<SignInController> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                appColors.whiteColor,
-                appColors.whiteColor,
-                appColors.lightAppColor,
+                AppColors.whiteColor,
+                AppColors.whiteColor,
+                AppColors.lightAppColor,
               ],
             ),
           ),
           child: Scaffold(
-            backgroundColor: appColors.transparentColor,
+            backgroundColor: AppColors.transparentColor,
             body: SafeArea(
               top: false,
               bottom: false,
@@ -63,7 +60,7 @@ class SignInScreen extends GetView<SignInController> {
                           MyTextView(
                             Strings.enterYourPhoneNumber,
                             textStyleNew: MyTextStyle(
-                              textColor: appColors.darkTextColor,
+                              textColor: AppColors.darkTextColor,
                               textWeight: FontWeight.bold,
                               textSize: 14.sp,
                             ),
@@ -73,7 +70,7 @@ class SignInScreen extends GetView<SignInController> {
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ...",
                             isMaxLineWrap: true,
                             textStyleNew: MyTextStyle(
-                              textColor: appColors.lightTextColor,
+                              textColor: AppColors.lightTextColor,
                               textWeight: FontWeight.w600,
                               textSize: 10.sp,
                             ),
@@ -120,8 +117,8 @@ class SignInScreen extends GetView<SignInController> {
                                     inputType: TextInputType.phone,
                                     controller: controller.phoneNumberController,
                                     isError: controller.phoneNumberError!.value,
-                                    hintColor: controller.phoneNumberError!.value ? appColors.errorColor : appColors.lightTextColor,
-                                    textColor: controller.phoneNumberError!.value ? appColors.errorColor : appColors.darkTextColor,
+                                    hintColor: controller.phoneNumberError!.value ? AppColors.errorColor : AppColors.lightTextColor,
+                                    textColor: controller.phoneNumberError!.value ? AppColors.errorColor : AppColors.darkTextColor,
                                   );
                                 }),
                               ),
@@ -131,8 +128,9 @@ class SignInScreen extends GetView<SignInController> {
                           CustomButton(
                             text: Strings.continueString,
                             onPressed: () {
-                              // if (controller.validation()) {}
-                              Get.to(() => const SignInOTPScreen(), binding: SignInOTPBindings());
+                              if (controller.validation()) {
+                                controller.phoneVerificationAPI();
+                              }
                             },
                           ),
                           SizedBox(height: 3.5.h),
@@ -142,7 +140,7 @@ class SignInScreen extends GetView<SignInController> {
                               Strings.orSignInWith,
                               textAlignNew: TextAlign.center,
                               textStyleNew: MyTextStyle(
-                                textColor: appColors.lightTextColor,
+                                textColor: AppColors.lightTextColor,
                                 textWeight: FontWeight.bold,
                                 textSize: 11.sp,
                               ),
@@ -153,9 +151,9 @@ class SignInScreen extends GetView<SignInController> {
                             text: Strings.google,
                             image: ImagePath.google,
                             imageSize: 3.2.h,
-                            textColor: appColors.darkTextColor,
-                            backgroundColor: appColors.transparentColor,
-                            borderSide: BorderSide(color: appColors.appColor),
+                            textColor: AppColors.darkTextColor,
+                            backgroundColor: AppColors.transparentColor,
+                            borderSide: BorderSide(color: AppColors.appColor),
                             elevation: 0,
                             onPressed: () {},
                           ),
@@ -164,9 +162,9 @@ class SignInScreen extends GetView<SignInController> {
                             text: Strings.facebook,
                             image: ImagePath.facebook,
                             imageSize: 3.h,
-                            textColor: appColors.darkTextColor,
-                            backgroundColor: appColors.transparentColor,
-                            borderSide: BorderSide(color: appColors.appColor),
+                            textColor: AppColors.darkTextColor,
+                            backgroundColor: AppColors.transparentColor,
+                            borderSide: BorderSide(color: AppColors.appColor),
                             elevation: 0,
                             onPressed: () {},
                           ),
@@ -175,9 +173,9 @@ class SignInScreen extends GetView<SignInController> {
                             text: Strings.appleID,
                             image: ImagePath.apple,
                             imageSize: 3.2.h,
-                            textColor: appColors.darkTextColor,
-                            backgroundColor: appColors.transparentColor,
-                            borderSide: BorderSide(color: appColors.appColor),
+                            textColor: AppColors.darkTextColor,
+                            backgroundColor: AppColors.transparentColor,
+                            borderSide: BorderSide(color: AppColors.appColor),
                             elevation: 0,
                             onPressed: () {},
                           ),
@@ -191,7 +189,7 @@ class SignInScreen extends GetView<SignInController> {
                           //       style: MyTextStyle(
                           //         textWeight: FontWeight.w600,
                           //         textSize: 12.sp,
-                          //         textColor: appColors.lightTextColor,
+                          //         textColor: AppColors.lightTextColor,
                           //       ),
                           //       children: [
                           //         TextSpan(
@@ -203,7 +201,7 @@ class SignInScreen extends GetView<SignInController> {
                           //           style: MyTextStyle(
                           //             textWeight: FontWeight.bold,
                           //             textSize: 12.sp,
-                          //             textColor: appColors.appColorText,
+                          //             textColor: AppColors.appColorText,
                           //           ),
                           //         )
                           //       ],

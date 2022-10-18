@@ -2,8 +2,7 @@ import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
-import 'package:beep_car_wash/screens/drawer_screen/drawer_binding.dart';
-import 'package:beep_car_wash/screens/drawer_screen/drawer_screen.dart';
+import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/screens/sign_in_otp_screen/sign_in_otp_controller.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,6 @@ class SignInOTPScreen extends GetView<SignInOTPController> {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     return GetBuilder(
       assignId: true,
       init: SignInOTPController(),
@@ -27,14 +25,14 @@ class SignInOTPScreen extends GetView<SignInOTPController> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                appColors.whiteColor,
-                appColors.whiteColor,
-                appColors.lightAppColor,
+                AppColors.whiteColor,
+                AppColors.whiteColor,
+                AppColors.lightAppColor,
               ],
             ),
           ),
           child: Scaffold(
-            backgroundColor: appColors.transparentColor,
+            backgroundColor: AppColors.transparentColor,
             body: SafeArea(
               top: false,
               bottom: false,
@@ -66,18 +64,18 @@ class SignInOTPScreen extends GetView<SignInOTPController> {
                             Strings.enterCodeToVerifyNumber,
                             textAlignNew: TextAlign.center,
                             textStyleNew: MyTextStyle(
-                              textColor: appColors.darkTextColor,
+                              textColor: AppColors.darkTextColor,
                               textWeight: FontWeight.bold,
                               textSize: 14.sp,
                             ),
                           ),
                           SizedBox(height: 1.4.h),
                           MyTextView(
-                            "${Strings.verifyNumber1}+01 2345443243${Strings.verifyNumber2}",
+                            Strings.verifyNumber1 + Get.arguments[0] + Get.arguments[1] + Strings.verifyNumber2,
                             isMaxLineWrap: true,
                             textAlignNew: TextAlign.center,
                             textStyleNew: MyTextStyle(
-                              textColor: appColors.lightTextColor,
+                              textColor: AppColors.lightTextColor,
                               textWeight: FontWeight.w600,
                               textSize: 10.sp,
                             ),
@@ -87,12 +85,12 @@ class SignInOTPScreen extends GetView<SignInOTPController> {
                             appContext: context,
                             length: 4,
                             textStyle: MyTextStyle(
-                              textColor: appColors.darkTextColor,
+                              textColor: AppColors.darkTextColor,
                               textWeight: FontWeight.bold,
                               textSize: 23.sp,
                             ),
                             pastedTextStyle: MyTextStyle(
-                              textColor: appColors.darkTextColor,
+                              textColor: AppColors.darkTextColor,
                               textWeight: FontWeight.bold,
                               textSize: 23.sp,
                             ),
@@ -102,25 +100,29 @@ class SignInOTPScreen extends GetView<SignInOTPController> {
                               shape: PinCodeFieldShape.underline,
                               fieldHeight: 7.5.h,
                               fieldWidth: 18.w,
-                              selectedColor: appColors.grayBorderColor,
-                              inactiveColor: appColors.grayBorderColor,
-                              activeColor: appColors.grayBorderColor,
+                              selectedColor: AppColors.grayBorderColor,
+                              inactiveColor: AppColors.grayBorderColor,
+                              activeColor: AppColors.grayBorderColor,
                             ),
                             cursorColor: Colors.black,
                             animationDuration: const Duration(milliseconds: 200),
                             enableActiveFill: false,
-                            // controller: textEditingController,
                             keyboardType: TextInputType.number,
                             autoDismissKeyboard: true,
                             enablePinAutofill: true,
                             onCompleted: (v) {
-                              debugPrint("Completed");
+                              printOkStatus("Completed");
+                              if (controller.validation()) {
+                                controller.otpVerificationAPI();
+                              }
                             },
                             onChanged: (value) {
-                              debugPrint(value);
+                              printAction(value);
+                              controller.otpText.value = value;
+                              controller.update();
                             },
                             beforeTextPaste: (text) {
-                              debugPrint("Allowing to paste $text");
+                              printAction("Allowing to paste $text");
                               return true;
                             },
                           ),
@@ -129,26 +131,31 @@ class SignInOTPScreen extends GetView<SignInOTPController> {
                             Strings.doNotReceiveTheOTP,
                             textAlignNew: TextAlign.center,
                             textStyleNew: MyTextStyle(
-                              textColor: appColors.lightTextColor,
+                              textColor: AppColors.lightTextColor,
                               textWeight: FontWeight.w600,
                               textSize: 10.sp,
                             ),
                           ),
                           SizedBox(height: 0.8.h),
-                          MyTextView(
-                            Strings.resendCode,
-                            textAlignNew: TextAlign.center,
-                            textStyleNew: MyTextStyle(
-                              textColor: appColors.appColorText,
-                              textWeight: FontWeight.bold,
-                              textSize: 11.sp,
+                          GestureDetector(
+                            onTap: () => controller.resendOTPAPI(),
+                            child: MyTextView(
+                              Strings.resendCode,
+                              textAlignNew: TextAlign.center,
+                              textStyleNew: MyTextStyle(
+                                textColor: AppColors.appColorText,
+                                textWeight: FontWeight.bold,
+                                textSize: 11.sp,
+                              ),
                             ),
                           ),
                           const Spacer(),
                           CustomButton(
                             text: Strings.continueString,
                             onPressed: () {
-                              Get.to(() => const DrawerScreen(), binding: DrawerBindings());
+                              if (controller.validation()) {
+                                controller.otpVerificationAPI();
+                              }
                             },
                           ),
                           SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),

@@ -14,7 +14,6 @@ class WashHistoryScreen extends GetView<WashHistoryController> {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     return Stack(
       children: [
         ListView.separated(
@@ -28,13 +27,13 @@ class WashHistoryScreen extends GetView<WashHistoryController> {
                   Container(
                     height: 2.4.h,
                     width: 2.4.h,
-                    decoration: BoxDecoration(color: appColors.appColorText, shape: BoxShape.circle),
+                    decoration: BoxDecoration(color: AppColors.appColorText, shape: BoxShape.circle),
                   ),
                   SizedBox(width: 1.h),
                   MyTextView(
                     "13 September, 2022",
                     textStyleNew: MyTextStyle(
-                      textColor: appColors.lightTextColor,
+                      textColor: AppColors.lightTextColor,
                       textWeight: FontWeight.w600,
                       textSize: 11.sp,
                     ),
@@ -47,7 +46,7 @@ class WashHistoryScreen extends GetView<WashHistoryController> {
                 child: CustomContainer(
                   borderVisible: true,
                   isHeight: false,
-                  containerColor: appColors.transparentColor,
+                  containerColor: AppColors.transparentColor,
                   borderRadius: 0.8.h,
                   padding: EdgeInsets.all(1.4.h).copyWith(bottom: 2.h),
                   child: Row(
@@ -69,7 +68,7 @@ class WashHistoryScreen extends GetView<WashHistoryController> {
                                 MyTextView(
                                   "4:54 Min",
                                   textStyleNew: MyTextStyle(
-                                    textColor: appColors.darkTextColor,
+                                    textColor: AppColors.darkTextColor,
                                     textWeight: FontWeight.bold,
                                     textSize: 12.sp,
                                   ),
@@ -77,7 +76,7 @@ class WashHistoryScreen extends GetView<WashHistoryController> {
                                 MyTextView(
                                   "\$5.43",
                                   textStyleNew: MyTextStyle(
-                                    textColor: appColors.appColorText,
+                                    textColor: AppColors.appColorText,
                                     textWeight: FontWeight.bold,
                                     textSize: 12.sp,
                                   ),
@@ -98,7 +97,7 @@ class WashHistoryScreen extends GetView<WashHistoryController> {
                                     "1234 Barclay St, New York",
                                     isMaxLineWrap: true,
                                     textStyleNew: MyTextStyle(
-                                      textColor: appColors.lightTextColor,
+                                      textColor: AppColors.lightTextColor,
                                       textWeight: FontWeight.w600,
                                       textSize: 10.sp,
                                     ),

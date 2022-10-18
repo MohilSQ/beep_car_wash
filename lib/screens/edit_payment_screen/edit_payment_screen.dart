@@ -15,7 +15,6 @@ class EditPaymentScreen extends GetView<EditPaymentController> {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     return Scaffold(
       body: SafeArea(
         top: false,
@@ -35,8 +34,8 @@ class EditPaymentScreen extends GetView<EditPaymentController> {
                     inputType: TextInputType.number,
                     controller: controller.cardNumberController,
                     isError: controller.cardNumberError.value,
-                    hintColor: controller.cardNumberError.value ? appColors.errorColor : appColors.lightTextColor,
-                    textColor: controller.cardNumberError.value ? appColors.errorColor : appColors.darkTextColor,
+                    hintColor: controller.cardNumberError.value ? AppColors.errorColor : AppColors.lightTextColor,
+                    textColor: controller.cardNumberError.value ? AppColors.errorColor : AppColors.darkTextColor,
                   );
                 }),
                 SizedBox(height: 1.6.h),
@@ -50,8 +49,8 @@ class EditPaymentScreen extends GetView<EditPaymentController> {
                     textCapitalization: TextCapitalization.words,
                     controller: controller.cardHolderNameController,
                     isError: controller.cardHolderNameError.value,
-                    hintColor: controller.cardHolderNameError.value ? appColors.errorColor : appColors.lightTextColor,
-                    textColor: controller.cardHolderNameError.value ? appColors.errorColor : appColors.darkTextColor,
+                    hintColor: controller.cardHolderNameError.value ? AppColors.errorColor : AppColors.lightTextColor,
+                    textColor: controller.cardHolderNameError.value ? AppColors.errorColor : AppColors.darkTextColor,
                   );
                 }),
                 SizedBox(height: 1.6.h),
@@ -64,8 +63,8 @@ class EditPaymentScreen extends GetView<EditPaymentController> {
                     inputType: TextInputType.datetime,
                     controller: controller.expirationDateController,
                     isError: controller.expirationDateError.value,
-                    hintColor: controller.expirationDateError.value ? appColors.errorColor : appColors.lightTextColor,
-                    textColor: controller.expirationDateError.value ? appColors.errorColor : appColors.darkTextColor,
+                    hintColor: controller.expirationDateError.value ? AppColors.errorColor : AppColors.lightTextColor,
+                    textColor: controller.expirationDateError.value ? AppColors.errorColor : AppColors.darkTextColor,
                     suffix: Image.asset(
                       ImagePath.date,
                       height: 3.2.h,
@@ -82,8 +81,8 @@ class EditPaymentScreen extends GetView<EditPaymentController> {
                     inputType: TextInputType.number,
                     controller: controller.cvvController,
                     isError: controller.cvvError.value,
-                    hintColor: controller.cvvError.value ? appColors.errorColor : appColors.lightTextColor,
-                    textColor: controller.cvvError.value ? appColors.errorColor : appColors.darkTextColor,
+                    hintColor: controller.cvvError.value ? AppColors.errorColor : AppColors.lightTextColor,
+                    textColor: controller.cvvError.value ? AppColors.errorColor : AppColors.darkTextColor,
                     suffix: Image.asset(
                       ImagePath.cardSmall,
                       width: 3.h,
@@ -96,7 +95,7 @@ class EditPaymentScreen extends GetView<EditPaymentController> {
                     MyTextView(
                       "Set as Primary Payment",
                       textStyleNew: MyTextStyle(
-                        textColor: appColors.darkTextColor,
+                        textColor: AppColors.darkTextColor,
                         textWeight: FontWeight.bold,
                         textSize: 12.sp,
                       ),
@@ -109,7 +108,7 @@ class EditPaymentScreen extends GetView<EditPaymentController> {
                           controller.primaryPayment.value = value;
                         },
                         thumbColor: CupertinoColors.white,
-                        activeColor: appColors.appColorText,
+                        activeColor: AppColors.appColorText,
                       );
                     }),
                   ],

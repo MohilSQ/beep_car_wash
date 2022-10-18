@@ -17,24 +17,22 @@ import 'constants.dart';
 class Utils {
   /// <<< To create dark status bar --------- >>>
   static void darkStatusBar() {
-    AppColors appColors = AppColors();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
       statusBarBrightness: Brightness.light,
-      systemNavigationBarColor: appColors.greyColor.withOpacity(0.1),
+      systemNavigationBarColor: AppColors.greyColor.withOpacity(0.1),
       systemNavigationBarIconBrightness: Brightness.dark,
     ));
   }
 
   /// <<< To create light status bar --------- >>>
   static void lightStatusBar() {
-    AppColors appColors = AppColors();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
       statusBarBrightness: Brightness.dark,
-      systemNavigationBarColor: appColors.whiteColor,
+      systemNavigationBarColor: AppColors.whiteColor,
       systemNavigationBarIconBrightness: Brightness.dark,
     ));
   }
@@ -100,7 +98,7 @@ class Utils {
     required BuildContext context,
     required String message,
   }) {
-    //AppColors appColors = AppColors();
+    //
     Get.snackbar(
       "",
       message,

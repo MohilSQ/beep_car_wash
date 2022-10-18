@@ -13,7 +13,6 @@ class NotificationScreen extends GetView<NotificationController> {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     return Stack(
       children: [
         ListView.separated(
@@ -21,7 +20,7 @@ class NotificationScreen extends GetView<NotificationController> {
           padding: EdgeInsets.symmetric(vertical: 2.h).copyWith(top: MediaQuery.of(context).padding.top + AppBar().preferredSize.height),
           separatorBuilder: (context, index) => SizedBox(height: 0.3.h),
           itemBuilder: (context, index) => Container(
-            color: index == 0 ? appColors.lightAppColor : appColors.whiteColor,
+            color: index == 0 ? AppColors.lightAppColor : AppColors.whiteColor,
             padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
             child: Column(
               children: [
@@ -32,7 +31,7 @@ class NotificationScreen extends GetView<NotificationController> {
                     MyTextView(
                       "Super Deal",
                       textStyleNew: MyTextStyle(
-                        textColor: index == 1 ? appColors.darkTextColor : appColors.appColorText,
+                        textColor: index == 1 ? AppColors.darkTextColor : AppColors.appColorText,
                         textWeight: FontWeight.bold,
                         textSize: 12.sp,
                       ),
@@ -40,7 +39,7 @@ class NotificationScreen extends GetView<NotificationController> {
                     MyTextView(
                       "Tue, Sep 13",
                       textStyleNew: MyTextStyle(
-                        textColor: appColors.lightTextColor,
+                        textColor: AppColors.lightTextColor,
                         textWeight: FontWeight.bold,
                         textSize: 10.sp,
                       ),
@@ -52,7 +51,7 @@ class NotificationScreen extends GetView<NotificationController> {
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore",
                   isMaxLineWrap: true,
                   textStyleNew: MyTextStyle(
-                    textColor: index == 1 ? appColors.lightTextColor : appColors.darkTextColor,
+                    textColor: index == 1 ? AppColors.lightTextColor : AppColors.darkTextColor,
                     textWeight: FontWeight.w600,
                     textSize: 11.sp,
                   ),

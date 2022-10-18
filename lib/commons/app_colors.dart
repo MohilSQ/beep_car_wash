@@ -21,29 +21,29 @@ class AppColors {
 
   ///************** Common Color **************///
   /// NOTE: DO not remove this colors -------->>>
-  Color blackColor = const Color(0xFF000000);
-  Color whiteColor = const Color(0xFFFFFFFF);
-  Color yellowColor = const Color(0xFFEEC829);
-  Color redColor = const Color(0xFFE94057);
-  Color blueColor = const Color(0xFF2196F3);
-  Color greyColor = const Color(0xFF707070);
-  Color lightGreyColor = const Color(0xFFE3E0E0);
-  Color transparentColor = const Color(0x00000000);
+  static Color blackColor = const Color(0xFF000000);
+  static Color whiteColor = const Color(0xFFFFFFFF);
+  static Color yellowColor = const Color(0xFFEEC829);
+  static Color redColor = const Color(0xFFE94057);
+  static Color blueColor = const Color(0xFF2196F3);
+  static Color greyColor = const Color(0xFF707070);
+  static Color lightGreyColor = const Color(0xFFE3E0E0);
+  static Color transparentColor = const Color(0x00000000);
 
-  Color appColor = const Color(0xFF00DD8D);
-  Color lightAppColor = const Color(0xFFDFF1EA);
-  Color darkAppColor = const Color(0xFF025839);
+  static Color appColor = const Color(0xFF00DD8D);
+  static Color lightAppColor = const Color(0xFFDFF1EA);
+  static Color darkAppColor = const Color(0xFF025839);
 
   ///************** Text Color **************///
-  Color darkTextColor = const Color(0xFF212121);
-  Color lightTextColor = const Color(0xFF898989);
-  Color appColorText = const Color(0xFF00AB6C);
-  Color blueText = const Color(0xFF0997B8);
+  static Color darkTextColor = const Color(0xFF212121);
+  static Color lightTextColor = const Color(0xFF898989);
+  static Color appColorText = const Color(0xFF00AB6C);
+  static Color blueText = const Color(0xFF0997B8);
 
   ///************** button Color **************///
-  Color buttonColor = const Color(0xFF00AB6C);
-  Color borderColor = const Color(0xFFEAEAEA);
-  Color grayBorderColor = const Color(0xFFD9D9D9);
-  Color errorColor = const Color(0xFFDE2800);
-  Color lightBlueColor = const Color(0xFFDFF3F8);
+  static Color buttonColor = const Color(0xFF00AB6C);
+  static Color borderColor = const Color(0xFFEAEAEA);
+  static Color grayBorderColor = const Color(0xFFD9D9D9);
+  static Color errorColor = const Color(0xFFDE2800);
+  static Color lightBlueColor = const Color(0xFFDFF3F8);
 }

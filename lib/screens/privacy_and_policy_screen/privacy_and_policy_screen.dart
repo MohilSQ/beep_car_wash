@@ -10,7 +10,6 @@ class PrivacyAndPolicyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     return Scaffold(
       body: SafeArea(
         bottom: false,
@@ -23,7 +22,7 @@ class PrivacyAndPolicyScreen extends StatelessWidget {
                 MyTextView(
                   "Lorem Ipsum",
                   textStyleNew: MyTextStyle(
-                    textColor: appColors.darkTextColor,
+                    textColor: AppColors.darkTextColor,
                     textWeight: FontWeight.bold,
                     textSize: 16.sp,
                   ),
@@ -33,7 +32,7 @@ class PrivacyAndPolicyScreen extends StatelessWidget {
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                   isMaxLineWrap: true,
                   textStyleNew: MyTextStyle(
-                    textColor: appColors.lightTextColor,
+                    textColor: AppColors.lightTextColor,
                     textWeight: FontWeight.w600,
                     textSize: 12.sp,
                   ),
@@ -42,7 +41,7 @@ class PrivacyAndPolicyScreen extends StatelessWidget {
                 MyTextView(
                   "Lorem Ipsum",
                   textStyleNew: MyTextStyle(
-                    textColor: appColors.darkTextColor,
+                    textColor: AppColors.darkTextColor,
                     textWeight: FontWeight.bold,
                     textSize: 16.sp,
                   ),
@@ -52,7 +51,7 @@ class PrivacyAndPolicyScreen extends StatelessWidget {
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                   isMaxLineWrap: true,
                   textStyleNew: MyTextStyle(
-                    textColor: appColors.lightTextColor,
+                    textColor: AppColors.lightTextColor,
                     textWeight: FontWeight.w600,
                     textSize: 12.sp,
                   ),
@@ -62,7 +61,7 @@ class PrivacyAndPolicyScreen extends StatelessWidget {
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                   isMaxLineWrap: true,
                   textStyleNew: MyTextStyle(
-                    textColor: appColors.lightTextColor,
+                    textColor: AppColors.lightTextColor,
                     textWeight: FontWeight.w600,
                     textSize: 12.sp,
                   ),

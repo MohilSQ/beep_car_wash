@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class Loading {
-  AppColors appColors = AppColors();
   Loading() {
     EasyLoading.instance
       ..displayDuration = const Duration(milliseconds: 2000)
@@ -13,11 +12,11 @@ class Loading {
       ..indicatorSize = 40.0
       ..lineWidth = 2
       ..radius = 15
-      ..progressColor = appColors.whiteColor
-      ..backgroundColor = appColors.appColor
-      ..indicatorColor = appColors.whiteColor
-      ..textColor = appColors.whiteColor
-      ..maskColor = appColors.blackColor.withOpacity(0.4)
+      ..progressColor = AppColors.whiteColor
+      ..backgroundColor = AppColors.appColor
+      ..indicatorColor = AppColors.whiteColor
+      ..textColor = AppColors.whiteColor
+      ..maskColor = AppColors.blackColor.withOpacity(0.4)
       ..maskType = EasyLoadingMaskType.custom
       ..userInteractions = true
       ..dismissOnTap = false;

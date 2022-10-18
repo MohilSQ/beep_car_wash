@@ -17,7 +17,6 @@ class FindABeepScreen extends GetView<FindABeepController> {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     return Stack(
       children: [
         Image.asset(
@@ -70,8 +69,8 @@ class FindABeepScreen extends GetView<FindABeepController> {
 
                       showModalBottomSheet(
                         context: context,
-                        backgroundColor: appColors.transparentColor,
-                        barrierColor: appColors.transparentColor,
+                        backgroundColor: AppColors.transparentColor,
+                        barrierColor: AppColors.transparentColor,
                         builder: (context) => const NearestBeepSheet(),
                       );
                     },
@@ -98,7 +97,7 @@ class FindABeepScreen extends GetView<FindABeepController> {
                     MyTextView(
                       Strings.setALocation,
                       textStyleNew: MyTextStyle(
-                        textColor: appColors.appColor,
+                        textColor: AppColors.appColor,
                         textWeight: FontWeight.w600,
                         textSize: 8.6.sp,
                       ),
@@ -109,7 +108,7 @@ class FindABeepScreen extends GetView<FindABeepController> {
                         Icon(
                           Icons.search_rounded,
                           size: 2.8.h,
-                          color: appColors.appColor,
+                          color: AppColors.appColor,
                         ),
                         SizedBox(width: 0.8.h),
                         Expanded(

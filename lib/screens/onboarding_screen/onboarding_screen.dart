@@ -15,7 +15,6 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
   static const routeName = "/OnBoardingScreen";
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     return Scaffold(
       body: SafeArea(
         top: false,
@@ -42,7 +41,7 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
                     MyTextView(
                       Strings.washYourCar,
                       textStyleNew: MyTextStyle(
-                        textColor: appColors.darkTextColor,
+                        textColor: AppColors.darkTextColor,
                         textWeight: FontWeight.bold,
                         textSize: 20.sp,
                       ),
@@ -52,7 +51,7 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ...",
                       isMaxLineWrap: true,
                       textStyleNew: MyTextStyle(
-                        textColor: appColors.lightTextColor,
+                        textColor: AppColors.lightTextColor,
                         textWeight: FontWeight.w600,
                         textSize: 10.sp,
                       ),

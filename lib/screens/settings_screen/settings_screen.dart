@@ -20,7 +20,6 @@ class SettingsScreen extends GetView<SettingsController> {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     return Column(
       children: [
         Stack(
@@ -32,8 +31,8 @@ class SettingsScreen extends GetView<SettingsController> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    appColors.appColorText,
-                    appColors.darkAppColor,
+                    AppColors.appColorText,
+                    AppColors.darkAppColor,
                   ],
                 ),
               ),
@@ -42,14 +41,14 @@ class SettingsScreen extends GetView<SettingsController> {
                   CustomAppBar(
                     title: Strings.setting,
                     shadowVisible: false,
-                    appBarColor: appColors.transparentColor,
-                    textColor: appColors.whiteColor,
+                    appBarColor: AppColors.transparentColor,
+                    textColor: AppColors.whiteColor,
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(right: 3.w),
                       child: MyTextView(
                         Strings.save,
                         textStyleNew: MyTextStyle(
-                          textColor: appColors.whiteColor,
+                          textColor: AppColors.whiteColor,
                           textWeight: FontWeight.bold,
                           textSize: 13.6.sp,
                         ),
@@ -66,7 +65,7 @@ class SettingsScreen extends GetView<SettingsController> {
                         padding: EdgeInsets.all(0.6.h),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: appColors.whiteColor,
+                          color: AppColors.whiteColor,
                         ),
                         child: ClipOval(
                           child: Image.asset(
@@ -81,10 +80,10 @@ class SettingsScreen extends GetView<SettingsController> {
                         padding: EdgeInsets.all(1.2.h),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: appColors.whiteColor,
+                          color: AppColors.whiteColor,
                           boxShadow: [
                             BoxShadow(
-                              color: appColors.blackColor.withOpacity(0.15),
+                              color: AppColors.blackColor.withOpacity(0.15),
                               blurRadius: 4,
                               spreadRadius: 0,
                               offset: const Offset(0, 4),
@@ -119,8 +118,8 @@ class SettingsScreen extends GetView<SettingsController> {
                         textCapitalization: TextCapitalization.words,
                         controller: controller.firstNameController,
                         isError: controller.fistNameError.value,
-                        hintColor: controller.fistNameError.value ? appColors.errorColor : appColors.lightTextColor,
-                        textColor: controller.fistNameError.value ? appColors.errorColor : appColors.darkTextColor,
+                        hintColor: controller.fistNameError.value ? AppColors.errorColor : AppColors.lightTextColor,
+                        textColor: controller.fistNameError.value ? AppColors.errorColor : AppColors.darkTextColor,
                       );
                     }),
                     SizedBox(height: 1.6.h),
@@ -134,8 +133,8 @@ class SettingsScreen extends GetView<SettingsController> {
                         textCapitalization: TextCapitalization.words,
                         controller: controller.lastNameController,
                         isError: controller.lastNameError.value,
-                        hintColor: controller.lastNameError.value ? appColors.errorColor : appColors.lightTextColor,
-                        textColor: controller.lastNameError.value ? appColors.errorColor : appColors.darkTextColor,
+                        hintColor: controller.lastNameError.value ? AppColors.errorColor : AppColors.lightTextColor,
+                        textColor: controller.lastNameError.value ? AppColors.errorColor : AppColors.darkTextColor,
                       );
                     }),
                     SizedBox(height: 1.6.h),
@@ -148,8 +147,8 @@ class SettingsScreen extends GetView<SettingsController> {
                         inputType: TextInputType.emailAddress,
                         controller: controller.emailController,
                         isError: controller.emailError.value,
-                        hintColor: controller.emailError.value ? appColors.errorColor : appColors.lightTextColor,
-                        textColor: controller.emailError.value ? appColors.errorColor : appColors.darkTextColor,
+                        hintColor: controller.emailError.value ? AppColors.errorColor : AppColors.lightTextColor,
+                        textColor: controller.emailError.value ? AppColors.errorColor : AppColors.darkTextColor,
                       );
                     }),
                     SizedBox(height: 1.6.h),
@@ -162,8 +161,8 @@ class SettingsScreen extends GetView<SettingsController> {
                         inputType: TextInputType.number,
                         controller: controller.phoneNumberController,
                         isError: controller.phoneNumberError.value,
-                        hintColor: controller.phoneNumberError.value ? appColors.errorColor : appColors.lightTextColor,
-                        textColor: controller.phoneNumberError.value ? appColors.errorColor : appColors.darkTextColor,
+                        hintColor: controller.phoneNumberError.value ? AppColors.errorColor : AppColors.lightTextColor,
+                        textColor: controller.phoneNumberError.value ? AppColors.errorColor : AppColors.darkTextColor,
                       );
                     }),
                     SizedBox(height: 1.6.h),
@@ -177,8 +176,8 @@ class SettingsScreen extends GetView<SettingsController> {
                         controller: controller.passwordController,
                         obscureText: true,
                         isError: controller.passwordError.value,
-                        hintColor: controller.passwordError.value ? appColors.errorColor : appColors.lightTextColor,
-                        textColor: controller.passwordError.value ? appColors.errorColor : appColors.darkTextColor,
+                        hintColor: controller.passwordError.value ? AppColors.errorColor : AppColors.lightTextColor,
+                        textColor: controller.passwordError.value ? AppColors.errorColor : AppColors.darkTextColor,
                       );
                     }),
                   ],
@@ -192,14 +191,14 @@ class SettingsScreen extends GetView<SettingsController> {
                 },
                 elevation: 0,
                 borderRadius: 0,
-                backgroundColor: appColors.transparentColor,
+                backgroundColor: AppColors.transparentColor,
                 text: Strings.termsOfService,
                 image: ImagePath.termsOfService,
                 widgetSpace: 1.5.h,
                 widgetMainAxis: MainAxisAlignment.start,
                 horizontalPadding: 3.w,
                 style: MyTextStyle(
-                  textColor: appColors.appColorText,
+                  textColor: AppColors.appColorText,
                   textWeight: FontWeight.w600,
                   textSize: 12.sp,
                 ),
@@ -211,14 +210,14 @@ class SettingsScreen extends GetView<SettingsController> {
                 },
                 elevation: 0,
                 borderRadius: 0,
-                backgroundColor: appColors.transparentColor,
+                backgroundColor: AppColors.transparentColor,
                 text: Strings.privacyAndPolicy,
                 image: ImagePath.privacyAndPolicy,
                 widgetSpace: 1.5.h,
                 widgetMainAxis: MainAxisAlignment.start,
                 horizontalPadding: 3.w,
                 style: MyTextStyle(
-                  textColor: appColors.appColorText,
+                  textColor: AppColors.appColorText,
                   textWeight: FontWeight.w600,
                   textSize: 12.sp,
                 ),
@@ -228,14 +227,14 @@ class SettingsScreen extends GetView<SettingsController> {
                 onPressed: () {},
                 elevation: 0,
                 borderRadius: 0,
-                backgroundColor: appColors.transparentColor,
+                backgroundColor: AppColors.transparentColor,
                 text: Strings.customerSupport,
                 image: ImagePath.customerSupport,
                 widgetSpace: 1.5.h,
                 widgetMainAxis: MainAxisAlignment.start,
                 horizontalPadding: 3.w,
                 style: MyTextStyle(
-                  textColor: appColors.appColorText,
+                  textColor: AppColors.appColorText,
                   textWeight: FontWeight.w600,
                   textSize: 12.sp,
                 ),
@@ -251,7 +250,7 @@ class SettingsScreen extends GetView<SettingsController> {
                     MyTextView(
                       Strings.logOut,
                       textStyleNew: MyTextStyle(
-                        textColor: appColors.lightTextColor,
+                        textColor: AppColors.lightTextColor,
                         textWeight: FontWeight.bold,
                         textSize: 12.sp,
                       ),

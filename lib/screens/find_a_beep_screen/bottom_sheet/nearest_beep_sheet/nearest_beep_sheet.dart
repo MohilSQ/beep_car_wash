@@ -14,14 +14,13 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     Get.put(NearestBeepController());
     return Wrap(
       children: [
         Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            color: appColors.whiteColor,
+            color: AppColors.whiteColor,
             borderRadius: BorderRadius.only(topLeft: Radius.circular(3.h), topRight: Radius.circular(3.h)),
           ),
           child: Column(
@@ -32,7 +31,7 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                 width: 10.w,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(2.h),
-                  color: appColors.grayBorderColor,
+                  color: AppColors.grayBorderColor,
                 ),
               ),
               SizedBox(height: 1.4.h),
@@ -47,7 +46,7 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                         textStyleNew: MyTextStyle(
                           textSize: 15.sp,
                           textWeight: FontWeight.bold,
-                          textColor: appColors.darkTextColor,
+                          textColor: AppColors.darkTextColor,
                         ),
                       ),
                     ),
@@ -61,7 +60,7 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                           textStyleNew: MyTextStyle(
                             textSize: 12.sp,
                             textWeight: FontWeight.w600,
-                            textColor: appColors.darkTextColor,
+                            textColor: AppColors.darkTextColor,
                           ),
                         ),
                       ],
@@ -84,16 +83,16 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                               } else if (e.index == 2) {
                                 showModalBottomSheet(
                                   context: context,
-                                  backgroundColor: appColors.transparentColor,
-                                  barrierColor: appColors.transparentColor,
+                                  backgroundColor: AppColors.transparentColor,
+                                  barrierColor: AppColors.transparentColor,
                                   isScrollControlled: true,
                                   builder: (context) => StatefulBuilder(builder: (context, setState) => const ReserveSheet()),
                                 );
                               } else if (e.index == 3) {
                                 showModalBottomSheet(
                                   context: context,
-                                  backgroundColor: appColors.transparentColor,
-                                  barrierColor: appColors.transparentColor,
+                                  backgroundColor: AppColors.transparentColor,
+                                  barrierColor: AppColors.transparentColor,
                                   isScrollControlled: true,
                                   builder: (context) => StatefulBuilder(builder: (context, setState) => const ReportSheet()),
                                 );
@@ -107,10 +106,10 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                                     height: 6.6.h,
                                     width: 6.6.h,
                                     decoration: BoxDecoration(
-                                      color: e.index == 0 ? appColors.appColorText : appColors.whiteColor,
+                                      color: e.index == 0 ? AppColors.appColorText : AppColors.whiteColor,
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: e.index == 0 ? appColors.appColorText : appColors.grayBorderColor,
+                                        color: e.index == 0 ? AppColors.appColorText : AppColors.grayBorderColor,
                                         width: 0.1.h,
                                       ),
                                     ),
@@ -132,7 +131,7 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                                     textStyleNew: MyTextStyle(
                                       textSize: 10.sp,
                                       textWeight: FontWeight.w600,
-                                      textColor: appColors.lightTextColor,
+                                      textColor: AppColors.lightTextColor,
                                     ),
                                   ),
                                 ],

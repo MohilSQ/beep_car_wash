@@ -15,6 +15,9 @@ class Constants {
   // Api credential .....
   static const String baseUrl = 'https://codewithwaqas.com/beep/api/';
   static const String phoneVerification = 'phone_verification';
+  static const String otpVerification = 'otp_verification';
+  static const String resendOTP = 'resend_otp';
+  static const String userRegistration = 'user_registration';
 
   // About app .....
   static const String AboutUsLink = "";

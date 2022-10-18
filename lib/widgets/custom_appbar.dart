@@ -29,14 +29,13 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     return Container(
       height: height ?? MediaQuery.of(context).padding.top + AppBar().preferredSize.height,
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: MediaQuery.of(context).padding.top).copyWith(bottom: 0),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: appBarColor ?? appColors.whiteColor,
+        color: appBarColor ?? AppColors.whiteColor,
         boxShadow: shadowVisible!
             ? [
                 BoxShadow(
@@ -74,7 +73,7 @@ class CustomAppBar extends StatelessWidget {
               MyTextView(
                 title!,
                 textStyleNew: MyTextStyle(
-                  textColor: textColor ?? appColors.darkTextColor,
+                  textColor: textColor ?? AppColors.darkTextColor,
                   textWeight: FontWeight.bold,
                   textSize: 14.6.sp,
                 ),

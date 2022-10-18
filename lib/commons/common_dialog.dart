@@ -13,7 +13,7 @@
 //   GestureTapCallback? onRightClick,
 // }) async {
 //   Utils utils = Utils();
-//   AppColors appColors = AppColors();
+//   
 //   utils.hideKeyboard(context);
 //
 //   showDialog(
@@ -31,9 +31,9 @@
 //                 width: double.infinity,
 //                 padding: EdgeInsets.all(ResponsiveFlutter.of(context).moderateScale(20)),
 //                 decoration: BoxDecoration(
-//                   color: appColors.lightOrangeColor,
+//                   color: AppColors.lightOrangeColor,
 //                   borderRadius: BorderRadius.circular(ResponsiveFlutter.of(context).moderateScale(15)),
-//                   border: Border.all(width: 1.5, color: appColors.lightDarkBlueColor),
+//                   border: Border.all(width: 1.5, color: AppColors.lightDarkBlueColor),
 //                 ),
 //                 child: Column(
 //                   mainAxisAlignment: MainAxisAlignment.center,
@@ -42,7 +42,7 @@
 //                     MyTextView(
 //                       Strings.appName,
 //                       textStyleNew: MyTextStyle(
-//                         textColor: appColors.darkBlueColor,
+//                         textColor: AppColors.darkBlueColor,
 //                         textSize: ResponsiveFlutter.of(context).fontSize(2.9),
 //                         textWeight: FontWeight.w400,
 //                         textFamily: Constants.klasik,
@@ -54,7 +54,7 @@
 //                       isMaxLineWrap: true,
 //                       textAlignNew: TextAlign.center,
 //                       textStyleNew: MyTextStyle(
-//                         textColor: appColors.darkBlueColor,
+//                         textColor: AppColors.darkBlueColor,
 //                         textSize: ResponsiveFlutter.of(context).fontSize(2),
 //                         textWeight: FontWeight.w500,
 //                       ),
@@ -102,7 +102,7 @@
 //   GestureTapCallback? onBtnClick,
 // }) async {
 //   Utils utils = Utils();
-//   AppColors appColors = AppColors();
+//   
 //   utils.hideKeyboard(context);
 //
 //   showDialog(
@@ -120,9 +120,9 @@
 //                 width: double.infinity,
 //                 padding: EdgeInsets.all(ResponsiveFlutter.of(context).moderateScale(20)),
 //                 decoration: BoxDecoration(
-//                   color: appColors.lightOrangeColor,
+//                   color: AppColors.lightOrangeColor,
 //                   borderRadius: BorderRadius.circular(ResponsiveFlutter.of(context).moderateScale(15)),
-//                   border: Border.all(width: 1.5, color: appColors.lightDarkBlueColor),
+//                   border: Border.all(width: 1.5, color: AppColors.lightDarkBlueColor),
 //                 ),
 //                 child: Column(
 //                   mainAxisAlignment: MainAxisAlignment.center,
@@ -131,7 +131,7 @@
 //                     MyTextView(
 //                       Strings.appName,
 //                       textStyleNew: MyTextStyle(
-//                         textColor: appColors.darkBlueColor,
+//                         textColor: AppColors.darkBlueColor,
 //                         textSize: ResponsiveFlutter.of(context).fontSize(2.9),
 //                         textWeight: FontWeight.w400,
 //                         textFamily: Constants.klasik,
@@ -143,7 +143,7 @@
 //                       isMaxLineWrap: true,
 //                       textAlignNew: TextAlign.center,
 //                       textStyleNew: MyTextStyle(
-//                         textColor: appColors.darkBlueColor,
+//                         textColor: AppColors.darkBlueColor,
 //                         textSize: ResponsiveFlutter.of(context).fontSize(2),
 //                         textWeight: FontWeight.w500,
 //                       ),

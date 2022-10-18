@@ -65,7 +65,6 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     return SizedBox(
       height: height ?? 6.h,
       width: width ?? double.infinity,
@@ -79,8 +78,8 @@ class CustomButton extends StatelessWidget {
                     end: gradientAlignmentEnd ?? Alignment.bottomRight,
                     colors: gradientColors ??
                         [
-                          appColors.redColor,
-                          appColors.yellowColor,
+                          AppColors.redColor,
+                          AppColors.yellowColor,
                         ],
                   ),
                   borderRadius: BorderRadius.circular(borderRadius ?? 1.2.h),
@@ -93,7 +92,6 @@ class CustomButton extends StatelessWidget {
   }
 
   Widget elevatedButton(BuildContext context) {
-    AppColors appColors = AppColors();
     return ElevatedButton(
       style: ButtonStyle(
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -104,11 +102,11 @@ class CustomButton extends StatelessWidget {
         ),
         elevation: MaterialStateProperty.all(elevation),
         overlayColor: MaterialStateProperty.resolveWith((states) {
-          return states.contains(MaterialState.pressed) ? overlayColor ?? appColors.blackColor.withOpacity(0.14) : null;
+          return states.contains(MaterialState.pressed) ? overlayColor ?? AppColors.blackColor.withOpacity(0.14) : null;
         }),
-        shadowColor: MaterialStateProperty.all(showGradient == true ? appColors.transparentColor : shadowColor),
+        shadowColor: MaterialStateProperty.all(showGradient == true ? AppColors.transparentColor : shadowColor),
         backgroundColor: MaterialStateProperty.all(
-          showGradient == true ? appColors.transparentColor : backgroundColor ?? (disableButton != true ? appColors.buttonColor : Theme.of(context).disabledColor),
+          showGradient == true ? AppColors.transparentColor : backgroundColor ?? (disableButton != true ? AppColors.buttonColor : Theme.of(context).disabledColor),
         ),
       ),
       onPressed: disableButton != true ? onPressed : null,
@@ -122,7 +120,7 @@ class CustomButton extends StatelessWidget {
                   children: [
                     Icon(
                       icon,
-                      color: iconColor ?? appColors.whiteColor,
+                      color: iconColor ?? AppColors.whiteColor,
                       size: 24,
                     ),
                     SizedBox(width: widgetSpace ?? 0)
@@ -149,7 +147,7 @@ class CustomButton extends StatelessWidget {
                   textAlignNew: TextAlign.center,
                   textStyleNew: style ??
                       MyTextStyle(
-                        textColor: textColor ?? appColors.whiteColor,
+                        textColor: textColor ?? AppColors.whiteColor,
                         textWeight: FontWeight.bold,
                         textSize: 12.sp,
                       ),

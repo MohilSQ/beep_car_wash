@@ -13,7 +13,6 @@ class ReserveSheet extends GetView<ReserveController> {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     Get.put(ReserveController());
     return Wrap(
       children: [
@@ -21,7 +20,7 @@ class ReserveSheet extends GetView<ReserveController> {
           width: double.infinity,
           padding: EdgeInsets.all(2.h),
           decoration: BoxDecoration(
-            color: appColors.whiteColor,
+            color: AppColors.whiteColor,
             borderRadius: BorderRadius.only(topLeft: Radius.circular(3.h), topRight: Radius.circular(3.h)),
           ),
           child: Column(
@@ -31,7 +30,7 @@ class ReserveSheet extends GetView<ReserveController> {
                   MyTextView(
                     "Reserve",
                     textStyleNew: MyTextStyle(
-                      textColor: appColors.darkTextColor,
+                      textColor: AppColors.darkTextColor,
                       textWeight: FontWeight.bold,
                       textSize: 15.sp,
                     ),
@@ -46,7 +45,7 @@ class ReserveSheet extends GetView<ReserveController> {
                 isMaxLineWrap: true,
                 textAlignNew: TextAlign.center,
                 textStyleNew: MyTextStyle(
-                  textColor: appColors.darkTextColor,
+                  textColor: AppColors.darkTextColor,
                   textWeight: FontWeight.bold,
                   textSize: 20.sp,
                 ),
@@ -64,7 +63,7 @@ class ReserveSheet extends GetView<ReserveController> {
                   children: [
                     Image.asset(
                       ImagePath.termsOfService,
-                      color: appColors.redColor,
+                      color: AppColors.redColor,
                       height: 2.4.h,
                     ),
                     SizedBox(width: 3.w),
@@ -72,7 +71,7 @@ class ReserveSheet extends GetView<ReserveController> {
                       "This action is non refundable",
                       isMaxLineWrap: true,
                       textStyleNew: MyTextStyle(
-                        textColor: appColors.redColor,
+                        textColor: AppColors.redColor,
                         textWeight: FontWeight.bold,
                         textSize: 12.sp,
                       ),
@@ -89,12 +88,12 @@ class ReserveSheet extends GetView<ReserveController> {
                         Get.back();
                       },
                       elevation: 0,
-                      backgroundColor: appColors.transparentColor,
+                      backgroundColor: AppColors.transparentColor,
                       text: Strings.cancel,
-                      textColor: appColors.appColorText,
+                      textColor: AppColors.appColorText,
                       borderSide: BorderSide(
                         width: 0.1.h,
-                        color: appColors.lightGreyColor,
+                        color: AppColors.lightGreyColor,
                       ),
                     ),
                   ),

@@ -18,7 +18,6 @@ class PaymentScreen extends GetView<PaymentController> {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     return Column(
       children: [
         SizedBox(
@@ -37,8 +36,8 @@ class PaymentScreen extends GetView<PaymentController> {
                   CustomAppBar(
                     title: Strings.payment,
                     shadowVisible: false,
-                    appBarColor: appColors.transparentColor,
-                    textColor: appColors.whiteColor,
+                    appBarColor: AppColors.transparentColor,
+                    textColor: AppColors.whiteColor,
                     // suffixIcon: Padding(
                     //   padding: EdgeInsets.only(right: 3.w),
                     //   child: GestureDetector(
@@ -56,7 +55,7 @@ class PaymentScreen extends GetView<PaymentController> {
                   MyTextView(
                     "US \$ 0.00",
                     textStyleNew: MyTextStyle(
-                      textColor: appColors.whiteColor,
+                      textColor: AppColors.whiteColor,
                       textWeight: FontWeight.bold,
                       textSize: 22.sp,
                     ),
@@ -65,7 +64,7 @@ class PaymentScreen extends GetView<PaymentController> {
                   MyTextView(
                     Strings.currentBalance,
                     textStyleNew: MyTextStyle(
-                      textColor: appColors.whiteColor,
+                      textColor: AppColors.whiteColor,
                       textWeight: FontWeight.bold,
                       textSize: 9.sp,
                     ),
@@ -105,7 +104,7 @@ class PaymentScreen extends GetView<PaymentController> {
                           MyTextView(
                             "Mastercard",
                             textStyleNew: MyTextStyle(
-                              textColor: appColors.darkTextColor,
+                              textColor: AppColors.darkTextColor,
                               textWeight: FontWeight.bold,
                               textSize: 12.sp,
                             ),
@@ -114,7 +113,7 @@ class PaymentScreen extends GetView<PaymentController> {
                           MyTextView(
                             "**** **** **** 5678",
                             textStyleNew: MyTextStyle(
-                              textColor: appColors.lightTextColor,
+                              textColor: AppColors.lightTextColor,
                               textWeight: FontWeight.w600,
                               textSize: 11.sp,
                             ),
@@ -126,13 +125,13 @@ class PaymentScreen extends GetView<PaymentController> {
                         ? Container(
                             padding: EdgeInsets.symmetric(horizontal: 0.8.h, vertical: 0.6.h),
                             decoration: BoxDecoration(
-                              color: appColors.lightBlueColor,
+                              color: AppColors.lightBlueColor,
                               borderRadius: BorderRadius.circular(0.8.h),
                             ),
                             child: MyTextView(
                               Strings.primary,
                               textStyleNew: MyTextStyle(
-                                textColor: appColors.blueText,
+                                textColor: AppColors.blueText,
                                 textWeight: FontWeight.bold,
                                 textSize: 10.sp,
                               ),

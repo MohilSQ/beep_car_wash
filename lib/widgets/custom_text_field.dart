@@ -71,7 +71,6 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -79,7 +78,7 @@ class CustomTextField extends StatelessWidget {
             ? MyTextView(
                 title!,
                 textStyleNew: MyTextStyle(
-                  textColor: appColors.darkTextColor,
+                  textColor: AppColors.darkTextColor,
                   textWeight: FontWeight.bold,
                   textSize: 12.sp,
                 ),
@@ -105,10 +104,9 @@ class CustomTextField extends StatelessWidget {
   }
 
   Widget textField() {
-    AppColors appColors = AppColors();
     return TextField(
       controller: controller,
-      cursorColor: appColors.appColor,
+      cursorColor: AppColors.appColor,
       cursorWidth: 2,
       keyboardType: inputType,
       enabled: enabled,
@@ -121,7 +119,7 @@ class CustomTextField extends StatelessWidget {
       autocorrect: false,
       autofocus: false,
       focusNode: focusNode,
-      textCapitalization: textCapitalization ?? TextCapitalization.sentences,
+      textCapitalization: textCapitalization ?? TextCapitalization.none,
       maxLines: isMaxLines! ? null : maxLines,
       maxLength: maxLength,
       minLines: minLines,
@@ -129,7 +127,7 @@ class CustomTextField extends StatelessWidget {
       style: MyTextStyle(
         textWeight: FontWeight.w600,
         textSize: textSize ?? 12.sp,
-        textColor: textColor ?? appColors.blackColor,
+        textColor: textColor ?? AppColors.blackColor,
       ),
       decoration: InputDecoration(
         isDense: isDense,
@@ -141,7 +139,7 @@ class CustomTextField extends StatelessWidget {
         hintStyle: MyTextStyle(
           textWeight: FontWeight.w600,
           textSize: textSize ?? 12.sp,
-          textColor: hintColor ?? appColors.lightTextColor,
+          textColor: hintColor ?? AppColors.lightTextColor,
         ),
       ),
     );

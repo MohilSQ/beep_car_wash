@@ -11,7 +11,6 @@ class SplashScreen extends GetView<SplashController> {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     return GetBuilder(
       assignId: true,
       init: SplashController(),
@@ -23,7 +22,7 @@ class SplashScreen extends GetView<SplashController> {
             child: Container(
               height: double.infinity,
               width: double.infinity,
-              color: appColors.appColor,
+              color: AppColors.appColor,
               alignment: Alignment.center,
               child: Image.asset(
                 ImagePath.appLogo,

@@ -7,11 +7,24 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class APIFunction {
+  /// ------ To Check Internet Aviblity -------------------->>>
   ConnectivityResult? connectivityResult;
   final Connectivity connectivity = Connectivity();
-
-  getConnectivityResult() async {
-    connectivityResult = await connectivity.checkConnectivity();
+  Future<bool> getConnectivityResult() async {
+    try {
+      connectivityResult = await connectivity.checkConnectivity();
+      printOkStatus(connectivityResult.toString());
+      if (connectivityResult == ConnectivityResult.wifi || connectivityResult == ConnectivityResult.mobile) {
+        return true;
+      } else {
+        Utils().showSnackBar(context: Get.context!, message: Strings.noInternatAvilable);
+        return false;
+      }
+    } on PlatformException catch (e) {
+      printError(e.toString());
+      Utils().showSnackBar(context: Get.context!, message: Strings.noInternatAvilable);
+      return false;
+    }
   }
 
   /// ------ To Call Post Api -------------------->>>
@@ -22,22 +35,13 @@ class APIFunction {
     bool isLoading = true,
     bool isFormData = false,
   }) async {
-    printAction("params -------->>> ${isFormData ? params!.fields : params}");
-    try {
-      getConnectivityResult();
-      printOkStatus(connectivityResult.toString());
-      if (connectivityResult == ConnectivityResult.wifi || connectivityResult == ConnectivityResult.mobile) {
-        var response = await HttpUtil(isLoading, context).post(
-          apiName,
-          data: params,
-        );
-        return response;
-      } else {
-        Utils().showSnackBar(context: Get.context!, message: Strings.noInternatAvilable);
-      }
-    } on PlatformException catch (e) {
-      printError(e.toString());
-      Utils().showSnackBar(context: Get.context!, message: Strings.noInternatAvilable);
+    if (await getConnectivityResult()) {
+      printAction("params -------->>> ${isFormData ? params!.fields : params}");
+      var response = await HttpUtil(isLoading, context).post(
+        apiName,
+        data: params,
+      );
+      return response;
     }
   }
 
@@ -48,22 +52,13 @@ class APIFunction {
     dynamic params,
     bool isLoading = true,
   }) async {
-    printAction("params -------->>> $params");
-    try {
-      getConnectivityResult();
-      printOkStatus(connectivityResult.toString());
-      if (connectivityResult == ConnectivityResult.wifi || connectivityResult == ConnectivityResult.mobile) {
-        var response = await HttpUtil(isLoading, context).get(
-          apiName,
-          queryParameters: params,
-        );
-        return response;
-      } else {
-        Utils().showSnackBar(context: Get.context!, message: Strings.noInternatAvilable);
-      }
-    } on PlatformException catch (e) {
-      printError(e.toString());
-      Utils().showSnackBar(context: Get.context!, message: Strings.noInternatAvilable);
+    if (await getConnectivityResult()) {
+      printAction("params -------->>> $params");
+      var response = await HttpUtil(isLoading, context).get(
+        apiName,
+        queryParameters: params,
+      );
+      return response;
     }
   }
 }

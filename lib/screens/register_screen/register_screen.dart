@@ -15,7 +15,6 @@ class RegisterScreen extends GetView<RegisterController> {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     return GetBuilder(
       assignId: true,
       init: RegisterController(),
@@ -26,14 +25,14 @@ class RegisterScreen extends GetView<RegisterController> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                appColors.whiteColor,
-                appColors.whiteColor,
-                appColors.lightAppColor,
+                AppColors.whiteColor,
+                AppColors.whiteColor,
+                AppColors.lightAppColor,
               ],
             ),
           ),
           child: Scaffold(
-            backgroundColor: appColors.transparentColor,
+            backgroundColor: AppColors.transparentColor,
             body: SafeArea(
               top: false,
               bottom: false,
@@ -64,7 +63,7 @@ class RegisterScreen extends GetView<RegisterController> {
                           MyTextView(
                             Strings.createYourAccount,
                             textStyleNew: MyTextStyle(
-                              textColor: appColors.darkTextColor,
+                              textColor: AppColors.darkTextColor,
                               textWeight: FontWeight.bold,
                               textSize: 14.sp,
                             ),
@@ -76,8 +75,8 @@ class RegisterScreen extends GetView<RegisterController> {
                               inputType: TextInputType.name,
                               controller: controller.firstNameController,
                               isError: controller.firstNameError!.value,
-                              hintColor: controller.firstNameError!.value ? appColors.errorColor : appColors.lightTextColor,
-                              textColor: controller.firstNameError!.value ? appColors.errorColor : appColors.darkTextColor,
+                              hintColor: controller.firstNameError!.value ? AppColors.errorColor : AppColors.lightTextColor,
+                              textColor: controller.firstNameError!.value ? AppColors.errorColor : AppColors.darkTextColor,
                             );
                           }),
                           SizedBox(height: 2.h),
@@ -87,8 +86,8 @@ class RegisterScreen extends GetView<RegisterController> {
                               inputType: TextInputType.name,
                               controller: controller.lastNameController,
                               isError: controller.lastNameError!.value,
-                              hintColor: controller.lastNameError!.value ? appColors.errorColor : appColors.lightTextColor,
-                              textColor: controller.lastNameError!.value ? appColors.errorColor : appColors.darkTextColor,
+                              hintColor: controller.lastNameError!.value ? AppColors.errorColor : AppColors.lightTextColor,
+                              textColor: controller.lastNameError!.value ? AppColors.errorColor : AppColors.darkTextColor,
                             );
                           }),
                           SizedBox(height: 2.h),
@@ -99,8 +98,8 @@ class RegisterScreen extends GetView<RegisterController> {
                               inputType: TextInputType.emailAddress,
                               controller: controller.emailController,
                               isError: controller.emailError!.value,
-                              hintColor: controller.emailError!.value ? appColors.errorColor : appColors.lightTextColor,
-                              textColor: controller.emailError!.value ? appColors.errorColor : appColors.darkTextColor,
+                              hintColor: controller.emailError!.value ? AppColors.errorColor : AppColors.lightTextColor,
+                              textColor: controller.emailError!.value ? AppColors.errorColor : AppColors.darkTextColor,
                             );
                           }),
                           const Spacer(),
@@ -128,7 +127,7 @@ class RegisterScreen extends GetView<RegisterController> {
                                     style: MyTextStyle(
                                       textWeight: FontWeight.w600,
                                       textSize: 12.sp,
-                                      textColor: appColors.blackColor,
+                                      textColor: AppColors.blackColor,
                                     ),
                                     children: [
                                       TextSpan(
@@ -140,7 +139,7 @@ class RegisterScreen extends GetView<RegisterController> {
                                         style: MyTextStyle(
                                           textWeight: FontWeight.bold,
                                           textSize: 12.sp,
-                                          textColor: appColors.appColorText,
+                                          textColor: AppColors.appColorText,
                                         ),
                                       )
                                     ],
@@ -150,12 +149,15 @@ class RegisterScreen extends GetView<RegisterController> {
                             ],
                           ),
                           SizedBox(height: 3.h),
-                          CustomButton(
-                            text: Strings.register,
-                            onPressed: () {
-                              Get.back();
-                            },
-                          ),
+                          Obx(() => CustomButton(
+                                text: Strings.register,
+                                disableButton: controller.termsAndPrivacy!.value,
+                                onPressed: () {
+                                  if (controller.validation()) {
+                                    controller.userRegistartionAPI();
+                                  }
+                                },
+                              )),
                           SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),
                         ],
                       ),

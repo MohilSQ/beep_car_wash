@@ -15,7 +15,6 @@ class DrawerScreen extends GetView<DrawerScreenController> {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     return WillPopScope(
       onWillPop: () {
         if (controller.screenNumber.value != 0) {
@@ -33,14 +32,14 @@ class DrawerScreen extends GetView<DrawerScreenController> {
       child: Scaffold(
         key: Constants.scaffoldKey,
         drawer: Drawer(
-          backgroundColor: appColors.transparentColor,
+          backgroundColor: AppColors.transparentColor,
           width: 78.6.w,
           elevation: 0,
           child: Stack(
             children: [
               Container(
                 width: 74.w,
-                color: appColors.whiteColor,
+                color: AppColors.whiteColor,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -49,7 +48,7 @@ class DrawerScreen extends GetView<DrawerScreenController> {
                       child: MyTextView(
                         "Hello, Martin",
                         textStyleNew: MyTextStyle(
-                          textColor: appColors.appColor,
+                          textColor: AppColors.appColor,
                           textWeight: FontWeight.bold,
                           textSize: 19.sp,
                         ),
@@ -77,19 +76,19 @@ class DrawerScreen extends GetView<DrawerScreenController> {
                             },
                             elevation: 0,
                             borderRadius: 0,
-                            backgroundColor: appColors.transparentColor,
+                            backgroundColor: AppColors.transparentColor,
                             text: controller.drawerList[index].title,
                             textColor: index == 6
-                                ? appColors.appColorText
+                                ? AppColors.appColorText
                                 : controller.drawerList[index].isSelected!.value
-                                    ? appColors.darkTextColor
-                                    : appColors.lightTextColor,
+                                    ? AppColors.darkTextColor
+                                    : AppColors.lightTextColor,
                             image: controller.drawerList[index].image,
                             imageColor: index == 6
-                                ? appColors.appColorText
+                                ? AppColors.appColorText
                                 : controller.drawerList[index].isSelected!.value
-                                    ? appColors.darkTextColor
-                                    : appColors.lightTextColor,
+                                    ? AppColors.darkTextColor
+                                    : AppColors.lightTextColor,
                             widgetSpace: 1.5.h,
                             widgetMainAxis: MainAxisAlignment.start,
                             horizontalPadding: 1.4.h,
@@ -129,7 +128,7 @@ class DrawerScreen extends GetView<DrawerScreenController> {
                       CustomContainer(
                         isHeight: false,
                         borderRadius: 1.2.h,
-                        containerColor: appColors.appColorText,
+                        containerColor: AppColors.appColorText,
                         padding: EdgeInsets.all(1.6.h),
                         child: Row(
                           children: [
@@ -141,7 +140,7 @@ class DrawerScreen extends GetView<DrawerScreenController> {
                                   MyTextView(
                                     Strings.startMyCarWash,
                                     textStyleNew: MyTextStyle(
-                                      textColor: appColors.whiteColor,
+                                      textColor: AppColors.whiteColor,
                                       textWeight: FontWeight.w600,
                                       textSize: 12.sp,
                                     ),
@@ -151,7 +150,7 @@ class DrawerScreen extends GetView<DrawerScreenController> {
                                     Strings.becomeAnOperatorAndEarnPassiveIncome,
                                     isMaxLineWrap: true,
                                     textStyleNew: MyTextStyle(
-                                      textColor: appColors.whiteColor,
+                                      textColor: AppColors.whiteColor,
                                       textWeight: FontWeight.w400,
                                       textSize: 8.6.sp,
                                     ),
@@ -163,7 +162,7 @@ class DrawerScreen extends GetView<DrawerScreenController> {
                             Image.asset(
                               ImagePath.dollarSign,
                               height: 3.h,
-                              color: appColors.lightGreyColor,
+                              color: AppColors.lightGreyColor,
                             ),
                           ],
                         ),

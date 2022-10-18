@@ -13,7 +13,6 @@ class HowItWorkScreen extends GetView<HowItWorkController> {
 
   @override
   Widget build(BuildContext context) {
-    AppColors appColors = AppColors();
     return Stack(
       children: [
         ListView.builder(
@@ -32,7 +31,7 @@ class HowItWorkScreen extends GetView<HowItWorkController> {
                 child: MyTextView(
                   controller.howItWorkList[index].title,
                   textStyleNew: MyTextStyle(
-                    textColor: appColors.darkTextColor,
+                    textColor: AppColors.darkTextColor,
                     textWeight: FontWeight.bold,
                     textSize: 16.sp,
                   ),
@@ -50,7 +49,7 @@ class HowItWorkScreen extends GetView<HowItWorkController> {
                   MyTextView(
                     "Lorem ipsum dolor sit amet, consectetur",
                     textStyleNew: MyTextStyle(
-                      textColor: appColors.lightTextColor,
+                      textColor: AppColors.lightTextColor,
                       textWeight: FontWeight.bold,
                       textSize: 12.sp,
                     ),
@@ -69,7 +68,7 @@ class HowItWorkScreen extends GetView<HowItWorkController> {
                   MyTextView(
                     "Lorem ipsum dolor sit amet, consectetur",
                     textStyleNew: MyTextStyle(
-                      textColor: appColors.lightTextColor,
+                      textColor: AppColors.lightTextColor,
                       textWeight: FontWeight.bold,
                       textSize: 12.sp,
                     ),
