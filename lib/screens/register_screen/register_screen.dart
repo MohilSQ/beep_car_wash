@@ -3,6 +3,7 @@ import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/screens/register_screen/register_controller.dart';
+import 'package:beep_car_wash/screens/terms_of_service_screen/terms_of_service_screen.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:beep_car_wash/widgets/custom_text_field.dart';
 import 'package:flutter/gestures.dart';
@@ -131,17 +132,37 @@ class RegisterScreen extends GetView<RegisterController> {
                                     ),
                                     children: [
                                       TextSpan(
-                                        text: Strings.termsOfServiceAndPrivacyPolicy,
+                                        text: Strings.termsOfService,
                                         recognizer: TapGestureRecognizer()
                                           ..onTap = () {
-                                            // Get.to(() => const RegisterScreen(), binding: RegisterBindings());
+                                            Get.to(() => const TermsOfServiceScreen());
                                           },
                                         style: MyTextStyle(
                                           textWeight: FontWeight.bold,
                                           textSize: 12.sp,
                                           textColor: AppColors.appColorText,
                                         ),
-                                      )
+                                      ),
+                                      TextSpan(
+                                        text: Strings.and,
+                                        style: MyTextStyle(
+                                          textWeight: FontWeight.bold,
+                                          textSize: 12.sp,
+                                          textColor: AppColors.appColorText,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: Strings.privacyAndPolicy,
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            Get.to(() => const RegisterScreen());
+                                          },
+                                        style: MyTextStyle(
+                                          textWeight: FontWeight.bold,
+                                          textSize: 12.sp,
+                                          textColor: AppColors.appColorText,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),

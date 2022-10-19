@@ -52,6 +52,7 @@ class ImagePath {
   static String checkMark = "${base}check_mark.png";
 
   /// ------ Setting Screen ------------------>>>>
+  static String profileAvtar = "${base}profile_avtar.png";
   static String camera = "${base}ic_camera.png";
   static String termsOfService = "${base}terms_of_service.png";
   static String privacyAndPolicy = "${base}privacy_and_policy.png";

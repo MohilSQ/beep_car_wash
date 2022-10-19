@@ -39,7 +39,7 @@ class Strings {
   static const String lastName = "Last Name";
   static const String email = "Email";
   static const String byCreatingAnAccountYouAgreeToBeep = "By creating an account you agree to beep ";
-  static const String termsOfServiceAndPrivacyPolicy = "Terms of Service and Privacy Policy";
+  static const String and = " and ";
   static const String register = "Register";
 
   /// ------ Sign In OTP Screen ------------------>>>>
@@ -70,18 +70,13 @@ class Strings {
   static const String scanToStart = "Scan to Start";
   static const String reserve = "Reserve";
   static const String report = "Report";
-  
+
   /// ------ Payment Screen ------------------>>>>
   static const String currentBalance = "Current Balance";
   static const String primary = "Primary";
   static const String addNewPayment = "Add New Payment";
 
   /// ------ Edit Payment Screen ------------------>>>>
-
-
-
-  
-
 
   /// ------ Setting Screen ------------------>>>>
   static const String phoneNumber = "Phone Number";
