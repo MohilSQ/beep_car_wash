@@ -41,19 +41,20 @@ class RegisterController extends GetxController {
     UserRegistrationModel model = UserRegistrationModel.fromJson(data);
     if (model.code == 200) {
       utils.showToast(context: Get.context!, message: model.msg!);
-      storeUserData();
+      storeUserData(model.token);
       Get.to(() => const DrawerScreen(), binding: DrawerBindings());
     } else if (model.code == 201) {
       utils.showSnackBar(context: Get.context!, message: model.msg!);
     }
   }
 
-  storeUserData() {
+  storeUserData(String? token) {
     userDataModel.firstName = firstNameController.text.trim();
     userDataModel.lastName = lastNameController.text.trim();
     userDataModel.email = emailController.text.trim();
     userDataModel.cconde = Get.arguments[0];
     userDataModel.phoneNumber = Get.arguments[1];
+    userDataModel.token = token;
     update();
     getStorage.saveObject(getStorage.loginData, userDataModel);
   }

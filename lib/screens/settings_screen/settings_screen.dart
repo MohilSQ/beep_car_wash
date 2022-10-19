@@ -69,7 +69,7 @@ class SettingsScreen extends GetView<SettingsController> {
                         ),
                         child: ClipOval(
                           child: Image.asset(
-                            ImagePath.dummyImage2,
+                            ImagePath.profileAvtar,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -163,21 +163,6 @@ class SettingsScreen extends GetView<SettingsController> {
                         isError: controller.phoneNumberError.value,
                         hintColor: controller.phoneNumberError.value ? AppColors.errorColor : AppColors.lightTextColor,
                         textColor: controller.phoneNumberError.value ? AppColors.errorColor : AppColors.darkTextColor,
-                      );
-                    }),
-                    SizedBox(height: 1.6.h),
-                    Obx(() {
-                      return CustomTextField(
-                        isTitle: true,
-                        title: Strings.password,
-                        hintText: Strings.password,
-                        textInputAction: TextInputAction.done,
-                        inputType: TextInputType.multiline,
-                        controller: controller.passwordController,
-                        obscureText: true,
-                        isError: controller.passwordError.value,
-                        hintColor: controller.passwordError.value ? AppColors.errorColor : AppColors.lightTextColor,
-                        textColor: controller.passwordError.value ? AppColors.errorColor : AppColors.darkTextColor,
                       );
                     }),
                   ],

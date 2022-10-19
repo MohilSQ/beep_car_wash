@@ -29,8 +29,6 @@ class DrawerScreenController extends GetxController {
     CommonModel(title: Strings.referAndEarn, image: ImagePath.referAndEarn, isSelected: false.obs, screen: const ReferAndEarnScreen(), bindings: ReferAndEarnBindings()),
   ].obs;
 
-  Future onWillPop() async {}
-
   @override
   void onInit() {
     drawerList[0].bindings!.dependencies();

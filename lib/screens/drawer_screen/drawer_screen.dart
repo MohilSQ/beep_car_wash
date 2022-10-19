@@ -3,6 +3,7 @@ import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
+import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:beep_car_wash/screens/drawer_screen/drawer_controller.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:beep_car_wash/widgets/custom_container.dart';
@@ -46,7 +47,7 @@ class DrawerScreen extends GetView<DrawerScreenController> {
                     Padding(
                       padding: EdgeInsets.only(left: 6.w, top: MediaQuery.of(context).padding.top + 4.6.h),
                       child: MyTextView(
-                        "Hello, Martin",
+                        "Hello, ${Get.find<CommonController>().userDataModel.firstName}",
                         textStyleNew: MyTextStyle(
                           textColor: AppColors.appColor,
                           textWeight: FontWeight.bold,
