@@ -1,6 +1,7 @@
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/model/common_model.dart';
+import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/find_a_beep_binding.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/find_a_beep_screen.dart';
 import 'package:beep_car_wash/screens/how_it_work_screen/how_it_work_bindings.dart';
@@ -32,6 +33,9 @@ class DrawerScreenController extends GetxController {
   @override
   void onInit() {
     drawerList[0].bindings!.dependencies();
+    if (Get.find<CommonController>().userDataAvilabeOrNot()) {
+      Get.find<CommonController>().getUserData();
+    }
     super.onInit();
   }
 }

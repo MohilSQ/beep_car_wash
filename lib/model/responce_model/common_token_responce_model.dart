@@ -1,15 +1,15 @@
-class PhoneVerificationModel {
+class CommonTokenResponceModel {
   final int? code;
   final String? msg;
   final String? token;
 
-  PhoneVerificationModel({
+  CommonTokenResponceModel({
     this.code,
     this.msg,
     this.token,
   });
 
-  PhoneVerificationModel.fromJson(Map<String, dynamic> json)
+  CommonTokenResponceModel.fromJson(Map<String, dynamic> json)
     : code = json['code'] as int?,
       msg = json['msg'] as String?,
       token = json['token'] as String?;

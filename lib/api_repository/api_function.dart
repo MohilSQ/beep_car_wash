@@ -40,6 +40,7 @@ class APIFunction {
       var response = await HttpUtil(isLoading, context).post(
         apiName,
         data: params,
+        isFromData: isFormData,
       );
       return response;
     }

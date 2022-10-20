@@ -2,7 +2,7 @@ import 'package:beep_car_wash/api_repository/api_function.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/get_storage_data.dart';
 import 'package:beep_car_wash/commons/utils.dart';
-import 'package:beep_car_wash/model/responce_model/user_Registration_model.dart';
+import 'package:beep_car_wash/model/responce_model/common_token_responce_model.dart';
 import 'package:beep_car_wash/model/responce_model/user_data_model.dart';
 import 'package:beep_car_wash/screens/drawer_screen/drawer_binding.dart';
 import 'package:beep_car_wash/screens/drawer_screen/drawer_screen.dart';
@@ -38,7 +38,7 @@ class RegisterController extends GetxController {
       params: formData,
     );
 
-    UserRegistrationModel model = UserRegistrationModel.fromJson(data);
+    CommonTokenResponceModel model = CommonTokenResponceModel.fromJson(data);
     if (model.code == 200) {
       utils.showToast(context: Get.context!, message: model.msg!);
       storeUserData(model.token);

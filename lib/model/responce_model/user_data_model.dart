@@ -1,4 +1,5 @@
 class UserDataModel {
+  String? profilImage;
   String? firstName;
   String? lastName;
   String? cconde;
@@ -7,16 +8,18 @@ class UserDataModel {
   String? token;
 
   UserDataModel({
-    this.firstName,
-    this.lastName,
-    this.cconde,
-    this.phoneNumber,
-    this.email,
-    this.token,
+    this.profilImage = "",
+    this.firstName = "",
+    this.lastName = "",
+    this.cconde = "",
+    this.phoneNumber = "",
+    this.email = "",
+    this.token = "",
   });
 
   UserDataModel.fromJson(Map<String, dynamic> json)
-      : firstName = json['firstName'] as String?,
+      : profilImage = json['profilImage'] as String?,
+        firstName = json['firstName'] as String?,
         lastName = json['lastName'] as String?,
         cconde = json['cconde'] as String?,
         phoneNumber = json['phoneNumber'] as String?,
@@ -24,6 +27,7 @@ class UserDataModel {
         token = json['token'] as String?;
 
   Map<String, dynamic> toJson() => {
+        'profilImage': profilImage,
         'firstName': firstName,
         'lastName': lastName,
         'cconde': cconde,

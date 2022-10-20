@@ -3,7 +3,7 @@ import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/get_storage_data.dart';
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/model/responce_model/otp_verification_model.dart';
-import 'package:beep_car_wash/model/responce_model/resend_otp_model.dart';
+import 'package:beep_car_wash/model/responce_model/common_responce_model.dart';
 import 'package:beep_car_wash/model/responce_model/user_data_model.dart';
 import 'package:beep_car_wash/screens/drawer_screen/drawer_binding.dart';
 import 'package:beep_car_wash/screens/drawer_screen/drawer_screen.dart';
@@ -62,7 +62,7 @@ class SignInOTPController extends GetxController {
       params: formData,
     );
 
-    ResendOTPModel model = ResendOTPModel.fromJson(data);
+    CommonResponceModel model = CommonResponceModel.fromJson(data);
     if (model.code == 200) {
       utils.showToast(context: Get.context!, message: model.msg!);
     } else if (model.code == 201) {

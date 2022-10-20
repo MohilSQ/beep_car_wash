@@ -14,10 +14,13 @@ class Constants {
 
   // Api credential .....
   static const String baseUrl = 'https://codewithwaqas.com/beep/api/';
+  static const String profileImageUrl = 'https://codewithwaqas.com/beep/assets/avatars/';
   static const String phoneVerification = 'phone_verification';
   static const String otpVerification = 'otp_verification';
   static const String resendOTP = 'resend_otp';
   static const String userRegistration = 'user_registration';
+  static const String saveSettings = 'save_settings';
+  static const String uploadProfileImage = 'upload_profile_image';
 
   // About app .....
   static const String AboutUsLink = "";

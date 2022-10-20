@@ -14,5 +14,6 @@ class CommonController extends GetxController {
   getUserData() {
     userDataModel = UserDataModel.fromJson(getStorageData.readObject(getStorageData.loginData));
     printOkStatus("User token -------------------->>> ${userDataModel.token!}");
+    // printOkStatus("User token -------------------->>> ${userDataModel.profilImage!}");
   }
 }

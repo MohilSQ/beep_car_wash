@@ -1,22 +1,22 @@
-class UserRegistrationModel {
+class UploadProfileImage {
   final int? code;
   final String? msg;
-  final String? token;
+  final String? avatar;
 
-  UserRegistrationModel({
+  UploadProfileImage({
     this.code,
     this.msg,
-    this.token,
+    this.avatar,
   });
 
-  UserRegistrationModel.fromJson(Map<String, dynamic> json)
+  UploadProfileImage.fromJson(Map<String, dynamic> json)
     : code = json['code'] as int?,
       msg = json['msg'] as String?,
-      token = json['token'] as String?;
+      avatar = json['avatar'] as String?;
 
   Map<String, dynamic> toJson() => {
     'code' : code,
     'msg' : msg,
-    'token' : token
+    'avatar' : avatar
   };
 }
