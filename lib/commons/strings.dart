@@ -86,4 +86,6 @@ class Strings {
   static const String privacyAndPolicy = "Privacy and Policy";
   static const String customerSupport = "Customer Support";
   static const String logOut = "Log Out";
+  static const String selectProfilePicture = "Select profile picture";
+  static const String takeAProfilePicture = "Take a profile picture";
 }
