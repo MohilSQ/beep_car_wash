@@ -9,6 +9,7 @@ import 'package:beep_car_wash/widgets/custom_container.dart';
 import 'package:beep_car_wash/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 
 class FindABeepScreen extends GetView<FindABeepController> {
@@ -19,24 +20,25 @@ class FindABeepScreen extends GetView<FindABeepController> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image.asset(
-          ImagePath.dummyImage5,
-          width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.cover,
+        Padding(
+          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+          child: SizedBox(
+            width: double.infinity,
+            child: GoogleMap(
+              mapType: MapType.normal,
+              myLocationEnabled: true,
+              mapToolbarEnabled: false,
+              zoomControlsEnabled: false,
+              compassEnabled: false,
+              initialCameraPosition: const CameraPosition(
+                target: LatLng(37.42796133580664, -122.085749655962),
+                zoom: 16,
+              ),
+              // markers: Set<Marker>.of(homeViewModal.marker),
+              onMapCreated: (GoogleMapController controller) {},
+            ),
+          ),
         ),
-        Obx(() {
-          return Container(
-            child: controller.mapView.value
-                ? Image.asset(
-                    ImagePath.dummyImage4,
-                    width: double.infinity,
-                    height: double.infinity,
-                    fit: BoxFit.cover,
-                  )
-                : const SizedBox(),
-          );
-        }),
         Padding(
           padding: EdgeInsets.only(left: 6.w, right: 6.w, top: MediaQuery.of(context).padding.top + 1.5.h, bottom: 1.5.h),
           child: Column(

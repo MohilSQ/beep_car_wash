@@ -3,6 +3,7 @@ import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/screens/register_screen/register_controller.dart';
+import 'package:beep_car_wash/screens/terms_of_service_screen/terms_of_service_binding.dart';
 import 'package:beep_car_wash/screens/terms_of_service_screen/terms_of_service_screen.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:beep_car_wash/widgets/custom_text_field.dart';
@@ -135,7 +136,7 @@ class RegisterScreen extends GetView<RegisterController> {
                                         text: Strings.termsOfService,
                                         recognizer: TapGestureRecognizer()
                                           ..onTap = () {
-                                            Get.to(() => const TermsOfServiceScreen());
+                                            Get.to(() => const TermsOfServiceScreen(),binding: TermsOfConditionBindings());
                                           },
                                         style: MyTextStyle(
                                           textWeight: FontWeight.bold,

@@ -21,6 +21,9 @@ class Constants {
   static const String userRegistration = 'user_registration';
   static const String saveSettings = 'save_settings';
   static const String uploadProfileImage = 'upload_profile_image';
+  static const String privacyPolicy = 'privacy_policy';
+  static const String termsAndConditions = 'terms_and_conditions';
+  static const String howItWorks = 'how_it_works';
 
   // About app .....
   static const String AboutUsLink = "";

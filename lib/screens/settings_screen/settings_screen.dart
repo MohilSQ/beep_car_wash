@@ -3,10 +3,12 @@ import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
+import 'package:beep_car_wash/screens/privacy_and_policy_screen/privacy_and_policy_binding.dart';
 import 'package:beep_car_wash/screens/privacy_and_policy_screen/privacy_and_policy_screen.dart';
 import 'package:beep_car_wash/screens/settings_screen/settings_controller.dart';
 import 'package:beep_car_wash/screens/sign_in_screen/sign_in_binding.dart';
 import 'package:beep_car_wash/screens/sign_in_screen/sign_in_screen.dart';
+import 'package:beep_car_wash/screens/terms_of_service_screen/terms_of_service_binding.dart';
 import 'package:beep_car_wash/screens/terms_of_service_screen/terms_of_service_screen.dart';
 import 'package:beep_car_wash/widgets/custom_appbar.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
@@ -58,7 +60,6 @@ class SettingsScreen extends GetView<SettingsController> {
                               onTap: () {
                                 if (controller.validation()) {
                                   controller.saveSettingsAPI();
-                                  
                                 }
                               },
                               child: MyTextView(
@@ -212,7 +213,7 @@ class SettingsScreen extends GetView<SettingsController> {
                     Divider(height: 0.8.h),
                     CustomButton(
                       onPressed: () {
-                        Get.to(() => const TermsOfServiceScreen());
+                        Get.to(() => const TermsOfServiceScreen(), binding: TermsOfConditionBindings());
                       },
                       elevation: 0,
                       borderRadius: 0,
@@ -231,7 +232,7 @@ class SettingsScreen extends GetView<SettingsController> {
                     Divider(height: 0.8.h),
                     CustomButton(
                       onPressed: () {
-                        Get.to(() => const PrivacyAndPolicyScreen());
+                        Get.to(() => const PrivacyAndPolicyScreen(), binding: PrivacyAndPolicyBindings());
                       },
                       elevation: 0,
                       borderRadius: 0,
