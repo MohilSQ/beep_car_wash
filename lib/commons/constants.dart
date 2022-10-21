@@ -25,10 +25,9 @@ class Constants {
   static const String termsAndConditions = 'terms_and_conditions';
   static const String howItWorks = 'how_it_works';
 
-  // About app .....
-  static const String AboutUsLink = "";
-  static const String PrivacyPolicyLink = "";
-  static const String TermsAndConditionLink = "";
+  // Location And Map .....
+  static double latitude = 0.0;
+  static double longitude = 0.0;
 
   // Global Variable .....
   static final scaffoldKey = GlobalKey<ScaffoldState>();

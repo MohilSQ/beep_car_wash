@@ -30,6 +30,10 @@
 	<string>Beep want to use your camera to take your pofile picture</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Beep want to use your photo library to set your pofile picture</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Beep want to access your location to get best location search option.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Beep want to access your location to get best location search option.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

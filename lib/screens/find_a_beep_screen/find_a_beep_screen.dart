@@ -3,7 +3,6 @@ import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
-import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/nearest_beep_sheet/nearest_beep_sheet.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/find_a_beep_controller.dart';
 import 'package:beep_car_wash/widgets/custom_container.dart';
 import 'package:beep_car_wash/widgets/custom_text_field.dart';
@@ -30,12 +29,16 @@ class FindABeepScreen extends GetView<FindABeepController> {
               mapToolbarEnabled: false,
               zoomControlsEnabled: false,
               compassEnabled: false,
-              initialCameraPosition: const CameraPosition(
-                target: LatLng(37.42796133580664, -122.085749655962),
-                zoom: 16,
-              ),
+              myLocationButtonEnabled: false,
+              initialCameraPosition: controller.cameraPosition!,
               // markers: Set<Marker>.of(homeViewModal.marker),
-              onMapCreated: (GoogleMapController controller) {},
+              onMapCreated: (GoogleMapController googleMapController) {
+                controller.mapController = googleMapController;
+                Future.delayed(
+                  const Duration(milliseconds: 500),
+                  () => controller.mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 18)),
+                );
+              },
             ),
           ),
         ),
@@ -68,13 +71,14 @@ class FindABeepScreen extends GetView<FindABeepController> {
                   GestureDetector(
                     onTap: () {
                       controller.mapView.value = true;
+                      controller.mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 18));
 
-                      showModalBottomSheet(
-                        context: context,
-                        backgroundColor: AppColors.transparentColor,
-                        barrierColor: AppColors.transparentColor,
-                        builder: (context) => const NearestBeepSheet(),
-                      );
+                      // showModalBottomSheet(
+                      //   context: context,
+                      //   backgroundColor: AppColors.transparentColor,
+                      //   barrierColor: AppColors.transparentColor,
+                      //   builder: (context) => const NearestBeepSheet(),
+                      // );
                     },
                     child: CustomContainer(
                       height: 5.h,

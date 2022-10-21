@@ -18,6 +18,7 @@ class SignInOTPScreen extends GetView<SignInOTPController> {
     return GetBuilder(
       assignId: true,
       init: SignInOTPController(),
+      initState: (state) => printAction(Get.arguments),
       builder: (logic) {
         return Container(
           decoration: BoxDecoration(
@@ -71,7 +72,7 @@ class SignInOTPScreen extends GetView<SignInOTPController> {
                           ),
                           SizedBox(height: 1.4.h),
                           MyTextView(
-                            Strings.verifyNumber1 + Get.arguments[0] + Get.arguments[1] + Strings.verifyNumber2,
+                            Strings.verifyNumber1 +  Get.arguments[0] + Get.arguments[1] + Strings.verifyNumber2,
                             isMaxLineWrap: true,
                             textAlignNew: TextAlign.center,
                             textStyleNew: MyTextStyle(
