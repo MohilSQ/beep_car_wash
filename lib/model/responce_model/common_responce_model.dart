@@ -1,13 +1,13 @@
-class CommonResponceModel {
+class CommonResponseModel {
   final int? code;
   final String? msg;
 
-  CommonResponceModel({
+  CommonResponseModel({
     this.code,
     this.msg,
   });
 
-  CommonResponceModel.fromJson(Map<String, dynamic> json)
+  CommonResponseModel.fromJson(Map<String, dynamic> json)
       : code = json['code'] as int?,
         msg = json['msg'] as String?;
 

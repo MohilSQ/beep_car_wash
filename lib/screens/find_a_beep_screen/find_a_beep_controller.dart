@@ -7,7 +7,6 @@ class FindABeepController extends GetxController {
   RxBool mapView = false.obs;
 
   GoogleMapController? mapController;
-  CameraPosition? cameraPosition;
 
   final List<Marker> markers = <Marker>[
     const Marker(
@@ -18,13 +17,36 @@ class FindABeepController extends GetxController {
         )),
   ];
 
-  setCameraPositin() async {
-    cameraPosition = const CameraPosition(target: LatLng(40.7127753, -74.0059728), zoom: 18);
-  }
+  /// ---- User Registartion Api ------------>>>
+  // userRegistartionAPI() async {
+  //   var formData = ({
+  //     "token": Get.arguments[2],
+  //     "name": "${firstNameController.text.trim()} ${lastNameController.text.trim()}",
+  //     "email": emailController.text.trim(),
+  //   });
+
+  //   final data = await APIFunction().postApiCall(
+  //     context: Get.context!,
+  //     apiName: Constants.findNearestBeep,
+  //     params: formData,
+  //   );
+
+  //   CommonTokenResponceModel model = CommonTokenResponceModel.fromJson(data);
+  //   if (model.code == 200) {
+
+  //     utils.showToast(context: Get.context!, message: model.msg!);
+  //     storeUserData(model.token);
+  //     Get.to(() => const DrawerScreen(), binding: DrawerBindings());
+  //   } else if (model.code == 201) {
+  //     utils.showSnackBar(context: Get.context!, message: model.msg!);
+  //   }
+  // }
 
   @override
   void onInit() {
-    setCameraPositin();
     super.onInit();
+    Future.delayed(const Duration(milliseconds: 800), () {
+      mapView.value = true;
+    });
   }
 }

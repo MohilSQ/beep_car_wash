@@ -21,26 +21,28 @@ class FindABeepScreen extends GetView<FindABeepController> {
       children: [
         Padding(
           padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-          child: SizedBox(
-            width: double.infinity,
-            child: GoogleMap(
-              mapType: MapType.normal,
-              myLocationEnabled: true,
-              mapToolbarEnabled: false,
-              zoomControlsEnabled: false,
-              compassEnabled: false,
-              myLocationButtonEnabled: false,
-              initialCameraPosition: controller.cameraPosition!,
-              // markers: Set<Marker>.of(homeViewModal.marker),
-              onMapCreated: (GoogleMapController googleMapController) {
-                controller.mapController = googleMapController;
-                Future.delayed(
-                  const Duration(milliseconds: 500),
-                  () => controller.mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 18)),
-                );
-              },
-            ),
-          ),
+          child: Obx(() {
+            return SizedBox(
+              width: double.infinity,
+              child: controller.mapView.value
+                  ? GoogleMap(
+                      mapType: MapType.normal,
+                      // myLocationEnabled: true,
+                      mapToolbarEnabled: false,
+                      zoomControlsEnabled: false,
+                      compassEnabled: false,
+                      myLocationButtonEnabled: false,
+                      initialCameraPosition: const CameraPosition(target: LatLng(40.7127753, -74.0059728), zoom: 18),
+                      // markers: Set<Marker>.of(homeViewModal.marker),
+
+                      onMapCreated: (GoogleMapController googleMapController) {
+                        controller.mapController = googleMapController;
+                        controller.mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 18));
+                      },
+                    )
+                  : const Center(child: CircularProgressIndicator()),
+            );
+          }),
         ),
         Padding(
           padding: EdgeInsets.only(left: 6.w, right: 6.w, top: MediaQuery.of(context).padding.top + 1.5.h, bottom: 1.5.h),
@@ -70,7 +72,6 @@ class FindABeepScreen extends GetView<FindABeepController> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      controller.mapView.value = true;
                       controller.mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 18));
 
                       // showModalBottomSheet(

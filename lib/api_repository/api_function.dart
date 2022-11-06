@@ -50,14 +50,14 @@ class APIFunction {
   Future<dynamic> getApiCall({
     required String apiName,
     required BuildContext context,
-    dynamic params,
+    dynamic queryParameters,
     bool isLoading = true,
   }) async {
     if (await getConnectivityResult()) {
-      printAction("params -------->>> $params");
+      printAction("params -------->>> $queryParameters");
       var response = await HttpUtil(isLoading, context).get(
         apiName,
-        queryParameters: params,
+        queryParameters: queryParameters,
       );
       return response;
     }

@@ -24,6 +24,9 @@ class Constants {
   static const String privacyPolicy = 'privacy_policy';
   static const String termsAndConditions = 'terms_and_conditions';
   static const String howItWorks = 'how_it_works';
+  static const String getNotifications = 'get_notifications';
+  static const String findNearestBeep = 'find_nearest_beep';
+  static const String notifyMe = 'notify_me';
 
   // Location And Map .....
   static double latitude = 0.0;

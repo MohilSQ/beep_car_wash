@@ -5,7 +5,7 @@ import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/get_storage_data.dart';
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/model/responce_model/common_responce_model.dart';
-import 'package:beep_car_wash/model/responce_model/update_profile_image.dart';
+import 'package:beep_car_wash/model/responce_model/update_profile_response_image.dart';
 import 'package:beep_car_wash/model/responce_model/user_data_model.dart';
 import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:dio/dio.dart';
@@ -37,14 +37,14 @@ class SettingsController extends GetxController {
     firstNameController.text = userDataModel!.firstName!;
     lastNameController.text = userDataModel!.lastName!;
     emailController.text = userDataModel!.email!;
-    phoneNumberController.text = "${userDataModel!.cconde!} ${userDataModel!.phoneNumber!}";
+    phoneNumberController.text = "${userDataModel!.cCode!} ${userDataModel!.phoneNumber!}";
   }
 
   setUserData() {
     userDataModel!.firstName = firstNameController.text;
     userDataModel!.lastName = lastNameController.text;
     userDataModel!.email = emailController.text;
-    userDataModel!.cconde = phoneNumberController.text.split(" ").first;
+    userDataModel!.cCode = phoneNumberController.text.split(" ").first;
     userDataModel!.phoneNumber = phoneNumberController.text.split(" ").last;
     getStorage.saveObject(getStorage.loginData, userDataModel);
     Get.find<CommonController>().getUserData();
@@ -73,7 +73,7 @@ class SettingsController extends GetxController {
       params: formData,
     );
 
-    CommonResponceModel model = CommonResponceModel.fromJson(data);
+    CommonResponseModel model = CommonResponseModel.fromJson(data);
     if (model.code == 200) {
       utils.showToast(context: Get.context!, message: model.msg!);
       setUserData();
@@ -103,10 +103,10 @@ class SettingsController extends GetxController {
       isFormData: true,
     );
 
-    UploadProfileImage model = UploadProfileImage.fromJson(data);
+    UploadProfileResponseImage model = UploadProfileResponseImage.fromJson(data);
     if (model.code == 200) {
       utils.showToast(context: Get.context!, message: model.msg!);
-      userDataModel!.profilImage = model.avatar;
+      userDataModel!.profileImage = model.avatar;
       getStorage.saveObject(getStorage.loginData, userDataModel);
       Get.find<CommonController>().getUserData();
     } else if (model.code == 201) {
