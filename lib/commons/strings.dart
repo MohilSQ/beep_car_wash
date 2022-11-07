@@ -75,6 +75,8 @@ class Strings {
   static const String currentBalance = "Current Balance";
   static const String primary = "Primary";
   static const String addNewPayment = "Add New Payment";
+  static const String edit = "Edit";
+  static const String deleat = "Deleat";
 
   /// ------ Edit Payment Screen ------------------>>>>
 

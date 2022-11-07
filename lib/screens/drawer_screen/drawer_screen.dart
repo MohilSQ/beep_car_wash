@@ -67,7 +67,7 @@ class DrawerScreen extends GetView<DrawerScreenController> {
                               for (int i = 0; i < controller.drawerList.length; i++) {
                                 if (i == index) {
                                   controller.drawerList[i].isSelected!.value = true;
-                                  controller.drawerList[index].bindings!.dependencies();
+                                  // controller.drawerList[index].bindings!.dependencies();
                                   controller.screenNumber.value = index;
                                   Constants.scaffoldKey.currentState!.closeDrawer();
                                 } else {

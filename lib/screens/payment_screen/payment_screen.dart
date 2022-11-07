@@ -38,18 +38,6 @@ class PaymentScreen extends GetView<PaymentController> {
                     shadowVisible: false,
                     appBarColor: AppColors.transparentColor,
                     textColor: AppColors.whiteColor,
-                    // suffixIcon: Padding(
-                    //   padding: EdgeInsets.only(right: 3.w),
-                    //   child: GestureDetector(
-                    //     onTap: () {
-                    //       Get.to(() => const EditPaymentScreen(), binding: EditPaymentBindings());
-                    //     },
-                    //     child: Image.asset(
-                    //       ImagePath.icEdit,
-                    //       height: 4.w,
-                    //     ),
-                    //   ),
-                    // ),
                   ),
                   const Spacer(),
                   MyTextView(
@@ -140,12 +128,13 @@ class PaymentScreen extends GetView<PaymentController> {
                         : const SizedBox(),
                     PopupMenuButton<int>(
                       itemBuilder: (context) => [
-                        PopupMenuItem(value: 1, textStyle: MyTextStyle(textSize: 10.sp, textWeight: FontWeight.w600), height: 3.4.h, child: const Text("Primary")),
-                        PopupMenuItem(value: 2, textStyle: MyTextStyle(textSize: 10.sp, textWeight: FontWeight.w600), height: 3.4.h, child: const Text("Edit")),
-                        PopupMenuItem(value: 3, textStyle: MyTextStyle(textSize: 10.sp, textWeight: FontWeight.w600), height: 3.4.h, child: const Text("Deleat")),
+                        PopupMenuItem(value: 1, textStyle: MyTextStyle(textSize: 10.sp, textWeight: FontWeight.w600), height: 3.4.h, child: const Text(Strings.primary)),
+                        PopupMenuItem(value: 2, textStyle: MyTextStyle(textSize: 10.sp, textWeight: FontWeight.w600), height: 3.4.h, child: const Text(Strings.edit)),
+                        PopupMenuItem(value: 3, textStyle: MyTextStyle(textSize: 10.sp, textWeight: FontWeight.w600), height: 3.4.h, child: const Text(Strings.deleat)),
                       ],
                       offset: const Offset(-30, 40),
                       color: Colors.white,
+                      icon: const Icon(Icons.more_vert_outlined),
                       onSelected: (data) {
                         if (data == 1) {
                         } else if (data == 2) {

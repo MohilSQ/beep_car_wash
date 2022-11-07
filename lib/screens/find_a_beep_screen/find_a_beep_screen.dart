@@ -3,7 +3,6 @@ import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
-import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/nearest_beep_sheet/nearest_beep_sheet.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/find_a_beep_controller.dart';
 import 'package:beep_car_wash/widgets/custom_container.dart';
 import 'package:beep_car_wash/widgets/custom_text_field.dart';
@@ -22,22 +21,28 @@ class FindABeepScreen extends GetView<FindABeepController> {
       children: [
         Padding(
           padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-          child: SizedBox(
-            width: double.infinity,
-            child: GoogleMap(
-              mapType: MapType.normal,
-              myLocationEnabled: true,
-              mapToolbarEnabled: false,
-              zoomControlsEnabled: false,
-              compassEnabled: false,
-              initialCameraPosition: const CameraPosition(
-                target: LatLng(37.42796133580664, -122.085749655962),
-                zoom: 16,
-              ),
-              // markers: Set<Marker>.of(homeViewModal.marker),
-              onMapCreated: (GoogleMapController controller) {},
-            ),
-          ),
+          child: Obx(() {
+            return SizedBox(
+              width: double.infinity,
+              child: controller.mapView.value
+                  ? GoogleMap(
+                      mapType: MapType.normal,
+                      // myLocationEnabled: true,
+                      mapToolbarEnabled: false,
+                      zoomControlsEnabled: false,
+                      compassEnabled: false,
+                      myLocationButtonEnabled: false,
+                      initialCameraPosition: const CameraPosition(target: LatLng(40.7127753, -74.0059728), zoom: 18),
+                      // markers: Set<Marker>.of(homeViewModal.marker),
+
+                      onMapCreated: (GoogleMapController googleMapController) {
+                        controller.mapController = googleMapController;
+                        controller.mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 18));
+                      },
+                    )
+                  : const Center(child: CircularProgressIndicator()),
+            );
+          }),
         ),
         Padding(
           padding: EdgeInsets.only(left: 6.w, right: 6.w, top: MediaQuery.of(context).padding.top + 1.5.h, bottom: 1.5.h),
@@ -67,14 +72,14 @@ class FindABeepScreen extends GetView<FindABeepController> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      controller.mapView.value = true;
+                      controller.mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 18));
 
-                      showModalBottomSheet(
-                        context: context,
-                        backgroundColor: AppColors.transparentColor,
-                        barrierColor: AppColors.transparentColor,
-                        builder: (context) => const NearestBeepSheet(),
-                      );
+                      // showModalBottomSheet(
+                      //   context: context,
+                      //   backgroundColor: AppColors.transparentColor,
+                      //   barrierColor: AppColors.transparentColor,
+                      //   builder: (context) => const NearestBeepSheet(),
+                      // );
                     },
                     child: CustomContainer(
                       height: 5.h,

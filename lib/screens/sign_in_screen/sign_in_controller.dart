@@ -81,7 +81,7 @@ class SignInController extends GetxController {
       params: formData,
     );
 
-    CommonTokenResponceModel model = CommonTokenResponceModel.fromJson(data);
+    CommonTokenResponseModel model = CommonTokenResponseModel.fromJson(data);
     if (model.code == 200) {
       utils.showToast(context: Get.context!, message: model.msg!);
       Get.to(() => const SignInOTPScreen(), binding: SignInOTPBindings(), arguments: [selectedCountry!.callingCode, phoneNumberController.text.trim(), model.token]);

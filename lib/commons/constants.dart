@@ -24,11 +24,13 @@ class Constants {
   static const String privacyPolicy = 'privacy_policy';
   static const String termsAndConditions = 'terms_and_conditions';
   static const String howItWorks = 'how_it_works';
+  static const String getNotifications = 'get_notifications';
+  static const String findNearestBeep = 'find_nearest_beep';
+  static const String notifyMe = 'notify_me';
 
-  // About app .....
-  static const String AboutUsLink = "";
-  static const String PrivacyPolicyLink = "";
-  static const String TermsAndConditionLink = "";
+  // Location And Map .....
+  static double latitude = 0.0;
+  static double longitude = 0.0;
 
   // Global Variable .....
   static final scaffoldKey = GlobalKey<ScaffoldState>();

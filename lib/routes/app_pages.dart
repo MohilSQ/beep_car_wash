@@ -1,5 +1,5 @@
-import 'package:beep_car_wash/screens/onboarding_screen/onboarding_binding.dart';
-import 'package:beep_car_wash/screens/onboarding_screen/onboarding_screen.dart';
+import 'package:beep_car_wash/screens/on_boarding_screen/on_boarding_binding.dart';
+import 'package:beep_car_wash/screens/on_boarding_screen/on_boarding_screen.dart';
 import 'package:beep_car_wash/screens/settings_screen/settings_bindings.dart';
 import 'package:beep_car_wash/screens/settings_screen/settings_screen.dart';
 import 'package:beep_car_wash/screens/sign_in_screen/sign_in_binding.dart';

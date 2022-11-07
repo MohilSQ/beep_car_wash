@@ -5,7 +5,7 @@ class ImagePath {
   static String appLogo = "${base}app_icon.png";
 
   /// ------ onBoarding Screen ------------------>>>>
-  static String onBoardingScreenImage = "${base}onBoarding_screen_image.png";
+  static String onBoardingScreenImage = "${base}on_boarding_screen_image.png";
 
   /// ------ SignIn Screen ------------------>>>>
   static String appNameImage = "${base}app_name_image.png";
@@ -41,6 +41,9 @@ class ImagePath {
   /// ------ Wash History Screen ------------------>>>>
   static String smallMachineImage = "${base}small_machine_image.png";
   static String address = "${base}ic_adress.png";
+
+  /// ------ Notification Screen ------------------>>>>
+  static String notificationAvtar = "${base}notification_avtar.png";
 
   /// ------ How It Work Screen ------------------>>>>
   static String howItWork1 = "${base}how_it_work1.png";

@@ -91,9 +91,9 @@ class SettingsScreen extends GetView<SettingsController> {
                                         controller.image!,
                                         fit: BoxFit.cover,
                                       )
-                                    : !controller.utils.isValidationEmpty(controller.userDataModel!.profilImage)
+                                    : !controller.utils.isValidationEmpty(controller.userDataModel!.profileImage)
                                         ? CachedNetworkImage(
-                                            imageUrl: Constants.profileImageUrl + controller.userDataModel!.profilImage!,
+                                            imageUrl: Constants.profileImageUrl + controller.userDataModel!.profileImage!,
                                             alignment: Alignment.topCenter,
                                             fit: BoxFit.cover,
                                             placeholder: (context, url) => Image.asset(ImagePath.profileAvtar),
@@ -342,7 +342,7 @@ class SettingsScreen extends GetView<SettingsController> {
               CustomButton(
                 onPressed: () {
                   Get.back();
-                  controller.setProfileImage(ImageSource.gallery);
+                  controller.setProfileImage(ImageSource.camera);
                 },
                 elevation: 0,
                 borderRadius: 0,

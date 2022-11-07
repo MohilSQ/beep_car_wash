@@ -1,5 +1,6 @@
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
+import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/model/common_model.dart';
 import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/find_a_beep_binding.dart';
@@ -19,6 +20,8 @@ import 'package:beep_car_wash/screens/wash_history_screen/wash_history_screen.da
 import 'package:get/get.dart';
 
 class DrawerScreenController extends GetxController {
+  Utils utils = Utils();
+
   RxInt screenNumber = 0.obs;
   RxList<CommonModel> drawerList = <CommonModel>[
     CommonModel(title: Strings.findABeep, image: ImagePath.findABeep, isSelected: true.obs, screen: const FindABeepScreen(), bindings: FindABeepBindings()),
@@ -33,6 +36,12 @@ class DrawerScreenController extends GetxController {
   @override
   void onInit() {
     drawerList[0].bindings!.dependencies();
+    drawerList[1].bindings!.dependencies();
+    drawerList[2].bindings!.dependencies();
+    drawerList[3].bindings!.dependencies();
+    drawerList[4].bindings!.dependencies();
+    drawerList[5].bindings!.dependencies();
+    drawerList[6].bindings!.dependencies();
     if (Get.find<CommonController>().userDataAvilabeOrNot()) {
       Get.find<CommonController>().getUserData();
     }
