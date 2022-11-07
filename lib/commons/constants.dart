@@ -25,6 +25,7 @@ class Constants {
   static const String termsAndConditions = 'terms_and_conditions';
   static const String howItWorks = 'how_it_works';
   static const String getNotifications = 'get_notifications';
+  static const String getWashHistory = 'get_wash_history';
   static const String findNearestBeep = 'find_nearest_beep';
   static const String notifyMe = 'notify_me';
 

@@ -61,6 +61,7 @@ dependencies:
   country_calling_code_picker: ^2.0.1
   pin_code_fields: ^7.4.0
   flutter_widget_from_html: ^0.8.5
+  credit_card_type_detector: ^2.0.0
 
   google_maps_flutter: ^2.2.1
   geolocator: ^9.0.2
