@@ -1,5 +1,4 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
-import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/screens/on_boarding_screen/on_boarding_controller.dart';
@@ -38,22 +37,21 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    MyTextView(
+                    Text(
                       Strings.washYourCar,
-                      textStyleNew: MyTextStyle(
-                        textColor: AppColors.darkTextColor,
-                        textWeight: FontWeight.bold,
-                        textSize: 20.sp,
+                      style: TextStyle(
+                        color: AppColors.darkTextColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.sp,
                       ),
                     ),
                     SizedBox(height: 1.4.h),
-                    MyTextView(
+                    Text(
                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ...",
-                      isMaxLineWrap: true,
-                      textStyleNew: MyTextStyle(
-                        textColor: AppColors.lightTextColor,
-                        textWeight: FontWeight.w600,
-                        textSize: 10.sp,
+                      style: TextStyle(
+                        color: AppColors.lightTextColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 10.sp,
                       ),
                     ),
                     const Spacer(),

@@ -1,5 +1,4 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
-import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/commons/utils.dart';
@@ -61,39 +60,38 @@ class SignInOTPScreen extends GetView<SignInOTPController> {
                             width: 50.w,
                           ),
                           SizedBox(height: 4.h),
-                          MyTextView(
+                          Text(
                             Strings.enterCodeToVerifyNumber,
-                            textAlignNew: TextAlign.center,
-                            textStyleNew: MyTextStyle(
-                              textColor: AppColors.darkTextColor,
-                              textWeight: FontWeight.bold,
-                              textSize: 14.sp,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: AppColors.darkTextColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.sp,
                             ),
                           ),
                           SizedBox(height: 1.4.h),
-                          MyTextView(
+                          Text(
                             Get.arguments == null ? "" : Strings.verifyNumber1 + Get.arguments[0] + Get.arguments[1] + Strings.verifyNumber2,
-                            isMaxLineWrap: true,
-                            textAlignNew: TextAlign.center,
-                            textStyleNew: MyTextStyle(
-                              textColor: AppColors.lightTextColor,
-                              textWeight: FontWeight.w600,
-                              textSize: 10.sp,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: AppColors.lightTextColor,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 10.sp,
                             ),
                           ),
                           SizedBox(height: 2.4.h),
                           PinCodeTextField(
                             appContext: context,
                             length: 4,
-                            textStyle: MyTextStyle(
-                              textColor: AppColors.darkTextColor,
-                              textWeight: FontWeight.bold,
-                              textSize: 23.sp,
+                            textStyle: TextStyle(
+                              color: AppColors.darkTextColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 23.sp,
                             ),
-                            pastedTextStyle: MyTextStyle(
-                              textColor: AppColors.darkTextColor,
-                              textWeight: FontWeight.bold,
-                              textSize: 23.sp,
+                            pastedTextStyle: TextStyle(
+                              color: AppColors.darkTextColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 23.sp,
                             ),
                             blinkWhenObscuring: true,
                             animationType: AnimationType.scale,
@@ -128,25 +126,25 @@ class SignInOTPScreen extends GetView<SignInOTPController> {
                             },
                           ),
                           SizedBox(height: 2.2.h),
-                          MyTextView(
+                          Text(
                             Strings.doNotReceiveTheOTP,
-                            textAlignNew: TextAlign.center,
-                            textStyleNew: MyTextStyle(
-                              textColor: AppColors.lightTextColor,
-                              textWeight: FontWeight.w600,
-                              textSize: 10.sp,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: AppColors.lightTextColor,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 10.sp,
                             ),
                           ),
                           SizedBox(height: 0.8.h),
                           GestureDetector(
                             onTap: () => controller.resendOTPAPI(),
-                            child: MyTextView(
+                            child: Text(
                               Strings.resendCode,
-                              textAlignNew: TextAlign.center,
-                              textStyleNew: MyTextStyle(
-                                textColor: AppColors.appColorText,
-                                textWeight: FontWeight.bold,
-                                textSize: 11.sp,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: AppColors.appColorText,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 11.sp,
                               ),
                             ),
                           ),

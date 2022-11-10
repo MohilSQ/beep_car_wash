@@ -1,5 +1,4 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
-import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/screens/wash_history_screen/wash_history_controller.dart';
@@ -51,13 +50,13 @@ class WashHistoryScreen extends GetView<WashHistoryController> {
                                   decoration: BoxDecoration(color: AppColors.appColorText, shape: BoxShape.circle),
                                 ),
                                 SizedBox(width: 1.h),
-                                MyTextView(
+                                Text(
                                   // "13 September, 2022",
                                   DateFormat("d MMMM yyyy").format(DateTime.parse(controller.utils.utcToLocal(obj.washStart!))),
-                                  textStyleNew: MyTextStyle(
-                                    textColor: AppColors.lightTextColor,
-                                    textWeight: FontWeight.w600,
-                                    textSize: 11.sp,
+                                  style: TextStyle(
+                                    color: AppColors.lightTextColor,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 11.sp,
                                   ),
                                 ),
                               ],
@@ -87,20 +86,20 @@ class WashHistoryScreen extends GetView<WashHistoryController> {
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             crossAxisAlignment: CrossAxisAlignment.center,
                                             children: [
-                                              MyTextView(
+                                              Text(
                                                 "${DateTime.parse(controller.utils.utcToLocal(obj.washStart!)).difference(DateTime.parse(controller.utils.utcToLocal(obj.washEnd!))).inMinutes} Min",
-                                                textStyleNew: MyTextStyle(
-                                                  textColor: AppColors.darkTextColor,
-                                                  textWeight: FontWeight.bold,
-                                                  textSize: 12.sp,
+                                                style: TextStyle(
+                                                  color: AppColors.darkTextColor,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 12.sp,
                                                 ),
                                               ),
-                                              MyTextView(
+                                              Text(
                                                 "\$${obj.amount ?? 0.0}",
-                                                textStyleNew: MyTextStyle(
-                                                  textColor: AppColors.appColorText,
-                                                  textWeight: FontWeight.bold,
-                                                  textSize: 12.sp,
+                                                style: TextStyle(
+                                                  color: AppColors.appColorText,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 12.sp,
                                                 ),
                                               ),
                                             ],
@@ -115,13 +114,12 @@ class WashHistoryScreen extends GetView<WashHistoryController> {
                                               ),
                                               SizedBox(width: 0.8.h),
                                               Expanded(
-                                                child: MyTextView(
-                                                  obj.address,
-                                                  isMaxLineWrap: true,
-                                                  textStyleNew: MyTextStyle(
-                                                    textColor: AppColors.lightTextColor,
-                                                    textWeight: FontWeight.w600,
-                                                    textSize: 10.sp,
+                                                child: Text(
+                                                  obj.address!,
+                                                  style: TextStyle(
+                                                    color: AppColors.lightTextColor,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 10.sp,
                                                   ),
                                                 ),
                                               ),

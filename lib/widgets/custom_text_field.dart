@@ -1,5 +1,4 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
-import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/widgets/custom_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,8 +9,8 @@ class CustomTextField extends StatelessWidget {
   final bool? obscureText;
   final String? hintText;
   final Color? hintColor;
-  final Color? textColor;
-  final double? textSize;
+  final Color? color;
+  final double? fontSize;
   final bool? isTitle;
   final String? title;
   final bool? enabled;
@@ -41,8 +40,8 @@ class CustomTextField extends StatelessWidget {
     required this.controller,
     this.obscureText = false,
     this.hintText,
-    this.textColor,
-    this.textSize,
+    this.color,
+    this.fontSize,
     this.hintColor,
     this.isTitle = false,
     this.title,
@@ -75,12 +74,12 @@ class CustomTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         isTitle!
-            ? MyTextView(
+            ? Text(
                 title!,
-                textStyleNew: MyTextStyle(
-                  textColor: AppColors.darkTextColor,
-                  textWeight: FontWeight.bold,
-                  textSize: 12.sp,
+                style: TextStyle(
+                  color: AppColors.darkTextColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12.sp,
                 ),
               )
             : const SizedBox(),
@@ -124,10 +123,10 @@ class CustomTextField extends StatelessWidget {
       maxLength: maxLength,
       minLines: minLines,
       inputFormatters: inputFormat,
-      style: MyTextStyle(
-        textWeight: FontWeight.w600,
-        textSize: textSize ?? 12.sp,
-        textColor: textColor ?? AppColors.blackColor,
+      style: TextStyle(
+        fontWeight: FontWeight.w600,
+        fontSize: fontSize ?? 12.sp,
+        color: color ?? AppColors.blackColor,
       ),
       decoration: InputDecoration(
         isDense: isDense,
@@ -136,10 +135,10 @@ class CustomTextField extends StatelessWidget {
         hintText: hintText,
         counter: null,
         counterText: "",
-        hintStyle: MyTextStyle(
-          textWeight: FontWeight.w600,
-          textSize: textSize ?? 12.sp,
-          textColor: hintColor ?? AppColors.lightTextColor,
+        hintStyle: TextStyle(
+          fontWeight: FontWeight.w600,
+          fontSize: fontSize ?? 12.sp,
+          color: hintColor ?? AppColors.lightTextColor,
         ),
       ),
     );

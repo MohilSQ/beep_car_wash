@@ -1,6 +1,6 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
-import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
+import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/screens/add_payment_screen/add_payment_controller.dart';
 import 'package:beep_car_wash/widgets/custom_appbar.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
@@ -25,201 +25,171 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
               padding: EdgeInsets.symmetric(vertical: 1.6.h, horizontal: 6.w).copyWith(top: MediaQuery.of(Get.context!).padding.top + AppBar().preferredSize.height + 2.h),
               children: [
                 SizedBox(height: 1.4.h),
-                MyTextView(
-                  "Choose a Payment Method",
-                  textStyleNew: MyTextStyle(
-                    textColor: AppColors.darkTextColor,
-                    textWeight: FontWeight.bold,
-                    textSize: 14.sp,
+                Text(
+                  Strings.chooseAPaymentMethod,
+                  style: TextStyle(
+                    color: AppColors.darkTextColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14.sp,
                   ),
                 ),
                 SizedBox(height: 3.h),
-                Row(
-                  children: [
-                    Container(
-                      height: 26.w,
-                      width: 27.33.w,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFE7FBF4),
-                        borderRadius: BorderRadius.circular(1.8.h),
-                        border: Border.all(color: AppColors.appColorText, width: 0.15.h),
-                      ),
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            right: 2.w,
-                            top: 2.w,
-                            child: Image.asset(
-                              ImagePath.checkMark,
-                              width: 2.2.h,
+                SizedBox(
+                  height: 26.w,
+                  child: ListView.separated(
+                    itemCount: controller.paymentMethodList.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    separatorBuilder: (context, index) => SizedBox(width: 3.w),
+                    itemBuilder: (context, index) => Obx(() {
+                      return GestureDetector(
+                        onTap: () {
+                          for (int i = 0; i < controller.paymentMethodList.length; i++) {
+                            if (index == i) {
+                              controller.paymentMethodList[i].isSelected!.value = true;
+                            } else {
+                              controller.paymentMethodList[i].isSelected!.value = false;
+                            }
+                          }
+                        },
+                        child: Container(
+                          height: 26.w,
+                          width: 27.33.w,
+                          decoration: BoxDecoration(
+                            color: controller.paymentMethodList[index].isSelected!.value ? const Color(0xFFE7FBF4) : AppColors.whiteColor,
+                            borderRadius: BorderRadius.circular(1.8.h),
+                            border: Border.all(
+                              color: controller.paymentMethodList[index].isSelected!.value ? AppColors.appColorText : AppColors.lightGreyColor,
+                              width: controller.paymentMethodList[index].isSelected!.value ? 0.15.h : 0.1.h,
                             ),
                           ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 2.6.w),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    ImagePath.card,
-                                    color: AppColors.appColorText,
-                                    width: 4.h,
+                          child: Stack(
+                            children: [
+                              if (controller.paymentMethodList[index].isSelected!.value)
+                                Positioned(
+                                  right: 2.w,
+                                  top: 2.w,
+                                  child: Image.asset(
+                                    ImagePath.checkMark,
+                                    width: 2.2.h,
                                   ),
-                                  MyTextView(
-                                    "Credit Card",
-                                    textStyleNew: MyTextStyle(
-                                      textColor: AppColors.appColorText,
-                                      textWeight: FontWeight.bold,
-                                      textSize: 12.sp,
-                                    ),
+                                ),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Padding(
+                                  padding: EdgeInsets.only(top: 2.6.w),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        controller.paymentMethodList[index].image!,
+                                        color: controller.paymentMethodList[index].isSelected!.value ? AppColors.appColorText : AppColors.lightTextColor,
+                                        width: 4.h,
+                                        height: 4.h,
+                                      ),
+                                      Text(
+                                        controller.paymentMethodList[index].title!,
+                                        style: TextStyle(
+                                          color: controller.paymentMethodList[index].isSelected!.value ? AppColors.appColorText : AppColors.lightTextColor,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12.sp,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(width: 3.w),
-                    Container(
-                      height: 26.w,
-                      width: 27.33.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(1.8.h),
-                        border: Border.all(color: AppColors.lightGreyColor, width: 0.1.h),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 2.w),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              ImagePath.payPal,
-                              color: AppColors.lightTextColor,
-                              width: 3.6.h,
-                            ),
-                            MyTextView(
-                              "Pay Pal",
-                              textStyleNew: MyTextStyle(
-                                textColor: AppColors.lightTextColor,
-                                textWeight: FontWeight.bold,
-                                textSize: 12.sp,
-                              ),
-                            ),
-                          ],
                         ),
-                      ),
-                    ),
-                    SizedBox(width: 3.w),
-                    Container(
-                      height: 26.w,
-                      width: 27.33.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(1.8.h),
-                        border: Border.all(color: AppColors.lightGreyColor, width: 0.1.h),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 1.4.w),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              ImagePath.applePayment,
-                              color: AppColors.lightTextColor,
-                              width: 3.6.h,
-                            ),
-                            MyTextView(
-                              "Apple Pay",
-                              textStyleNew: MyTextStyle(
-                                textColor: AppColors.lightTextColor,
-                                textWeight: FontWeight.bold,
-                                textSize: 12.sp,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+                      );
+                    }),
+                  ),
                 ),
                 SizedBox(height: 2.4.h),
                 Obx(() {
-                  return CustomTextField(
-                    isTitle: true,
-                    title: "Card Number",
-                    hintText: "Input Card Number",
-                    textInputAction: TextInputAction.next,
-                    inputType: TextInputType.number,
-                    controller: controller.cardNumberController,
-                    isError: controller.cardNumberError.value,
-                    hintColor: controller.cardNumberError.value ? AppColors.errorColor : AppColors.lightTextColor,
-                    textColor: controller.cardNumberError.value ? AppColors.errorColor : AppColors.darkTextColor,
-                  );
+                  return controller.paymentMethodList[0].isSelected!.value
+                      ? Column(
+                          children: [
+                            Obx(() {
+                              return CustomTextField(
+                                isTitle: true,
+                                title: Strings.cardNumber,
+                                hintText: Strings.inputCardNumber,
+                                textInputAction: TextInputAction.next,
+                                inputType: TextInputType.number,
+                                controller: controller.cardNumberController,
+                                isError: controller.cardNumberError.value,
+                                hintColor: controller.cardNumberError.value ? AppColors.errorColor : AppColors.lightTextColor,
+                                color: controller.cardNumberError.value ? AppColors.errorColor : AppColors.darkTextColor,
+                              );
+                            }),
+                            SizedBox(height: 1.6.h),
+                            Obx(() {
+                              return CustomTextField(
+                                isTitle: true,
+                                title: Strings.cardHolderName,
+                                hintText: Strings.inputName,
+                                textInputAction: TextInputAction.next,
+                                inputType: TextInputType.name,
+                                textCapitalization: TextCapitalization.words,
+                                controller: controller.cardHolderNameController,
+                                isError: controller.cardHolderNameError.value,
+                                hintColor: controller.cardHolderNameError.value ? AppColors.errorColor : AppColors.lightTextColor,
+                                color: controller.cardHolderNameError.value ? AppColors.errorColor : AppColors.darkTextColor,
+                              );
+                            }),
+                            SizedBox(height: 1.6.h),
+                            Obx(() {
+                              return CustomTextField(
+                                isTitle: true,
+                                title: Strings.expirationDate,
+                                hintText: Strings.inputMMYY,
+                                textInputAction: TextInputAction.next,
+                                inputType: TextInputType.datetime,
+                                controller: controller.expirationDateController,
+                                isError: controller.expirationDateError.value,
+                                hintColor: controller.expirationDateError.value ? AppColors.errorColor : AppColors.lightTextColor,
+                                color: controller.expirationDateError.value ? AppColors.errorColor : AppColors.darkTextColor,
+                                suffix: Image.asset(
+                                  ImagePath.date,
+                                  height: 3.2.h,
+                                ),
+                              );
+                            }),
+                            SizedBox(height: 1.6.h),
+                            Obx(() {
+                              return CustomTextField(
+                                isTitle: true,
+                                title: Strings.cvv,
+                                hintText: Strings.inputCVV,
+                                textInputAction: TextInputAction.done,
+                                inputType: TextInputType.number,
+                                controller: controller.cvvController,
+                                isError: controller.cvvError.value,
+                                hintColor: controller.cvvError.value ? AppColors.errorColor : AppColors.lightTextColor,
+                                color: controller.cvvError.value ? AppColors.errorColor : AppColors.darkTextColor,
+                                suffix: Image.asset(
+                                  ImagePath.cardSmall,
+                                  width: 3.h,
+                                ),
+                              );
+                            }),
+                            SizedBox(height: 1.8.h),
+                          ],
+                        )
+                      : Container();
                 }),
-                SizedBox(height: 1.6.h),
-                Obx(() {
-                  return CustomTextField(
-                    isTitle: true,
-                    title: "Card Holder Name",
-                    hintText: "Input Name",
-                    textInputAction: TextInputAction.next,
-                    inputType: TextInputType.name,
-                    textCapitalization: TextCapitalization.words,
-                    controller: controller.cardHolderNameController,
-                    isError: controller.cardHolderNameError.value,
-                    hintColor: controller.cardHolderNameError.value ? AppColors.errorColor : AppColors.lightTextColor,
-                    textColor: controller.cardHolderNameError.value ? AppColors.errorColor : AppColors.darkTextColor,
-                  );
-                }),
-                SizedBox(height: 1.6.h),
-                Obx(() {
-                  return CustomTextField(
-                    isTitle: true,
-                    title: "Expiration Date",
-                    hintText: "DD/MM/YYYY",
-                    textInputAction: TextInputAction.next,
-                    inputType: TextInputType.datetime,
-                    controller: controller.expirationDateController,
-                    isError: controller.expirationDateError.value,
-                    hintColor: controller.expirationDateError.value ? AppColors.errorColor : AppColors.lightTextColor,
-                    textColor: controller.expirationDateError.value ? AppColors.errorColor : AppColors.darkTextColor,
-                    suffix: Image.asset(
-                      ImagePath.date,
-                      height: 3.2.h,
-                    ),
-                  );
-                }),
-                SizedBox(height: 1.6.h),
-                Obx(() {
-                  return CustomTextField(
-                    isTitle: true,
-                    title: "CVV",
-                    hintText: "Input CVV",
-                    textInputAction: TextInputAction.done,
-                    inputType: TextInputType.number,
-                    controller: controller.cvvController,
-                    isError: controller.cvvError.value,
-                    hintColor: controller.cvvError.value ? AppColors.errorColor : AppColors.lightTextColor,
-                    textColor: controller.cvvError.value ? AppColors.errorColor : AppColors.darkTextColor,
-                    suffix: Image.asset(
-                      ImagePath.cardSmall,
-                      width: 3.h,
-                    ),
-                  );
-                }),
-                SizedBox(height: 1.8.h),
                 Row(
                   children: [
-                    MyTextView(
-                      "Set as Primary Payment",
-                      textStyleNew: MyTextStyle(
-                        textColor: AppColors.darkTextColor,
-                        textWeight: FontWeight.bold,
-                        textSize: 12.sp,
+                    Text(
+                      Strings.setAsPrimaryPayment,
+                      style: TextStyle(
+                        color: AppColors.darkTextColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12.sp,
                       ),
                     ),
                     const Spacer(),
@@ -235,17 +205,21 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                     }),
                   ],
                 ),
-                SizedBox(height: 3.h),
-                CustomButton(
-                  onPressed: () {},
-                  text: "Add Payment",
-                ),
+                SizedBox(height: 2.4.h),
+                Obx(() {
+                  return controller.paymentMethodList[0].isSelected!.value
+                      ? CustomButton(
+                          onPressed: () {},
+                          text: Strings.addPayment,
+                        )
+                      : const SizedBox();
+                }),
                 SizedBox(height: MediaQuery.of(context).padding.bottom),
               ],
             ),
             const CustomAppBar(
               isBack: true,
-              title: "Add Payment",
+              title: Strings.addPayment,
             ),
           ],
         ),

@@ -1,5 +1,4 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
-import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/screens/edit_payment_screen/edit_payment_controller.dart';
 import 'package:beep_car_wash/widgets/custom_appbar.dart';
@@ -35,7 +34,7 @@ class EditPaymentScreen extends GetView<EditPaymentController> {
                     controller: controller.cardNumberController,
                     isError: controller.cardNumberError.value,
                     hintColor: controller.cardNumberError.value ? AppColors.errorColor : AppColors.lightTextColor,
-                    textColor: controller.cardNumberError.value ? AppColors.errorColor : AppColors.darkTextColor,
+                    color: controller.cardNumberError.value ? AppColors.errorColor : AppColors.darkTextColor,
                   );
                 }),
                 SizedBox(height: 1.6.h),
@@ -50,7 +49,7 @@ class EditPaymentScreen extends GetView<EditPaymentController> {
                     controller: controller.cardHolderNameController,
                     isError: controller.cardHolderNameError.value,
                     hintColor: controller.cardHolderNameError.value ? AppColors.errorColor : AppColors.lightTextColor,
-                    textColor: controller.cardHolderNameError.value ? AppColors.errorColor : AppColors.darkTextColor,
+                    color: controller.cardHolderNameError.value ? AppColors.errorColor : AppColors.darkTextColor,
                   );
                 }),
                 SizedBox(height: 1.6.h),
@@ -64,7 +63,7 @@ class EditPaymentScreen extends GetView<EditPaymentController> {
                     controller: controller.expirationDateController,
                     isError: controller.expirationDateError.value,
                     hintColor: controller.expirationDateError.value ? AppColors.errorColor : AppColors.lightTextColor,
-                    textColor: controller.expirationDateError.value ? AppColors.errorColor : AppColors.darkTextColor,
+                    color: controller.expirationDateError.value ? AppColors.errorColor : AppColors.darkTextColor,
                     suffix: Image.asset(
                       ImagePath.date,
                       height: 3.2.h,
@@ -82,7 +81,7 @@ class EditPaymentScreen extends GetView<EditPaymentController> {
                     controller: controller.cvvController,
                     isError: controller.cvvError.value,
                     hintColor: controller.cvvError.value ? AppColors.errorColor : AppColors.lightTextColor,
-                    textColor: controller.cvvError.value ? AppColors.errorColor : AppColors.darkTextColor,
+                    color: controller.cvvError.value ? AppColors.errorColor : AppColors.darkTextColor,
                     suffix: Image.asset(
                       ImagePath.cardSmall,
                       width: 3.h,
@@ -92,12 +91,12 @@ class EditPaymentScreen extends GetView<EditPaymentController> {
                 SizedBox(height: 1.8.h),
                 Row(
                   children: [
-                    MyTextView(
+                    Text(
                       "Set as Primary Payment",
-                      textStyleNew: MyTextStyle(
-                        textColor: AppColors.darkTextColor,
-                        textWeight: FontWeight.bold,
-                        textSize: 12.sp,
+                      style: TextStyle(
+                        color: AppColors.darkTextColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12.sp,
                       ),
                     ),
                     const Spacer(),

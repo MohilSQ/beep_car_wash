@@ -1,5 +1,4 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
-import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
@@ -53,7 +52,7 @@ class SettingsScreen extends GetView<SettingsController> {
                           title: Strings.setting,
                           shadowVisible: false,
                           appBarColor: AppColors.transparentColor,
-                          textColor: AppColors.whiteColor,
+                          color: AppColors.whiteColor,
                           suffixIcon: Padding(
                             padding: EdgeInsets.only(right: 3.w),
                             child: GestureDetector(
@@ -62,12 +61,12 @@ class SettingsScreen extends GetView<SettingsController> {
                                   controller.saveSettingsAPI();
                                 }
                               },
-                              child: MyTextView(
+                              child: Text(
                                 Strings.save,
-                                textStyleNew: MyTextStyle(
-                                  textColor: AppColors.whiteColor,
-                                  textWeight: FontWeight.bold,
-                                  textSize: 13.6.sp,
+                                style: TextStyle(
+                                  color: AppColors.whiteColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13.6.sp,
                                 ),
                               ),
                             ),
@@ -159,7 +158,7 @@ class SettingsScreen extends GetView<SettingsController> {
                               controller: controller.firstNameController,
                               isError: controller.firstNameError.value,
                               hintColor: controller.firstNameError.value ? AppColors.errorColor : AppColors.lightTextColor,
-                              textColor: controller.firstNameError.value ? AppColors.errorColor : AppColors.darkTextColor,
+                              color: controller.firstNameError.value ? AppColors.errorColor : AppColors.darkTextColor,
                             );
                           }),
                           SizedBox(height: 1.6.h),
@@ -174,7 +173,7 @@ class SettingsScreen extends GetView<SettingsController> {
                               controller: controller.lastNameController,
                               isError: controller.lastNameError.value,
                               hintColor: controller.lastNameError.value ? AppColors.errorColor : AppColors.lightTextColor,
-                              textColor: controller.lastNameError.value ? AppColors.errorColor : AppColors.darkTextColor,
+                              color: controller.lastNameError.value ? AppColors.errorColor : AppColors.darkTextColor,
                             );
                           }),
                           SizedBox(height: 1.6.h),
@@ -188,7 +187,7 @@ class SettingsScreen extends GetView<SettingsController> {
                               controller: controller.emailController,
                               isError: controller.emailError.value,
                               hintColor: controller.emailError.value ? AppColors.errorColor : AppColors.lightTextColor,
-                              textColor: controller.emailError.value ? AppColors.errorColor : AppColors.darkTextColor,
+                              color: controller.emailError.value ? AppColors.errorColor : AppColors.darkTextColor,
                             );
                           }),
                           SizedBox(height: 1.6.h),
@@ -203,7 +202,7 @@ class SettingsScreen extends GetView<SettingsController> {
                               controller: controller.phoneNumberController,
                               isError: controller.phoneNumberError.value,
                               hintColor: controller.phoneNumberError.value ? AppColors.errorColor : AppColors.lightTextColor,
-                              textColor: controller.phoneNumberError.value ? AppColors.errorColor : AppColors.darkTextColor,
+                              color: controller.phoneNumberError.value ? AppColors.errorColor : AppColors.darkTextColor,
                             );
                           }),
                         ],
@@ -223,10 +222,10 @@ class SettingsScreen extends GetView<SettingsController> {
                       widgetSpace: 1.5.h,
                       widgetMainAxis: MainAxisAlignment.start,
                       horizontalPadding: 3.w,
-                      style: MyTextStyle(
-                        textColor: AppColors.appColorText,
-                        textWeight: FontWeight.w600,
-                        textSize: 12.sp,
+                      style: TextStyle(
+                        color: AppColors.appColorText,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12.sp,
                       ),
                     ),
                     Divider(height: 0.8.h),
@@ -242,10 +241,10 @@ class SettingsScreen extends GetView<SettingsController> {
                       widgetSpace: 1.5.h,
                       widgetMainAxis: MainAxisAlignment.start,
                       horizontalPadding: 3.w,
-                      style: MyTextStyle(
-                        textColor: AppColors.appColorText,
-                        textWeight: FontWeight.w600,
-                        textSize: 12.sp,
+                      style: TextStyle(
+                        color: AppColors.appColorText,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12.sp,
                       ),
                     ),
                     Divider(height: 0.8.h),
@@ -259,10 +258,10 @@ class SettingsScreen extends GetView<SettingsController> {
                       widgetSpace: 1.5.h,
                       widgetMainAxis: MainAxisAlignment.start,
                       horizontalPadding: 3.w,
-                      style: MyTextStyle(
-                        textColor: AppColors.appColorText,
-                        textWeight: FontWeight.w600,
-                        textSize: 12.sp,
+                      style: TextStyle(
+                        color: AppColors.appColorText,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12.sp,
                       ),
                     ),
                     SizedBox(height: 4.h),
@@ -274,12 +273,12 @@ class SettingsScreen extends GetView<SettingsController> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          MyTextView(
+                          Text(
                             Strings.logOut,
-                            textStyleNew: MyTextStyle(
-                              textColor: AppColors.lightTextColor,
-                              textWeight: FontWeight.bold,
-                              textSize: 12.sp,
+                            style: TextStyle(
+                              color: AppColors.lightTextColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12.sp,
                             ),
                           ),
                           SizedBox(width: 1.h),
@@ -332,10 +331,10 @@ class SettingsScreen extends GetView<SettingsController> {
                 widgetSpace: 1.5.h,
                 widgetMainAxis: MainAxisAlignment.start,
                 horizontalPadding: 3.w,
-                style: MyTextStyle(
-                  textColor: AppColors.lightTextColor,
-                  textWeight: FontWeight.w600,
-                  textSize: 12.sp,
+                style: TextStyle(
+                  color: AppColors.lightTextColor,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 12.sp,
                 ),
               ),
               Divider(height: 0.8.h),
@@ -353,10 +352,10 @@ class SettingsScreen extends GetView<SettingsController> {
                 widgetSpace: 1.5.h,
                 widgetMainAxis: MainAxisAlignment.start,
                 horizontalPadding: 3.w,
-                style: MyTextStyle(
-                  textColor: AppColors.lightTextColor,
-                  textWeight: FontWeight.w600,
-                  textSize: 12.sp,
+                style: TextStyle(
+                  color: AppColors.lightTextColor,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 12.sp,
                 ),
               ),
               Divider(height: 0.8.h),

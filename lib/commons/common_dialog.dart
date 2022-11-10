@@ -1,5 +1,4 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
-import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
@@ -39,23 +38,22 @@ void alertActionDialog({
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                MyTextView(
+                Text(
                   Strings.appName,
-                  textStyleNew: MyTextStyle(
-                    textSize: 16.sp,
-                    textWeight: FontWeight.bold,
-                    textColor: AppColors.appColorText,
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.appColorText,
                   ),
                 ),
                 SizedBox(height: 1.h),
-                MyTextView(
+                Text(
                   massage ?? "",
-                  isMaxLineWrap: true,
-                  textAlignNew: TextAlign.center,
-                  textStyleNew: MyTextStyle(
-                    textSize: 12.sp,
-                    textWeight: FontWeight.w500,
-                    textColor: AppColors.darkTextColor,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.darkTextColor,
                   ),
                 ),
                 SizedBox(height: 2.6.h),
@@ -67,7 +65,7 @@ void alertActionDialog({
                         onPressed: () => Get.back(),
                         text: leftBtnName ?? Strings.no,
                         height: 4.8.h,
-                        textColor: AppColors.appColorText,
+                        color: AppColors.appColorText,
                         backgroundColor: AppColors.transparentColor,
                         borderSide: BorderSide(color: AppColors.appColor),
                         elevation: 0,
@@ -120,23 +118,22 @@ void messageDialog({
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                MyTextView(
+                Text(
                   Strings.appName,
-                  textStyleNew: MyTextStyle(
-                    textSize: 16.sp,
-                    textWeight: FontWeight.bold,
-                    textColor: AppColors.appColorText,
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.appColorText,
                   ),
                 ),
                 SizedBox(height: 1.h),
-                MyTextView(
+                Text(
                   massage ?? "",
-                  isMaxLineWrap: true,
-                  textAlignNew: TextAlign.center,
-                  textStyleNew: MyTextStyle(
-                    textSize: 12.sp,
-                    textWeight: FontWeight.w500,
-                    textColor: AppColors.darkTextColor,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.darkTextColor,
                   ),
                 ),
                 SizedBox(height: 2.6.h),

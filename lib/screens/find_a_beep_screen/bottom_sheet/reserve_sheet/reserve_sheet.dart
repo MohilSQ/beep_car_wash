@@ -1,5 +1,4 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
-import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/reserve_sheet/reserve_controller.dart';
@@ -27,12 +26,12 @@ class ReserveSheet extends GetView<ReserveController> {
             children: [
               Row(
                 children: [
-                  MyTextView(
+                  Text(
                     "Reserve",
-                    textStyleNew: MyTextStyle(
-                      textColor: AppColors.darkTextColor,
-                      textWeight: FontWeight.bold,
-                      textSize: 15.sp,
+                    style: TextStyle(
+                      color: AppColors.darkTextColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15.sp,
                     ),
                   ),
                   const Spacer(),
@@ -40,14 +39,13 @@ class ReserveSheet extends GetView<ReserveController> {
                 ],
               ),
               SizedBox(height: 4.h),
-              MyTextView(
+              Text(
                 "2\$ to reserve the machine\nfor 5 min",
-                isMaxLineWrap: true,
-                textAlignNew: TextAlign.center,
-                textStyleNew: MyTextStyle(
-                  textColor: AppColors.darkTextColor,
-                  textWeight: FontWeight.bold,
-                  textSize: 20.sp,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: AppColors.darkTextColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.sp,
                 ),
               ),
               SizedBox(height: 5.h),
@@ -67,13 +65,12 @@ class ReserveSheet extends GetView<ReserveController> {
                       height: 2.4.h,
                     ),
                     SizedBox(width: 3.w),
-                    MyTextView(
+                    Text(
                       "This action is non refundable",
-                      isMaxLineWrap: true,
-                      textStyleNew: MyTextStyle(
-                        textColor: AppColors.redColor,
-                        textWeight: FontWeight.bold,
-                        textSize: 12.sp,
+                      style: TextStyle(
+                        color: AppColors.redColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12.sp,
                       ),
                     ),
                   ],
@@ -90,7 +87,7 @@ class ReserveSheet extends GetView<ReserveController> {
                       elevation: 0,
                       backgroundColor: AppColors.transparentColor,
                       text: Strings.cancel,
-                      textColor: AppColors.appColorText,
+                      color: AppColors.appColorText,
                       borderSide: BorderSide(
                         width: 0.1.h,
                         color: AppColors.lightGreyColor,

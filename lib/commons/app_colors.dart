@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Enter your app primer color code in opacity ----->>
 /// NOTE: Don't change opacity code just change color code -------->>
-Map<int, Color> textColor = {
+Map<int, Color> color = {
   50: const Color(0x1a00DD8D),
   100: const Color(0x2600DD8D),
   200: const Color(0x3300DD8D),
@@ -17,7 +17,7 @@ Map<int, Color> textColor = {
 
 class AppColors {
   /// Enter your app primer color code ----->>
-  static MaterialColor primerColor = MaterialColor(0xFF00DD8D, textColor);
+  static MaterialColor primerColor = MaterialColor(0xFF00DD8D, color);
 
   ///************** Common Color **************///
   /// NOTE: DO not remove this colors -------->>>

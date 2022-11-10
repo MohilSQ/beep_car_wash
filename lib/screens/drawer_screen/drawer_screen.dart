@@ -1,5 +1,4 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
-import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
@@ -46,12 +45,12 @@ class DrawerScreen extends GetView<DrawerScreenController> {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(left: 6.w, top: MediaQuery.of(context).padding.top + 4.6.h),
-                      child: MyTextView(
+                      child: Text(
                         "Hello, ${Get.find<CommonController>().userDataModel.firstName}",
-                        textStyleNew: MyTextStyle(
-                          textColor: AppColors.appColor,
-                          textWeight: FontWeight.bold,
-                          textSize: 19.sp,
+                        style: TextStyle(
+                          color: AppColors.appColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 19.sp,
                         ),
                       ),
                     ),
@@ -79,7 +78,7 @@ class DrawerScreen extends GetView<DrawerScreenController> {
                             borderRadius: 0,
                             backgroundColor: AppColors.transparentColor,
                             text: controller.drawerList[index].title,
-                            textColor: index == 6
+                            color: index == 6
                                 ? AppColors.appColorText
                                 : controller.drawerList[index].isSelected!.value
                                     ? AppColors.darkTextColor
@@ -138,22 +137,21 @@ class DrawerScreen extends GetView<DrawerScreenController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  MyTextView(
+                                  Text(
                                     Strings.startMyCarWash,
-                                    textStyleNew: MyTextStyle(
-                                      textColor: AppColors.whiteColor,
-                                      textWeight: FontWeight.w600,
-                                      textSize: 12.sp,
+                                    style: TextStyle(
+                                      color: AppColors.whiteColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12.sp,
                                     ),
                                   ),
                                   SizedBox(height: 0.4.h),
-                                  MyTextView(
+                                  Text(
                                     Strings.becomeAnOperatorAndEarnPassiveIncome,
-                                    isMaxLineWrap: true,
-                                    textStyleNew: MyTextStyle(
-                                      textColor: AppColors.whiteColor,
-                                      textWeight: FontWeight.w400,
-                                      textSize: 8.6.sp,
+                                    style: TextStyle(
+                                      color: AppColors.whiteColor,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 8.6.sp,
                                     ),
                                   ),
                                 ],

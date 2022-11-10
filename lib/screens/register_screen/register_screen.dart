@@ -62,12 +62,12 @@ class RegisterScreen extends GetView<RegisterController> {
                             ),
                           ),
                           SizedBox(height: 6.h),
-                          MyTextView(
+                          Text(
                             Strings.createYourAccount,
-                            textStyleNew: MyTextStyle(
-                              textColor: AppColors.darkTextColor,
-                              textWeight: FontWeight.bold,
-                              textSize: 14.sp,
+                            style: TextStyle(
+                              color: AppColors.darkTextColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.sp,
                             ),
                           ),
                           SizedBox(height: 3.8.h),
@@ -78,7 +78,7 @@ class RegisterScreen extends GetView<RegisterController> {
                               controller: controller.firstNameController,
                               isError: controller.firstNameError!.value,
                               hintColor: controller.firstNameError!.value ? AppColors.errorColor : AppColors.lightTextColor,
-                              textColor: controller.firstNameError!.value ? AppColors.errorColor : AppColors.darkTextColor,
+                              color: controller.firstNameError!.value ? AppColors.errorColor : AppColors.darkTextColor,
                             );
                           }),
                           SizedBox(height: 2.h),
@@ -89,7 +89,7 @@ class RegisterScreen extends GetView<RegisterController> {
                               controller: controller.lastNameController,
                               isError: controller.lastNameError!.value,
                               hintColor: controller.lastNameError!.value ? AppColors.errorColor : AppColors.lightTextColor,
-                              textColor: controller.lastNameError!.value ? AppColors.errorColor : AppColors.darkTextColor,
+                              color: controller.lastNameError!.value ? AppColors.errorColor : AppColors.darkTextColor,
                             );
                           }),
                           SizedBox(height: 2.h),
@@ -101,7 +101,7 @@ class RegisterScreen extends GetView<RegisterController> {
                               controller: controller.emailController,
                               isError: controller.emailError!.value,
                               hintColor: controller.emailError!.value ? AppColors.errorColor : AppColors.lightTextColor,
-                              textColor: controller.emailError!.value ? AppColors.errorColor : AppColors.darkTextColor,
+                              color: controller.emailError!.value ? AppColors.errorColor : AppColors.darkTextColor,
                             );
                           }),
                           const Spacer(),
@@ -126,30 +126,30 @@ class RegisterScreen extends GetView<RegisterController> {
                                   textAlign: TextAlign.start,
                                   text: TextSpan(
                                     text: Strings.byCreatingAnAccountYouAgreeToBeep,
-                                    style: MyTextStyle(
-                                      textWeight: FontWeight.w600,
-                                      textSize: 12.sp,
-                                      textColor: AppColors.blackColor,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12.sp,
+                                      color: AppColors.blackColor,
                                     ),
                                     children: [
                                       TextSpan(
                                         text: Strings.termsOfService,
                                         recognizer: TapGestureRecognizer()
                                           ..onTap = () {
-                                            Get.to(() => const TermsOfServiceScreen(),binding: TermsOfConditionBindings());
+                                            Get.to(() => const TermsOfServiceScreen(), binding: TermsOfConditionBindings());
                                           },
-                                        style: MyTextStyle(
-                                          textWeight: FontWeight.bold,
-                                          textSize: 12.sp,
-                                          textColor: AppColors.appColorText,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12.sp,
+                                          color: AppColors.appColorText,
                                         ),
                                       ),
                                       TextSpan(
                                         text: Strings.and,
-                                        style: MyTextStyle(
-                                          textWeight: FontWeight.bold,
-                                          textSize: 12.sp,
-                                          textColor: AppColors.appColorText,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12.sp,
+                                          color: AppColors.appColorText,
                                         ),
                                       ),
                                       TextSpan(
@@ -158,10 +158,10 @@ class RegisterScreen extends GetView<RegisterController> {
                                           ..onTap = () {
                                             Get.to(() => const RegisterScreen());
                                           },
-                                        style: MyTextStyle(
-                                          textWeight: FontWeight.bold,
-                                          textSize: 12.sp,
-                                          textColor: AppColors.appColorText,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12.sp,
+                                          color: AppColors.appColorText,
                                         ),
                                       ),
                                     ],

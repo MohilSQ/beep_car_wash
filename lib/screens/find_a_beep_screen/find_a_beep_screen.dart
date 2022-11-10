@@ -1,5 +1,4 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
-import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
@@ -101,12 +100,12 @@ class FindABeepScreen extends GetView<FindABeepController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    MyTextView(
+                    Text(
                       Strings.setALocation,
-                      textStyleNew: MyTextStyle(
-                        textColor: AppColors.appColor,
-                        textWeight: FontWeight.w600,
-                        textSize: 8.6.sp,
+                      style: TextStyle(
+                        color: AppColors.appColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 8.6.sp,
                       ),
                     ),
                     SizedBox(height: 0.6.h),
@@ -123,7 +122,7 @@ class FindABeepScreen extends GetView<FindABeepController> {
                             controller: controller.searchController,
                             textInputAction: TextInputAction.done,
                             hintText: Strings.yourLocation,
-                            textSize: 10.sp,
+                            fontSize: 10.sp,
                             isDense: true,
                             containerVisible: false,
                             borderVisible: false,

@@ -1,5 +1,4 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
-import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -29,7 +28,7 @@ class CustomButton extends StatelessWidget {
   final double? imageSize;
   final Color? imageColor;
   final String? text;
-  final Color? textColor;
+  final Color? color;
   final TextStyle? style;
 
   const CustomButton({
@@ -59,7 +58,7 @@ class CustomButton extends StatelessWidget {
     this.imageSize,
     this.imageColor,
     this.text,
-    this.textColor,
+    this.color,
     this.style,
   }) : super(key: key);
 
@@ -142,14 +141,14 @@ class CustomButton extends StatelessWidget {
               else
                 const SizedBox(),
               if (text != null && text != "")
-                MyTextView(
+                Text(
                   text!,
-                  textAlignNew: TextAlign.center,
-                  textStyleNew: style ??
-                      MyTextStyle(
-                        textColor: textColor ?? AppColors.whiteColor,
-                        textWeight: FontWeight.bold,
-                        textSize: 12.sp,
+                  textAlign: TextAlign.center,
+                  style: style ??
+                      TextStyle(
+                        color: color ?? AppColors.whiteColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12.sp,
                       ),
                 )
               else

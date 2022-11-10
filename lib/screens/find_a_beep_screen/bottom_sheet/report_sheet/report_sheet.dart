@@ -1,5 +1,4 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
-import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/report_sheet/report_controller.dart';
@@ -29,12 +28,12 @@ class ReportSheet extends GetView<ReportController> {
             children: [
               Row(
                 children: [
-                  MyTextView(
+                  Text(
                     "Report",
-                    textStyleNew: MyTextStyle(
-                      textColor: AppColors.darkTextColor,
-                      textWeight: FontWeight.bold,
-                      textSize: 15.sp,
+                    style: TextStyle(
+                      color: AppColors.darkTextColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15.sp,
                     ),
                   ),
                   const Spacer(),
@@ -42,13 +41,12 @@ class ReportSheet extends GetView<ReportController> {
                 ],
               ),
               SizedBox(height: 1.h),
-              MyTextView(
+              Text(
                 "What issue are you facing?",
-                isMaxLineWrap: true,
-                textStyleNew: MyTextStyle(
-                  textColor: AppColors.darkTextColor,
-                  textWeight: FontWeight.bold,
-                  textSize: 14.sp,
+                style: TextStyle(
+                  color: AppColors.darkTextColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14.sp,
                 ),
               ),
               SizedBox(height: 2.h),
@@ -66,26 +64,24 @@ class ReportSheet extends GetView<ReportController> {
                       size: 3.h,
                     ),
                     SizedBox(width: 2.w),
-                    MyTextView(
-                      controller.reportList[index].title,
-                      isMaxLineWrap: true,
-                      textStyleNew: MyTextStyle(
-                        textColor: AppColors.darkTextColor,
-                        textWeight: FontWeight.w600,
-                        textSize: 12.sp,
+                    Text(
+                      controller.reportList[index].title!,
+                      style: TextStyle(
+                        color: AppColors.darkTextColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12.sp,
                       ),
                     ),
                   ],
                 ),
               ),
               SizedBox(height: 2.h),
-              MyTextView(
+              Text(
                 "Attach Photo",
-                isMaxLineWrap: true,
-                textStyleNew: MyTextStyle(
-                  textColor: AppColors.darkTextColor,
-                  textWeight: FontWeight.bold,
-                  textSize: 14.sp,
+                style: TextStyle(
+                  color: AppColors.darkTextColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14.sp,
                 ),
               ),
               SizedBox(height: 1.h),
@@ -108,13 +104,12 @@ class ReportSheet extends GetView<ReportController> {
                       height: 3.3.h,
                     ),
                     const Spacer(),
-                    MyTextView(
+                    Text(
                       "Update",
-                      isMaxLineWrap: true,
-                      textStyleNew: MyTextStyle(
-                        textColor: AppColors.appColorText,
-                        textWeight: FontWeight.bold,
-                        textSize: 12.sp,
+                      style: TextStyle(
+                        color: AppColors.appColorText,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12.sp,
                       ),
                     ),
                   ],
@@ -134,7 +129,7 @@ class ReportSheet extends GetView<ReportController> {
                 padding: EdgeInsets.all(1.8.h),
                 // isError: controller.phoneNumberError.value,
                 // hintColor: controller.phoneNumberError.value ? AppColors.errorColor : AppColors.lightTextColor,
-                // textColor: controller.phoneNumberError.value ? AppColors.errorColor : AppColors.darkTextColor,
+                // color: controller.phoneNumberError.value ? AppColors.errorColor : AppColors.darkTextColor,
               ),
               SizedBox(height: 2.h),
               Row(
@@ -147,7 +142,7 @@ class ReportSheet extends GetView<ReportController> {
                       elevation: 0,
                       backgroundColor: AppColors.transparentColor,
                       text: Strings.cancel,
-                      textColor: AppColors.appColorText,
+                      color: AppColors.appColorText,
                       borderSide: BorderSide(
                         width: 0.1.h,
                         color: AppColors.lightGreyColor,

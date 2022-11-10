@@ -1,5 +1,4 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
-import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/nearest_beep_sheet/nearest_beep_controller.dart';
@@ -41,12 +40,12 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                   children: [
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: MyTextView(
+                      child: Text(
                         Strings.nearestBeep,
-                        textStyleNew: MyTextStyle(
-                          textSize: 15.sp,
-                          textWeight: FontWeight.bold,
-                          textColor: AppColors.darkTextColor,
+                        style: TextStyle(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.darkTextColor,
                         ),
                       ),
                     ),
@@ -55,12 +54,12 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                       children: [
                         Image.asset(ImagePath.address, height: 2.4.h),
                         SizedBox(width: 2.w),
-                        MyTextView(
+                        Text(
                           "1234 Barclay St, New York",
-                          textStyleNew: MyTextStyle(
-                            textSize: 12.sp,
-                            textWeight: FontWeight.w600,
-                            textColor: AppColors.darkTextColor,
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.darkTextColor,
                           ),
                         ),
                       ],
@@ -126,12 +125,12 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                                     ),
                                   ),
                                   SizedBox(height: 0.6.h),
-                                  MyTextView(
-                                    e.title,
-                                    textStyleNew: MyTextStyle(
-                                      textSize: 10.sp,
-                                      textWeight: FontWeight.w600,
-                                      textColor: AppColors.lightTextColor,
+                                  Text(
+                                    e.title!,
+                                    style: TextStyle(
+                                      fontSize: 10.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.lightTextColor,
                                     ),
                                   ),
                                 ],

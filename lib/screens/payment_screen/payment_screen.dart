@@ -1,5 +1,4 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
-import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/screens/add_payment_screen/add_payment_binding.dart';
@@ -37,29 +36,29 @@ class PaymentScreen extends GetView<PaymentController> {
                     title: Strings.payment,
                     shadowVisible: false,
                     appBarColor: AppColors.transparentColor,
-                    textColor: AppColors.whiteColor,
+                    color: AppColors.whiteColor,
                   ),
                   const Spacer(),
-                  MyTextView(
+                  Text(
                     "US \$ 0.00",
-                    textStyleNew: MyTextStyle(
-                      textColor: AppColors.whiteColor,
-                      textWeight: FontWeight.bold,
-                      textSize: 22.sp,
+                    style: TextStyle(
+                      color: AppColors.whiteColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22.sp,
                     ),
                   ),
                   SizedBox(height: 0.4.h),
-                  MyTextView(
+                  Text(
                     Strings.currentBalance,
-                    textStyleNew: MyTextStyle(
-                      textColor: AppColors.whiteColor,
-                      textWeight: FontWeight.bold,
-                      textSize: 9.sp,
+                    style: TextStyle(
+                      color: AppColors.whiteColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 9.sp,
                     ),
                   ),
                   const Spacer(),
                   Image.asset(
-                    ImagePath.dummyImage3,
+                    ImagePath.paymentCard,
                     width: 80.w,
                   ),
                   const Spacer(),
@@ -89,21 +88,21 @@ class PaymentScreen extends GetView<PaymentController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          MyTextView(
+                          Text(
                             "Mastercard",
-                            textStyleNew: MyTextStyle(
-                              textColor: AppColors.darkTextColor,
-                              textWeight: FontWeight.bold,
-                              textSize: 12.sp,
+                            style: TextStyle(
+                              color: AppColors.darkTextColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12.sp,
                             ),
                           ),
                           SizedBox(height: 0.6.h),
-                          MyTextView(
+                          Text(
                             "**** **** **** 5678",
-                            textStyleNew: MyTextStyle(
-                              textColor: AppColors.lightTextColor,
-                              textWeight: FontWeight.w600,
-                              textSize: 11.sp,
+                            style: TextStyle(
+                              color: AppColors.lightTextColor,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 11.sp,
                             ),
                           ),
                         ],
@@ -116,21 +115,21 @@ class PaymentScreen extends GetView<PaymentController> {
                               color: AppColors.lightBlueColor,
                               borderRadius: BorderRadius.circular(0.8.h),
                             ),
-                            child: MyTextView(
+                            child: Text(
                               Strings.primary,
-                              textStyleNew: MyTextStyle(
-                                textColor: AppColors.blueText,
-                                textWeight: FontWeight.bold,
-                                textSize: 10.sp,
+                              style: TextStyle(
+                                color: AppColors.blueText,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 10.sp,
                               ),
                             ),
                           )
                         : const SizedBox(),
                     PopupMenuButton<int>(
                       itemBuilder: (context) => [
-                        PopupMenuItem(value: 1, textStyle: MyTextStyle(textSize: 10.sp, textWeight: FontWeight.w600), height: 3.4.h, child: const Text(Strings.primary)),
-                        PopupMenuItem(value: 2, textStyle: MyTextStyle(textSize: 10.sp, textWeight: FontWeight.w600), height: 3.4.h, child: const Text(Strings.edit)),
-                        PopupMenuItem(value: 3, textStyle: MyTextStyle(textSize: 10.sp, textWeight: FontWeight.w600), height: 3.4.h, child: const Text(Strings.deleat)),
+                        PopupMenuItem(value: 1, textStyle: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w600), height: 3.4.h, child: const Text(Strings.primary)),
+                        PopupMenuItem(value: 2, textStyle: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w600), height: 3.4.h, child: const Text(Strings.edit)),
+                        PopupMenuItem(value: 3, textStyle: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w600), height: 3.4.h, child: const Text(Strings.delete)),
                       ],
                       offset: const Offset(-30, 40),
                       color: Colors.white,

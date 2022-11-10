@@ -1,5 +1,4 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
-import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/screens/refer_and_earn_screen/refer_and_earn_controller.dart';
 import 'package:beep_car_wash/widgets/custom_appbar.dart';
@@ -27,9 +26,9 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
             title: "Referral",
             height: MediaQuery.of(context).padding.top + AppBar().preferredSize.height + 4.5.h,
             bottonChild: TabBar(
-              labelStyle: MyTextStyle(
-                textSize: 12.sp,
-                textWeight: FontWeight.bold,
+              labelStyle: TextStyle(
+                fontSize: 12.sp,
+                fontWeight: FontWeight.bold,
               ),
               unselectedLabelColor: AppColors.lightTextColor,
               labelColor: AppColors.appColorText,
@@ -54,23 +53,22 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
           height: 50.w,
         ),
         SizedBox(height: 3.h),
-        MyTextView(
+        Text(
           "Spread The Wealth",
-          textStyleNew: MyTextStyle(
-            textColor: AppColors.darkTextColor,
-            textWeight: FontWeight.bold,
-            textSize: 18.sp,
+          style: TextStyle(
+            color: AppColors.darkTextColor,
+            fontWeight: FontWeight.bold,
+            fontSize: 18.sp,
           ),
         ),
         SizedBox(height: 1.6.h),
-        MyTextView(
+        Text(
           "Share your personal code with potential operators. After they get their first beep wash booking, you both earn a \$100 each!",
-          isMaxLineWrap: true,
-          textAlignNew: TextAlign.center,
-          textStyleNew: MyTextStyle(
-            textColor: AppColors.lightTextColor,
-            textWeight: FontWeight.w600,
-            textSize: 10.6.sp,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: AppColors.lightTextColor,
+            fontWeight: FontWeight.w600,
+            fontSize: 10.6.sp,
           ),
         ),
         SizedBox(height: 3.h),
@@ -85,12 +83,12 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
                 shape: BoxShape.circle,
                 color: AppColors.lightAppColor,
               ),
-              child: MyTextView(
+              child: Text(
                 "1",
-                textStyleNew: MyTextStyle(
-                  textColor: AppColors.appColorText,
-                  textWeight: FontWeight.bold,
-                  textSize: 11.sp,
+                style: TextStyle(
+                  color: AppColors.appColorText,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 11.sp,
                 ),
               ),
             ),
@@ -99,23 +97,22 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MyTextView(
+                  Text(
                     "Invite operators by sharing your code",
-                    textStyleNew: MyTextStyle(
-                      textColor: AppColors.darkTextColor,
-                      textWeight: FontWeight.bold,
-                      textSize: 12.sp,
+                    style: TextStyle(
+                      color: AppColors.darkTextColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12.sp,
                     ),
                   ),
                   SizedBox(height: 0.4.h),
-                  MyTextView(
+                  Text(
                     "They sign up using your code below into the app",
-                    isMaxLineWrap: true,
-                    textAlignNew: TextAlign.start,
-                    textStyleNew: MyTextStyle(
-                      textColor: AppColors.lightTextColor,
-                      textWeight: FontWeight.w600,
-                      textSize: 10.6.sp,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: AppColors.lightTextColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 10.6.sp,
                     ),
                   ),
                 ],
@@ -135,12 +132,12 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
                 shape: BoxShape.circle,
                 color: AppColors.lightAppColor,
               ),
-              child: MyTextView(
+              child: Text(
                 "2",
-                textStyleNew: MyTextStyle(
-                  textColor: AppColors.appColorText,
-                  textWeight: FontWeight.bold,
-                  textSize: 11.sp,
+                style: TextStyle(
+                  color: AppColors.appColorText,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 11.sp,
                 ),
               ),
             ),
@@ -149,23 +146,22 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MyTextView(
+                  Text(
                     "Set up their beep operation",
-                    textStyleNew: MyTextStyle(
-                      textColor: AppColors.darkTextColor,
-                      textWeight: FontWeight.bold,
-                      textSize: 12.sp,
+                    style: TextStyle(
+                      color: AppColors.darkTextColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12.sp,
                     ),
                   ),
                   SizedBox(height: 0.4.h),
-                  MyTextView(
+                  Text(
                     "Once they set up their beep operation and receive their first beep booking you both earn",
-                    isMaxLineWrap: true,
-                    textAlignNew: TextAlign.start,
-                    textStyleNew: MyTextStyle(
-                      textColor: AppColors.lightTextColor,
-                      textWeight: FontWeight.w600,
-                      textSize: 10.6.sp,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: AppColors.lightTextColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 10.6.sp,
                     ),
                   ),
                 ],
@@ -185,12 +181,12 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
                 shape: BoxShape.circle,
                 color: AppColors.lightAppColor,
               ),
-              child: MyTextView(
+              child: Text(
                 "3",
-                textStyleNew: MyTextStyle(
-                  textColor: AppColors.appColorText,
-                  textWeight: FontWeight.bold,
-                  textSize: 11.sp,
+                style: TextStyle(
+                  color: AppColors.appColorText,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 11.sp,
                 ),
               ),
             ),
@@ -199,23 +195,22 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MyTextView(
+                  Text(
                     "You both earn \$100!",
-                    textStyleNew: MyTextStyle(
-                      textColor: AppColors.darkTextColor,
-                      textWeight: FontWeight.bold,
-                      textSize: 12.sp,
+                    style: TextStyle(
+                      color: AppColors.darkTextColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12.sp,
                     ),
                   ),
                   SizedBox(height: 0.4.h),
-                  MyTextView(
+                  Text(
                     "Your \$100 will be added to your earnings and be  available for withdrawal immediately",
-                    isMaxLineWrap: true,
-                    textAlignNew: TextAlign.start,
-                    textStyleNew: MyTextStyle(
-                      textColor: AppColors.lightTextColor,
-                      textWeight: FontWeight.w600,
-                      textSize: 10.6.sp,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: AppColors.lightTextColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 10.6.sp,
                     ),
                   ),
                 ],
@@ -226,12 +221,12 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
         SizedBox(height: 2.2.h),
         Align(
           alignment: Alignment.center,
-          child: MyTextView(
+          child: Text(
             "Terms apply",
-            textStyleNew: MyTextStyle(
-              textColor: AppColors.appColorText,
-              textWeight: FontWeight.bold,
-              textSize: 12.sp,
+            style: TextStyle(
+              color: AppColors.appColorText,
+              fontWeight: FontWeight.bold,
+              fontSize: 12.sp,
             ),
           ),
         ),
@@ -256,23 +251,22 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
           fit: BoxFit.fitHeight,
         ),
         SizedBox(height: 3.h),
-        MyTextView(
+        Text(
           "Spread The Wealth",
-          textStyleNew: MyTextStyle(
-            textColor: AppColors.darkTextColor,
-            textWeight: FontWeight.bold,
-            textSize: 18.sp,
+          style: TextStyle(
+            color: AppColors.darkTextColor,
+            fontWeight: FontWeight.bold,
+            fontSize: 18.sp,
           ),
         ),
         SizedBox(height: 1.6.h),
-        MyTextView(
+        Text(
           "Share your personal code with your friends. After they get their first beep wash, you both earn a free wash",
-          isMaxLineWrap: true,
-          textAlignNew: TextAlign.center,
-          textStyleNew: MyTextStyle(
-            textColor: AppColors.lightTextColor,
-            textWeight: FontWeight.w600,
-            textSize: 10.6.sp,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: AppColors.lightTextColor,
+            fontWeight: FontWeight.w600,
+            fontSize: 10.6.sp,
           ),
         ),
         SizedBox(height: 3.2.h),
@@ -287,12 +281,12 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
                 shape: BoxShape.circle,
                 color: AppColors.lightAppColor,
               ),
-              child: MyTextView(
+              child: Text(
                 "1",
-                textStyleNew: MyTextStyle(
-                  textColor: AppColors.appColorText,
-                  textWeight: FontWeight.bold,
-                  textSize: 11.sp,
+                style: TextStyle(
+                  color: AppColors.appColorText,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 11.sp,
                 ),
               ),
             ),
@@ -301,23 +295,22 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MyTextView(
+                  Text(
                     "Invite friends by sharing your code",
-                    textStyleNew: MyTextStyle(
-                      textColor: AppColors.darkTextColor,
-                      textWeight: FontWeight.bold,
-                      textSize: 12.sp,
+                    style: TextStyle(
+                      color: AppColors.darkTextColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12.sp,
                     ),
                   ),
                   SizedBox(height: 0.4.h),
-                  MyTextView(
+                  Text(
                     "They use your code below on their first wash",
-                    isMaxLineWrap: true,
-                    textAlignNew: TextAlign.start,
-                    textStyleNew: MyTextStyle(
-                      textColor: AppColors.lightTextColor,
-                      textWeight: FontWeight.w600,
-                      textSize: 10.6.sp,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: AppColors.lightTextColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 10.6.sp,
                     ),
                   ),
                 ],
@@ -337,12 +330,12 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
                 shape: BoxShape.circle,
                 color: AppColors.lightAppColor,
               ),
-              child: MyTextView(
+              child: Text(
                 "2",
-                textStyleNew: MyTextStyle(
-                  textColor: AppColors.appColorText,
-                  textWeight: FontWeight.bold,
-                  textSize: 11.sp,
+                style: TextStyle(
+                  color: AppColors.appColorText,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 11.sp,
                 ),
               ),
             ),
@@ -351,23 +344,22 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MyTextView(
+                  Text(
                     "Both earn a free wash",
-                    textStyleNew: MyTextStyle(
-                      textColor: AppColors.darkTextColor,
-                      textWeight: FontWeight.bold,
-                      textSize: 12.sp,
+                    style: TextStyle(
+                      color: AppColors.darkTextColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12.sp,
                     ),
                   ),
                   SizedBox(height: 0.4.h),
-                  MyTextView(
+                  Text(
                     "You and your friend both enjoy a free beep wash on your next wash",
-                    isMaxLineWrap: true,
-                    textAlignNew: TextAlign.start,
-                    textStyleNew: MyTextStyle(
-                      textColor: AppColors.lightTextColor,
-                      textWeight: FontWeight.w600,
-                      textSize: 10.6.sp,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: AppColors.lightTextColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 10.6.sp,
                     ),
                   ),
                 ],
@@ -387,12 +379,12 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
                 shape: BoxShape.circle,
                 color: AppColors.lightAppColor,
               ),
-              child: MyTextView(
+              child: Text(
                 "3",
-                textStyleNew: MyTextStyle(
-                  textColor: AppColors.appColorText,
-                  textWeight: FontWeight.bold,
-                  textSize: 11.sp,
+                style: TextStyle(
+                  color: AppColors.appColorText,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 11.sp,
                 ),
               ),
             ),
@@ -401,23 +393,22 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MyTextView(
+                  Text(
                     "Enjoy Beep with your friends and love ones",
-                    textStyleNew: MyTextStyle(
-                      textColor: AppColors.darkTextColor,
-                      textWeight: FontWeight.bold,
-                      textSize: 12.sp,
+                    style: TextStyle(
+                      color: AppColors.darkTextColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12.sp,
                     ),
                   ),
                   SizedBox(height: 0.4.h),
-                  MyTextView(
+                  Text(
                     "The free wash will be automatically applied on your next wash",
-                    isMaxLineWrap: true,
-                    textAlignNew: TextAlign.start,
-                    textStyleNew: MyTextStyle(
-                      textColor: AppColors.lightTextColor,
-                      textWeight: FontWeight.w600,
-                      textSize: 10.6.sp,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: AppColors.lightTextColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 10.6.sp,
                     ),
                   ),
                 ],
@@ -428,12 +419,12 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
         SizedBox(height: 2.2.h),
         Align(
           alignment: Alignment.center,
-          child: MyTextView(
+          child: Text(
             "Terms apply",
-            textStyleNew: MyTextStyle(
-              textColor: AppColors.appColorText,
-              textWeight: FontWeight.bold,
-              textSize: 12.sp,
+            style: TextStyle(
+              color: AppColors.appColorText,
+              fontWeight: FontWeight.bold,
+              fontSize: 12.sp,
             ),
           ),
         ),

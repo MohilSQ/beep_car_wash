@@ -65,7 +65,7 @@ class Strings {
   static const String yourLocation = "Your Location";
   static const String nearestBeep = "Nearest Beep";
 
-  /// ------ Nerest Beep Sheet ------------------>>>>
+  /// ------ Nearest Beep Sheet ------------------>>>>
   static const String navigation = "Navigation";
   static const String scanToStart = "Scan to Start";
   static const String reserve = "Reserve";
@@ -76,7 +76,23 @@ class Strings {
   static const String primary = "Primary";
   static const String addNewPayment = "Add New Payment";
   static const String edit = "Edit";
-  static const String deleat = "Deleat";
+  static const String delete = "Delete";
+
+  /// ------ Add Payment Screen ------------------>>>>
+  static const String chooseAPaymentMethod = "Choose a Payment Method";
+  static const String creditCard = "Credit Card";
+  static const String payPal = "Pay Pal";
+  static const String applePay = "Apple Pay";
+  static const String cardNumber = "Card Number";
+  static const String inputCardNumber = "Input Card Number";
+  static const String cardHolderName = "Card Holder Name";
+  static const String inputName = "Input Holder Name";
+  static const String expirationDate = "Expiration Date";
+  static const String inputMMYY = "Input MM/YY";
+  static const String cvv = "CVV";
+  static const String inputCVV = "Input CVV";
+  static const String setAsPrimaryPayment = "Set as Primary Payment";
+  static const String addPayment = "Add Payment";
 
   /// ------ Edit Payment Screen ------------------>>>>
 

@@ -1,5 +1,4 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
-import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/screens/sign_in_screen/sign_in_controller.dart';
@@ -57,22 +56,21 @@ class SignInScreen extends GetView<SignInController> {
                             ),
                           ),
                           SizedBox(height: 6.h),
-                          MyTextView(
+                          Text(
                             Strings.enterYourPhoneNumber,
-                            textStyleNew: MyTextStyle(
-                              textColor: AppColors.darkTextColor,
-                              textWeight: FontWeight.bold,
-                              textSize: 14.sp,
+                            style: TextStyle(
+                              color: AppColors.darkTextColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.sp,
                             ),
                           ),
                           SizedBox(height: 1.4.h),
-                          MyTextView(
+                          Text(
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ...",
-                            isMaxLineWrap: true,
-                            textStyleNew: MyTextStyle(
-                              textColor: AppColors.lightTextColor,
-                              textWeight: FontWeight.w600,
-                              textSize: 10.sp,
+                            style: TextStyle(
+                              color: AppColors.lightTextColor,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 10.sp,
                             ),
                           ),
                           SizedBox(height: 4.5.h),
@@ -118,7 +116,7 @@ class SignInScreen extends GetView<SignInController> {
                                     controller: controller.phoneNumberController,
                                     isError: controller.phoneNumberError!.value,
                                     hintColor: controller.phoneNumberError!.value ? AppColors.errorColor : AppColors.lightTextColor,
-                                    textColor: controller.phoneNumberError!.value ? AppColors.errorColor : AppColors.darkTextColor,
+                                    color: controller.phoneNumberError!.value ? AppColors.errorColor : AppColors.darkTextColor,
                                   );
                                 }),
                               ),
@@ -136,13 +134,13 @@ class SignInScreen extends GetView<SignInController> {
                           SizedBox(height: 3.5.h),
                           Align(
                             alignment: Alignment.center,
-                            child: MyTextView(
+                            child: Text(
                               Strings.orSignInWith,
-                              textAlignNew: TextAlign.center,
-                              textStyleNew: MyTextStyle(
-                                textColor: AppColors.lightTextColor,
-                                textWeight: FontWeight.bold,
-                                textSize: 11.sp,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: AppColors.lightTextColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 11.sp,
                               ),
                             ),
                           ),
@@ -151,7 +149,7 @@ class SignInScreen extends GetView<SignInController> {
                             text: Strings.google,
                             image: ImagePath.google,
                             imageSize: 3.2.h,
-                            textColor: AppColors.darkTextColor,
+                            color: AppColors.darkTextColor,
                             backgroundColor: AppColors.transparentColor,
                             borderSide: BorderSide(color: AppColors.appColor),
                             elevation: 0,
@@ -162,7 +160,7 @@ class SignInScreen extends GetView<SignInController> {
                             text: Strings.facebook,
                             image: ImagePath.facebook,
                             imageSize: 3.h,
-                            textColor: AppColors.darkTextColor,
+                            color: AppColors.darkTextColor,
                             backgroundColor: AppColors.transparentColor,
                             borderSide: BorderSide(color: AppColors.appColor),
                             elevation: 0,
@@ -173,7 +171,7 @@ class SignInScreen extends GetView<SignInController> {
                             text: Strings.appleID,
                             image: ImagePath.apple,
                             imageSize: 3.2.h,
-                            textColor: AppColors.darkTextColor,
+                            color: AppColors.darkTextColor,
                             backgroundColor: AppColors.transparentColor,
                             borderSide: BorderSide(color: AppColors.appColor),
                             elevation: 0,
@@ -186,10 +184,10 @@ class SignInScreen extends GetView<SignInController> {
                           //     textAlign: TextAlign.center,
                           //     text: TextSpan(
                           //       text: Strings.doNotHaveAnAccount,
-                          //       style: MyTextStyle(
-                          //         textWeight: FontWeight.w600,
-                          //         textSize: 12.sp,
-                          //         textColor: AppColors.lightTextColor,
+                          //       style: TextStyle(
+                          //         fontWeight: FontWeight.w600,
+                          //         fontSize: 12.sp,
+                          //         color: AppColors.lightTextColor,
                           //       ),
                           //       children: [
                           //         TextSpan(
@@ -198,10 +196,10 @@ class SignInScreen extends GetView<SignInController> {
                           //             ..onTap = () {
                           //               Get.to(() => const RegisterScreen(), binding: RegisterBindings());
                           //             },
-                          //           style: MyTextStyle(
-                          //             textWeight: FontWeight.bold,
-                          //             textSize: 12.sp,
-                          //             textColor: AppColors.appColorText,
+                          //           style: TextStyle(
+                          //             fontWeight: FontWeight.bold,
+                          //             fontSize: 12.sp,
+                          //             color: AppColors.appColorText,
                           //           ),
                           //         )
                           //       ],

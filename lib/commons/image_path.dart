@@ -45,15 +45,6 @@ class ImagePath {
   /// ------ Notification Screen ------------------>>>>
   static String notificationAvtar = "${base}notification_avtar.png";
 
-  /// ------ How It Work Screen ------------------>>>>
-  static String howItWork1 = "${base}how_it_work1.png";
-  static String howItWork2 = "${base}how_it_work2.png";
-  static String howItWork3 = "${base}how_it_work3.png";
-  static String howItWork4 = "${base}how_it_work4.png";
-  static String howItWork5 = "${base}how_it_work5.png";
-  static String howItWork6 = "${base}how_it_work6.png";
-  static String checkMark = "${base}check_mark.png";
-
   /// ------ Setting Screen ------------------>>>>
   static String profileAvtar = "${base}profile_avtar.png";
   static String camera = "${base}ic_camera.png";
@@ -70,6 +61,7 @@ class ImagePath {
   static String inviteFriendsImage = "${base}invite_friends_image.png";
 
   /// ------ Payment Screen ------------------>>>>
+  static String paymentCard = "${base}payment_card.png";
   static String masterCard = "${base}master_card.png";
   static String visaCard = "${base}visa_card.png";
   static String paymentsBG = "${base}payments_bg.png";
@@ -81,11 +73,5 @@ class ImagePath {
   static String applePayment = "${base}ic_apple_payment.png";
   static String date = "${base}date.png";
   static String cardSmall = "${base}ic_card_small.png";
-
-  /// ------ Dummy Image Screen ------------------>>>>
-  static String dummyImage1 = "${base}dummy_image1.png";
-  static String dummyImage2 = "${base}dummy_image2.png";
-  static String dummyImage3 = "${base}dummy_image3.png";
-  static String dummyImage4 = "${base}dummy_image4.png";
-  static String dummyImage5 = "${base}dummy_image5.png";
+  static String checkMark = "${base}check_mark.png";
 }

@@ -1,5 +1,4 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
-import 'package:beep_car_wash/commons/common_widget.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/screens/notification_screen/notification_controller.dart';
@@ -55,33 +54,32 @@ class NotificationScreen extends GetView<NotificationController> {
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
-                                        MyTextView(
+                                        Text(
                                           obj.notifTitle ?? "",
-                                          textStyleNew: MyTextStyle(
-                                            textColor: /* index == 1 ? AppColors.darkTextColor : */ AppColors.appColorText,
-                                            textWeight: FontWeight.bold,
-                                            textSize: 12.sp,
+                                          style: TextStyle(
+                                            color: /* index == 1 ? AppColors.darkTextColor : */ AppColors.appColorText,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 12.sp,
                                           ),
                                         ),
-                                        MyTextView(
+                                        Text(
                                           DateFormat.MMMEd().format(DateTime.parse(controller.utils.utcToLocal(obj.createdAt!))),
-                                          textStyleNew: MyTextStyle(
-                                            textColor: AppColors.lightTextColor,
-                                            textWeight: FontWeight.bold,
-                                            textSize: 10.sp,
+                                          style: TextStyle(
+                                            color: AppColors.lightTextColor,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 10.sp,
                                           ),
                                         ),
                                       ],
                                     ),
                                     SizedBox(height: 1.h),
-                                    MyTextView(
-                                      obj.notifBody,
-                                      isMaxLineWrap: true,
-                                      textAlignNew: TextAlign.start,
-                                      textStyleNew: MyTextStyle(
-                                        textColor: /*index == 1 ? AppColors.lightTextColor : */ AppColors.darkTextColor,
-                                        textWeight: FontWeight.w600,
-                                        textSize: 11.sp,
+                                    Text(
+                                      obj.notifBody!,
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        color: /*index == 1 ? AppColors.lightTextColor : */ AppColors.darkTextColor,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 11.sp,
                                       ),
                                     ),
                                     SizedBox(height: 2.h),
