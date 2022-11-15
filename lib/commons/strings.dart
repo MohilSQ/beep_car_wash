@@ -94,7 +94,14 @@ class Strings {
   static const String setAsPrimaryPayment = "Set as Primary Payment";
   static const String addPayment = "Add Payment";
 
-  /// ------ Edit Payment Screen ------------------>>>>
+  /// ------ Validation Payment Screen ------------------>>>>
+  static const String vInputCardNumber = "Please enter card number";
+  static const String vInputCardNumberValid = "Please enter valid card number";
+  static const String vCardHolderName = "Please enter card holder name";
+  static const String vExpirationDate = "Please enter expiration Date";
+  static const String vExpirationDateValid = "Please enter valid expiration Date";
+  static const String vCvv = "Please enter CVV";
+  static const String vCvvValid = "Please enter valid CVV";
 
   /// ------ Setting Screen ------------------>>>>
   static const String phoneNumber = "Phone Number";

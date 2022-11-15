@@ -1,0 +1,417 @@
+// ignore_for_file: constant_identifier_names
+
+import 'dart:math';
+
+import 'package:flutter/services.dart';
+import 'package:flutter_multi_formatter/formatters/formatter_utils.dart';
+import 'package:flutter_multi_formatter/formatters/masked_input_formatter.dart';
+
+class CreditCardCvcInputFormatter extends MaskedInputFormatter {
+  CreditCardCvcInputFormatter({bool isAmericanExpress = false})
+      : super(
+          isAmericanExpress ? '0000' : '000',
+        );
+}
+
+class CreditCardExpirationDateFormatter extends MaskedInputFormatter {
+  CreditCardExpirationDateFormatter() : super('00/00');
+
+  @override
+  FormattedValue applyMask(String text) {
+    var fv = super.applyMask(text);
+    var result = fv.toString();
+    var numericString = toNumericString(
+      result,
+      allowAllZeroes: true,
+    );
+    var numAddedLeadingSymbols = 0;
+    String? ammendedMonth;
+    if (numericString.isNotEmpty) {
+      var allDigits = numericString.split('');
+      var stringBuffer = StringBuffer();
+      var firstDigit = int.parse(allDigits[0]);
+
+      if (firstDigit > 1) {
+        stringBuffer.write('0');
+        stringBuffer.write(firstDigit);
+        ammendedMonth = stringBuffer.toString();
+        numAddedLeadingSymbols = 1;
+      } else if (firstDigit == 1) {
+        if (allDigits.length > 1) {
+          stringBuffer.write(firstDigit);
+          var secondDigit = int.parse(allDigits[1]);
+          if (secondDigit > 2) {
+            stringBuffer.write(2);
+          } else {
+            stringBuffer.write(secondDigit);
+          }
+          ammendedMonth = stringBuffer.toString();
+        }
+      }
+    }
+    if (ammendedMonth != null) {
+      if (result.length < ammendedMonth.length) {
+        result = ammendedMonth;
+      } else {
+        var sub = result.substring(2, result.length);
+        result = '$ammendedMonth$sub';
+      }
+    }
+    fv = super.applyMask(result);
+
+    /// a little hack to be able to move caret by one
+    /// symbol to the right if a leading zero was added automatically
+    for (var i = 0; i < numAddedLeadingSymbols; i++) {
+      fv.increaseNumberOfLeadingSymbols();
+    }
+    return fv;
+  }
+}
+
+class CardSystem {
+  static const String MIR = 'MIR';
+  static const String UNION_PAY = 'UnionPay';
+  static const String VISA = 'Visa';
+  static const String MASTERCARD = 'Mastercard';
+  static const String JCB = 'JCB';
+  static const String DISCOVER = 'Discover';
+  static const String MAESTRO = 'Maestro';
+  static const String AMERICAN_EXPRESS = 'Amex';
+  static const String DINERS_CLUB = 'DinersClub';
+}
+
+class CreditCardNumberInputFormatter extends TextInputFormatter {
+  final ValueChanged<CardSystemData?>? onCardSystemSelected;
+  final bool useSeparators;
+
+  CardSystemData? _cardSystemData;
+  CreditCardNumberInputFormatter({
+    this.onCardSystemSelected,
+    this.useSeparators = true,
+  });
+
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    var isErasing = newValue.text.length < oldValue.text.length;
+    if (isErasing) {
+      if (newValue.text.isEmpty) {
+        _removeFirstLetter();
+      }
+    }
+    var onlyNumbers = toNumericString(
+      newValue.text,
+    );
+    String maskedValue = _applyMask(
+      onlyNumbers,
+    );
+    if (maskedValue.length == oldValue.text.length) {
+      return oldValue;
+    }
+    var endOffset = max(
+      oldValue.text.length - oldValue.selection.end,
+      0,
+    );
+    var selectionEnd = maskedValue.length - endOffset;
+    return TextEditingValue(
+      selection: TextSelection.collapsed(
+        offset: selectionEnd,
+      ),
+      text: maskedValue,
+    );
+  }
+
+  /// this is a small dirty hask to be able to remove the first character
+  Future _removeFirstLetter() async {
+    await Future.delayed(
+      const Duration(
+        milliseconds: 5,
+      ),
+    );
+    _updateCardSystemData(null);
+  }
+
+  void _updateCardSystemData(
+    CardSystemData? cardSystemData,
+  ) {
+    _cardSystemData = cardSystemData;
+    if (onCardSystemSelected != null) {
+      onCardSystemSelected!(_cardSystemData);
+    }
+  }
+
+  String _applyMask(
+    String numericString,
+  ) {
+    if (numericString.isEmpty) {
+      _updateCardSystemData(null);
+    } else {
+      var countryData = _CardSystemDatas.getCardSystemDataByNumber(
+        numericString,
+      );
+      if (countryData != null) {
+        _updateCardSystemData(
+          countryData,
+        );
+      }
+    }
+    if (_cardSystemData != null) {
+      return _formatByMask(numericString, _cardSystemData!.numberMask!);
+    }
+    return numericString;
+  }
+}
+
+/// checks not only for length and characters but also
+/// for card system code code. If it's not found the succession of numbers
+/// will not be marked as a valid card number
+bool isCardValidNumber(
+  String cardNumber, {
+  bool checkLength = false,
+}) {
+  cardNumber = toNumericString(cardNumber);
+  if (cardNumber.isEmpty) {
+    return false;
+  }
+  var countryData = _CardSystemDatas.getCardSystemDataByNumber(cardNumber);
+  if (countryData == null) {
+    return false;
+  }
+  var formatted = _formatByMask(cardNumber, countryData.numberMask!);
+  var reprocessed = toNumericString(formatted);
+  return reprocessed == cardNumber && (checkLength == false || reprocessed.length == countryData.numDigits);
+}
+
+String formatAsCardNumber(
+  String cardNumber, {
+  bool useSeparators = true,
+}) {
+  if (!isCardValidNumber(cardNumber)) {
+    return cardNumber;
+  }
+  cardNumber = toNumericString(
+    cardNumber,
+  );
+  var cardSystemData = _CardSystemDatas.getCardSystemDataByNumber(cardNumber)!;
+  return _formatByMask(cardNumber, cardSystemData.numberMask!);
+}
+
+CardSystemData? getCardSystemData(
+  String cardNumber,
+) {
+  return _CardSystemDatas.getCardSystemDataByNumber(cardNumber);
+}
+
+String _formatByMask(
+  String text,
+  String mask,
+) {
+  var chars = text.split('');
+  var result = <String>[];
+  var index = 0;
+  for (var i = 0; i < mask.length; i++) {
+    if (index >= chars.length) {
+      break;
+    }
+    var curChar = chars[index];
+    if (mask[i] == '0') {
+      if (isDigit(curChar)) {
+        result.add(curChar);
+        index++;
+      } else {
+        break;
+      }
+    } else {
+      result.add(mask[i]);
+    }
+  }
+  return result.join();
+}
+
+class CardSystemData {
+  final String? system;
+  final String? systemCode;
+  final String? numberMask;
+  final int? numDigits;
+
+  CardSystemData._init({
+    this.numberMask,
+    this.system,
+    this.systemCode,
+    this.numDigits,
+  });
+
+  factory CardSystemData.fromMap(Map value) {
+    return CardSystemData._init(
+      system: value['system'],
+      systemCode: value['systemCode'],
+      numDigits: value['numDigits'],
+      numberMask: value['numberMask'],
+    );
+  }
+  @override
+  String toString() {
+    return '[CardSystemData(system: $system,' ' systemCode: $systemCode]';
+  }
+}
+
+class _CardSystemDatas {
+  /// рекурсивно ищет в номере карты код системы, начиная с конца
+  /// нужно для того, чтобы даже после setState и обнуления данных карты
+  /// снова правильно отформатировать ее номер
+  static CardSystemData? getCardSystemDataByNumber(String cardNumber, {int? subscringLength}) {
+    if (cardNumber.isEmpty) return null;
+    subscringLength = subscringLength ?? cardNumber.length;
+
+    if (subscringLength < 1) return null;
+    var systemCode = cardNumber.substring(0, subscringLength);
+
+    var rawData = _data.firstWhere((Map<String, dynamic>? data) {
+      if (data != null) {
+        var numericValue = toNumericString(data['systemCode']);
+        var numDigits = data['numDigits'];
+        return numericValue == systemCode && numDigits >= cardNumber.length && numDigits <= _maxDigitsInCard;
+      }
+      return false;
+    }, orElse: () => null);
+    if (rawData != null) {
+      return CardSystemData.fromMap(rawData);
+    }
+    return getCardSystemDataByNumber(
+      cardNumber,
+      subscringLength: subscringLength - 1,
+    );
+  }
+
+  static int get _maxDigitsInCard {
+    return _data.map((data) {
+      int numDigits = data!['numDigits'];
+      return numDigits;
+    }).reduce(max);
+  }
+
+  static final List<Map<String, dynamic>?> _data = <Map<String, dynamic>?>[
+    {
+      'system': CardSystem.VISA,
+      'systemCode': '4',
+      'numberMask': '0000 0000 0000 0000',
+      'numDigits': 16,
+    },
+    {
+      'system': CardSystem.DINERS_CLUB,
+      'systemCode': '14',
+      'numberMask': '0000 0000 0000 0000',
+      'numDigits': 16,
+    },
+    {
+      'system': CardSystem.DINERS_CLUB,
+      'systemCode': '36',
+      'numberMask': '0000 000000 0000',
+      'numDigits': 14,
+    },
+    {
+      'system': CardSystem.DINERS_CLUB,
+      'systemCode': '54',
+      'numberMask': '0000 0000 0000 0000',
+      'numDigits': 16,
+    },
+    {
+      'system': CardSystem.DINERS_CLUB,
+      'systemCode': '30',
+      'numberMask': '0000 0000 0000 0000',
+      'numDigits': 16,
+    },
+    {
+      'system': CardSystem.MASTERCARD,
+      'systemCode': '5',
+      'numberMask': '0000 0000 0000 0000',
+      'numDigits': 16,
+    },
+    {
+      'system': CardSystem.MASTERCARD,
+      'systemCode': '222',
+      'numberMask': '0000 0000 0000 0000',
+      'numDigits': 16,
+    },
+    {
+      'system': CardSystem.MASTERCARD,
+      'systemCode': '2720',
+      'numberMask': '0000 0000 0000 0000',
+      'numDigits': 16,
+    },
+    {
+      'system': CardSystem.AMERICAN_EXPRESS,
+      'systemCode': '34',
+      'numberMask': '0000 000000 00000',
+      'numDigits': 15,
+    },
+    {
+      'system': CardSystem.AMERICAN_EXPRESS,
+      'systemCode': '37',
+      'numberMask': '0000 000000 00000',
+      'numDigits': 15,
+    },
+    {
+      'system': CardSystem.JCB,
+      'systemCode': '3589',
+      'numberMask': '0000 0000 0000 0000 000',
+      'numDigits': 19,
+    },
+    {
+      'system': CardSystem.JCB,
+      'systemCode': '3528',
+      'numberMask': '0000 0000 0000 0000',
+      'numDigits': 16,
+    },
+    {
+      'system': CardSystem.DISCOVER,
+      'systemCode': '60',
+      'numberMask': '0000 0000 0000 0000',
+      'numDigits': 16,
+    },
+    {
+      'system': CardSystem.DISCOVER,
+      'systemCode': '60',
+      'numberMask': '0000 0000 0000 0000',
+      'numDigits': 19,
+    },
+    {
+      'system': CardSystem.MAESTRO,
+      'systemCode': '67',
+      'numberMask': '0000 0000 0000 0000 0',
+      'numDigits': 17,
+    },
+    {
+      'system': CardSystem.MAESTRO,
+      'systemCode': '67',
+      'numberMask': '00000000 0000000000',
+      'numDigits': 18,
+    },
+    {
+      'system': CardSystem.MIR,
+      'systemCode': '2200',
+      'numberMask': '0000 0000 0000 0000',
+      'numDigits': 16,
+    },
+    {
+      'system': CardSystem.MIR,
+      'systemCode': '2204',
+      'numberMask': '0000 0000 0000 0000',
+      'numDigits': 16,
+    },
+    {
+      'system': CardSystem.UNION_PAY,
+      'systemCode': '62',
+      'numberMask': '0000 0000 0000 0000',
+      'numDigits': 16,
+    },
+    {
+      'system': CardSystem.UNION_PAY,
+      'systemCode': '62',
+      'numberMask': '0000 0000 0000 0000 000',
+      'numDigits': 19,
+    },
+  ];
+}

@@ -26,6 +26,8 @@ class ImagePath {
   static String reserve = "${base}reserve.png";
   static String report = "${base}report.png";
   static String tablerPhoto = "${base}tabler_photo.png";
+  static String selectMarker = "${base}ic_select_marker.png";
+  static String marker = "${base}ic_marker.png";
 
   /// ------ Drawer Screen ------------------>>>>
   static String findABeep = "${base}find_a_beep.png";
@@ -62,10 +64,18 @@ class ImagePath {
 
   /// ------ Payment Screen ------------------>>>>
   static String paymentCard = "${base}payment_card.png";
-  static String masterCard = "${base}master_card.png";
-  static String visaCard = "${base}visa_card.png";
   static String paymentsBG = "${base}payments_bg.png";
   static String icEdit = "${base}ic_edit.png";
+  static String americanExpressLogo = "${base}american_express_logo.png";
+  static String maestroLogo = "${base}maestro_logo.png";
+  static String dinersClubInternationalLogo = "${base}diners_club_International_logo.png";
+  static String discoverLogo = "${base}discover_logo.png";
+  static String jcBLogo = "${base}JCB_logo.png";
+  static String mastercardLogo = "${base}mastercard_logo.png";
+  static String mnpLogo = "${base}mnp_logo.png";
+  static String unionPayLogo = "${base}union_pay_logo.png";
+  static String visaLogo = "${base}visa_logo.png";
+  static String creditCard = "${base}credit_card.png";
 
   /// ------ Add and Edit Payment Screen ------------------>>>>
   static String card = "${base}ic_card.png";

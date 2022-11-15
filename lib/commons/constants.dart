@@ -26,6 +26,11 @@ class Constants {
   static const String howItWorks = 'how_it_works';
   static const String getNotifications = 'get_notifications';
   static const String getWashHistory = 'get_wash_history';
+  static const String getPaymentCardList = 'get_payment_sources';
+  static const String updatePaymentSource = 'update_payment_source';
+  static const String deletePaymentSource = 'delete_payment_source';
+  static const String savePaymentCardList = 'save_payment_source';
+  static const String getMachines = 'get_machines';
   static const String findNearestBeep = 'find_nearest_beep';
   static const String notifyMe = 'notify_me';
 
