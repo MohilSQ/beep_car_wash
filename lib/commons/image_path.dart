@@ -28,6 +28,7 @@ class ImagePath {
   static String tablerPhoto = "${base}tabler_photo.png";
   static String selectMarker = "${base}ic_select_marker.png";
   static String marker = "${base}ic_marker.png";
+  static String myLocation = "${base}my_location.png";
 
   /// ------ Drawer Screen ------------------>>>>
   static String findABeep = "${base}find_a_beep.png";
@@ -76,6 +77,8 @@ class ImagePath {
   static String unionPayLogo = "${base}union_pay_logo.png";
   static String visaLogo = "${base}visa_logo.png";
   static String creditCard = "${base}credit_card.png";
+  static String paypalLogo = "${base}paypal_logo.png";
+  static String appleLogo = "${base}apple_logo.png";
 
   /// ------ Add and Edit Payment Screen ------------------>>>>
   static String card = "${base}ic_card.png";

@@ -1,6 +1,6 @@
 class MachinesResponseModel {
   final int? code;
-  final List<Data>? data;
+  final List<MachineData>? data;
 
   MachinesResponseModel({
     this.code,
@@ -9,7 +9,7 @@ class MachinesResponseModel {
 
   MachinesResponseModel.fromJson(Map<String, dynamic> json)
       : code = json['code'] as int?,
-        data = (json['data'] as List?)?.map((dynamic e) => Data.fromJson(e as Map<String, dynamic>)).toList();
+        data = (json['data'] as List?)?.map((dynamic e) => MachineData.fromJson(e as Map<String, dynamic>)).toList();
 
   Map<String, dynamic> toJson() => {
         'code': code,
@@ -17,14 +17,14 @@ class MachinesResponseModel {
       };
 }
 
-class Data {
+class MachineData {
   final String? id;
   final String? machineName;
   final String? lat;
   final String? long;
   final String? cityName;
 
-  Data({
+  MachineData({
     this.id,
     this.machineName,
     this.lat,
@@ -32,7 +32,7 @@ class Data {
     this.cityName,
   });
 
-  Data.fromJson(Map<String, dynamic> json)
+  MachineData.fromJson(Map<String, dynamic> json)
       : id = json['id'] as String?,
         machineName = json['machine_name'] as String?,
         lat = json['lat'] as String?,

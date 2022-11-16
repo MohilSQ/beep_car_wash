@@ -33,6 +33,10 @@ class PaymentController extends GetxController {
         return ImagePath.americanExpressLogo;
       case "DinersClub":
         return ImagePath.discoverLogo;
+      case "PayPal":
+        return ImagePath.paypalLogo;
+      case "Apple Pay":
+        return ImagePath.appleLogo;
       default:
         return ImagePath.creditCard;
     }
@@ -58,8 +62,6 @@ class PaymentController extends GetxController {
       } else {
         noData!.value = "";
         for (int i = 0; i < getPaymentDetailsModel.data!.length; i++) {
-          printOkStatus(i.toString());
-          printOkStatus(getPaymentDetailsModel.data![i].primaryCard.toString());
           if (getPaymentDetailsModel.data![i].primaryCard == "1") {
             primaryIndex!.value = i;
             break;
@@ -73,7 +75,7 @@ class PaymentController extends GetxController {
   }
 
   /// ---- SetPrimary Response API ------------>>>
-  setPrimaryResponseAPI(int id) async {
+  setPrimaryResponseAPI({int? index, int? id}) async {
     dynamic formData = ({
       "token": Get.find<CommonController>().userDataModel.token,
       "source_id": id,
@@ -87,8 +89,10 @@ class PaymentController extends GetxController {
     );
 
     if (data["code"] == 200) {
-      utils.showSnackBar(context: Get.context!, message: data["msg"]);
-      getCardDetailsResponseAPI();
+      utils.showToast(context: Get.context!, message: data["msg"]);
+      getPaymentDetailsModel.data![primaryIndex!.value].primaryCard = "0";
+      primaryIndex!.value = index!;
+      getPaymentDetailsModel.data![index].primaryCard = "1";
       update();
     } else {
       utils.showSnackBar(context: Get.context!, message: data["msg"]);
@@ -96,7 +100,7 @@ class PaymentController extends GetxController {
   }
 
   /// ---- SetPrimary Response API ------------>>>
-  deletePaymentResponseAPI(int id) async {
+  deletePaymentResponseAPI({int? index, int? id}) async {
     dynamic formData = ({
       "token": Get.find<CommonController>().userDataModel.token,
       "source_id": id,
@@ -109,8 +113,15 @@ class PaymentController extends GetxController {
     );
 
     if (data["code"] == 200) {
-      utils.showSnackBar(context: Get.context!, message: data["msg"]);
-      getCardDetailsResponseAPI();
+      utils.showToast(context: Get.context!, message: data["msg"]);
+      getPaymentDetailsModel.data!.removeAt(index!);
+      for (int i = 0; i < getPaymentDetailsModel.data!.length; i++) {
+        if (getPaymentDetailsModel.data![i].primaryCard == "1") {
+          primaryIndex!.value = i;
+          break;
+        }
+      }
+      update();
     } else {
       utils.showSnackBar(context: Get.context!, message: data["msg"]);
     }

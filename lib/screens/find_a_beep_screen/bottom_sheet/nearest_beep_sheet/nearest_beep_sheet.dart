@@ -1,15 +1,22 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
+import 'package:beep_car_wash/commons/utils.dart';
+import 'package:beep_car_wash/model/responce_model/machine_responce_model.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/nearest_beep_sheet/nearest_beep_controller.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/report_sheet/report_sheet.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/reserve_sheet/reserve_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NearestBeepSheet extends GetView<NearestBeepController> {
-  const NearestBeepSheet({super.key});
+  final MachineData? machineData;
+  const NearestBeepSheet({
+    super.key,
+    this.machineData,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +62,7 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                         Image.asset(ImagePath.address, height: 2.4.h),
                         SizedBox(width: 2.w),
                         Text(
-                          "1234 Barclay St, New York",
+                          machineData!.cityName!,
                           style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w600,
@@ -76,8 +83,16 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: controller.actionList
                       .map((e) => GestureDetector(
-                            onTap: () {
+                            onTap: () async {
                               if (e.index! == 0) {
+                                String googleMapUrl = "https://www.google.com/maps/search/?api=1&query=${machineData!.lat},${machineData!.long}";
+
+                                if (await canLaunchUrl(Uri.parse(googleMapUrl))) {
+                                  await launchUrl(Uri.parse(googleMapUrl));
+                                } else {
+                                  Utils().showSnackBar(context: Get.context!, message: "Could not open the Map");
+                                  throw 'Could not open the Map';
+                                }
                               } else if (e.index == 1) {
                               } else if (e.index == 2) {
                                 showModalBottomSheet(

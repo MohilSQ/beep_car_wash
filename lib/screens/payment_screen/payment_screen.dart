@@ -78,7 +78,7 @@ class PaymentScreen extends GetView<PaymentController> {
                                 children: [
                                   Obx(() {
                                     return Text(
-                                      "**** **** **** ${controller.noData!.value.isNotEmpty ? "****" : controller.getPaymentDetailsModel.data?[controller.primaryIndex!.value].last4 ?? ""}",
+                                      "**** **** **** ${controller.getPaymentDetailsModel.data == null ? "" : controller.getPaymentDetailsModel.data![controller.primaryIndex!.value].brand!.isEmpty ? "****" : controller.getPaymentDetailsModel.data?[controller.primaryIndex!.value].last4 ?? ""}",
                                       style: TextStyle(
                                         color: AppColors.whiteColor,
                                         fontWeight: FontWeight.w600,
@@ -106,7 +106,7 @@ class PaymentScreen extends GetView<PaymentController> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  "09/20",
+                                                  "**/**",
                                                   style: TextStyle(
                                                     color: AppColors.whiteColor,
                                                     fontWeight: FontWeight.w600,
@@ -120,7 +120,7 @@ class PaymentScreen extends GetView<PaymentController> {
                                             Align(
                                               alignment: Alignment.centerLeft,
                                               child: Text(
-                                                "Holder Name",
+                                                "******* **********",
                                                 style: TextStyle(
                                                   color: AppColors.whiteColor,
                                                   fontWeight: FontWeight.w600,
@@ -165,97 +165,110 @@ class PaymentScreen extends GetView<PaymentController> {
                       itemCount: controller.getPaymentDetailsModel.data?.length ?? 0,
                       padding: EdgeInsets.zero,
                       separatorBuilder: (context, index) => const Divider(height: 0),
-                      itemBuilder: (context, index) => SizedBox(
-                        height: 10.h,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 6.w).copyWith(right: 1.w),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                controller.getCardImage(controller.getPaymentDetailsModel.data![index].brand!),
-                                width: 6.6.h,
-                              ),
-                              SizedBox(width: 2.h),
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      controller.getPaymentDetailsModel.data?[index].brand ?? "",
-                                      style: TextStyle(
-                                        color: AppColors.darkTextColor,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12.sp,
-                                      ),
-                                    ),
-                                    SizedBox(height: 0.6.h),
-                                    Text(
-                                      "**** **** **** ${controller.getPaymentDetailsModel.data?[index].last4}",
-                                      style: TextStyle(
-                                        color: AppColors.lightTextColor,
+                      itemBuilder: (context, index) {
+                        var obj = controller.getPaymentDetailsModel.data![index];
+                        return SizedBox(
+                          height: 10.h,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 6.w).copyWith(right: 1.w),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  controller.getCardImage(obj.brand!.isEmpty ? obj.sourceType! : obj.brand!),
+                                  width: 6.6.h,
+                                  height: 5.h,
+                                ),
+                                SizedBox(width: 2.h),
+                                Expanded(
+                                  child: obj.brand!.isEmpty
+                                      ? Text(
+                                          obj.sourceType ?? "",
+                                          style: TextStyle(
+                                            color: AppColors.darkTextColor,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14.sp,
+                                          ),
+                                        )
+                                      : Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              obj.brand ?? "",
+                                              style: TextStyle(
+                                                color: AppColors.darkTextColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 12.sp,
+                                              ),
+                                            ),
+                                            SizedBox(height: 0.6.h),
+                                            Text(
+                                              "**** **** **** ${obj.last4}",
+                                              style: TextStyle(
+                                                color: AppColors.lightTextColor,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 11.sp,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                ),
+                                obj.primaryCard == "1"
+                                    ? Container(
+                                        padding: EdgeInsets.symmetric(horizontal: 0.8.h, vertical: 0.6.h),
+                                        decoration: BoxDecoration(
+                                          color: AppColors.lightBlueColor,
+                                          borderRadius: BorderRadius.circular(0.8.h),
+                                        ),
+                                        child: Text(
+                                          Strings.primary,
+                                          style: TextStyle(
+                                            color: AppColors.blueText,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 10.sp,
+                                          ),
+                                        ),
+                                      )
+                                    : const SizedBox(),
+                                PopupMenuButton<int>(
+                                  itemBuilder: (context) => [
+                                    PopupMenuItem(
+                                      value: 1,
+                                      textStyle: TextStyle(
+                                        fontSize: 10.sp,
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 11.sp,
+                                        color: Colors.black,
                                       ),
+                                      height: 3.4.h,
+                                      child: const Text(Strings.primary),
+                                    ),
+                                    PopupMenuItem(
+                                      value: 2,
+                                      textStyle: TextStyle(
+                                        fontSize: 10.sp,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black,
+                                      ),
+                                      height: 3.4.h,
+                                      child: const Text(Strings.delete),
                                     ),
                                   ],
+                                  offset: const Offset(-30, 40),
+                                  color: Colors.white,
+                                  icon: const Icon(Icons.more_vert_outlined),
+                                  onSelected: (data) {
+                                    if (data == 1) {
+                                      controller.setPrimaryResponseAPI(index: index, id: int.parse(obj.id ?? ""));
+                                    } else if (data == 2) {
+                                      controller.deletePaymentResponseAPI(index: index, id: int.parse(obj.id ?? ""));
+                                    } else if (data == 3) {}
+                                  },
                                 ),
-                              ),
-                              controller.getPaymentDetailsModel.data?[index].primaryCard == "1"
-                                  ? Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 0.8.h, vertical: 0.6.h),
-                                      decoration: BoxDecoration(
-                                        color: AppColors.lightBlueColor,
-                                        borderRadius: BorderRadius.circular(0.8.h),
-                                      ),
-                                      child: Text(
-                                        Strings.primary,
-                                        style: TextStyle(
-                                          color: AppColors.blueText,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 10.sp,
-                                        ),
-                                      ),
-                                    )
-                                  : const SizedBox(),
-                              PopupMenuButton<int>(
-                                itemBuilder: (context) => [
-                                  PopupMenuItem(
-                                    value: 1,
-                                    textStyle: TextStyle(
-                                      fontSize: 10.sp,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black,
-                                    ),
-                                    height: 3.4.h,
-                                    child: const Text(Strings.primary),
-                                  ),
-                                  PopupMenuItem(
-                                    value: 2,
-                                    textStyle: TextStyle(
-                                      fontSize: 10.sp,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black,
-                                    ),
-                                    height: 3.4.h,
-                                    child: const Text(Strings.delete),
-                                  ),
-                                ],
-                                offset: const Offset(-30, 40),
-                                color: Colors.white,
-                                icon: const Icon(Icons.more_vert_outlined),
-                                onSelected: (data) {
-                                  if (data == 1) {
-                                    controller.setPrimaryResponseAPI(int.parse(controller.getPaymentDetailsModel.data?[index].id ?? ""));
-                                  } else if (data == 2) {
-                                    controller.deletePaymentResponseAPI(int.parse(controller.getPaymentDetailsModel.data?[index].id ?? ""));
-                                  } else if (data == 3) {}
-                                },
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
             ),
             CustomButton(

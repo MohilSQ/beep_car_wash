@@ -35,6 +35,7 @@ class Constants {
   static const String notifyMe = 'notify_me';
 
   // Location And Map .....
+
   static double latitude = 0.0;
   static double longitude = 0.0;
 

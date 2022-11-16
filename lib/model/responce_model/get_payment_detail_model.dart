@@ -1,7 +1,7 @@
 class GetPaymentDetailsModel {
   final int? code;
   final String? msg;
-  final List<Data>? data;
+  List<Data>? data;
 
   GetPaymentDetailsModel({
     this.code,
@@ -36,7 +36,7 @@ class Data {
   final String? custToken;
   final String? cardToken;
   final String? sourceType;
-  final String? primaryCard;
+  String? primaryCard;
 
   Data({
     this.id,

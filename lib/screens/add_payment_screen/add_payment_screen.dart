@@ -52,6 +52,7 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                             onTap: () {
                               for (int i = 0; i < controller.paymentMethodList.length; i++) {
                                 if (index == i) {
+                                  controller.primaryPaymentSelectNumber.value = index;
                                   controller.paymentMethodList[i].isSelected!.value = true;
                                 } else {
                                   controller.paymentMethodList[i].isSelected!.value = false;
@@ -208,7 +209,6 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                                         for (int i = 0; i < val.length; i++) {
                                           controller.cvvNumber.value = i + 1;
                                         }
-                                        print("object----${controller.cvvNumber.value}");
                                       }
                                       controller.update();
                                     },
@@ -239,9 +239,17 @@ class AddPaymentScreen extends GetView<AddPaymentController> {
                         const Spacer(),
                         Obx(() {
                           return CupertinoSwitch(
-                            value: controller.primaryPayment.value,
+                            value: controller.primaryPaymentSelectList[controller.primaryPaymentSelectNumber.value].value,
                             onChanged: (value) {
-                              controller.primaryPayment.value = value;
+                              for (int i = 0; i < controller.paymentMethodList.length; i++) {
+                                controller.primaryPaymentSelectList[i].value = false;
+                              }
+                              controller.primaryPaymentSelectList[controller.primaryPaymentSelectNumber.value].value = value;
+                              if (controller.paymentMethodList[1].isSelected!.value) {
+                                controller.saveCardDetailsResponseAPI(1);
+                              } else if (controller.paymentMethodList[2].isSelected!.value) {
+                                controller.saveCardDetailsResponseAPI(2);
+                              }
                             },
                             thumbColor: CupertinoColors.white,
                             activeColor: AppColors.appColorText,

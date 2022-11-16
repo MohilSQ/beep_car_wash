@@ -1,5 +1,6 @@
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/utils.dart';
+import 'package:beep_car_wash/screens/find_a_beep_screen/find_a_beep_controller.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -44,6 +45,9 @@ class MapService {
       Constants.latitude = currentPosition!.latitude;
       Constants.longitude = currentPosition!.longitude;
       printOkStatus("currentPosition --------------->> Lat: ${Constants.latitude}, Long: ${Constants.longitude}");
+      Get.find<FindABeepController>().mapView.value = true;
+      Get.find<FindABeepController>().setMyLocationMarker();
+      Get.find<FindABeepController>().getMachineAPI();
     }).catchError((e) {
       printError(e);
     });
