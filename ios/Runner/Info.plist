@@ -27,13 +27,15 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Beep want to use your camera to take your pofile picture</string>
+	<string>Beep want to use your camera to take your pofile picture and scan QR code</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Beep want to use your photo library to set your pofile picture</string>
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>Beep want to access your location to get best location search option.</string>
     <key>NSLocationAlwaysUsageDescription</key>
     <string>Beep want to access your location to get best location search option.</string>
+    <key>io.flutter.embedded_views_preview</key>
+    <true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

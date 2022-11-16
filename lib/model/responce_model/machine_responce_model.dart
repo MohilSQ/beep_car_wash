@@ -22,14 +22,16 @@ class MachineData {
   final String? machineName;
   final String? lat;
   final String? long;
-  final String? cityName;
+  final String? address;
+  final String? tagline;
 
   MachineData({
     this.id,
     this.machineName,
     this.lat,
     this.long,
-    this.cityName,
+    this.address,
+    this.tagline,
   });
 
   MachineData.fromJson(Map<String, dynamic> json)
@@ -37,13 +39,15 @@ class MachineData {
         machineName = json['machine_name'] as String?,
         lat = json['lat'] as String?,
         long = json['long'] as String?,
-        cityName = json['city_name'] as String?;
+        address = json['address'] as String?,
+        tagline = json['tagline'] as String?;
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'machine_name': machineName,
         'lat': lat,
         'long': long,
-        'city_name': cityName,
+        'address': address,
+        'tagline': tagline,
       };
 }

@@ -9,6 +9,7 @@ class CustomAppBar extends StatelessWidget {
   final String? title;
   final bool? shadowVisible;
   final bool? isBack;
+  final bool? isButton;
   final Color? appBarColor;
   final Color? color;
   final Widget? suffixIcon;
@@ -19,6 +20,7 @@ class CustomAppBar extends StatelessWidget {
     this.title,
     this.shadowVisible = true,
     this.isBack = false,
+    this.isButton = true,
     this.appBarColor,
     this.color,
     this.suffixIcon,
@@ -52,22 +54,24 @@ class CustomAppBar extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              GestureDetector(
-                onTap: () {
-                  if (isBack!) {
-                    Get.back();
-                  } else {
-                    Constants.scaffoldKey.currentState!.openDrawer();
-                  }
-                },
-                child: Container(
-                  width: 4.6.h,
-                  height: 4.6.h,
-                  padding: EdgeInsets.symmetric(horizontal: 1.2.h),
-                  decoration: const BoxDecoration(shape: BoxShape.circle),
-                  child: Image.asset(isBack! ? ImagePath.back : ImagePath.drawer, color: color),
-                ),
-              ),
+              isButton!
+                  ? GestureDetector(
+                      onTap: () {
+                        if (isBack!) {
+                          Get.back();
+                        } else {
+                          Constants.scaffoldKey.currentState!.openDrawer();
+                        }
+                      },
+                      child: Container(
+                        width: 4.6.h,
+                        height: 4.6.h,
+                        padding: EdgeInsets.symmetric(horizontal: 1.2.h),
+                        decoration: const BoxDecoration(shape: BoxShape.circle),
+                        child: Image.asset(isBack! ? ImagePath.back : ImagePath.drawer, color: color),
+                      ),
+                    )
+                  : const SizedBox(),
               SizedBox(width: 2.6.w),
               Text(
                 title!,

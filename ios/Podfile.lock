@@ -29,8 +29,12 @@ PODS:
     - Flutter
   - just_audio (0.0.1):
     - Flutter
+  - MTBBarcodeScanner (5.0.11)
   - path_provider_ios (0.0.1):
     - Flutter
+  - qr_code_scanner (0.2.0):
+    - Flutter
+    - MTBBarcodeScanner
   - ReachabilitySwift (5.0.0)
   - sqflite (0.0.2):
     - Flutter
@@ -57,6 +61,7 @@ DEPENDENCIES:
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - just_audio (from `.symlinks/plugins/just_audio/ios`)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
+  - qr_code_scanner (from `.symlinks/plugins/qr_code_scanner/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/ios`)
@@ -67,6 +72,7 @@ SPEC REPOS:
   trunk:
     - FMDB
     - GoogleMaps
+    - MTBBarcodeScanner
     - ReachabilitySwift
     - Toast
 
@@ -93,6 +99,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/just_audio/ios"
   path_provider_ios:
     :path: ".symlinks/plugins/path_provider_ios/ios"
+  qr_code_scanner:
+    :path: ".symlinks/plugins/qr_code_scanner/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
   url_launcher_ios:
@@ -117,7 +125,9 @@ SPEC CHECKSUMS:
   GoogleMaps: 025272d5876d3b32604e5c080dc25eaf68764693
   image_picker_ios: b786a5dcf033a8336a657191401bfdf12017dabb
   just_audio: baa7252489dbcf47a4c7cc9ca663e9661c99aafa
+  MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
   path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
+  qr_code_scanner: bb67d64904c3b9658ada8c402e8b4d406d5d796e
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196

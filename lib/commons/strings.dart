@@ -65,11 +65,20 @@ class Strings {
   static const String yourLocation = "Your Location";
   static const String nearestBeep = "Nearest Beep";
 
+  /// ------ Notify Me Sheet ------------------>>>>
+  static const String notifyMeTitle = "Sorry we do not service this location yet";
+  static const String notifyMeDescription = "Tap the button below to be notified as soon as we are available in this area";
+  static const String notifyMe = "Notify Me!";
+
   /// ------ Nearest Beep Sheet ------------------>>>>
   static const String navigation = "Navigation";
   static const String scanToStart = "Scan to Start";
   static const String reserve = "Reserve";
   static const String report = "Report";
+
+  /// ------ Reserve Sheet ------------------>>>>
+  static const String reserveNow = "Reserve Now";
+  static const String reserveDetail = "This action is non refundable";
 
   /// ------ Payment Screen ------------------>>>>
   static const String currentBalance = "Current Balance";

@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 class MapService {
   static Utils utils = Utils();
   static String? currentAddress;
+  static String? currentCity;
   static Position? currentPosition;
 
   /// ---- Handle Location Permission --------------------- >>>
@@ -59,6 +60,17 @@ class MapService {
       Placemark place = placemarks[0];
       currentAddress = '${place.street}, ${place.subLocality}, ${place.subAdministrativeArea}, ${place.postalCode}';
       printOkStatus("currentAddress --------------->> $placemarks");
+    }).catchError((e) {
+      printError(e);
+    });
+  }
+
+  /// ---- TO Get Current City  --------------------- >>>
+  static Future<void> getCityFromLatLng({double lat = 0.0, double log = 0.0}) async {
+    await placemarkFromCoordinates(lat, log).then((List<Placemark> placeMarks) {
+      Placemark place = placeMarks[0];
+      currentCity = place.locality;
+      printOkStatus("currentAddress --------------->> $placeMarks");
     }).catchError((e) {
       printError(e);
     });

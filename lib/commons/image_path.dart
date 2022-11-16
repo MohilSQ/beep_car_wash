@@ -29,6 +29,10 @@ class ImagePath {
   static String selectMarker = "${base}ic_select_marker.png";
   static String marker = "${base}ic_marker.png";
   static String myLocation = "${base}my_location.png";
+  static String undrawLocationTracking = "${base}undraw_location_tracking.png";
+
+  /// ------ Scan QR Screen ------------------>>>>
+  static String flashLight = "${base}flash_light.png";
 
   /// ------ Drawer Screen ------------------>>>>
   static String findABeep = "${base}find_a_beep.png";

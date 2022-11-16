@@ -6,6 +6,8 @@ import 'package:beep_car_wash/model/responce_model/machine_responce_model.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/nearest_beep_sheet/nearest_beep_controller.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/report_sheet/report_sheet.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/reserve_sheet/reserve_sheet.dart';
+import 'package:beep_car_wash/screens/scan_qr_code_screen/scan_qr_code_binding.dart';
+import 'package:beep_car_wash/screens/scan_qr_code_screen/scan_qr_code_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -61,12 +63,16 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                       children: [
                         Image.asset(ImagePath.address, height: 2.4.h),
                         SizedBox(width: 2.w),
-                        Text(
-                          machineData!.cityName!,
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.darkTextColor,
+                        Expanded(
+                          child: Text(
+                            machineData!.address!,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 3,
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.darkTextColor,
+                            ),
                           ),
                         ),
                       ],
@@ -94,13 +100,14 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                                   throw 'Could not open the Map';
                                 }
                               } else if (e.index == 1) {
+                                Get.to(() => const ScanQRCodeScreen(), binding: ScanQRCodeBinding());
                               } else if (e.index == 2) {
                                 showModalBottomSheet(
                                   context: context,
                                   backgroundColor: AppColors.transparentColor,
                                   barrierColor: AppColors.transparentColor,
                                   isScrollControlled: true,
-                                  builder: (context) => StatefulBuilder(builder: (context, setState) => const ReserveSheet()),
+                                  builder: (context) => ReserveSheet(machineId: machineData!.id!.toString()),
                                 );
                               } else if (e.index == 3) {
                                 showModalBottomSheet(
@@ -108,7 +115,7 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                                   backgroundColor: AppColors.transparentColor,
                                   barrierColor: AppColors.transparentColor,
                                   isScrollControlled: true,
-                                  builder: (context) => StatefulBuilder(builder: (context, setState) => const ReportSheet()),
+                                  builder: (context) => const ReportSheet(),
                                 );
                               }
                             },

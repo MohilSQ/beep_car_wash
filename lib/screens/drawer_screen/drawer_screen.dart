@@ -12,7 +12,7 @@ import 'package:sizer/sizer.dart';
 
 class DrawerScreen extends GetView<DrawerScreenController> {
   const DrawerScreen({Key? key}) : super(key: key);
-
+  static const routeName = "/DrawerScreen";
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

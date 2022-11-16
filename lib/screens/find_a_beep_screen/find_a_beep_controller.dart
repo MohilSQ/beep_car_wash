@@ -8,7 +8,7 @@ import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/model/responce_model/machine_responce_model.dart';
 import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/nearest_beep_sheet/nearest_beep_sheet.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/notify_me_sheet/notify_me_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -67,31 +67,49 @@ class FindABeepController extends GetxController {
 
     MachinesResponseModel model = MachinesResponseModel.fromJson(data);
     if (model.code == 200) {
-      Uint8List markerIcon;
+      if (model.data!.isEmpty) {
+        showModalBottomSheet(
+          context: Get.context!,
+          backgroundColor: AppColors.transparentColor,
+          barrierColor: AppColors.transparentColor,
+          builder: (context) => const NotifyMeSheet(),
+        );
+      } else {
+        Uint8List markerIcon;
 
-      for (int i = 0; i < model.data!.length; i++) {
-        if (i == 0) {
-          markerIcon = await getBytesFromAssets(ImagePath.selectMarker, 190);
-        } else {
-          markerIcon = await getBytesFromAssets(ImagePath.marker, 160);
+        for (int i = 0; i < model.data!.length; i++) {
+          if (i == 0) {
+            markerIcon = await getBytesFromAssets(ImagePath.selectMarker, 190);
+          } else {
+            markerIcon = await getBytesFromAssets(ImagePath.marker, 160);
+          }
+
+          markers.add(
+            Marker(
+              markerId: MarkerId(i.toString()),
+              position: LatLng(double.parse(model.data![i].lat!), double.parse(model.data![i].long!)),
+              onTap: () {
+                mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(double.parse(model.data![i].lat!), double.parse(model.data![i].long!)), 18));
+                showModalBottomSheet(
+                  context: Get.context!,
+                  backgroundColor: AppColors.transparentColor,
+                  barrierColor: AppColors.transparentColor,
+                  builder: (context) => NearestBeepSheet(
+                    machineData: model.data![i],
+                  ),
+                );
+              },
+              icon: BitmapDescriptor.fromBytes(markerIcon),
+            ),
+          );
         }
-
-        markers.add(
-          Marker(
-            markerId: MarkerId(i.toString()),
-            position: LatLng(double.parse(model.data![i].lat!), double.parse(model.data![i].long!)),
-            onTap: () {
-              mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(double.parse(model.data![i].lat!), double.parse(model.data![i].long!)), 18));
-              showModalBottomSheet(
-                context: Get.context!,
-                backgroundColor: AppColors.transparentColor,
-                barrierColor: AppColors.transparentColor,
-                builder: (context) => NearestBeepSheet(
-                  machineData: model.data![i],
-                ),
-              );
-            },
-            icon: BitmapDescriptor.fromBytes(markerIcon),
+        mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(double.parse(model.data![0].lat!), double.parse(model.data![0].long!)), 18));
+        showModalBottomSheet(
+          context: Get.context!,
+          backgroundColor: AppColors.transparentColor,
+          barrierColor: AppColors.transparentColor,
+          builder: (context) => NearestBeepSheet(
+            machineData: model.data![0],
           ),
         );
       }
