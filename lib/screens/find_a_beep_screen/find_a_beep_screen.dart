@@ -1,6 +1,7 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
+import 'package:beep_car_wash/commons/map_service.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/find_a_beep_controller.dart';
 import 'package:beep_car_wash/widgets/custom_container.dart';
@@ -19,7 +20,7 @@ class FindABeepScreen extends GetView<FindABeepController> {
     return GetBuilder<FindABeepController>(
       init: FindABeepController(),
       initState: (state) {
-        controller.getMachineAPI();
+        MapService.getCurrentPosition();
       },
       builder: (logic) {
         return Stack(
@@ -32,7 +33,7 @@ class FindABeepScreen extends GetView<FindABeepController> {
                   child: controller.mapView.value
                       ? GoogleMap(
                           mapType: MapType.normal,
-                          myLocationEnabled: true,
+                          myLocationEnabled: false,
                           mapToolbarEnabled: false,
                           zoomControlsEnabled: false,
                           compassEnabled: false,
@@ -42,7 +43,6 @@ class FindABeepScreen extends GetView<FindABeepController> {
                           markers: Set<Marker>.of(controller.markers),
                           onMapCreated: (GoogleMapController googleMapController) {
                             controller.mapController = googleMapController;
-                            // controller.mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 18));
                           },
                         )
                       : const Center(child: CircularProgressIndicator()),

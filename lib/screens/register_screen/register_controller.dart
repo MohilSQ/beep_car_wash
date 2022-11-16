@@ -1,7 +1,6 @@
 import 'package:beep_car_wash/api_repository/api_function.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/get_storage_data.dart';
-import 'package:beep_car_wash/commons/map_service.dart';
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/model/responce_model/common_token_responce_model.dart';
 import 'package:beep_car_wash/model/responce_model/user_data_model.dart';
@@ -41,7 +40,6 @@ class RegisterController extends GetxController {
 
     CommonTokenResponseModel model = CommonTokenResponseModel.fromJson(data);
     if (model.code == 200) {
-      MapService.getCurrentPosition();
       utils.showToast(context: Get.context!, message: model.msg!);
       storeUserData(model.token);
       Get.to(() => const DrawerScreen(), binding: DrawerBindings());

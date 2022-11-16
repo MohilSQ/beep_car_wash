@@ -20,9 +20,9 @@ class AddPaymentController extends GetxController {
   RxBool cardHolderNameError = false.obs;
   RxBool expirationDateError = false.obs;
   RxBool cvvError = false.obs;
-  RxBool primaryPayment = false.obs;
   RxInt cardNumber = 0.obs;
   RxInt cvvNumber = 0.obs;
+  RxInt primaryPaymentSelectNumber = 0.obs;
 
   RxString expireMonth = "".obs;
   RxString expireyear = "".obs;
@@ -32,6 +32,8 @@ class AddPaymentController extends GetxController {
     CommonModel(image: ImagePath.payPal, title: Strings.payPal, isSelected: false.obs),
     CommonModel(image: ImagePath.applePayment, title: Strings.applePay, isSelected: false.obs),
   ];
+
+  List<RxBool> primaryPaymentSelectList = [false.obs, false.obs, false.obs];
 
   /// ---- Validation ------------>>>
 
@@ -63,7 +65,7 @@ class AddPaymentController extends GetxController {
 
   /// ---- Save Card Details Response API ------------>>>
   saveCardDetailsResponseAPI(int i) async {
-    dynamic formData = FormData({});
+    dynamic formData;
 
     if (paymentMethodList[i].title == Strings.creditCard) {
       formData = ({
@@ -73,19 +75,19 @@ class AddPaymentController extends GetxController {
         "exp_month": expireMonth.value.trim(),
         "exp_year": expireyear.value.trim(),
         "cvc": cvvController.text.trim(),
-        "primary": primaryPayment.value ? 1 : 0,
+        "primary": primaryPaymentSelectList[0].value ? 1 : 0,
       });
     } else if (paymentMethodList[i].title == Strings.payPal) {
       formData = ({
         "token": Get.find<CommonController>().userDataModel.token,
         "payment_method": 2,
-        "primary": primaryPayment.value ? 1 : 0,
+        "primary": 1,
       });
     } else if (paymentMethodList[i].title == Strings.applePay) {
       formData = ({
         "token": Get.find<CommonController>().userDataModel.token,
         "payment_method": 3,
-        "primary": primaryPayment.value ? 1 : 0,
+        "primary": 1,
       });
     }
 
