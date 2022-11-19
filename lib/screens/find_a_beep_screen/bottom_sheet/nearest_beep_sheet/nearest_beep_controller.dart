@@ -4,6 +4,8 @@ import 'package:beep_car_wash/model/common_model.dart';
 import 'package:get/get.dart';
 
 class NearestBeepController extends GetxController {
+  RxBool isDrag = false.obs;
+  RxBool isDragMore = false.obs;
   List<CommonModel> actionList = [
     CommonModel(index: 0, image: ImagePath.navigation, title: Strings.navigation),
     CommonModel(index: 1, image: ImagePath.qrScan, title: Strings.scanToStart),

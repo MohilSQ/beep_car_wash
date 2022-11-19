@@ -15,6 +15,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class NearestBeepSheet extends GetView<NearestBeepController> {
   final MachineData? machineData;
+
   const NearestBeepSheet({
     super.key,
     this.machineData,
@@ -23,150 +24,398 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
   @override
   Widget build(BuildContext context) {
     Get.put(NearestBeepController());
-    return Wrap(
-      children: [
-        Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: AppColors.whiteColor,
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(3.h), topRight: Radius.circular(3.h)),
-          ),
-          child: Column(
-            children: [
-              SizedBox(height: 1.8.h),
-              Container(
-                height: 0.6.h,
-                width: 10.w,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(2.h),
-                  color: AppColors.grayBorderColor,
-                ),
+    return GetBuilder<NearestBeepController>(builder: (logic) {
+      return Wrap(
+        children: [
+          GestureDetector(
+            onVerticalDragEnd: (details) {
+              if (controller.isDragMore.value == false) {
+                if (controller.isDrag.value == true) {
+                  controller.isDragMore.value = true;
+                  controller.isDrag.value = false;
+
+                  controller.update();
+                } else {
+                  controller.isDrag.value = true;
+                }
+              }
+              controller.update();
+            },
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: AppColors.whiteColor,
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(3.h), topRight: Radius.circular(3.h)),
               ),
-              SizedBox(height: 1.4.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 6.w),
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        Strings.nearestBeep,
-                        style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.darkTextColor,
-                        ),
-                      ),
+              child: Column(
+                children: [
+                  SizedBox(height: 1.8.h),
+                  Container(
+                    height: 0.6.h,
+                    width: 10.w,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2.h),
+                      color: AppColors.grayBorderColor,
                     ),
-                    SizedBox(height: 1.4.h),
-                    Row(
+                  ),
+                  SizedBox(height: 1.4.h),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 6.w),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Image.asset(ImagePath.address, height: 2.4.h),
-                        SizedBox(width: 2.w),
-                        Expanded(
+                        Align(
+                          alignment: Alignment.centerLeft,
                           child: Text(
-                            machineData!.address!,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
+                            Strings.nearestBeep,
                             style: TextStyle(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w600,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
                               color: AppColors.darkTextColor,
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                    SizedBox(height: 2.h),
-                  ],
-                ),
-              ),
-              Divider(height: 0.6.h),
-              SizedBox(height: 2.h),
-              SizedBox(
-                height: 10.h,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: controller.actionList
-                      .map((e) => GestureDetector(
-                            onTap: () async {
-                              if (e.index! == 0) {
-                                String googleMapUrl = "https://www.google.com/maps/search/?api=1&query=${machineData!.lat},${machineData!.long}";
+                        SizedBox(height: 1.4.h),
+                        Row(
+                          children: [
+                            Image.asset(ImagePath.address, height: 2.4.h),
+                            SizedBox(width: 2.w),
+                            Expanded(
+                              child: Text(
+                                machineData!.address!,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 3,
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.darkTextColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 1.h),
+                        Visibility(
+                          visible: controller.isDrag.value,
+                          child: AnimatedContainer(
+                            // Use the properties stored in the State class.
+                            width: MediaQuery.of(context).size.width - 4.w,
 
-                                if (await canLaunchUrl(Uri.parse(googleMapUrl))) {
-                                  await launchUrl(Uri.parse(googleMapUrl));
-                                } else {
-                                  Utils().showSnackBar(context: Get.context!, message: "Could not open the Map");
-                                  throw 'Could not open the Map';
-                                }
-                              } else if (e.index == 1) {
-                                Get.to(() => const ScanQRCodeScreen(), binding: ScanQRCodeBinding());
-                              } else if (e.index == 2) {
-                                showModalBottomSheet(
-                                  context: context,
-                                  backgroundColor: AppColors.transparentColor,
-                                  barrierColor: AppColors.transparentColor,
-                                  isScrollControlled: true,
-                                  builder: (context) => ReserveSheet(machineId: machineData!.id!.toString()),
-                                );
-                              } else if (e.index == 3) {
-                                showModalBottomSheet(
-                                  context: context,
-                                  backgroundColor: AppColors.transparentColor,
-                                  barrierColor: AppColors.transparentColor,
-                                  isScrollControlled: true,
-                                  builder: (context) => const ReportSheet(),
-                                );
-                              }
-                            },
-                            child: SizedBox(
-                              width: 22.w,
-                              child: Column(
-                                children: [
-                                  Container(
-                                    height: 6.6.h,
-                                    width: 6.6.h,
-                                    decoration: BoxDecoration(
-                                      color: e.index == 0 ? AppColors.appColorText : AppColors.whiteColor,
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color: e.index == 0 ? AppColors.appColorText : AppColors.grayBorderColor,
-                                        width: 0.1.h,
-                                      ),
-                                    ),
-                                    child: Wrap(
-                                      runAlignment: WrapAlignment.center,
-                                      alignment: WrapAlignment.center,
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                            ),
+                            // Define how long the animation should take.
+                            duration: const Duration(seconds: 1),
+
+                            // Provide an optional curve to make the animation feel smoother.
+                            curve: Curves.fastOutSlowIn,
+                            child: Column(
+                              children: [
+                                SizedBox(height: 1.6.h),
+                                Row(
+                                  children: [
+                                    Column(
                                       children: [
                                         Image.asset(
-                                          e.image!,
-                                          height: 3.2.h,
-                                          width: 3.2.h,
+                                          ImagePath.droplet,
+                                          height: 3.h,
+                                          width: 3.h,
+                                        ),
+                                        SizedBox(height: 0.4.h),
+                                        Text(
+                                          "Spotless\nWater",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 8.sp,
+                                            color: AppColors.greyColor,
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  SizedBox(height: 0.6.h),
-                                  Text(
-                                    e.title!,
-                                    style: TextStyle(
-                                      fontSize: 10.sp,
-                                      fontWeight: FontWeight.w600,
-                                      color: AppColors.lightTextColor,
+                                    SizedBox(width: 10.w),
+                                    Column(
+                                      children: [
+                                        Image.asset(
+                                          ImagePath.bubble,
+                                          height: 3.h,
+                                          width: 3.h,
+                                        ),
+                                        SizedBox(height: 0.4.h),
+                                        Text(
+                                          "Triple\nFoam",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 8.sp,
+                                            color: AppColors.greyColor,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(width: 10.w),
+                                    Column(
+                                      children: [
+                                        Image.asset(
+                                          ImagePath.wind,
+                                          height: 3.h,
+                                          width: 3.h,
+                                        ),
+                                        SizedBox(height: 0.4.h),
+                                        Text(
+                                          "Air\nDryer",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 8.sp,
+                                            color: AppColors.greyColor,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(width: 10.w),
+                                    Column(
+                                      children: [
+                                        Image.asset(
+                                          ImagePath.vaccum,
+                                          height: 3.h,
+                                          width: 3.h,
+                                        ),
+                                        SizedBox(height: 0.4.h),
+                                        Text(
+                                          "Vaccum\nCleaner",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 8.sp,
+                                            color: AppColors.greyColor,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 2.6.h),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Visibility(
+                          visible: controller.isDragMore.value,
+                          child: AnimatedContainer(
+                            // Use the properties stored in the State class.
+                            width: MediaQuery.of(context).size.width - 4.w,
+
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                            ),
+                            // Define how long the animation should take.
+                            duration: const Duration(seconds: 1),
+
+                            // Provide an optional curve to make the animation feel smoother.
+                            curve: Curves.fastOutSlowIn,
+                            child: Column(
+                              children: [
+                                SizedBox(height: 1.6.h),
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      ImagePath.machine,
+                                      height: 16.h,
+                                      // width: 3.h,
+                                    ),
+                                    SizedBox(width: 6.w),
+                                    Column(
+                                      children: [
+                                        Image.asset(
+                                          ImagePath.wind,
+                                          height: 3.h,
+                                          width: 3.h,
+                                        ),
+                                        SizedBox(height: 0.4.h),
+                                        Text(
+                                          "Air Dryer",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 8.sp,
+                                            color: AppColors.greyColor,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        SizedBox(height: 2.h),
+                                        Image.asset(
+                                          ImagePath.droplet,
+                                          height: 3.h,
+                                          width: 3.h,
+                                        ),
+                                        SizedBox(height: 0.4.h),
+                                        Text(
+                                          "Spotless Water",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 8.sp,
+                                            color: AppColors.greyColor,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(width: 6.w),
+                                    Column(
+                                      children: [
+                                        Image.asset(
+                                          ImagePath.vaccum,
+                                          height: 3.h,
+                                          width: 3.h,
+                                        ),
+                                        SizedBox(height: 0.4.h),
+                                        Text(
+                                          "Vaccum Cleaner",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 8.sp,
+                                            color: AppColors.greyColor,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        SizedBox(height: 2.h),
+                                        Image.asset(
+                                          ImagePath.bubble,
+                                          height: 3.h,
+                                          width: 3.h,
+                                        ),
+                                        SizedBox(height: 0.4.h),
+                                        Text(
+                                          "Triple Foam",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 8.sp,
+                                            color: AppColors.greyColor,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 2.6.h),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Image.asset(
+                              ImagePath.coin,
+                              height: 2.4.h,
+                            ),
+                            SizedBox(width: 2.w),
+                            Expanded(
+                              child: Text(
+                                machineData!.tagline!,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 3,
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.greyColor,
+                                ),
                               ),
                             ),
-                          ))
-                      .toList(),
-                ),
+                          ],
+                        ),
+                        SizedBox(height: 2.h),
+                      ],
+                    ),
+                  ),
+                  Divider(height: 0.6.h),
+                  SizedBox(height: 2.h),
+                  SizedBox(
+                    height: 10.h,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: controller.actionList
+                          .map((e) => GestureDetector(
+                                onTap: () async {
+                                  if (e.index! == 0) {
+                                    String googleMapUrl = "https://www.google.com/maps/search/?api=1&query=${machineData!.lat},${machineData!.long}";
+
+                                    if (await canLaunchUrl(Uri.parse(googleMapUrl))) {
+                                      await launchUrl(Uri.parse(googleMapUrl));
+                                    } else {
+                                      Utils().showSnackBar(context: Get.context!, message: "Could not open the Map");
+                                      throw 'Could not open the Map';
+                                    }
+                                  } else if (e.index == 1) {
+                                    Get.to(() => const ScanQRCodeScreen(), binding: ScanQRCodeBinding());
+                                  } else if (e.index == 2) {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      backgroundColor: AppColors.transparentColor,
+                                      barrierColor: AppColors.transparentColor,
+                                      isScrollControlled: true,
+                                      builder: (context) => ReserveSheet(machineId: machineData!.id!.toString()),
+                                    );
+                                  } else if (e.index == 3) {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      backgroundColor: AppColors.transparentColor,
+                                      barrierColor: AppColors.transparentColor,
+                                      isScrollControlled: true,
+                                      builder: (context) => ReportSheet(machineId: machineData!.id!.toString()),
+                                    );
+                                  }
+                                },
+                                child: SizedBox(
+                                  width: 22.w,
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: 6.6.h,
+                                        width: 6.6.h,
+                                        decoration: BoxDecoration(
+                                          color: e.index == 0 ? AppColors.appColorText : AppColors.whiteColor,
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: e.index == 0 ? AppColors.appColorText : AppColors.grayBorderColor,
+                                            width: 0.1.h,
+                                          ),
+                                        ),
+                                        child: Wrap(
+                                          runAlignment: WrapAlignment.center,
+                                          alignment: WrapAlignment.center,
+                                          children: [
+                                            Image.asset(
+                                              e.image!,
+                                              height: 3.2.h,
+                                              width: 3.2.h,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 0.6.h),
+                                      Text(
+                                        e.title!,
+                                        style: TextStyle(
+                                          fontSize: 10.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: AppColors.lightTextColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                  SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),
+                ],
               ),
-              SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),
-            ],
+            ),
           ),
-        ),
-      ],
-    );
+        ],
+      );
+    });
   }
 }

@@ -77,7 +77,7 @@ class FindABeepScreen extends GetView<FindABeepController> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          controller.mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 18));
+                          controller.mapController?.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 18));
                         },
                         child: CustomContainer(
                           height: 5.h,

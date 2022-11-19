@@ -30,6 +30,12 @@ class ImagePath {
   static String marker = "${base}ic_marker.png";
   static String myLocation = "${base}my_location.png";
   static String undrawLocationTracking = "${base}undraw_location_tracking.png";
+  static String coin = "${base}coin.png";
+  static String bubble = "${base}bubble.png";
+  static String droplet = "${base}droplet.png";
+  static String vaccum = "${base}vaccum.png";
+  static String wind = "${base}wind.png";
+  static String machine = "${base}machine.png";
 
   /// ------ Scan QR Screen ------------------>>>>
   static String flashLight = "${base}flash_light.png";
