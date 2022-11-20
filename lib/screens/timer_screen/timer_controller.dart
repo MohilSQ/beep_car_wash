@@ -27,9 +27,16 @@ class TimerController extends GetxController {
 
     StopMachineResponseModel model = StopMachineResponseModel.fromJson(data);
     if (model.code == 200) {
-      Get.to(() => const CustomCameraScreen(), binding: CustomCameraBinding(), arguments: model.data);
+      Get.to(() => const CustomCameraScreen(), binding: CustomCameraBinding(), arguments: [model, washId]);
     } else if (model.code == 201) {
       utils.showSnackBar(context: Get.context!, message: data["msg"]);
     }
+  }
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    printOkStatus("controller.countDownController.value.getTime() ------------------>> ${countDownController.value.getTime()}");
+    super.onInit();
   }
 }

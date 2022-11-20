@@ -41,6 +41,8 @@ class Constants {
   static const String submitReport = 'submit_report';
   static const String getFeedbackRemarks = 'get_feedback_remarks';
   static const String submitFeedback = 'submit_feedback';
+  static const String attachMachinePhoto = 'attach_machine_photo';
+  static const String verifyCouponCode = 'verify_coupon_code';
 
   static const String findNearestBeep = 'find_nearest_beep';
 

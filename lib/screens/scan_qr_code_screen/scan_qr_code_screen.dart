@@ -1,5 +1,6 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
+import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/screens/scan_qr_code_screen/scan_qr_code_controller.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:beep_car_wash/widgets/custom_text_field.dart';
@@ -33,7 +34,7 @@ class ScanQRCodeScreen extends GetView<ScanQrCodeController> {
                   onQRViewCreated: controller.onQRViewCreated,
                   cameraFacing: CameraFacing.back,
                   onPermissionSet: (p0, p1) {
-                    p0.dispose();
+                    printAction("dvfjsdvfjsvdjsgvjksbvjkvsvbskbskjbfskdjb");
                   },
                   overlay: QrScannerOverlayShape(
                     borderRadius: 3.h,

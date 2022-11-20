@@ -62,7 +62,7 @@ class ScanQrCodeController extends GetxController {
     }
   }
 
-  //{"code":200,"data":{"is_machine_start":1,"data":{"wash_id":"13221668963914637a5e4a2fc296.71030739","wash_timer":"10","wash_start":"2022-11-20 17:05:14"}}}
+//{"code":200,"data":{"is_machine_start":1,"data":{"wash_id":"14221668966555637a689b68e4d7.42113359","wash_timer":"10","wash_start":"2022-11-20 17:49:15"}}}
 
   /// ---- Report Scan To Start API ------------>>>
   reportScanToStartAPI(bool very) async {
@@ -89,8 +89,15 @@ class ScanQrCodeController extends GetxController {
   @override
   void onClose() {
     // TODO: implement onClose
-    super.onClose();
     qrViewController?.dispose();
+    super.onClose();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    qrViewController?.dispose();
+    super.dispose();
   }
 
   @override

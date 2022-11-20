@@ -67,7 +67,7 @@ class FeedbackScreen extends GetView<FeedbackController> {
                         color: Colors.amber,
                       ),
                       onRatingUpdate: (rating) {
-                        print(rating);
+                        controller.rating.value = "${rating.toInt()}";
                         controller.getFeedbackRemarksAPI("${rating.toInt()}");
                       },
                     ),
@@ -101,9 +101,6 @@ class FeedbackScreen extends GetView<FeedbackController> {
                       minLines: 5,
                       isMaxLines: true,
                       padding: EdgeInsets.all(1.8.h),
-                      // isError: controller.phoneNumberError.value,
-                      // hintColor: controller.phoneNumberError.value ? AppColors.errorColor : AppColors.lightTextColor,
-                      // color: controller.phoneNumberError.value ? AppColors.errorColor : AppColors.darkTextColor,
                     ),
                     SizedBox(height: MediaQuery.of(context).padding.bottom + 2.h),
                   ],
@@ -117,7 +114,7 @@ class FeedbackScreen extends GetView<FeedbackController> {
                         padding: EdgeInsets.symmetric(horizontal: 3.h),
                         child: CustomButton(
                           onPressed: () {
-                            // controller.stopMachineAPI(washId!);
+                            controller.submitFeedbacksAPI();
                           },
                           text: "Done",
                         ),

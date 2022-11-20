@@ -1,6 +1,6 @@
 class StopMachineResponseModel {
   final int? code;
-  final Data? data;
+  Data? data;
 
   StopMachineResponseModel({
     this.code,

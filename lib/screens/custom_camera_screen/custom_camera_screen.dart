@@ -22,6 +22,12 @@ class CustomCameraScreen extends GetView<CustomCameraController> {
     Utils.lightStatusBar();
     return GetBuilder<CustomCameraController>(
       assignId: true,
+      initState: (state) {
+        Future.delayed(
+          const Duration(milliseconds: 200),
+          () => openBottomApplyCodeSheet(Get.context!),
+        );
+      },
       dispose: (state) {
         Utils.darkStatusBar();
         controller.controller!.dispose();
@@ -55,7 +61,7 @@ class CustomCameraScreen extends GetView<CustomCameraController> {
                               onTap: () async {
                                 XFile? rawImage = await controller.takePicture();
                                 File imageFile = File(rawImage!.path);
-                                Get.back(result: imageFile);
+                                controller.uploadMachinePhotoAPI(imageFile.toString());
                               },
                               child: Image.asset(
                                 ImagePath.takeImage,
