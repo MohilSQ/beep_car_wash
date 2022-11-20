@@ -36,7 +36,7 @@ class ReportSheet extends GetView<ReportController> {
                   Row(
                     children: [
                       Text(
-                        "Report",
+                        Strings.report,
                         style: TextStyle(
                           color: AppColors.darkTextColor,
                           fontWeight: FontWeight.bold,
@@ -49,7 +49,7 @@ class ReportSheet extends GetView<ReportController> {
                   ),
                   SizedBox(height: 1.h),
                   Text(
-                    "What issue are you facing?",
+                    Strings.whatIssueAreYouFacing,
                     style: TextStyle(
                       color: AppColors.darkTextColor,
                       fontWeight: FontWeight.bold,
@@ -97,7 +97,7 @@ class ReportSheet extends GetView<ReportController> {
                   ),
                   SizedBox(height: 2.h),
                   Text(
-                    "Attach Photo",
+                    Strings.attachPhoto,
                     style: TextStyle(
                       color: AppColors.darkTextColor,
                       fontWeight: FontWeight.bold,
@@ -146,7 +146,7 @@ class ReportSheet extends GetView<ReportController> {
                           ),
                           SizedBox(width: 4.w),
                           Text(
-                            "Update",
+                            Strings.update,
                             style: TextStyle(
                               color: AppColors.appColorText,
                               fontWeight: FontWeight.bold,
@@ -159,7 +159,7 @@ class ReportSheet extends GetView<ReportController> {
                   ),
                   SizedBox(height: 2.h),
                   Text(
-                    "Machine Code",
+                    Strings.machineCode,
                     style: TextStyle(
                       color: AppColors.darkTextColor,
                       fontWeight: FontWeight.bold,
@@ -170,7 +170,7 @@ class ReportSheet extends GetView<ReportController> {
                   GestureDetector(
                     behavior: HitTestBehavior.opaque,
                     onTap: () {
-                      Get.to(() => const ScanQRCodeScreen(screenName: "Report"), binding: ScanQRCodeBinding())?.then(
+                      Get.to(() => const ScanQRCodeScreen(), binding: ScanQRCodeBinding(), arguments: ["Report", machineId.toString()])?.then(
                         (value) {
                           if (value != null) {
                             controller.machineCode.value = value;
@@ -194,7 +194,7 @@ class ReportSheet extends GetView<ReportController> {
                       child: Row(
                         children: [
                           Text(
-                            controller.machineCode.value.isEmpty ? "Machine Code" : controller.machineCode.value,
+                            controller.machineCode.value.isEmpty ? Strings.machineCode : controller.machineCode.value,
                             style: TextStyle(
                               color: AppColors.appColorText,
                               fontWeight: FontWeight.bold,
@@ -203,7 +203,7 @@ class ReportSheet extends GetView<ReportController> {
                           ),
                           const Spacer(),
                           Text(
-                            "Scan",
+                            Strings.scan,
                             style: TextStyle(
                               color: AppColors.appColorText,
                               fontWeight: FontWeight.bold,
@@ -218,8 +218,8 @@ class ReportSheet extends GetView<ReportController> {
                   CustomTextField(
                     isTitle: true,
                     isHight: false,
-                    title: "Write a Comment",
-                    hintText: "Input Text",
+                    title: Strings.writeAComment,
+                    hintText: Strings.inputText,
                     textInputAction: TextInputAction.next,
                     inputType: TextInputType.number,
                     controller: TextEditingController(),
@@ -252,7 +252,18 @@ class ReportSheet extends GetView<ReportController> {
                       Expanded(
                         child: CustomButton(
                           onPressed: () {
-                            Get.back();
+                            if (controller.issueId.value.isEmpty) {
+                              controller.utils.showSnackBar(message: Strings.vWhatIsIssue, context: context);
+                            } else if (controller.image.value.isEmpty) {
+                              controller.utils.showSnackBar(message: Strings.vAttachPhoto, context: context);
+                            } else if (controller.machineCode.value.isEmpty) {
+                              controller.utils.showSnackBar(message: Strings.vMachineCode, context: context);
+                            } else if (controller.comment.text.isEmpty) {
+                              controller.utils.showSnackBar(message: Strings.vComment, context: context);
+                            } else {
+                              controller.submitReportAPI(machineId);
+                            }
+                            // Get.back();
                           },
                           elevation: 0,
                           text: Strings.submit,

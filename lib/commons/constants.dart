@@ -35,9 +35,12 @@ class Constants {
   static const String reserveNow = 'reserve_now';
   static const String notifyMe = 'notify_me';
   static const String scanToStart = 'scan_to_start';
+  static const String scanToReport = 'scan_report_qr';
   static const String stopMachine = 'stop_machine';
   static const String getReportOptions = 'get_report_options';
   static const String submitReport = 'submit_report';
+  static const String getFeedbackRemarks = 'get_feedback_remarks';
+  static const String submitFeedback = 'submit_feedback';
 
   static const String findNearestBeep = 'find_nearest_beep';
 

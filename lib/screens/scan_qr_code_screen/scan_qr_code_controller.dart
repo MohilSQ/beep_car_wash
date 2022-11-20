@@ -14,6 +14,7 @@ class ScanQrCodeController extends GetxController {
   Barcode? result;
   QRViewController? controller;
   RxString screen = "".obs;
+  RxString machineId = "".obs;
   TextEditingController code = TextEditingController();
 
   onQRViewCreated(QRViewController controller) {
@@ -24,9 +25,9 @@ class ScanQrCodeController extends GetxController {
       printAction(result!.code!);
       controller.pauseCamera();
       if (screen.value == "Report") {
-        Get.back(result: result?.code.toString());
+        reportScanToStartAPI(false);
       } else {
-        // scanToStartAPI();
+        scanToStartAPI();
       }
       update();
     });
@@ -48,8 +49,10 @@ class ScanQrCodeController extends GetxController {
     // ScanToStartResponseModel model = ScanToStartResponseModel.fromJson(data);
     if (data["code"] == 200) {
       if (data["data"]["is_machine_start"] == 0) {
+        // Get.to(() => TimerScreen(washId: data["data"]["wash_id"], washTimer: data["data"]["wash_timer"]), binding: TimerBinding());
+        // controller?.dispose();
         utils.showSnackBar(context: Get.context!, message: "Machine is reserve for someone, Please wait to his time end.");
-        controller!.resumeCamera();
+        controller!.stopCamera();
       } else {
         utils.showToast(context: Get.context!, message: "Machine start successfully");
         controller?.stopCamera();
@@ -61,10 +64,41 @@ class ScanQrCodeController extends GetxController {
     }
   }
 
+  /// ---- Report Scan To Start API ------------>>>
+  reportScanToStartAPI(bool very) async {
+    var formData = ({
+      "token": Get.find<CommonController>().userDataModel.token,
+      "machine_id": machineId.value,
+      "qr_code": very ? code.text.trim() : result!.code,
+    });
+
+    final data = await APIFunction().postApiCall(
+      context: Get.context!,
+      apiName: Constants.scanToReport,
+      params: formData,
+    );
+
+    // ScanToStartResponseModel model = ScanToStartResponseModel.fromJson(data);
+    if (data["code"] == 200) {
+      Get.back(result: result?.code.toString());
+    } else if (data["code"] == 201) {
+      utils.showSnackBar(context: Get.context!, message: data["msg"]);
+      controller!.resumeCamera();
+    }
+  }
+
   @override
   void onClose() {
     // TODO: implement onClose
     super.onClose();
     controller?.dispose();
+  }
+
+  @override
+  void onInit() {
+    screen.value = Get.arguments[0].toString();
+    machineId.value = Get.arguments[1].toString();
+    update();
+    super.onInit();
   }
 }

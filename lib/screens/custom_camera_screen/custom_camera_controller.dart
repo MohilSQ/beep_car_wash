@@ -1,0 +1,71 @@
+import 'package:camera/camera.dart';
+import 'package:get/get.dart';
+
+import '../../main.dart';
+
+class CustomCameraController extends GetxController {
+  CameraController? controller;
+  bool isCameraInitialized = false;
+  bool isRearCameraSelected = true;
+  final resolutionPresets = ResolutionPreset.values;
+  ResolutionPreset currentResolutionPreset = ResolutionPreset.high;
+
+  void onNewCameraSelected(CameraDescription cameraDescription) async {
+    final previousCameraController = controller;
+    // Instantiating the camera controller
+    final CameraController cameraController = CameraController(
+      cameraDescription,
+      ResolutionPreset.high,
+      imageFormatGroup: ImageFormatGroup.jpeg,
+    );
+
+    // Dispose the previous controller
+    await previousCameraController?.dispose();
+
+    controller = cameraController;
+
+    // Update UI if controller updated
+    cameraController.addListener(() {
+      update();
+    });
+
+    // Initialize controller
+    try {
+      await cameraController.initialize();
+    } on CameraException catch (e) {
+      print('Error initializing camera: $e');
+    }
+
+    // Update the Boolean
+
+    isCameraInitialized = controller!.value.isInitialized;
+    update();
+  }
+
+  Future<XFile?> takePicture() async {
+    final CameraController? cameraController = controller;
+    if (cameraController!.value.isTakingPicture) {
+      // A capture is already pending, do nothing.
+      return null;
+    }
+    try {
+      XFile file = await cameraController.takePicture();
+      return file;
+    } on CameraException catch (e) {
+      print('Error occured while taking picture: $e');
+      return null;
+    }
+  }
+
+  @override
+  void onInit() {
+    onNewCameraSelected(cameras[0]);
+    super.onInit();
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+}

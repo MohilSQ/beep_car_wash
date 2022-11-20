@@ -347,7 +347,7 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                                       throw 'Could not open the Map';
                                     }
                                   } else if (e.index == 1) {
-                                    Get.to(() => const ScanQRCodeScreen(), binding: ScanQRCodeBinding());
+                                    Get.to(() => const ScanQRCodeScreen(), binding: ScanQRCodeBinding(), arguments: ["Scan", machineData!.id!.toString()]);
                                   } else if (e.index == 2) {
                                     showModalBottomSheet(
                                       context: context,

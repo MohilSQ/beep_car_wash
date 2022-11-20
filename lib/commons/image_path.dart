@@ -36,6 +36,10 @@ class ImagePath {
   static String vaccum = "${base}vaccum.png";
   static String wind = "${base}wind.png";
   static String machine = "${base}machine.png";
+  static String wallet = "${base}wallet.png";
+  static String time = "${base}time.png";
+  static String takeImage = "${base}take_image.png";
+  static String flipCamera = "${base}flip_camera.png";
 
   /// ------ Scan QR Screen ------------------>>>>
   static String flashLight = "${base}flash_light.png";

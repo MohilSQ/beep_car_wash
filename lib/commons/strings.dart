@@ -80,6 +80,43 @@ class Strings {
   static const String reserveNow = "Reserve Now";
   static const String reserveDetail = "This action is non refundable";
 
+  /// ------ Report Sheet ------------------>>>>
+  static const String whatIssueAreYouFacing = "What issue are you facing?";
+  static const String attachPhoto = "Attach Photo";
+  static const String update = "Update";
+  static const String machineCode = "Machine Code";
+  static const String scan = "Scan";
+  static const String writeAComment = "Write a Comment";
+  static const String comment = "Comment";
+  static const String inputText = "Input Text";
+
+  /// ------ Report Sheet Validation ------------------>>>>
+  static const String vWhatIsIssue = "Please select what issue are you facing?";
+  static const String vAttachPhoto = "Please select attach photo";
+  static const String vMachineCode = "Please scan machine code";
+  static const String vComment = "Please enter comment";
+
+  /// ------ Scan Screen  ------------------>>>>
+  static const String scanWrCodeToStart = "Scan the QR code on the\nmachine to start your wash";
+  static const String enterMachineCode = "Enter Machine Code";
+  static const String enterBeepCode = "Enter Beep code to start";
+  static const String enterCode = "Enter Code";
+  static const String verifyNumber = "Verify Number";
+  static const String customCameraStr = "Please take picture of the\nmachine from the front";
+
+  /// ------ Stop Time screen ------------------>>>>
+  static const String endWash = "End Wash";
+  static const String important = "Important!";
+  static const String importantPoint1 = "Please make sure to move tubes out of the way to avoid breaking them";
+  static const String importantPoint2 = "Make sure to make every component to their designated placement once done using";
+  static const String importantPointWarring = "Failure to follow these process might result in a fine";
+
+  /// ------ Payment Screen ------------------>>>>
+  static const String promo = "Promo";
+
+  static const String enterCouponCode = "Enter Coupon Code";
+  static const String enterCouponCodedic = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore";
+
   /// ------ Payment Screen ------------------>>>>
   static const String currentBalance = "Current Balance";
   static const String primary = "Primary";

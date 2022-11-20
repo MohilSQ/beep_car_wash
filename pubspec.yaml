@@ -70,6 +70,11 @@ dependencies:
 
   qr_code_scanner: ^1.0.1
   circular_countdown_timer: ^0.2.3
+  flutter_rating_bar: ^4.0.1
+  chips_choice: ^3.0.0
+  camera: ^0.10.0+4
+  path_provider: ^2.0.11
+
 
 
 dev_dependencies:
