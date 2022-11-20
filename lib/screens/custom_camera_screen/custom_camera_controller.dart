@@ -7,8 +7,7 @@ import '../../main.dart';
 class CustomCameraController extends GetxController {
   CameraController? controller;
   bool isCameraInitialized = false;
-  final resolutionPresets = ResolutionPreset.values;
-  ResolutionPreset currentResolutionPreset = ResolutionPreset.high;
+  RxInt cameraSelected = 0.obs;
 
   void onNewCameraSelected(CameraDescription cameraDescription) async {
     final previousCameraController = controller;
@@ -49,7 +48,7 @@ class CustomCameraController extends GetxController {
       XFile file = await cameraController.takePicture();
       return file;
     } on CameraException catch (e) {
-      printError('Error occured while taking picture: $e');
+      printError('Error occurred while taking picture: $e');
       return null;
     }
   }

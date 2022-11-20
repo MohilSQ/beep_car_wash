@@ -8,11 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../commons/image_path.dart';
-import '../../commons/strings.dart';
-import '../custom_camera_screen/custom_camera_binding.dart';
-import '../custom_camera_screen/custom_camera_screen.dart';
-
 class TimerScreen extends GetView<TimerController> {
   const TimerScreen({Key? key}) : super(key: key);
 
@@ -34,15 +29,17 @@ class TimerScreen extends GetView<TimerController> {
                   isButton: false,
                 ),
                 SizedBox(height: 4.h),
-                Text(
-                  "Your remains time is ${controller.min.value}",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.blackColor,
-                  ),
-                ),
+                Obx(() {
+                  return Text(
+                    "Your remains time is ${int.parse(Get.arguments[1]) - int.parse(controller.countDownController.value.getTime().toString().split(":").first)} min ",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.blackColor,
+                    ),
+                  );
+                }),
                 SizedBox(height: 5.h),
                 Container(
                   width: 72.w,
@@ -61,7 +58,7 @@ class TimerScreen extends GetView<TimerController> {
                       color: Color(0xFFD9F3EA),
                     ),
                     child: CircularCountDownTimer(
-                      duration: 3600,
+                      duration: (int.parse(Get.arguments[1]) * 60),
                       initialDuration: 0,
                       controller: controller.countDownController.value,
                       width: 60.w,
@@ -85,6 +82,7 @@ class TimerScreen extends GetView<TimerController> {
                       },
                       onComplete: () {
                         printOkStatus('Countdown Ended');
+                        controller.stopMachineAPI(Get.arguments[0]);
                       },
                       onChange: (String timeStamp) {
                         printAction('Countdown Changed $timeStamp');
@@ -93,8 +91,6 @@ class TimerScreen extends GetView<TimerController> {
                         if (duration.inSeconds == 0) {
                           return "00:00";
                         } else {
-                          controller.min.value = duration.inMinutes;
-
                           return Function.apply(defaultFormatterFunction, [duration]);
                         }
                       },
@@ -106,7 +102,6 @@ class TimerScreen extends GetView<TimerController> {
                   padding: EdgeInsets.symmetric(horizontal: 3.h),
                   child: CustomButton(
                     onPressed: () {
-                      openBottomApplyCodeSheet(context);
                       controller.stopMachineAPI(Get.arguments[0]);
                     },
                     text: "Stop",
@@ -116,145 +111,6 @@ class TimerScreen extends GetView<TimerController> {
               ],
             ),
           ),
-        );
-      },
-    );
-  }
-
-  openBottomApplyCodeSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: AppColors.transparentColor,
-      barrierColor: AppColors.blackColor.withOpacity(0.3),
-      isScrollControlled: true,
-      builder: (context) {
-        return Wrap(
-          children: [
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(2.h),
-              decoration: BoxDecoration(
-                color: AppColors.whiteColor,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(3.h), topRight: Radius.circular(3.h)),
-              ),
-              child: ListView(
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                physics: const BouncingScrollPhysics(),
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        Strings.endWash,
-                        style: TextStyle(
-                          color: AppColors.darkTextColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15.sp,
-                        ),
-                      ),
-                      const Spacer(),
-                      const CloseButton(),
-                    ],
-                  ),
-                  SizedBox(height: 1.h),
-                  Text(
-                    Strings.important,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: AppColors.darkTextColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14.sp,
-                    ),
-                  ),
-                  SizedBox(height: 5.h),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image.asset(
-                        ImagePath.termsOfService,
-                        color: AppColors.yellowColor,
-                        height: 2.4.h,
-                      ),
-                      SizedBox(width: 3.w),
-                      Expanded(
-                        child: Text(
-                          Strings.importantPoint1,
-                          softWrap: true,
-                          style: TextStyle(
-                            color: AppColors.blackColor,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12.sp,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 2.h),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image.asset(
-                        ImagePath.termsOfService,
-                        color: AppColors.yellowColor,
-                        height: 2.4.h,
-                      ),
-                      SizedBox(width: 3.w),
-                      Expanded(
-                        child: Text(
-                          Strings.importantPoint2,
-                          softWrap: true,
-                          style: TextStyle(
-                            color: AppColors.blackColor,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12.sp,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 4.h),
-                  Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.all(2.h),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(1.h),
-                      color: const Color(0xFFFFE7E2),
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.asset(
-                          ImagePath.termsOfService,
-                          color: AppColors.redColor,
-                          height: 2.4.h,
-                        ),
-                        SizedBox(width: 3.w),
-                        Expanded(
-                          child: Text(
-                            Strings.importantPointWarring,
-                            softWrap: true,
-                            style: TextStyle(
-                              color: AppColors.redColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 5.h),
-                  CustomButton(
-                    onPressed: () {
-                      Get.to(() => const CustomCameraScreen(), binding: CustomCameraBinding());
-                    },
-                    text: "Okay",
-                    color: AppColors.whiteColor,
-                  ),
-                ],
-              ),
-            ),
-          ],
         );
       },
     );

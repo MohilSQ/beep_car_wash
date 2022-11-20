@@ -54,13 +54,15 @@ class ScanQrCodeController extends GetxController {
         utils.showToast(context: Get.context!, message: "Machine start successfully");
         qrViewController?.stopCamera();
         qrViewController!.dispose();
-        Get.to(() => const TimerScreen(), binding: TimerBinding(), arguments: [data["data"]["wash_id"], data["data"]["wash_timer"]]);
+        Get.to(() => const TimerScreen(), binding: TimerBinding(), arguments: [data["data"]["data"]["wash_id"], data["data"]["data"]["wash_timer"]]);
       }
     } else if (data["code"] == 201) {
       utils.showSnackBar(context: Get.context!, message: data["msg"]);
       qrViewController!.resumeCamera();
     }
   }
+
+  //{"code":200,"data":{"is_machine_start":1,"data":{"wash_id":"13221668963914637a5e4a2fc296.71030739","wash_timer":"10","wash_start":"2022-11-20 17:05:14"}}}
 
   /// ---- Report Scan To Start API ------------>>>
   reportScanToStartAPI(bool very) async {

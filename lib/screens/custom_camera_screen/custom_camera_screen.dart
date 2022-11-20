@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/utils.dart';
+import 'package:beep_car_wash/screens/custom_camera_screen/custom_camera_binding.dart';
+import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -66,10 +68,13 @@ class CustomCameraScreen extends GetView<CustomCameraController> {
                             child: InkWell(
                               onTap: () {
                                 controller.isCameraInitialized = false;
-                                controller.isRearCameraSelected = !controller.isRearCameraSelected;
-                                controller.onNewCameraSelected(
-                                  cameras[controller.isRearCameraSelected ? 0 : 1],
-                                );
+                                if (controller.cameraSelected.value == 0) {
+                                  controller.cameraSelected.value = 1;
+                                  controller.onNewCameraSelected(cameras[1]);
+                                } else {
+                                  controller.cameraSelected.value = 0;
+                                  controller.onNewCameraSelected(cameras[0]);
+                                }
                                 controller.update();
                               },
                               child: Container(
@@ -138,6 +143,145 @@ class CustomCameraScreen extends GetView<CustomCameraController> {
               ),
             ),
           ),
+        );
+      },
+    );
+  }
+
+  openBottomApplyCodeSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: AppColors.transparentColor,
+      barrierColor: AppColors.blackColor.withOpacity(0.3),
+      isScrollControlled: true,
+      builder: (context) {
+        return Wrap(
+          children: [
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(2.h),
+              decoration: BoxDecoration(
+                color: AppColors.whiteColor,
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(3.h), topRight: Radius.circular(3.h)),
+              ),
+              child: ListView(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        Strings.endWash,
+                        style: TextStyle(
+                          color: AppColors.darkTextColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15.sp,
+                        ),
+                      ),
+                      const Spacer(),
+                      const CloseButton(),
+                    ],
+                  ),
+                  SizedBox(height: 1.h),
+                  Text(
+                    Strings.important,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: AppColors.darkTextColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14.sp,
+                    ),
+                  ),
+                  SizedBox(height: 5.h),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image.asset(
+                        ImagePath.termsOfService,
+                        color: AppColors.yellowColor,
+                        height: 2.4.h,
+                      ),
+                      SizedBox(width: 3.w),
+                      Expanded(
+                        child: Text(
+                          Strings.importantPoint1,
+                          softWrap: true,
+                          style: TextStyle(
+                            color: AppColors.blackColor,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12.sp,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 2.h),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image.asset(
+                        ImagePath.termsOfService,
+                        color: AppColors.yellowColor,
+                        height: 2.4.h,
+                      ),
+                      SizedBox(width: 3.w),
+                      Expanded(
+                        child: Text(
+                          Strings.importantPoint2,
+                          softWrap: true,
+                          style: TextStyle(
+                            color: AppColors.blackColor,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12.sp,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 4.h),
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(2.h),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(1.h),
+                      color: const Color(0xFFFFE7E2),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Image.asset(
+                          ImagePath.termsOfService,
+                          color: AppColors.redColor,
+                          height: 2.4.h,
+                        ),
+                        SizedBox(width: 3.w),
+                        Expanded(
+                          child: Text(
+                            Strings.importantPointWarring,
+                            softWrap: true,
+                            style: TextStyle(
+                              color: AppColors.redColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12.sp,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 5.h),
+                  CustomButton(
+                    onPressed: () {
+                      Get.to(() => const CustomCameraScreen(), binding: CustomCameraBinding());
+                    },
+                    text: "Okay",
+                    color: AppColors.whiteColor,
+                  ),
+                ],
+              ),
+            ),
+          ],
         );
       },
     );

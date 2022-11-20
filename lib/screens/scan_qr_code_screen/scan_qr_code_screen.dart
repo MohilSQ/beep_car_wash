@@ -32,7 +32,9 @@ class ScanQRCodeScreen extends GetView<ScanQrCodeController> {
                   key: controller.qrKey,
                   onQRViewCreated: controller.onQRViewCreated,
                   cameraFacing: CameraFacing.back,
-                  onPermissionSet: (p0, p1) {},
+                  onPermissionSet: (p0, p1) {
+                    p0.dispose();
+                  },
                   overlay: QrScannerOverlayShape(
                     borderRadius: 3.h,
                     borderColor: AppColors.whiteColor,
