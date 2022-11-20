@@ -36,6 +36,10 @@
     <string>Beep want to access your location to get best location search option.</string>
     <key>NSLocationAlwaysUsageDescription</key>
     <string>Beep want to access your location to get best location search option.</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>comgooglemaps</string>
+    </array>
     <key>io.flutter.embedded_views_preview</key>
     <true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>

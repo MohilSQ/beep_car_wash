@@ -12,13 +12,13 @@ class ScanQrCodeController extends GetxController {
   Utils utils = Utils();
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
-  QRViewController? controller;
+  QRViewController? qrViewController;
   RxString screen = "".obs;
   RxString machineId = "".obs;
   TextEditingController code = TextEditingController();
 
   onQRViewCreated(QRViewController controller) {
-    this.controller = controller;
+    qrViewController = controller;
     controller.resumeCamera();
     controller.scannedDataStream.listen((scanData) {
       result = scanData;
@@ -46,21 +46,19 @@ class ScanQrCodeController extends GetxController {
       params: formData,
     );
 
-    // ScanToStartResponseModel model = ScanToStartResponseModel.fromJson(data);
     if (data["code"] == 200) {
       if (data["data"]["is_machine_start"] == 0) {
-        // Get.to(() => TimerScreen(washId: data["data"]["wash_id"], washTimer: data["data"]["wash_timer"]), binding: TimerBinding());
-        // controller?.dispose();
         utils.showSnackBar(context: Get.context!, message: "Machine is reserve for someone, Please wait to his time end.");
-        controller!.stopCamera();
+        qrViewController!.resumeCamera();
       } else {
         utils.showToast(context: Get.context!, message: "Machine start successfully");
-        controller?.stopCamera();
-        Get.to(() => TimerScreen(washId: data["data"]["wash_id"], washTimer: data["data"]["wash_timer"]), binding: TimerBinding());
+        qrViewController?.stopCamera();
+        qrViewController!.dispose();
+        Get.to(() => const TimerScreen(), binding: TimerBinding(), arguments: [data["data"]["wash_id"], data["data"]["wash_timer"]]);
       }
     } else if (data["code"] == 201) {
       utils.showSnackBar(context: Get.context!, message: data["msg"]);
-      controller!.resumeCamera();
+      qrViewController!.resumeCamera();
     }
   }
 
@@ -78,12 +76,11 @@ class ScanQrCodeController extends GetxController {
       params: formData,
     );
 
-    // ScanToStartResponseModel model = ScanToStartResponseModel.fromJson(data);
     if (data["code"] == 200) {
       Get.back(result: result?.code.toString());
     } else if (data["code"] == 201) {
       utils.showSnackBar(context: Get.context!, message: data["msg"]);
-      controller!.resumeCamera();
+      qrViewController!.resumeCamera();
     }
   }
 
@@ -91,7 +88,7 @@ class ScanQrCodeController extends GetxController {
   void onClose() {
     // TODO: implement onClose
     super.onClose();
-    controller?.dispose();
+    qrViewController?.dispose();
   }
 
   @override

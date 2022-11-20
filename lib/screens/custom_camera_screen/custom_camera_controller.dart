@@ -1,3 +1,4 @@
+import 'package:beep_car_wash/commons/utils.dart';
 import 'package:camera/camera.dart';
 import 'package:get/get.dart';
 
@@ -6,21 +7,20 @@ import '../../main.dart';
 class CustomCameraController extends GetxController {
   CameraController? controller;
   bool isCameraInitialized = false;
-  bool isRearCameraSelected = true;
   final resolutionPresets = ResolutionPreset.values;
   ResolutionPreset currentResolutionPreset = ResolutionPreset.high;
 
   void onNewCameraSelected(CameraDescription cameraDescription) async {
     final previousCameraController = controller;
+    // Dispose the previous controller
+    await previousCameraController?.dispose();
+
     // Instantiating the camera controller
     final CameraController cameraController = CameraController(
       cameraDescription,
       ResolutionPreset.high,
       imageFormatGroup: ImageFormatGroup.jpeg,
     );
-
-    // Dispose the previous controller
-    await previousCameraController?.dispose();
 
     controller = cameraController;
 
@@ -33,10 +33,8 @@ class CustomCameraController extends GetxController {
     try {
       await cameraController.initialize();
     } on CameraException catch (e) {
-      print('Error initializing camera: $e');
+      printWarning('Error initializing camera: $e');
     }
-
-    // Update the Boolean
 
     isCameraInitialized = controller!.value.isInitialized;
     update();
@@ -45,14 +43,13 @@ class CustomCameraController extends GetxController {
   Future<XFile?> takePicture() async {
     final CameraController? cameraController = controller;
     if (cameraController!.value.isTakingPicture) {
-      // A capture is already pending, do nothing.
       return null;
     }
     try {
       XFile file = await cameraController.takePicture();
       return file;
     } on CameraException catch (e) {
-      print('Error occured while taking picture: $e');
+      printError('Error occured while taking picture: $e');
       return null;
     }
   }

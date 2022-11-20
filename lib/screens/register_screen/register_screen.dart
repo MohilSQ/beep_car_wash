@@ -174,9 +174,12 @@ class RegisterScreen extends GetView<RegisterController> {
                           Obx(() => CustomButton(
                                 text: Strings.register,
                                 disableButton: controller.termsAndPrivacy!.value,
+                                isLoading: controller.isLoading!.value,
                                 onPressed: () {
                                   if (controller.validation()) {
-                                    controller.userRegistartionAPI();
+                                    if (!controller.isLoading!.value) {
+                                      controller.userRegistartionAPI();
+                                    }
                                   }
                                 },
                               )),

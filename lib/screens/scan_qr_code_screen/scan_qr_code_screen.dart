@@ -17,6 +17,10 @@ class ScanQRCodeScreen extends GetView<ScanQrCodeController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ScanQrCodeController>(
+      assignId: true,
+      dispose: (state) {
+        controller.qrViewController!.dispose();
+      },
       builder: (logic) {
         return Scaffold(
           body: SafeArea(
@@ -27,6 +31,8 @@ class ScanQRCodeScreen extends GetView<ScanQrCodeController> {
                 QRView(
                   key: controller.qrKey,
                   onQRViewCreated: controller.onQRViewCreated,
+                  cameraFacing: CameraFacing.back,
+                  onPermissionSet: (p0, p1) {},
                   overlay: QrScannerOverlayShape(
                     borderRadius: 3.h,
                     borderColor: AppColors.whiteColor,
@@ -48,7 +54,7 @@ class ScanQRCodeScreen extends GetView<ScanQrCodeController> {
                           GestureDetector(
                             behavior: HitTestBehavior.opaque,
                             onTap: () {
-                              Get.find<ScanQrCodeController>().controller!.toggleFlash();
+                              Get.find<ScanQrCodeController>().qrViewController!.toggleFlash();
                               // controller.controller!.pauseCamera();
                             },
                             child: Container(
@@ -78,6 +84,7 @@ class ScanQRCodeScreen extends GetView<ScanQrCodeController> {
                       padding: EdgeInsets.symmetric(horizontal: 3.h),
                       child: CustomButton(
                         onPressed: () {
+                          controller.qrViewController!.pauseCamera();
                           openBottomEnterMachineCodeSheet(context);
                         },
                         backgroundColor: AppColors.whiteColor,
@@ -171,6 +178,7 @@ class ScanQRCodeScreen extends GetView<ScanQrCodeController> {
         );
       },
     ).then((value) {
+      controller.qrViewController!.resumeCamera();
       if (value != null) {
         Get.back(result: value);
       }

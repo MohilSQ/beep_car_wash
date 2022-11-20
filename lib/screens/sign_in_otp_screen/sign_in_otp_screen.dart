@@ -149,14 +149,19 @@ class SignInOTPScreen extends GetView<SignInOTPController> {
                             ),
                           ),
                           const Spacer(),
-                          CustomButton(
-                            text: Strings.continueString,
-                            onPressed: () {
-                              if (controller.validation()) {
-                                controller.otpVerificationAPI();
-                              }
-                            },
-                          ),
+                          Obx(() {
+                            return CustomButton(
+                              text: Strings.continueString,
+                              isLoading: controller.isLoading!.value,
+                              onPressed: () {
+                                if (controller.validation()) {
+                                  if (!controller.isLoading!.value) {
+                                    controller.otpVerificationAPI();
+                                  }
+                                }
+                              },
+                            );
+                          }),
                           SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),
                         ],
                       ),

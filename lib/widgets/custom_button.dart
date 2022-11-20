@@ -30,6 +30,7 @@ class CustomButton extends StatelessWidget {
   final String? text;
   final Color? color;
   final TextStyle? style;
+  final bool? isLoading;
 
   const CustomButton({
     Key? key,
@@ -60,33 +61,32 @@ class CustomButton extends StatelessWidget {
     this.text,
     this.color,
     this.style,
+    this.isLoading = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: height ?? 6.h,
-      width: width ?? double.infinity,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-        child: showGradient == true
-            ? Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: gradientAlignmentBegin ?? Alignment.topLeft,
-                    end: gradientAlignmentEnd ?? Alignment.bottomRight,
-                    colors: gradientColors ??
-                        [
-                          AppColors.redColor,
-                          AppColors.yellowColor,
-                        ],
-                  ),
-                  borderRadius: BorderRadius.circular(borderRadius ?? 1.2.h),
+      width: width ?? MediaQuery.of(context).size.width,
+      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+      child: showGradient == true
+          ? Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(borderRadius ?? 1.2.h),
+                gradient: LinearGradient(
+                  begin: gradientAlignmentBegin ?? Alignment.topLeft,
+                  end: gradientAlignmentEnd ?? Alignment.bottomRight,
+                  colors: gradientColors ??
+                      [
+                        AppColors.appColor,
+                        AppColors.darkAppColor,
+                      ],
                 ),
-                child: elevatedButton(context),
-              )
-            : elevatedButton(context),
-      ),
+              ),
+              child: elevatedButton(context),
+            )
+          : elevatedButton(context),
     );
   }
 
@@ -110,51 +110,60 @@ class CustomButton extends StatelessWidget {
       ),
       onPressed: disableButton != true ? onPressed : null,
       onLongPress: onLongPress,
-      child: child ??
-          Row(
-            mainAxisAlignment: widgetMainAxis ?? MainAxisAlignment.center,
-            children: [
-              if (icon != null)
-                Row(
-                  children: [
-                    Icon(
-                      icon,
-                      color: iconColor ?? AppColors.whiteColor,
-                      size: 24,
-                    ),
-                    SizedBox(width: widgetSpace ?? 0)
-                  ],
-                )
-              else
-                const SizedBox(),
-              if (image != null && image != "")
-                Row(
-                  children: [
-                    Image.asset(
-                      image!,
-                      height: imageSize ?? 22,
-                      color: imageColor,
-                    ),
-                    SizedBox(width: widgetSpace ?? 0)
-                  ],
-                )
-              else
-                const SizedBox(),
-              if (text != null && text != "")
-                Text(
-                  text!,
-                  textAlign: TextAlign.center,
-                  style: style ??
-                      TextStyle(
-                        color: color ?? AppColors.whiteColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12.sp,
-                      ),
-                )
-              else
-                const SizedBox(),
-            ],
-          ),
+      child: isLoading!
+          ? SizedBox(
+              height: 3.h,
+              width: 3.h,
+              child: CircularProgressIndicator(
+                color: AppColors.whiteColor,
+                strokeWidth: 2.4,
+              ),
+            )
+          : child ??
+              Row(
+                mainAxisAlignment: widgetMainAxis ?? MainAxisAlignment.center,
+                children: [
+                  if (icon != null)
+                    Row(
+                      children: [
+                        Icon(
+                          icon,
+                          color: iconColor ?? AppColors.whiteColor,
+                          size: 24,
+                        ),
+                        SizedBox(width: widgetSpace ?? 0)
+                      ],
+                    )
+                  else
+                    const SizedBox(),
+                  if (image != null && image != "")
+                    Row(
+                      children: [
+                        Image.asset(
+                          image!,
+                          height: imageSize ?? 22,
+                          color: imageColor,
+                        ),
+                        SizedBox(width: widgetSpace ?? 0)
+                      ],
+                    )
+                  else
+                    const SizedBox(),
+                  if (text != null && text != "")
+                    Text(
+                      text!,
+                      textAlign: TextAlign.center,
+                      style: style ??
+                          TextStyle(
+                            color: color ?? AppColors.whiteColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12.sp,
+                          ),
+                    )
+                  else
+                    const SizedBox(),
+                ],
+              ),
     );
   }
 }

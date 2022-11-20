@@ -18,8 +18,11 @@ class SignInOTPController extends GetxController {
   RxString otpText = "".obs;
   UserDataModel userDataModel = UserDataModel();
 
+  RxBool? isLoading = false.obs;
+
   /// ---- OTP Verification Api ------------>>>
   otpVerificationAPI() async {
+    isLoading!.value = true;
     var formData = ({
       "otp": otpText.value.trim(),
       "token": Get.arguments[2],
@@ -28,9 +31,11 @@ class SignInOTPController extends GetxController {
       context: Get.context!,
       apiName: Constants.otpVerification,
       params: formData,
+      isLoading: false,
     );
 
     OTPVerificationResponseModel model = OTPVerificationResponseModel.fromJson(data);
+    isLoading!.value = false;
     if (model.code == 200) {
       utils.showToast(context: Get.context!, message: model.msg!);
       if (model.isNewUser == 0) {

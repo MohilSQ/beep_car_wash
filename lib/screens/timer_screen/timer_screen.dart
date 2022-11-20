@@ -14,9 +14,7 @@ import '../custom_camera_screen/custom_camera_binding.dart';
 import '../custom_camera_screen/custom_camera_screen.dart';
 
 class TimerScreen extends GetView<TimerController> {
-  final String? washId;
-  final String? washTimer;
-  const TimerScreen({this.washId, this.washTimer, Key? key}) : super(key: key);
+  const TimerScreen({Key? key}) : super(key: key);
 
   static const routeName = "/TimerScreen";
 
@@ -63,7 +61,7 @@ class TimerScreen extends GetView<TimerController> {
                       color: Color(0xFFD9F3EA),
                     ),
                     child: CircularCountDownTimer(
-                      duration: 36000,
+                      duration: 3600,
                       initialDuration: 0,
                       controller: controller.countDownController.value,
                       width: 60.w,
@@ -109,8 +107,7 @@ class TimerScreen extends GetView<TimerController> {
                   child: CustomButton(
                     onPressed: () {
                       openBottomApplyCodeSheet(context);
-
-                      // controller.stopMachineAPI(washId!);
+                      controller.stopMachineAPI(Get.arguments[0]);
                     },
                     text: "Stop",
                   ),
@@ -128,7 +125,7 @@ class TimerScreen extends GetView<TimerController> {
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.transparentColor,
-      barrierColor: AppColors.transparentColor,
+      barrierColor: AppColors.blackColor.withOpacity(0.3),
       isScrollControlled: true,
       builder: (context) {
         return Wrap(
@@ -250,9 +247,7 @@ class TimerScreen extends GetView<TimerController> {
                   CustomButton(
                     onPressed: () {
                       Get.to(() => const CustomCameraScreen(), binding: CustomCameraBinding());
-                      // Get.to(() => const BillingScreen(), binding: BillingBinding());
                     },
-                    // backgroundColor: AppColors.appColor,
                     text: "Okay",
                     color: AppColors.whiteColor,
                   ),
@@ -262,10 +257,6 @@ class TimerScreen extends GetView<TimerController> {
           ],
         );
       },
-    ).then((value) {
-      if (value != null) {
-        Get.back(result: value);
-      }
-    });
+    );
   }
 }

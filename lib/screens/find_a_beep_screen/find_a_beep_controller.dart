@@ -89,15 +89,7 @@ class FindABeepController extends GetxController {
               markerId: MarkerId(i.toString()),
               position: LatLng(double.parse(model.data![i].lat!), double.parse(model.data![i].long!)),
               onTap: () {
-                mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(double.parse(model.data![i].lat!), double.parse(model.data![i].long!)), 18));
-                showModalBottomSheet(
-                  context: Get.context!,
-                  backgroundColor: AppColors.transparentColor,
-                  barrierColor: AppColors.transparentColor,
-                  builder: (context) => NearestBeepSheet(
-                    machineData: model.data![i],
-                  ),
-                );
+                markerClick(model: model, i: i);
               },
               icon: BitmapDescriptor.fromBytes(markerIcon),
             ),
@@ -116,5 +108,17 @@ class FindABeepController extends GetxController {
     } else if (model.code == 201) {
       utils.showSnackBar(context: Get.context!, message: data["msg"]);
     }
+  }
+
+  void markerClick({MachinesResponseModel? model, int i = 0}) {
+    mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(double.parse(model!.data![i].lat!), double.parse(model.data![i].long!)), 18));
+    showModalBottomSheet(
+      context: Get.context!,
+      backgroundColor: AppColors.transparentColor,
+      barrierColor: AppColors.transparentColor,
+      builder: (context) => NearestBeepSheet(
+        machineData: model.data![i],
+      ),
+    );
   }
 }

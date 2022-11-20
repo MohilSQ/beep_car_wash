@@ -24,8 +24,11 @@ class RegisterController extends GetxController {
 
   UserDataModel userDataModel = UserDataModel();
 
+  RxBool? isLoading = false.obs;
+
   /// ---- User Registartion Api ------------>>>
   userRegistartionAPI() async {
+    isLoading!.value = true;
     var formData = ({
       "token": Get.arguments[2],
       "name": "${firstNameController.text.trim()} ${lastNameController.text.trim()}",
@@ -39,6 +42,7 @@ class RegisterController extends GetxController {
     );
 
     CommonTokenResponseModel model = CommonTokenResponseModel.fromJson(data);
+    isLoading!.value = false;
     if (model.code == 200) {
       utils.showToast(context: Get.context!, message: model.msg!);
       storeUserData(model.token);

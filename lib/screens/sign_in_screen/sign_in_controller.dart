@@ -19,6 +19,8 @@ class SignInController extends GetxController {
   TextEditingController phoneNumberController = TextEditingController();
   RxBool? phoneNumberError = false.obs;
 
+  RxBool? isLoading = false.obs;
+
   @override
   void onInit() {
     initCountry();
@@ -72,6 +74,8 @@ class SignInController extends GetxController {
 
   /// ---- Login Api ------------>>>
   phoneVerificationAPI() async {
+    isLoading!.value = true;
+
     var formData = ({
       'phone': selectedCountry!.callingCode + phoneNumberController.text.trim(),
     });
@@ -79,9 +83,11 @@ class SignInController extends GetxController {
       context: Get.context!,
       apiName: Constants.phoneVerification,
       params: formData,
+      isLoading: false,
     );
 
     CommonTokenResponseModel model = CommonTokenResponseModel.fromJson(data);
+    isLoading!.value = false;
     if (model.code == 200) {
       utils.showToast(context: Get.context!, message: model.msg!);
       Get.to(() => const SignInOTPScreen(), binding: SignInOTPBindings(), arguments: [selectedCountry!.callingCode, phoneNumberController.text.trim(), model.token]);

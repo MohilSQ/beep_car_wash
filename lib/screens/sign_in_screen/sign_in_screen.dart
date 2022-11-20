@@ -123,14 +123,19 @@ class SignInScreen extends GetView<SignInController> {
                             ],
                           ),
                           SizedBox(height: 4.h),
-                          CustomButton(
-                            text: Strings.continueString,
-                            onPressed: () {
-                              if (controller.validation()) {
-                                controller.phoneVerificationAPI();
-                              }
-                            },
-                          ),
+                          Obx(() {
+                            return CustomButton(
+                              text: Strings.continueString,
+                              isLoading: controller.isLoading!.value,
+                              onPressed: () {
+                                if (controller.validation()) {
+                                  if (!controller.isLoading!.value) {
+                                    controller.phoneVerificationAPI();
+                                  }
+                                }
+                              },
+                            );
+                          }),
                           SizedBox(height: 3.5.h),
                           Align(
                             alignment: Alignment.center,
@@ -177,35 +182,6 @@ class SignInScreen extends GetView<SignInController> {
                             elevation: 0,
                             onPressed: () {},
                           ),
-                          // const Spacer(),
-                          // Align(
-                          //   alignment: Alignment.center,
-                          //   child: RichText(
-                          //     textAlign: TextAlign.center,
-                          //     text: TextSpan(
-                          //       text: Strings.doNotHaveAnAccount,
-                          //       style: TextStyle(
-                          //         fontWeight: FontWeight.w600,
-                          //         fontSize: 12.sp,
-                          //         color: AppColors.lightTextColor,
-                          //       ),
-                          //       children: [
-                          //         TextSpan(
-                          //           text: Strings.spaceRegister,
-                          //           recognizer: TapGestureRecognizer()
-                          //             ..onTap = () {
-                          //               Get.to(() => const RegisterScreen(), binding: RegisterBindings());
-                          //             },
-                          //           style: TextStyle(
-                          //             fontWeight: FontWeight.bold,
-                          //             fontSize: 12.sp,
-                          //             color: AppColors.appColorText,
-                          //           ),
-                          //         )
-                          //       ],
-                          //     ),
-                          //   ),
-                          // ),
                           SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),
                         ],
                       ),
