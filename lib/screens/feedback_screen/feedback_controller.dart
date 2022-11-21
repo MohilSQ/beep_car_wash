@@ -1,5 +1,7 @@
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/model/responce_model/get_feedback_remark_responce_model.dart';
+import 'package:beep_car_wash/screens/drawer_screen/drawer_binding.dart';
+import 'package:beep_car_wash/screens/drawer_screen/drawer_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -48,7 +50,7 @@ class FeedbackController extends GetxController {
     var formData = ({
       "token": Get.find<CommonController>().userDataModel.token,
       "rating": rating.value,
-      "wash_id": "",
+      "wash_id": Get.arguments,
       "remark_id": list,
       "message": comment.text.trim(),
     });
@@ -61,7 +63,7 @@ class FeedbackController extends GetxController {
 
     GetFeedbackRemarkModel model = GetFeedbackRemarkModel.fromJson(data);
     if (model.code == 200) {
-      update();
+      Get.off(() => const DrawerScreen(), binding: DrawerBindings());
     } else if (model.code == 201) {
       utils.showSnackBar(context: Get.context!, message: data["msg"]);
     }

@@ -56,10 +56,11 @@ class FeedbackScreen extends GetView<FeedbackController> {
                     ),
                     SizedBox(height: 2.h),
                     RatingBar.builder(
-                      initialRating: 2,
+                      initialRating: 0,
                       minRating: 1,
                       direction: Axis.horizontal,
                       allowHalfRating: false,
+                      glowColor: Colors.amber,
                       itemCount: 5,
                       itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
                       itemBuilder: (context, _) => const Icon(
@@ -84,7 +85,7 @@ class FeedbackScreen extends GetView<FeedbackController> {
                             padding: EdgeInsets.zero,
                             choiceItems: C2Choice.listFrom<String, String>(
                               source: controller.options,
-                              value: (i, v) => v,
+                              value: (i, v) => i.toString(),
                               label: (i, v) => v,
                             ),
                             choiceStyle: C2ChipStyle.toned(),
@@ -96,8 +97,8 @@ class FeedbackScreen extends GetView<FeedbackController> {
                       title: Strings.comment,
                       hintText: Strings.writeAComment,
                       textInputAction: TextInputAction.next,
-                      inputType: TextInputType.number,
-                      controller: TextEditingController(),
+                      inputType: TextInputType.multiline,
+                      controller: controller.comment,
                       minLines: 5,
                       isMaxLines: true,
                       padding: EdgeInsets.all(1.8.h),

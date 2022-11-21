@@ -62,8 +62,6 @@ class ScanQrCodeController extends GetxController {
     }
   }
 
-//{"code":200,"data":{"is_machine_start":1,"data":{"wash_id":"14221668966555637a689b68e4d7.42113359","wash_timer":"10","wash_start":"2022-11-20 17:49:15"}}}
-
   /// ---- Report Scan To Start API ------------>>>
   reportScanToStartAPI(bool very) async {
     var formData = ({

@@ -48,7 +48,7 @@ class MapService {
       printOkStatus("currentPosition --------------->> Lat: ${Constants.latitude}, Long: ${Constants.longitude}");
       Get.find<FindABeepController>().mapView.value = true;
       Get.find<FindABeepController>().setMyLocationMarker();
-      Get.find<FindABeepController>().getMachineAPI();
+      Get.find<FindABeepController>().getMachineAPI(Constants.getMachines);
     }).catchError((e) {
       printError(e);
     });
@@ -70,7 +70,19 @@ class MapService {
     await placemarkFromCoordinates(lat, log).then((List<Placemark> placeMarks) {
       Placemark place = placeMarks[0];
       currentCity = place.locality;
-      printOkStatus("currentAddress --------------->> $placeMarks");
+    }).catchError((e) {
+      printError(e);
+    });
+  }
+
+  /// ---- TO Get Lat Lng From Address City  --------------------- >>>
+  static Future<void> getLatLngFromAddress({String? address}) async {
+    await locationFromAddress(address ?? "").then((List<Location> location) {
+      Constants.latitude = location[0].latitude;
+      Constants.longitude = location[0].longitude;
+      printOkStatus("location --------------->> Lat: ${Constants.latitude}, Long: ${Constants.longitude}");
+      Get.find<FindABeepController>().setMyLocationMarker();
+      Get.find<FindABeepController>().getMachineAPI(Constants.findNearestBeep);
     }).catchError((e) {
       printError(e);
     });

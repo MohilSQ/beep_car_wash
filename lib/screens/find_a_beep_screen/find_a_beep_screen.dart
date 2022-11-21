@@ -3,12 +3,14 @@ import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/map_service.dart';
 import 'package:beep_car_wash/commons/strings.dart';
+import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/find_a_beep_controller.dart';
 import 'package:beep_car_wash/widgets/custom_container.dart';
 import 'package:beep_car_wash/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_place/google_place.dart';
 import 'package:sizer/sizer.dart';
 
 class FindABeepScreen extends GetView<FindABeepController> {
@@ -21,6 +23,7 @@ class FindABeepScreen extends GetView<FindABeepController> {
       init: FindABeepController(),
       initState: (state) {
         MapService.getCurrentPosition();
+        controller.googlePlace = GooglePlace("AIzaSyBXOkSkbXFoeyRXlZmmqBzxb9eGYY75LOE");
       },
       builder: (logic) {
         return Stack(
@@ -38,8 +41,9 @@ class FindABeepScreen extends GetView<FindABeepController> {
                           zoomControlsEnabled: false,
                           compassEnabled: false,
                           myLocationButtonEnabled: false,
-                          initialCameraPosition: const CameraPosition(target: LatLng(40.7127753, -74.0059728), zoom: 18),
-                          // initialCameraPosition: CameraPosition(target: LatLng(Constants.latitude, Constants.longitude), zoom: 18),
+                          trafficEnabled: false,
+                          // initialCameraPosition: const CameraPosition(target: LatLng(40.7127753, -74.0059728), zoom: 18),
+                          initialCameraPosition: CameraPosition(target: LatLng(Constants.latitude, Constants.longitude), zoom: 18),
                           markers: Set<Marker>.of(controller.markers),
                           onMapCreated: (GoogleMapController googleMapController) {
                             controller.mapController = googleMapController;
@@ -91,46 +95,89 @@ class FindABeepScreen extends GetView<FindABeepController> {
                     ],
                   ),
                   SizedBox(height: 2.h),
-                  CustomContainer(
-                    isHeight: false,
-                    boxShadowVisible: true,
-                    borderRadius: 1.h,
-                    padding: EdgeInsets.only(left: 1.6.h, top: 0.8.h, bottom: 0.8.h),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          Strings.setALocation,
-                          style: TextStyle(
-                            color: AppColors.appColor,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 8.6.sp,
-                          ),
-                        ),
-                        SizedBox(height: 0.6.h),
-                        Row(
+                  Column(
+                    children: [
+                      CustomContainer(
+                        isHeight: false,
+                        boxShadowVisible: true,
+                        borderRadius: 1.h,
+                        padding: EdgeInsets.only(left: 1.6.h, top: 0.8.h, bottom: 0.8.h),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Icon(
-                              Icons.search_rounded,
-                              size: 2.8.h,
-                              color: AppColors.appColor,
-                            ),
-                            SizedBox(width: 0.8.h),
-                            Expanded(
-                              child: CustomTextField(
-                                controller: controller.searchController,
-                                textInputAction: TextInputAction.done,
-                                hintText: Strings.yourLocation,
-                                fontSize: 10.sp,
-                                isDense: true,
-                                containerVisible: false,
-                                borderVisible: false,
+                            Text(
+                              Strings.setALocation,
+                              style: TextStyle(
+                                color: AppColors.appColor,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 8.6.sp,
                               ),
+                            ),
+                            SizedBox(height: 0.6.h),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.search_rounded,
+                                  size: 2.8.h,
+                                  color: AppColors.appColor,
+                                ),
+                                SizedBox(width: 0.8.h),
+                                Expanded(
+                                  child: CustomTextField(
+                                    controller: controller.searchController,
+                                    textInputAction: TextInputAction.done,
+                                    hintText: Strings.yourLocation,
+                                    fontSize: 10.sp,
+                                    isDense: true,
+                                    containerVisible: false,
+                                    borderVisible: false,
+                                    onChange: (value) {
+                                      if (value.isEmpty) {
+                                        controller.predictions.clear();
+                                      } else {
+                                        controller.autoCompleteSearch(value);
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(height: 1.4.h),
+                      controller.searchController.text.isEmpty
+                          ? const SizedBox()
+                          : CustomContainer(
+                              height: 34.h,
+                              boxShadowVisible: true,
+                              borderRadius: 1.h,
+                              padding: EdgeInsets.zero,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: controller.predictions.length,
+                                padding: EdgeInsets.all(0.8.h),
+                                itemBuilder: (context, index) {
+                                  return ListTile(
+                                    leading: CircleAvatar(
+                                      backgroundColor: AppColors.appColor,
+                                      child: const Icon(
+                                        Icons.pin_drop,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    title: Text(controller.predictions[index].description!),
+                                    onTap: () {
+                                      controller.searchController.clear();
+                                      printAction(controller.predictions[index].description!);
+                                      MapService.getLatLngFromAddress(address: controller.predictions[index].description!);
+                                      controller.update();
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                    ],
                   ),
                 ],
               ),

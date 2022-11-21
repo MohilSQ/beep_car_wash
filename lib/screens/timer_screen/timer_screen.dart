@@ -16,6 +16,8 @@ class TimerScreen extends GetView<TimerController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<TimerController>(
+      assignId: true,
+      dispose: (state) {},
       builder: (logic) {
         return Scaffold(
           body: SafeArea(
@@ -31,7 +33,7 @@ class TimerScreen extends GetView<TimerController> {
                 SizedBox(height: 4.h),
                 Obx(() {
                   return Text(
-                    "Your remains time is ${int.parse(Get.arguments[1]) - int.parse(controller.countDownController.value.getTime().toString().split(":").first)} min ",
+                    "Your remains time is ${controller.countDownController.value.getTime()!.isEmpty ? int.parse(Get.arguments[1]) : int.parse(Get.arguments[1]) - int.parse(controller.countDownController.value.getTime().toString().split(":").first)} min ",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 15.sp,

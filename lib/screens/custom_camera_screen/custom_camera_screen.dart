@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/utils.dart';
-import 'package:beep_car_wash/screens/custom_camera_screen/custom_camera_binding.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +60,7 @@ class CustomCameraScreen extends GetView<CustomCameraController> {
                               onTap: () async {
                                 XFile? rawImage = await controller.takePicture();
                                 File imageFile = File(rawImage!.path);
-                                controller.uploadMachinePhotoAPI(imageFile.toString());
+                                controller.uploadMachinePhotoAPI(imageFile);
                               },
                               child: Image.asset(
                                 ImagePath.takeImage,
@@ -279,7 +278,7 @@ class CustomCameraScreen extends GetView<CustomCameraController> {
                   SizedBox(height: 5.h),
                   CustomButton(
                     onPressed: () {
-                      Get.to(() => const CustomCameraScreen(), binding: CustomCameraBinding());
+                      Get.back();
                     },
                     text: "Okay",
                     color: AppColors.whiteColor,

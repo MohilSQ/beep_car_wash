@@ -1,6 +1,9 @@
 import 'dart:ui' as ui;
 
 import 'package:beep_car_wash/commons/utils.dart';
+import 'package:beep_car_wash/model/responce_model/stop_machine_response_model.dart';
+import 'package:beep_car_wash/screens/feedback_screen/feedback_binding.dart';
+import 'package:beep_car_wash/screens/feedback_screen/feedback_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -12,27 +15,40 @@ import '../../commons/image_path.dart';
 import '../common_controller.dart';
 
 class BillingController extends GetxController {
-  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
-  TextEditingController code = TextEditingController();
   Utils utils = Utils();
+  TextEditingController code = TextEditingController();
+  RxString washId = "".obs;
+  StopMachineResponseModel? stopMachineResponseModel;
+  RxList<Marker> markers = <Marker>[].obs;
 
+  /// ---- Converted Image To Marker Icon ------------>>>
+  getBytesFromAssets(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetHeight: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+  }
+
+  /// ---- Set Marker ------------>>>
   setMarker(double lat, double long) async {
     Uint8List markerIcon = await getBytesFromAssets(ImagePath.marker, 160);
+
     final Marker marker = Marker(
       markerId: const MarkerId("1"),
       position: LatLng(lat, long),
       icon: BitmapDescriptor.fromBytes(markerIcon),
     );
 
-    markers[const MarkerId("1")] = marker;
+    markers.add(marker);
     update();
   }
 
-  /// ---- Verify CoupneCode API ------------>>>
-  verifyCouponCodeAPI(String washId) async {
+  /// ---- Verify CouponCode API ------------>>>
+  verifyCouponCodeAPI() async {
     var formData = ({
       "token": Get.find<CommonController>().userDataModel.token,
-      "wash_id": washId,
+      "wash_id": washId.value,
       "coupon_code": code.text.trim(),
     });
 
@@ -43,26 +59,31 @@ class BillingController extends GetxController {
     );
 
     if (data["code"] == 200) {
-      // Get.off(() => BillingScreen(stopMachineResponseModel: stopMachineResponseModel), binding: BillingBinding());
-      // Get.offAll(() => const DrawerScreen(), binding: DrawerBindings());
-      Utils().showSnackBar(context: Get.context!, message: data["msg"]);
+      utils.showToast(context: Get.context!, message: data["msg"]);
       Get.back();
     } else if (data["code"] == 201) {
-      Utils().showSnackBar(context: Get.context!, message: data["msg"]);
+      utils.showSnackBar(context: Get.context!, message: data["msg"]);
     }
   }
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  /// ---- Save Wash Bill By Credit Card API ------------>>>
+  saveWashBillByCreditCardAPI() async {
+    var formData = ({
+      "token": Get.find<CommonController>().userDataModel.token,
+      "payment_id": washId.value,
+    });
 
-  /// ---- Converted Image To Marker Icon ------------>>>
-  getBytesFromAssets(String path, int width) async {
-    ByteData data = await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetHeight: width);
-    ui.FrameInfo fi = await codec.getNextFrame();
+    final data = await APIFunction().postApiCall(
+      context: Get.context!,
+      apiName: Constants.saveCardPayment,
+      params: formData,
+    );
 
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+    if (data["code"] == 200) {
+      Get.to(() => const FeedbackScreen(), binding: FeedbackBinding(), arguments: washId.value);
+      utils.showToast(context: Get.context!, message: data["msg"]);
+    } else if (data["code"] == 201) {
+      utils.showSnackBar(context: Get.context!, message: data["msg"]);
+    }
   }
 }

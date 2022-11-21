@@ -31,6 +31,7 @@ class Constants {
   static const String deletePaymentSource = 'delete_payment_source';
   static const String savePaymentCardList = 'save_payment_source';
   static const String getMachines = 'get_machines';
+  static const String findNearestBeep = 'find_nearest_beep';
   static const String getReserveDetails = 'get_reserve_details';
   static const String reserveNow = 'reserve_now';
   static const String notifyMe = 'notify_me';
@@ -43,8 +44,7 @@ class Constants {
   static const String submitFeedback = 'submit_feedback';
   static const String attachMachinePhoto = 'attach_machine_photo';
   static const String verifyCouponCode = 'verify_coupon_code';
-
-  static const String findNearestBeep = 'find_nearest_beep';
+  static const String saveCardPayment = 'save_card_payment';
 
   // Location And Map .....
 

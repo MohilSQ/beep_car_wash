@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:beep_car_wash/api_repository/api_function.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/utils.dart';
@@ -5,7 +7,8 @@ import 'package:beep_car_wash/screens/biling_screen/billing_binding.dart';
 import 'package:beep_car_wash/screens/biling_screen/billing_screen.dart';
 import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:camera/camera.dart';
-import 'package:get/get.dart';
+import 'package:dio/dio.dart';
+import 'package:get/get.dart' hide Response, FormData, MultipartFile;
 
 import '../../main.dart';
 
@@ -58,21 +61,25 @@ class CustomCameraController extends GetxController {
   }
 
   /// ---- UploadMachine Photo API ------------>>>
-  uploadMachinePhotoAPI(String image) async {
-    var formData = ({
+  uploadMachinePhotoAPI(File image) async {
+    FormData formData = FormData.fromMap({
       "token": Get.find<CommonController>().userDataModel.token,
       "wash_id": Get.arguments[1],
-      "machine_photo": image,
     });
+
+    formData.files.addAll([
+      MapEntry("machine_photo", MultipartFile.fromFileSync(image.path, filename: image.path.split("/").last)),
+    ]);
 
     final data = await APIFunction().postApiCall(
       context: Get.context!,
       apiName: Constants.attachMachinePhoto,
       params: formData,
+      isFormData: true,
     );
 
     if (data["code"] == 200) {
-      Get.off(() => BillingScreen(stopMachineResponseModel: Get.arguments[0], washId: Get.arguments[1]), binding: BillingBinding());
+      Get.to(() => const BillingScreen(), binding: BillingBinding(), arguments: [Get.arguments[0], Get.arguments[1]]);
     } else if (data["code"] == 201) {
       Utils().showSnackBar(context: Get.context!, message: data["msg"]);
     }

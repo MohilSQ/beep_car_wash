@@ -185,7 +185,7 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                                           ),
                                           SizedBox(height: 0.4.h),
                                           Text(
-                                            "Vaccum\nCleaner",
+                                            "Vacuum\nCleaner",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontSize: 8.sp,

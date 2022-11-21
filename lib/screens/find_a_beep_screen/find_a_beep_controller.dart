@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_place/google_place.dart';
 
 class FindABeepController extends GetxController {
   Utils utils = Utils();
@@ -23,22 +24,8 @@ class FindABeepController extends GetxController {
 
   RxList<Marker> markers = <Marker>[].obs;
 
-  /// ---- Set My Location Marker ------------>>>
-  setMyLocationMarker() async {
-    Uint8List markerIcon = await getBytesFromAssets(ImagePath.myLocation, 100);
-    markers.add(
-      Marker(
-        markerId: const MarkerId("MyLocation"),
-        position: const LatLng(40.7127753, -74.0059728),
-        // position: LatLng(Constants.latitude, Constants.longitude),
-        onTap: () {
-          mapController!.animateCamera(CameraUpdate.newLatLngZoom(const LatLng(40.7127753, -74.0059728), 18));
-          // mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 18));
-        },
-        icon: BitmapDescriptor.fromBytes(markerIcon),
-      ),
-    );
-  }
+  GooglePlace? googlePlace;
+  RxList<AutocompletePrediction> predictions = <AutocompletePrediction>[].obs;
 
   /// ---- Converted Image To Marker Icon ------------>>>
   getBytesFromAssets(String path, int width) async {
@@ -49,19 +36,42 @@ class FindABeepController extends GetxController {
     return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
   }
 
+  /// ---- Set My Location Marker ------------>>>
+  setMyLocationMarker() async {
+    Uint8List markerIcon = await getBytesFromAssets(ImagePath.myLocation, 100);
+    markers.add(
+      Marker(
+        markerId: const MarkerId("MyLocation"),
+        // position: const LatLng(40.7127753, -74.0059728),
+        position: LatLng(Constants.latitude, Constants.longitude),
+        onTap: () {
+          // mapController!.animateCamera(CameraUpdate.newLatLngZoom(const LatLng(40.7127753, -74.0059728), 18));
+          mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 18));
+          showModalBottomSheet(
+            context: Get.context!,
+            backgroundColor: AppColors.transparentColor,
+            barrierColor: AppColors.transparentColor,
+            builder: (context) => const NotifyMeSheet(),
+          );
+        },
+        icon: BitmapDescriptor.fromBytes(markerIcon),
+      ),
+    );
+  }
+
   /// ---- Get Machine Api ------------>>>
-  getMachineAPI() async {
+  getMachineAPI(String apiName) async {
     var formData = ({
       "token": Get.find<CommonController>().userDataModel.token,
-      "lat": "40.7127753",
-      "long": "-74.0059728",
-      // "lat": Constants.latitude,
-      // "long": Constants.longitude,
+      // "lat": "40.7127753",
+      // "long": "-74.0059728",
+      "lat": Constants.latitude,
+      "long": Constants.longitude,
     });
 
     final data = await APIFunction().postApiCall(
       context: Get.context!,
-      apiName: Constants.getMachines,
+      apiName: apiName,
       params: formData,
     );
 
@@ -75,15 +85,7 @@ class FindABeepController extends GetxController {
           builder: (context) => const NotifyMeSheet(),
         );
       } else {
-        Uint8List markerIcon;
-
         for (int i = 0; i < model.data!.length; i++) {
-          if (i == 0) {
-            markerIcon = await getBytesFromAssets(ImagePath.selectMarker, 190);
-          } else {
-            markerIcon = await getBytesFromAssets(ImagePath.marker, 160);
-          }
-
           markers.add(
             Marker(
               markerId: MarkerId(i.toString()),
@@ -91,25 +93,19 @@ class FindABeepController extends GetxController {
               onTap: () {
                 markerClick(model: model, i: i);
               },
-              icon: BitmapDescriptor.fromBytes(markerIcon),
+              icon: BitmapDescriptor.fromBytes(i == 0 ? await getBytesFromAssets(ImagePath.selectMarker, 190) : await getBytesFromAssets(ImagePath.marker, 160)),
             ),
           );
         }
-        mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(double.parse(model.data![0].lat!), double.parse(model.data![0].long!)), 18));
-        showModalBottomSheet(
-          context: Get.context!,
-          backgroundColor: AppColors.transparentColor,
-          barrierColor: AppColors.transparentColor,
-          builder: (context) => NearestBeepSheet(
-            machineData: model.data![0],
-          ),
-        );
+
+        markerClick(model: model, i: 0);
       }
     } else if (model.code == 201) {
       utils.showSnackBar(context: Get.context!, message: data["msg"]);
     }
   }
 
+  /// ---- Marker Click ------------>>>
   void markerClick({MachinesResponseModel? model, int i = 0}) {
     mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(double.parse(model!.data![i].lat!), double.parse(model.data![i].long!)), 18));
     showModalBottomSheet(
@@ -120,5 +116,19 @@ class FindABeepController extends GetxController {
         machineData: model.data![i],
       ),
     );
+  }
+
+  /// ---- Auto Complete Search ------------>>>
+  void autoCompleteSearch(String value) async {
+    if (value.isNotEmpty) {
+      var result = await googlePlace!.autocomplete.get(value);
+      if (result != null && result.predictions != null) {
+        predictions.value = result.predictions!;
+        update();
+      }
+    } else {
+      predictions.clear();
+      update();
+    }
   }
 }

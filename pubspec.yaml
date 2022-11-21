@@ -63,16 +63,18 @@ dependencies:
   flutter_widget_from_html: ^0.8.5
   credit_card_type_detector: ^2.0.0
   flutter_multi_formatter: ^2.9.4
+  flutter_rating_bar: ^4.0.1
+  circular_countdown_timer: ^0.2.3
+  chips_choice: ^3.0.0
 
   google_maps_flutter: ^2.2.1
   geolocator: ^9.0.2
   geocoding: ^2.0.5
+  google_place: ^0.4.7
 
-  qr_code_scanner: ^1.0.1
-  circular_countdown_timer: ^0.2.3
-  flutter_rating_bar: ^4.0.1
-  chips_choice: ^3.0.0
+
   camera: ^0.10.0+4
+  qr_code_scanner: ^1.0.1
   path_provider: ^2.0.11
 
 

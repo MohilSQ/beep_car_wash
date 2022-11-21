@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 class TimerController extends GetxController {
   Utils utils = Utils();
   Rx<CountDownController> countDownController = CountDownController().obs;
+  RxInt remainTime = 0.obs;
 
   /// ---- Stop Machine API ------------>>>
   stopMachineAPI(String washId) async {
@@ -27,16 +28,10 @@ class TimerController extends GetxController {
 
     StopMachineResponseModel model = StopMachineResponseModel.fromJson(data);
     if (model.code == 200) {
-      Get.to(() => const CustomCameraScreen(), binding: CustomCameraBinding(), arguments: [model, washId]);
+      countDownController.value.pause();
+      Get.to(() => const CustomCameraScreen(), binding: CustomCameraBinding(), arguments: [data, washId]);
     } else if (model.code == 201) {
       utils.showSnackBar(context: Get.context!, message: data["msg"]);
     }
-  }
-
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    printOkStatus("controller.countDownController.value.getTime() ------------------>> ${countDownController.value.getTime()}");
-    super.onInit();
   }
 }
