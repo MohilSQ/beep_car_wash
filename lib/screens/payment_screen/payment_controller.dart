@@ -4,38 +4,39 @@ import 'package:get/get.dart';
 
 import '../../api_repository/api_function.dart';
 import '../../commons/constants.dart';
+import '../../commons/strings.dart';
 import '../../commons/utils.dart';
 import '../../model/responce_model/get_payment_detail_model.dart';
 
 class PaymentController extends GetxController {
   Utils utils = Utils();
-  GetPaymentDetailsModel getPaymentDetailsModel = GetPaymentDetailsModel();
+  GetPaymentDetailsModel? getPaymentDetailsModel ;
   RxString? noData = "".obs;
-  RxInt? primaryIndex = 0.obs;
+  RxString? cardLastNumber = "".obs;
 
   String getCardImage(String cardName) {
     switch (cardName) {
-      case "MIR":
+      case Strings.mir :
         return ImagePath.mnpLogo;
-      case "UnionPay":
+      case Strings.unionPay:
         return ImagePath.unionPayLogo;
-      case "Visa":
+      case Strings.visa:
         return ImagePath.visaLogo;
-      case "Mastercard":
+      case Strings. mastercard:
         return ImagePath.mastercardLogo;
-      case "JCB":
+      case Strings.jcb:
         return ImagePath.jcBLogo;
-      case "Discover":
+      case Strings.discover:
         return ImagePath.discoverLogo;
-      case "Maestro":
+      case Strings.maestro:
         return ImagePath.maestroLogo;
-      case "Amex":
+      case Strings.amex:
         return ImagePath.americanExpressLogo;
-      case "DinersClub":
+      case Strings.dinersClub:
         return ImagePath.discoverLogo;
-      case "PayPal":
+      case Strings.payPal:
         return ImagePath.paypalLogo;
-      case "Apple Pay":
+      case Strings.applePay:
         return ImagePath.appleLogo;
       default:
         return ImagePath.creditCard;
@@ -57,13 +58,14 @@ class PaymentController extends GetxController {
     GetPaymentDetailsModel model = GetPaymentDetailsModel.fromJson(data);
     if (model.code == 200) {
       getPaymentDetailsModel = model;
-      if (getPaymentDetailsModel.data!.isEmpty) {
+      if (getPaymentDetailsModel!.data!.isEmpty) {
         noData!.value = "No payment detail found";
+        cardLastNumber!.value = "****";
       } else {
         noData!.value = "";
-        for (int i = 0; i < getPaymentDetailsModel.data!.length; i++) {
-          if (getPaymentDetailsModel.data![i].primaryCard == "1") {
-            primaryIndex!.value = i;
+        for (int i = 0; i < getPaymentDetailsModel!.data!.length; i++) {
+          if (getPaymentDetailsModel!.data![i].primaryCard == "1") {
+            cardLastNumber!.value = getPaymentDetailsModel!.data![i].last4! ;
             break;
           }
         }
@@ -90,9 +92,13 @@ class PaymentController extends GetxController {
 
     if (data["code"] == 200) {
       utils.showToast(context: Get.context!, message: data["msg"]);
-      getPaymentDetailsModel.data![primaryIndex!.value].primaryCard = "0";
-      primaryIndex!.value = index!;
-      getPaymentDetailsModel.data![index].primaryCard = "1";
+      for (int i = 0; i < getPaymentDetailsModel!.data!.length; i++) {
+        if (getPaymentDetailsModel!.data![i].primaryCard == "1") {
+          getPaymentDetailsModel!.data![i].primaryCard = "0";
+          break;
+        }
+      }
+      getPaymentDetailsModel!.data![index!].primaryCard = "1";
       update();
     } else {
       utils.showSnackBar(context: Get.context!, message: data["msg"]);
@@ -114,12 +120,18 @@ class PaymentController extends GetxController {
 
     if (data["code"] == 200) {
       utils.showToast(context: Get.context!, message: data["msg"]);
-      getPaymentDetailsModel.data!.removeAt(index!);
-      for (int i = 0; i < getPaymentDetailsModel.data!.length; i++) {
-        if (getPaymentDetailsModel.data![i].primaryCard == "1") {
-          primaryIndex!.value = i;
+      if(getPaymentDetailsModel!.data!.length == 1){
+        cardLastNumber!.value = "****";
+        getPaymentDetailsModel = null;
+        noData!.value = "No payment detail found";
+      }else{
+      getPaymentDetailsModel!.data!.removeAt(index!);
+      for (int i = 0; i < getPaymentDetailsModel!.data!.length; i++) {
+        if (getPaymentDetailsModel!.data![i].primaryCard == "1") {
+          cardLastNumber!.value = getPaymentDetailsModel!.data![i].last4! ;
           break;
         }
+      }
       }
       update();
     } else {

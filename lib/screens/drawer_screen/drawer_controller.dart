@@ -42,7 +42,7 @@ class DrawerScreenController extends GetxController {
     drawerList[4].bindings!.dependencies();
     drawerList[5].bindings!.dependencies();
     drawerList[6].bindings!.dependencies();
-    if (Get.find<CommonController>().userDataAvilabeOrNot()) {
+    if (Get.find<CommonController>().userDataAvailableOrNot()) {
       Get.find<CommonController>().getUserData();
     }
     super.onInit();

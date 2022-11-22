@@ -23,7 +23,7 @@ class FindABeepScreen extends GetView<FindABeepController> {
       init: FindABeepController(),
       initState: (state) {
         MapService.getCurrentPosition();
-        controller.googlePlace = GooglePlace("AIzaSyBXOkSkbXFoeyRXlZmmqBzxb9eGYY75LOE");
+        controller.googlePlace = GooglePlace(Constants.mapKey);
       },
       builder: (logic) {
         return Stack(

@@ -15,7 +15,7 @@ class Strings {
   static const String submit = "submit";
   static const String search = "Search";
   static const String logoutString = "Are you sure you want to logout";
-  static const String noInternatAvilable = "No Internat avilable";
+  static const String noInternetAvailable = "No Internet available";
 
   /// ------ onBoarding Screen ------------------>>>>
   static const String washYourCar = "Wash Your Car";
@@ -33,6 +33,10 @@ class Strings {
   static const String doNotHaveAnAccount = "Don’t have an account?";
   static const String spaceRegister = "  Register";
 
+  /// ------ Sign In Screen Validation ------------------>>>>
+  static const String vPhoneNumber = "Please enter phone number";
+  static const String vValidPhoneNumber = "Please enter valid phone number";
+
   /// ------ Register Screen ------------------>>>>
   static const String createYourAccount = "Create your Account";
   static const String firstName = "First Name";
@@ -48,6 +52,10 @@ class Strings {
   static const String verifyNumber2 = " Please enter the four number of verification code below";
   static const String doNotReceiveTheOTP = "Don’t receive the OTP?";
   static const String resendCode = "Resend Code";
+
+  /// ------ Sign In OTP Screen Validation ------------------>>>>
+  static const String vOTP = "Please enter OTP";
+  static const String vFullOTP = "Please enter full OTP";
 
   /// ------ Drawer Screen ------------------>>>>
   static const String findABeep = "Find a Beep";
@@ -80,6 +88,9 @@ class Strings {
   static const String reserveNow = "Reserve Now";
   static const String reserveDetail = "This action is non refundable";
 
+  /// ------ Reserve Sheet Validation ------------------>>>>
+  static const String reservationSuccessfully = "Successfully Reservation completed";
+
   /// ------ Report Sheet ------------------>>>>
   static const String whatIssueAreYouFacing = "What issue are you facing?";
   static const String attachPhoto = "Attach Photo";
@@ -97,12 +108,23 @@ class Strings {
   static const String vComment = "Please enter comment";
 
   /// ------ Scan Screen  ------------------>>>>
-  static const String scanWrCodeToStart = "Scan the QR code on the\nmachine to start your wash";
+  static const String scanQrCodeToStart = "Scan the QR code on the\nmachine to start your wash";
+  static const String scanQrCodeToReport = "Scan the QR code on the\nmachine to report that machine";
   static const String enterMachineCode = "Enter Machine Code";
   static const String enterBeepCode = "Enter Beep code to start";
   static const String enterCode = "Enter Code";
   static const String verifyNumber = "Verify Number";
   static const String customCameraStr = "Please take picture of the\nmachine from the front";
+
+  /// ------ Scan Screen verification ------------------>>>>
+  static const String vMachineReserve = "Machine is reserve for someone, Please wait to his time end.";
+  static const String vMachineStart = "Machine start successfully";
+
+  /// ------ Timer screen ------------------>>>>
+  static const String timer = "Timer";
+  static const String yourRemainsTimeIs = "Your remains time is ";
+  static const String min = " min";
+  static const String stop = " Stop";
 
   /// ------ Stop Time screen ------------------>>>>
   static const String endWash = "End Wash";
@@ -111,24 +133,33 @@ class Strings {
   static const String importantPoint2 = "Make sure to make every component to their designated placement once done using";
   static const String importantPointWarring = "Failure to follow these process might result in a fine";
 
-  /// ------ Payment Screen ------------------>>>>
+  /// ------ Billing Screen ------------------>>>>
   static const String promo = "Promo";
-
   static const String enterCouponCode = "Enter Coupon Code";
-  static const String enterCouponCodedic = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore";
+  static const String enterCouponCodeDic = "Lorem ipsum dolor sit amet, consecrate disciplining elite, sed do usermod temper incident ut laborer";
 
   /// ------ Payment Screen ------------------>>>>
+  static const String us = "US \$ ";
+  static const String expiresEnd = "Expires \nEnd";
+  static const String mir = "MIR";
+  static const String unionPay = "UnionPay";
+  static const String visa = "Visa";
+  static const String mastercard = "Mastercard";
+  static const String jcb = "JCB";
+  static const String discover = "Discover";
+  static const String maestro = "Maestro";
+  static const String amex = "Amex";
+  static const String dinersClub = "DinersClub";
+  static const String payPal = "PayPal";
+  static const String applePay = "Apple Pay";
   static const String currentBalance = "Current Balance";
   static const String primary = "Primary";
   static const String addNewPayment = "Add New Payment";
-  static const String edit = "Edit";
   static const String delete = "Delete";
 
   /// ------ Add Payment Screen ------------------>>>>
   static const String chooseAPaymentMethod = "Choose a Payment Method";
   static const String creditCard = "Credit Card";
-  static const String payPal = "Pay Pal";
-  static const String applePay = "Apple Pay";
   static const String cardNumber = "Card Number";
   static const String inputCardNumber = "Input Card Number";
   static const String cardHolderName = "Card Holder Name";
@@ -159,4 +190,10 @@ class Strings {
   static const String logOut = "Log Out";
   static const String selectProfilePicture = "Select profile picture";
   static const String takeAProfilePicture = "Take a profile picture";
+
+  /// ------ Setting Screen Validation ------------------>>>>
+  static const String vFirstName = "Please enter your first name";
+  static const String vLastName = "Please enter your last name";
+  static const String vEmail = "Please enter your email";
+  static const String vValidEmail = "Please enter your valid email";
 }

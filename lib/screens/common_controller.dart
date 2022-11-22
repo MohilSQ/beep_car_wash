@@ -7,13 +7,12 @@ class CommonController extends GetxController {
   GetStorageData getStorageData = GetStorageData();
   UserDataModel userDataModel = UserDataModel();
 
-  bool userDataAvilabeOrNot() {
+  bool userDataAvailableOrNot() {
     return getStorageData.containKey(getStorageData.loginData);
   }
 
   getUserData() {
     userDataModel = UserDataModel.fromJson(getStorageData.readObject(getStorageData.loginData));
     printOkStatus("User token -------------------->>> ${userDataModel.token!}");
-    // printOkStatus("User token -------------------->>> ${userDataModel.profilImage!}");
   }
 }

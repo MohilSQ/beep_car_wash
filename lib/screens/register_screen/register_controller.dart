@@ -1,6 +1,7 @@
 import 'package:beep_car_wash/api_repository/api_function.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/get_storage_data.dart';
+import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/model/responce_model/common_token_responce_model.dart';
 import 'package:beep_car_wash/model/responce_model/user_data_model.dart';
@@ -26,8 +27,8 @@ class RegisterController extends GetxController {
 
   RxBool? isLoading = false.obs;
 
-  /// ---- User Registartion Api ------------>>>
-  userRegistartionAPI() async {
+  /// ---- User Registration Api ------------>>>
+  userRegistrationAPI() async {
     isLoading!.value = true;
     var formData = ({
       "token": Get.arguments[2],
@@ -66,19 +67,19 @@ class RegisterController extends GetxController {
   bool validation() {
     if (utils.isValidationEmpty(firstNameController.text)) {
       firstNameError!.value = true;
-      utils.showSnackBar(context: Get.context!, message: "Plese enter your first name");
+      utils.showSnackBar(context: Get.context!, message: Strings.vFirstName);
     } else if (utils.isValidationEmpty(lastNameController.text)) {
       firstNameError!.value = false;
       lastNameError!.value = true;
-      utils.showSnackBar(context: Get.context!, message: "Plese enter your last name");
+      utils.showSnackBar(context: Get.context!, message: Strings.vLastName);
     } else if (utils.isValidationEmpty(emailController.text)) {
       lastNameError!.value = false;
       emailError!.value = true;
-      utils.showSnackBar(context: Get.context!, message: "Plese enter your email");
+      utils.showSnackBar(context: Get.context!, message: Strings.vEmail);
     } else if (!utils.emailValidator(emailController.text)) {
       lastNameError!.value = false;
       emailError!.value = true;
-      utils.showSnackBar(context: Get.context!, message: "Plese enter your valid email");
+      utils.showSnackBar(context: Get.context!, message: Strings.vValidEmail);
     } else {
       emailError!.value = false;
       utils.hideKeyboard(Get.context!);

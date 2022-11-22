@@ -17,12 +17,12 @@ class APIFunction {
       if (connectivityResult == ConnectivityResult.wifi || connectivityResult == ConnectivityResult.mobile) {
         return true;
       } else {
-        Utils().showSnackBar(context: Get.context!, message: Strings.noInternatAvilable);
+        Utils().showSnackBar(context: Get.context!, message: Strings.noInternetAvailable);
         return false;
       }
     } on PlatformException catch (e) {
       printError(e.toString());
-      Utils().showSnackBar(context: Get.context!, message: Strings.noInternatAvilable);
+      Utils().showSnackBar(context: Get.context!, message: Strings.noInternetAvailable);
       return false;
     }
   }

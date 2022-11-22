@@ -44,7 +44,7 @@ class PaymentScreen extends GetView<PaymentController> {
                       ),
                       const Spacer(),
                       Text(
-                        "US \$ 0.00",
+                        "${Strings.us}0.00",
                         style: TextStyle(
                           color: AppColors.whiteColor,
                           fontWeight: FontWeight.bold,
@@ -76,16 +76,14 @@ class PaymentScreen extends GetView<PaymentController> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Obx(() {
-                                    return Text(
-                                      "**** **** **** ${controller.getPaymentDetailsModel.data == null ? "" : controller.getPaymentDetailsModel.data![controller.primaryIndex!.value].brand!.isEmpty ? "****" : controller.getPaymentDetailsModel.data?[controller.primaryIndex!.value].last4 ?? ""}",
+                                     Text(
+                                    "**** **** **** ${controller.cardLastNumber!.value}",
                                       style: TextStyle(
                                         color: AppColors.whiteColor,
                                         fontWeight: FontWeight.w600,
                                         fontSize: 20.sp,
                                       ),
-                                    );
-                                  }),
+                                    ),
                                   SizedBox(height: 0.6.h),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
@@ -98,7 +96,7 @@ class PaymentScreen extends GetView<PaymentController> {
                                               mainAxisAlignment: MainAxisAlignment.end,
                                               children: [
                                                 Text(
-                                                  "Expires \nEnd",
+                                                  Strings.expiresEnd,
                                                   style: TextStyle(
                                                     color: AppColors.whiteColor,
                                                     fontWeight: FontWeight.w600,
@@ -162,11 +160,11 @@ class PaymentScreen extends GetView<PaymentController> {
                       ),
                     )
                   : ListView.separated(
-                      itemCount: controller.getPaymentDetailsModel.data?.length ?? 0,
+                      itemCount: controller.getPaymentDetailsModel!.data?.length ?? 0,
                       padding: EdgeInsets.zero,
                       separatorBuilder: (context, index) => const Divider(height: 0),
                       itemBuilder: (context, index) {
-                        var obj = controller.getPaymentDetailsModel.data![index];
+                        var obj = controller.getPaymentDetailsModel!.data![index];
                         return SizedBox(
                           height: 10.h,
                           child: Padding(
@@ -261,7 +259,7 @@ class PaymentScreen extends GetView<PaymentController> {
                                       controller.setPrimaryResponseAPI(index: index, id: int.parse(obj.id ?? ""));
                                     } else if (data == 2) {
                                       controller.deletePaymentResponseAPI(index: index, id: int.parse(obj.id ?? ""));
-                                    } else if (data == 3) {}
+                                    }
                                   },
                                 ),
                               ],

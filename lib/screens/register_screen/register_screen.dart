@@ -178,7 +178,7 @@ class RegisterScreen extends GetView<RegisterController> {
                                 onPressed: () {
                                   if (controller.validation()) {
                                     if (!controller.isLoading!.value) {
-                                      controller.userRegistartionAPI();
+                                      controller.userRegistrationAPI();
                                     }
                                   }
                                 },

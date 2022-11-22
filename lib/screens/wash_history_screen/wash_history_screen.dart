@@ -51,7 +51,6 @@ class WashHistoryScreen extends GetView<WashHistoryController> {
                                 ),
                                 SizedBox(width: 1.h),
                                 Text(
-                                  // "13 September, 2022",
                                   DateFormat("d MMMM yyyy").format(DateTime.parse(controller.utils.utcToLocal(obj.washStart!))),
                                   style: TextStyle(
                                     color: AppColors.lightTextColor,

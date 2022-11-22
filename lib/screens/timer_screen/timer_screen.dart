@@ -1,4 +1,5 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
+import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/screens/timer_screen/timer_controller.dart';
 import 'package:beep_car_wash/widgets/custom_appbar.dart';
@@ -27,13 +28,13 @@ class TimerScreen extends GetView<TimerController> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 const CustomAppBar(
-                  title: "Timer",
+                  title: Strings.timer,
                   isButton: false,
                 ),
                 SizedBox(height: 4.h),
                 Obx(() {
                   return Text(
-                    "Your remains time is ${controller.countDownController.value.getTime()!.isEmpty ? int.parse(Get.arguments[1]) : int.parse(Get.arguments[1]) - int.parse(controller.countDownController.value.getTime().toString().split(":").first)} min ",
+                    Strings.yourRemainsTimeIs+ (controller.countDownController.value.getTime()!.isEmpty ? Get.arguments[1] : (int.parse(Get.arguments[1]) - int.parse(controller.countDownController.value.getTime().toString().split(":").first)) )+Strings.min,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 15.sp,
@@ -106,7 +107,7 @@ class TimerScreen extends GetView<TimerController> {
                     onPressed: () {
                       controller.stopMachineAPI(Get.arguments[0]);
                     },
-                    text: "Stop",
+                    text: Strings.stop,
                   ),
                 ),
                 SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),

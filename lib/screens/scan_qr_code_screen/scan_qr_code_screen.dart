@@ -73,7 +73,7 @@ class ScanQRCodeScreen extends GetView<ScanQrCodeController> {
                     ),
                     SizedBox(height: 6.h),
                     Text(
-                      Strings.scanWrCodeToStart,
+                      controller.screen.value == "Report"? Strings.scanQrCodeToReport:   Strings.scanQrCodeToStart,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 15.sp,
@@ -112,71 +112,74 @@ class ScanQRCodeScreen extends GetView<ScanQrCodeController> {
       barrierColor: AppColors.transparentColor,
       isScrollControlled: true,
       builder: (context) {
-        return Wrap(
-          children: [
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(2.h),
-              decoration: BoxDecoration(
-                color: AppColors.whiteColor,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(3.h), topRight: Radius.circular(3.h)),
-              ),
-              child: ListView(
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                physics: const BouncingScrollPhysics(),
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        Strings.enterMachineCode,
-                        style: TextStyle(
-                          color: AppColors.darkTextColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15.sp,
+        return Padding(
+          padding: MediaQuery.of(context).viewInsets,
+          child: Wrap(
+            children: [
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(2.h),
+                decoration: BoxDecoration(
+                  color: AppColors.whiteColor,
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(3.h), topRight: Radius.circular(3.h)),
+                ),
+                child: ListView(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          Strings.enterMachineCode,
+                          style: TextStyle(
+                            color: AppColors.darkTextColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15.sp,
+                          ),
                         ),
-                      ),
-                      const Spacer(),
-                      const CloseButton(),
-                    ],
-                  ),
-                  SizedBox(height: 1.h),
-                  Text(
-                    Strings.enterBeepCode,
-                    style: TextStyle(
-                      color: AppColors.darkTextColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14.sp,
+                        const Spacer(),
+                        const CloseButton(),
+                      ],
                     ),
-                  ),
-                  SizedBox(height: 5.h),
-                  CustomTextField(
-                    controller: controller.code,
-                    hintText: Strings.enterCode,
-                    inputType: TextInputType.number,
-                    inputFormat: [FilteringTextInputFormatter.digitsOnly],
-                  ),
-                  SizedBox(height: 5.h),
-                  CustomButton(
-                    onPressed: () {
-                      if (controller.code.text.trim().isEmpty) {
-                        controller.utils.showSnackBar(message: Strings.vMachineCode, context: context);
-                      } else {
-                        if (controller.screen.value == "Report") {
-                          controller.reportScanToStartAPI(true);
+                    SizedBox(height: 1.h),
+                    Text(
+                      Strings.enterBeepCode,
+                      style: TextStyle(
+                        color: AppColors.darkTextColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                    SizedBox(height: 5.h),
+                    CustomTextField(
+                      controller: controller.code,
+                      hintText: Strings.enterCode,
+                      inputType: TextInputType.number,
+                      inputFormat: [FilteringTextInputFormatter.digitsOnly],
+                    ),
+                    SizedBox(height: 5.h),
+                    CustomButton(
+                      onPressed: () {
+                        if (controller.code.text.trim().isEmpty) {
+                          controller.utils.showSnackBar(message: Strings.vMachineCode, context: context);
                         } else {
-                          controller.scanToStartAPI();
+                          if (controller.screen.value == "Report") {
+                            controller.reportScanToStartAPI(true);
+                          } else {
+                            controller.scanToStartAPI();
+                          }
                         }
-                      }
-                    },
-                    // backgroundColor: AppColors.appColor,
-                    text: Strings.verifyNumber,
-                    color: AppColors.whiteColor,
-                  ),
-                ],
+                      },
+                      // backgroundColor: AppColors.appColor,
+                      text: Strings.verifyNumber,
+                      color: AppColors.whiteColor,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     ).then((value) {

@@ -1,5 +1,6 @@
 import 'package:beep_car_wash/api_repository/api_function.dart';
 import 'package:beep_car_wash/commons/constants.dart';
+import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:beep_car_wash/screens/timer_screen/timer_binding.dart';
@@ -48,10 +49,10 @@ class ScanQrCodeController extends GetxController {
 
     if (data["code"] == 200) {
       if (data["data"]["is_machine_start"] == 0) {
-        utils.showSnackBar(context: Get.context!, message: "Machine is reserve for someone, Please wait to his time end.");
+        utils.showSnackBar(context: Get.context!, message: Strings.vMachineReserve);
         qrViewController!.resumeCamera();
       } else {
-        utils.showToast(context: Get.context!, message: "Machine start successfully");
+        utils.showToast(context: Get.context!, message: Strings.vMachineStart);
         qrViewController?.stopCamera();
         qrViewController!.dispose();
         Get.to(() => const TimerScreen(), binding: TimerBinding(), arguments: [data["data"]["data"]["wash_id"], data["data"]["data"]["wash_timer"]]);

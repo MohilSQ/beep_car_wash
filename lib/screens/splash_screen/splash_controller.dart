@@ -13,7 +13,7 @@ class SplashController extends GetxController {
   }
 
   void pageNavigation() {
-    if (Get.find<CommonController>().userDataAvilabeOrNot()) {
+    if (Get.find<CommonController>().userDataAvailableOrNot()) {
       Get.find<CommonController>().getUserData();
       Get.offAll(() => const DrawerScreen(), binding: DrawerBindings());
     } else {

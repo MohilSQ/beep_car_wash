@@ -3,7 +3,6 @@ import 'package:beep_car_wash/model/responce_model/stop_machine_response_model.d
 import 'package:beep_car_wash/screens/biling_screen/billing_controller.dart';
 import 'package:beep_car_wash/widgets/custom_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
@@ -257,7 +256,7 @@ class BillingScreen extends GetView<BillingController> {
                     ),
                     SizedBox(height: 3.h),
                     Text(
-                      Strings.enterCouponCodedic,
+                      Strings.enterCouponCodeDic,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: AppColors.greyColor.withOpacity(0.6),

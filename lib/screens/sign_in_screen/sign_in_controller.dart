@@ -29,10 +29,8 @@ class SignInController extends GetxController {
 
   /// ---- Show Defult Country ------------>>>
   void initCountry() async {
-    printAction("initCountry");
     final country = await getDefaultCountry(Get.context!);
     selectedCountry = country;
-    printAction("Country Code --------->> ${selectedCountry!.callingCode}");
     update();
   }
 
@@ -67,7 +65,6 @@ class SignInController extends GetxController {
 
     if (country != null) {
       selectedCountry = country;
-      printAction("Country Code --------->> ${selectedCountry!.callingCode}");
       update();
     }
   }
@@ -99,10 +96,10 @@ class SignInController extends GetxController {
   bool validation() {
     if (phoneNumberController.text.isEmpty) {
       phoneNumberError!.value = true;
-      utils.showSnackBar(context: Get.context!, message: "Plese enter phone number");
+      utils.showSnackBar(context: Get.context!, message: Strings.vPhoneNumber);
     } else if (!utils.phoneValidator(phoneNumberController.text)) {
       phoneNumberError!.value = true;
-      utils.showSnackBar(context: Get.context!, message: "Plese enter valid phone number");
+      utils.showSnackBar(context: Get.context!, message: Strings.vValidPhoneNumber);
     } else {
       phoneNumberError!.value = false;
       return true;

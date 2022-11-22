@@ -47,9 +47,9 @@ class Constants {
   static const String saveCardPayment = 'save_card_payment';
 
   // Location And Map .....
-
   static double latitude = 0.0;
   static double longitude = 0.0;
+  static String mapKey = "AIzaSyBXOkSkbXFoeyRXlZmmqBzxb9eGYY75LOE";
 
   // Global Variable .....
   static final scaffoldKey = GlobalKey<ScaffoldState>();

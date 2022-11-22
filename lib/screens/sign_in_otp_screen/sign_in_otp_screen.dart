@@ -110,7 +110,6 @@ class SignInOTPScreen extends GetView<SignInOTPController> {
                             autoDismissKeyboard: true,
                             enablePinAutofill: true,
                             onCompleted: (v) {
-                              printOkStatus("Completed");
                               if (controller.validation()) {
                                 controller.otpVerificationAPI();
                               }

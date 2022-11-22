@@ -15,12 +15,12 @@ import 'package:sizer/sizer.dart';
 
 List<CameraDescription> cameras = [];
 Future<void> main() async {
+    WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   try {
-    WidgetsFlutterBinding.ensureInitialized();
     cameras = await availableCameras();
   } on CameraException catch (e) {
-    print('Error in fetching the cameras: $e');
+    printError('Error in fetching the cameras: $e');
   }
   runApp(const MyApp());
 }
