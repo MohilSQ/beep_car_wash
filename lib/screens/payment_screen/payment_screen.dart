@@ -76,14 +76,14 @@ class PaymentScreen extends GetView<PaymentController> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                     Text(
+                                  Text(
                                     "**** **** **** ${controller.cardLastNumber!.value}",
-                                      style: TextStyle(
-                                        color: AppColors.whiteColor,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 20.sp,
-                                      ),
+                                    style: TextStyle(
+                                      color: AppColors.whiteColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20.sp,
                                     ),
+                                  ),
                                   SizedBox(height: 0.6.h),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
@@ -160,7 +160,7 @@ class PaymentScreen extends GetView<PaymentController> {
                       ),
                     )
                   : ListView.separated(
-                      itemCount: controller.getPaymentDetailsModel!.data?.length ?? 0,
+                      itemCount: controller.getPaymentDetailsModel == null ? 0 : controller.getPaymentDetailsModel!.data?.length ?? 0,
                       padding: EdgeInsets.zero,
                       separatorBuilder: (context, index) => const Divider(height: 0),
                       itemBuilder: (context, index) {

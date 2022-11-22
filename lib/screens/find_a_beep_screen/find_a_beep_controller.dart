@@ -20,6 +20,7 @@ class FindABeepController extends GetxController {
   TextEditingController searchController = TextEditingController();
 
   RxBool mapView = false.obs;
+  RxBool mapSearchView = false.obs;
   GoogleMapController? mapController;
 
   RxList<Marker> markers = <Marker>[].obs;
@@ -32,7 +33,6 @@ class FindABeepController extends GetxController {
     ByteData data = await rootBundle.load(path);
     ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetHeight: width);
     ui.FrameInfo fi = await codec.getNextFrame();
-
     return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
   }
 
@@ -46,7 +46,7 @@ class FindABeepController extends GetxController {
         position: LatLng(Constants.latitude, Constants.longitude),
         onTap: () {
           // mapController!.animateCamera(CameraUpdate.newLatLngZoom(const LatLng(40.7127753, -74.0059728), 18));
-          mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 18));
+          mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 16));
           showModalBottomSheet(
             context: Get.context!,
             backgroundColor: AppColors.transparentColor,
@@ -78,6 +78,7 @@ class FindABeepController extends GetxController {
     MachinesResponseModel model = MachinesResponseModel.fromJson(data);
     if (model.code == 200) {
       if (model.data!.isEmpty) {
+        mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 16));
         showModalBottomSheet(
           context: Get.context!,
           backgroundColor: AppColors.transparentColor,
@@ -85,15 +86,19 @@ class FindABeepController extends GetxController {
           builder: (context) => const NotifyMeSheet(),
         );
       } else {
+        Uint8List? marker;
+
         for (int i = 0; i < model.data!.length; i++) {
+          marker = (i == 0 ? await getBytesFromAssets(ImagePath.selectMarker, 190) : await getBytesFromAssets(ImagePath.marker, 160));
           markers.add(
             Marker(
               markerId: MarkerId(i.toString()),
               position: LatLng(double.parse(model.data![i].lat!), double.parse(model.data![i].long!)),
-              onTap: () {
+              onTap: () async {
                 markerClick(model: model, i: i);
+                marker = await getBytesFromAssets(ImagePath.selectMarker, 190);
               },
-              icon: BitmapDescriptor.fromBytes(i == 0 ? await getBytesFromAssets(ImagePath.selectMarker, 190) : await getBytesFromAssets(ImagePath.marker, 160)),
+              icon: BitmapDescriptor.fromBytes(marker! /*i == 0 ? await getBytesFromAssets(ImagePath.selectMarker, 190) : await getBytesFromAssets(ImagePath.marker, 160)*/),
             ),
           );
         }
@@ -107,7 +112,7 @@ class FindABeepController extends GetxController {
 
   /// ---- Marker Click ------------>>>
   void markerClick({MachinesResponseModel? model, int i = 0}) {
-    mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(double.parse(model!.data![i].lat!), double.parse(model.data![i].long!)), 18));
+    mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(double.parse(model!.data![i].lat!), double.parse(model.data![i].long!)), 16));
     showModalBottomSheet(
       context: Get.context!,
       backgroundColor: AppColors.transparentColor,
@@ -126,9 +131,6 @@ class FindABeepController extends GetxController {
         predictions.value = result.predictions!;
         update();
       }
-    } else {
-      predictions.clear();
-      update();
     }
   }
 }

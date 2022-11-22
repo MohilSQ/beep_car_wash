@@ -13,8 +13,8 @@ class Constants {
   static const String fontFamily = 'NunitoSans';
 
   // Api credential .....
-  static const String baseUrl = 'https://codewithwaqas.com/beep/api/';
-  static const String profileImageUrl = 'https://codewithwaqas.com/beep/assets/avatars/';
+  static const String baseUrl = 'http://machine.beepwash.com/api/';
+  static const String profileImageUrl = 'http://machine.beepwash.com/assets/avatars/';
   static const String phoneVerification = 'phone_verification';
   static const String otpVerification = 'otp_verification';
   static const String resendOTP = 'resend_otp';

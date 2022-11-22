@@ -3,7 +3,6 @@ import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/map_service.dart';
 import 'package:beep_car_wash/commons/strings.dart';
-import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/find_a_beep_controller.dart';
 import 'package:beep_car_wash/widgets/custom_container.dart';
 import 'package:beep_car_wash/widgets/custom_text_field.dart';
@@ -22,8 +21,10 @@ class FindABeepScreen extends GetView<FindABeepController> {
     return GetBuilder<FindABeepController>(
       init: FindABeepController(),
       initState: (state) {
-        MapService.getCurrentPosition();
-        controller.googlePlace = GooglePlace(Constants.mapKey);
+        if (controller.mapController == null) {
+          MapService.getCurrentPosition();
+          controller.googlePlace = GooglePlace(Constants.mapKey);
+        }
       },
       builder: (logic) {
         return Stack(
@@ -43,7 +44,7 @@ class FindABeepScreen extends GetView<FindABeepController> {
                           myLocationButtonEnabled: false,
                           trafficEnabled: false,
                           // initialCameraPosition: const CameraPosition(target: LatLng(40.7127753, -74.0059728), zoom: 18),
-                          initialCameraPosition: CameraPosition(target: LatLng(Constants.latitude, Constants.longitude), zoom: 18),
+                          initialCameraPosition: CameraPosition(target: LatLng(Constants.latitude, Constants.longitude), zoom: 16),
                           markers: Set<Marker>.of(controller.markers),
                           onMapCreated: (GoogleMapController googleMapController) {
                             controller.mapController = googleMapController;
@@ -81,7 +82,7 @@ class FindABeepScreen extends GetView<FindABeepController> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          controller.mapController?.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 18));
+                          controller.mapController?.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 16));
                         },
                         child: CustomContainer(
                           height: 5.h,
@@ -133,49 +134,54 @@ class FindABeepScreen extends GetView<FindABeepController> {
                                     borderVisible: false,
                                     onChange: (value) {
                                       if (value.isEmpty) {
-                                        controller.predictions.clear();
+                                        controller.mapSearchView.value = false;
                                       } else {
+                                        controller.mapSearchView.value = true;
                                         controller.autoCompleteSearch(value);
                                       }
                                     },
                                   ),
                                 ),
+                                SizedBox(width: 1.8.h),
                               ],
                             ),
                           ],
                         ),
                       ),
                       SizedBox(height: 1.4.h),
-                      controller.searchController.text.isEmpty
+                      !controller.mapSearchView.value
                           ? const SizedBox()
                           : CustomContainer(
                               height: 34.h,
                               boxShadowVisible: true,
                               borderRadius: 1.h,
                               padding: EdgeInsets.zero,
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: controller.predictions.length,
-                                padding: EdgeInsets.all(0.8.h),
-                                itemBuilder: (context, index) {
-                                  return ListTile(
-                                    leading: CircleAvatar(
-                                      backgroundColor: AppColors.appColor,
-                                      child: const Icon(
-                                        Icons.pin_drop,
-                                        color: Colors.white,
-                                      ),
+                              child: controller.predictions.isEmpty
+                                  ? const Text("No Result Found")
+                                  : ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: controller.predictions.length,
+                                      padding: EdgeInsets.all(0.8.h),
+                                      itemBuilder: (context, index) {
+                                        return ListTile(
+                                          leading: CircleAvatar(
+                                            backgroundColor: AppColors.appColor,
+                                            child: const Icon(
+                                              Icons.pin_drop,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          title: Text(controller.predictions[index].description!),
+                                          onTap: () {
+                                            FocusScope.of(context).unfocus();
+                                            controller.mapSearchView.value = false;
+                                            controller.searchController.text = controller.predictions[index].description!;
+                                            MapService.getLatLngFromAddress(address: controller.predictions[index].description!);
+                                            controller.update();
+                                          },
+                                        );
+                                      },
                                     ),
-                                    title: Text(controller.predictions[index].description!),
-                                    onTap: () {
-                                      controller.searchController.clear();
-                                      printAction(controller.predictions[index].description!);
-                                      MapService.getLatLngFromAddress(address: controller.predictions[index].description!);
-                                      controller.update();
-                                    },
-                                  );
-                                },
-                              ),
                             ),
                     ],
                   ),
