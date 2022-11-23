@@ -1,6 +1,7 @@
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/model/common_model.dart';
+import 'package:beep_car_wash/model/responce_model/common_responce_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -72,8 +73,9 @@ class AddPaymentController extends GetxController {
         "token": Get.find<CommonController>().userDataModel.token,
         "payment_method": 1,
         "number": cardNumberController.text.trim(),
+        "card_holder": cardHolderNameController.text.trim(),
         "exp_month": expireMonth.value.trim(),
-        "exp_year": expireyear.value.trim(),
+        "exp_year": "20${expireyear.value.trim()}",
         "cvc": cvvController.text.trim(),
         "primary": primaryPaymentSelectList[0].value ? 1 : 0,
       });
@@ -97,8 +99,13 @@ class AddPaymentController extends GetxController {
       params: formData,
     );
 
-    utils.showSnackBar(context: Get.context!, message: data["msg"]);
-    Get.back();
+    CommonResponseModel model = CommonResponseModel.fromJson(data);
+    if (model.code == 200) {
+      utils.showToast(context: Get.context!, message: model.msg!);
+      Get.back();
+    } else {
+      utils.showSnackBar(context: Get.context!, message: model.msg!);
+    }
 
     update();
   }

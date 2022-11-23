@@ -47,12 +47,6 @@ class FindABeepController extends GetxController {
         onTap: () {
           // mapController!.animateCamera(CameraUpdate.newLatLngZoom(const LatLng(40.7127753, -74.0059728), 18));
           mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 16));
-          showModalBottomSheet(
-            context: Get.context!,
-            backgroundColor: AppColors.transparentColor,
-            barrierColor: AppColors.transparentColor,
-            builder: (context) => const NotifyMeSheet(),
-          );
         },
         icon: BitmapDescriptor.fromBytes(markerIcon),
       ),

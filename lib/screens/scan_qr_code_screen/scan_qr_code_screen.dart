@@ -73,7 +73,7 @@ class ScanQRCodeScreen extends GetView<ScanQrCodeController> {
                     ),
                     SizedBox(height: 6.h),
                     Text(
-                      controller.screen.value == "Report"? Strings.scanQrCodeToReport:   Strings.scanQrCodeToStart,
+                      controller.screen.value == "Report" ? Strings.scanQrCodeToReport : Strings.scanQrCodeToStart,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 15.sp,
@@ -167,7 +167,7 @@ class ScanQRCodeScreen extends GetView<ScanQrCodeController> {
                           if (controller.screen.value == "Report") {
                             controller.reportScanToStartAPI(true);
                           } else {
-                            controller.scanToStartAPI();
+                            controller.scanToStartAPI(true);
                           }
                         }
                       },

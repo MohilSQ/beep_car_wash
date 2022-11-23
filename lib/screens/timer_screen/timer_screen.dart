@@ -34,7 +34,7 @@ class TimerScreen extends GetView<TimerController> {
                 SizedBox(height: 4.h),
                 Obx(() {
                   return Text(
-                    Strings.yourRemainsTimeIs+ (controller.countDownController.value.getTime()!.isEmpty ? Get.arguments[1] : (int.parse(Get.arguments[1]) - int.parse(controller.countDownController.value.getTime().toString().split(":").first)) )+Strings.min,
+                    "${Strings.yourRemainsTimeIs}${(controller.countDownController.value.getTime()!.isEmpty ? Get.arguments[1] : (int.parse(Get.arguments[1]) - int.parse(controller.countDownController.value.getTime().toString().split(":").first)))}:${controller.countDownController.value.getTime().toString().split(":").first}${Strings.min}",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 15.sp,
@@ -89,6 +89,7 @@ class TimerScreen extends GetView<TimerController> {
                       },
                       onChange: (String timeStamp) {
                         printAction('Countdown Changed $timeStamp');
+                        controller.update();
                       },
                       timeFormatterFunction: (defaultFormatterFunction, duration) {
                         if (duration.inSeconds == 0) {

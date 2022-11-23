@@ -28,17 +28,17 @@ class ScanQrCodeController extends GetxController {
       if (screen.value == "Report") {
         reportScanToStartAPI(false);
       } else {
-        scanToStartAPI();
+        scanToStartAPI(false);
       }
       update();
     });
   }
 
   /// ---- Scan To Start API ------------>>>
-  scanToStartAPI() async {
+  scanToStartAPI(bool very) async {
     var formData = ({
       "token": Get.find<CommonController>().userDataModel.token,
-      "qr_code": result!.code,
+      "qr_code": very ? code.text.trim() : result!.code,
     });
 
     final data = await APIFunction().postApiCall(
