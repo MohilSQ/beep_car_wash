@@ -18,10 +18,10 @@ class CustomCameraScreen extends GetView<CustomCameraController> {
 
   @override
   Widget build(BuildContext context) {
-    Utils.lightStatusBar();
     return GetBuilder<CustomCameraController>(
       assignId: true,
       initState: (state) {
+        Utils.lightStatusBar();
         Future.delayed(
           const Duration(milliseconds: 200),
           () => openBottomApplyCodeSheet(Get.context!),
@@ -280,7 +280,7 @@ class CustomCameraScreen extends GetView<CustomCameraController> {
                     onPressed: () {
                       Get.back();
                     },
-                    text: "Okay",
+                    text: Strings.okay,
                     color: AppColors.whiteColor,
                   ),
                 ],

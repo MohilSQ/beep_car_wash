@@ -15,6 +15,7 @@ class TimerScreen extends GetView<TimerController> {
   static const routeName = "/TimerScreen";
 
   @override
+
   Widget build(BuildContext context) {
     return GetBuilder<TimerController>(
       assignId: true,
@@ -32,17 +33,18 @@ class TimerScreen extends GetView<TimerController> {
                   isButton: false,
                 ),
                 SizedBox(height: 4.h),
-                Obx(() {
-                  return Text(
-                    "${Strings.yourRemainsTimeIs}${(controller.countDownController.value.getTime()!.isEmpty ? Get.arguments[1] : (int.parse(Get.arguments[1]) - int.parse(controller.countDownController.value.getTime().toString().split(":").first)))}:${controller.countDownController.value.getTime().toString().split(":").first}${Strings.min}",
+
+                  Text(
+                    "${Strings.yourRemainsTimeIs}${(controller.countDownController.value.getTime()!.isEmpty ? Get.arguments[1] : (int.parse(Get.arguments[1]) - int.parse(controller.countDownController.value.getTime().toString().split(":").first)))}:${controller.countDownController.value.getTime().toString().split(":").last}${Strings.min}",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 15.sp,
                       fontWeight: FontWeight.bold,
                       color: AppColors.blackColor,
                     ),
-                  );
-                }),
+                  ),
+
+
                 SizedBox(height: 5.h),
                 Container(
                   width: 72.w,

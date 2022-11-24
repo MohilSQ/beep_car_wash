@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 class TimerController extends GetxController {
   Utils utils = Utils();
   Rx<CountDownController> countDownController = CountDownController().obs;
+  Stopwatch stopwatch = Stopwatch();
   RxInt remainTime = 0.obs;
 
   /// ---- Stop Machine API ------------>>>

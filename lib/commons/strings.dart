@@ -3,6 +3,7 @@ class Strings {
   /// NOTE: Don't remove this Strings ---------->>>
   static const String appName = "Beep";
   static const String ok = "Ok";
+  static const String okay = "Okay";
   static const String yes = "Yes";
   static const String no = "No";
   static const String or = "Or";
@@ -97,9 +98,11 @@ class Strings {
   static const String update = "Update";
   static const String machineCode = "Machine Code";
   static const String scan = "Scan";
-  static const String writeAComment = "Write a Comment";
+  static const String writeAComment = "Comment...";
   static const String comment = "Comment";
   static const String inputText = "Input Text";
+  static const String selectAPhoto = "Select a photo";
+  static const String takeAPicture = "Take a picture";
 
   /// ------ Report Sheet Validation ------------------>>>>
   static const String vWhatIsIssue = "Please select what issue are you facing?";
@@ -114,7 +117,7 @@ class Strings {
   static const String enterBeepCode = "Enter Beep code to start";
   static const String enterCode = "Enter Code";
   static const String verifyNumber = "Verify Number";
-  static const String customCameraStr = "Please take picture of the\nmachine from the front";
+  static const String customCameraStr = "Please take a picture of the\nmachine from the front";
 
   /// ------ Scan Screen verification ------------------>>>>
   static const String vMachineReserve = "Machine is reserve for someone, Please wait to his time end.";
@@ -129,9 +132,9 @@ class Strings {
   /// ------ Stop Time screen ------------------>>>>
   static const String endWash = "End Wash";
   static const String important = "Important!";
-  static const String importantPoint1 = "Please make sure to move tubes out of the way to avoid breaking them";
-  static const String importantPoint2 = "Make sure to make every component to their designated placement once done using";
-  static const String importantPointWarring = "Failure to follow these process might result in a fine";
+  static const String importantPoint1 = "Please make sure to move tubes out of the way to avoid breaking them.";
+  static const String importantPoint2 = "Make sure to put every component back to their designated placement once done using.";
+  static const String importantPointWarring = "Failure to follow these process might result in a fine.";
 
   /// ------ Billing Screen ------------------>>>>
   static const String promo = "Promo";

@@ -114,7 +114,7 @@ class WashHistoryScreen extends GetView<WashHistoryController> {
                                               SizedBox(width: 0.8.h),
                                               Expanded(
                                                 child: Text(
-                                                  obj.address!,
+                                                  obj.address??"",
                                                   style: TextStyle(
                                                     color: AppColors.lightTextColor,
                                                     fontWeight: FontWeight.w600,

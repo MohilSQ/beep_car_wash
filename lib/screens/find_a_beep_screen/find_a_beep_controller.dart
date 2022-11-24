@@ -42,10 +42,8 @@ class FindABeepController extends GetxController {
     markers.add(
       Marker(
         markerId: const MarkerId("MyLocation"),
-        // position: const LatLng(40.7127753, -74.0059728),
         position: LatLng(Constants.latitude, Constants.longitude),
         onTap: () {
-          // mapController!.animateCamera(CameraUpdate.newLatLngZoom(const LatLng(40.7127753, -74.0059728), 18));
           mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 16));
         },
         icon: BitmapDescriptor.fromBytes(markerIcon),
@@ -57,8 +55,6 @@ class FindABeepController extends GetxController {
   getMachineAPI(String apiName) async {
     var formData = ({
       "token": Get.find<CommonController>().userDataModel.token,
-      // "lat": "40.7127753",
-      // "long": "-74.0059728",
       "lat": Constants.latitude,
       "long": Constants.longitude,
     });
@@ -72,7 +68,9 @@ class FindABeepController extends GetxController {
     MachinesResponseModel model = MachinesResponseModel.fromJson(data);
     if (model.code == 200) {
       if (model.data!.isEmpty) {
-        mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 16));
+       if(apiName ==Constants.findNearestBeep){
+         mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(Constants.latitude, Constants.longitude), 16));
+       }
         showModalBottomSheet(
           context: Get.context!,
           backgroundColor: AppColors.transparentColor,
@@ -80,19 +78,18 @@ class FindABeepController extends GetxController {
           builder: (context) => const NotifyMeSheet(),
         );
       } else {
-        Uint8List? marker;
+
 
         for (int i = 0; i < model.data!.length; i++) {
-          marker = (i == 0 ? await getBytesFromAssets(ImagePath.selectMarker, 190) : await getBytesFromAssets(ImagePath.marker, 160));
+          /*i == 0 ? await getBytesFromAssets(ImagePath.selectMarker, 190) : await getBytesFromAssets(ImagePath.marker, 160)*/
           markers.add(
             Marker(
               markerId: MarkerId(i.toString()),
               position: LatLng(double.parse(model.data![i].lat!), double.parse(model.data![i].long!)),
               onTap: () async {
                 markerClick(model: model, i: i);
-                marker = await getBytesFromAssets(ImagePath.selectMarker, 190);
               },
-              icon: BitmapDescriptor.fromBytes(marker! /*i == 0 ? await getBytesFromAssets(ImagePath.selectMarker, 190) : await getBytesFromAssets(ImagePath.marker, 160)*/),
+              icon: BitmapDescriptor.fromBytes( await getBytesFromAssets(ImagePath.marker, 160)),
             ),
           );
         }

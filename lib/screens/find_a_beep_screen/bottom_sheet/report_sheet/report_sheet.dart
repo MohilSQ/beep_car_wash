@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/report_sheet/report_controller.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:beep_car_wash/widgets/custom_text_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -146,7 +149,7 @@ class ReportSheet extends GetView<ReportController> {
                           ),
                           SizedBox(width: 4.w),
                           Text(
-                            Strings.update,
+                            Strings.add,
                             style: TextStyle(
                               color: AppColors.appColorText,
                               fontWeight: FontWeight.bold,
@@ -311,8 +314,8 @@ class ReportSheet extends GetView<ReportController> {
                 elevation: 0,
                 borderRadius: 0,
                 backgroundColor: AppColors.transparentColor,
-                text: Strings.selectProfilePicture,
-                icon: Icons.image,
+                text: Strings.selectAPhoto,
+                icon: Platform.isAndroid? Icons.image:CupertinoIcons.photo_on_rectangle,
                 iconColor: AppColors.lightTextColor,
                 widgetSpace: 1.5.h,
                 widgetMainAxis: MainAxisAlignment.start,
@@ -332,8 +335,8 @@ class ReportSheet extends GetView<ReportController> {
                 elevation: 0,
                 borderRadius: 0,
                 backgroundColor: AppColors.transparentColor,
-                text: Strings.takeAProfilePicture,
-                icon: Icons.camera_alt,
+                text: Strings.takeAPicture,
+                icon: Platform.isAndroid?Icons.camera_alt: CupertinoIcons.camera,
                 iconColor: AppColors.lightTextColor,
                 widgetSpace: 1.5.h,
                 widgetMainAxis: MainAxisAlignment.start,
