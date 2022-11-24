@@ -31,6 +31,7 @@ class DrawerScreen extends GetView<DrawerScreenController> {
       },
       child: Scaffold(
         key: Constants.scaffoldKey,
+        drawerEdgeDragWidth: 40,
         drawer: Drawer(
           backgroundColor: AppColors.transparentColor,
           width: 78.6.w,

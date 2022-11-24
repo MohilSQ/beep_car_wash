@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
@@ -13,6 +15,7 @@ import 'package:beep_car_wash/widgets/custom_appbar.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:beep_car_wash/widgets/custom_text_field.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -326,7 +329,7 @@ class SettingsScreen extends GetView<SettingsController> {
                 borderRadius: 0,
                 backgroundColor: AppColors.transparentColor,
                 text: Strings.selectProfilePicture,
-                icon: Icons.image,
+                icon: Platform.isAndroid ? Icons.image : CupertinoIcons.photo_on_rectangle,
                 iconColor: AppColors.lightTextColor,
                 widgetSpace: 1.5.h,
                 widgetMainAxis: MainAxisAlignment.start,
@@ -347,7 +350,7 @@ class SettingsScreen extends GetView<SettingsController> {
                 borderRadius: 0,
                 backgroundColor: AppColors.transparentColor,
                 text: Strings.takeAProfilePicture,
-                icon: Icons.camera_alt,
+                icon: Platform.isAndroid ? Icons.camera_alt : CupertinoIcons.camera,
                 iconColor: AppColors.lightTextColor,
                 widgetSpace: 1.5.h,
                 widgetMainAxis: MainAxisAlignment.start,

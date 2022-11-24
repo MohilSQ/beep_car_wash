@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/model/common_model.dart';
-import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/report_sheet/report_model.dart';
+import 'package:beep_car_wash/model/responce_model/report_respose_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,7 +12,7 @@ import '../../../../commons/constants.dart';
 import '../../../common_controller.dart';
 
 class ReportController extends GetxController {
-  GetReportOptionModel reportOptionModel = GetReportOptionModel();
+  GetReportOptionResponseModel reportOptionModel = GetReportOptionResponseModel();
   Utils utils = Utils();
   RxString noData = "".obs;
   RxString issueId = "".obs;
@@ -52,7 +52,7 @@ class ReportController extends GetxController {
       params: formData,
     );
 
-    GetReportOptionModel model = GetReportOptionModel.fromJson(data);
+    GetReportOptionResponseModel model = GetReportOptionResponseModel.fromJson(data);
     if (model.code == 200) {
       reportOptionModel = model;
       if (model.data!.isEmpty) {

@@ -46,8 +46,9 @@ class FindABeepScreen extends GetView<FindABeepController> {
                           // initialCameraPosition: const CameraPosition(target: LatLng(40.7127753, -74.0059728), zoom: 18),
                           initialCameraPosition: CameraPosition(target: LatLng(Constants.latitude, Constants.longitude), zoom: 16),
                           markers: Set<Marker>.of(controller.markers),
-                          onMapCreated: (GoogleMapController googleMapController) {
+                          onMapCreated: (GoogleMapController googleMapController) async {
                             controller.mapController = googleMapController;
+                            controller.mapController!.setMapStyle(await DefaultAssetBundle.of(context).loadString('assets/map_json/map_style.json'));
                           },
                         )
                       : const Center(child: CircularProgressIndicator()),
