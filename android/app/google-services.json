@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "488574869249",
+    "firebase_url": "https://beepwash-default-rtdb.firebaseio.com",
+    "project_id": "beepwash",
+    "storage_bucket": "beepwash.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488574869249:android:020888fcd80ea9e26c8500",
+        "android_client_info": {
+          "package_name": "com.app.beep_car_wash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488574869249-9r0i91pt9u5idr93l9c26546pu6cl6d8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPtsxYB15nIJiXNMgojgZgsG3BkOz1wHg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488574869249-9r0i91pt9u5idr93l9c26546pu6cl6d8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "488574869249-4ae67fifdnhp000s3s11lo1o9s0d7fsn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.beepCarWash"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
