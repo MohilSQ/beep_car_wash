@@ -14,8 +14,6 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
-	<key>NSMicrophoneUsageDescription</key>
-    <string>your usage description here</string>
 	<key>CFBundleName</key>
 	<string>beep_car_wash</string>
 	<key>CFBundlePackageType</key>
@@ -26,24 +24,34 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>comgooglemaps</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsLocalNetworking</key>
+        <true/>
+    </dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Beep want to use your camera to take your pofile picture and scan QR code</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Beep want to access your location to get best location search option.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Beep want to access your location to get best location search option.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>your usage description here</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Beep want to use your photo library to set your pofile picture</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Beep want to access your location to get best location search option.</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>Beep want to access your location to get best location search option.</string>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>comgooglemaps</string>
-    </array>
-    <key>io.flutter.embedded_views_preview</key>
-    <true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -54,5 +62,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
 </dict>
 </plist>

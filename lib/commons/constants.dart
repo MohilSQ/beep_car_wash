@@ -52,5 +52,9 @@ class Constants {
   static String mapKey = "AIzaSyBXOkSkbXFoeyRXlZmmqBzxb9eGYY75LOE";
 
   // Global Variable .....
-  static final scaffoldKey = GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+  // Notification Count .....
+  static String notificationCount = '0';
 }
