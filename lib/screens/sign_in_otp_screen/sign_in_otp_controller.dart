@@ -27,6 +27,8 @@ class SignInOTPController extends GetxController {
     var formData = ({
       "otp": otpText.value.trim(),
       "token": Get.arguments[2],
+      "device_id": getStorage.readString(getStorage.deviceId),
+
     });
     final data = await APIFunction().postApiCall(
       context: Get.context!,

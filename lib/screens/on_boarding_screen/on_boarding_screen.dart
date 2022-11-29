@@ -62,7 +62,7 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
                       text: Strings.getStarted,
                       onPressed: () {
                         Get.to(() => const SignInScreen(), binding: SignInBindings());
-
+                        // controller.sendPush("Hello new push");
                       },
                     ),
                     SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),
