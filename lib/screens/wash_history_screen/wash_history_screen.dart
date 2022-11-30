@@ -58,6 +58,15 @@ class WashHistoryScreen extends GetView<WashHistoryController> {
                                     fontSize: 11.sp,
                                   ),
                                 ),
+                                const Spacer(),
+                                Text(
+                                  DateFormat.Hm().format(DateTime.parse(controller.utils.utcToLocal(obj.washStart!))),
+                                  style: TextStyle(
+                                    color: AppColors.lightTextColor,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 11.sp,
+                                  ),
+                                ),
                               ],
                             ),
                             SizedBox(height: 1.h),
@@ -86,7 +95,7 @@ class WashHistoryScreen extends GetView<WashHistoryController> {
                                             crossAxisAlignment: CrossAxisAlignment.center,
                                             children: [
                                               Text(
-                                                "${DateTime.parse(controller.utils.utcToLocal(obj.washStart!)).difference(DateTime.parse(controller.utils.utcToLocal(obj.washEnd!))).inMinutes} Min",
+                                                "${obj.totalUsedMints} Min",
                                                 style: TextStyle(
                                                   color: AppColors.darkTextColor,
                                                   fontWeight: FontWeight.bold,

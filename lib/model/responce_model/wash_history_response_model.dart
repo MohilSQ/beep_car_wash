@@ -24,12 +24,14 @@ class WashHistoryResponseModel {
 class Data {
   final String? washStart;
   final String? washEnd;
+  final String? totalUsedMints;
   final String? amount;
   final String? address;
 
   Data({
     this.washStart,
     this.washEnd,
+    this.totalUsedMints,
     this.amount,
     this.address,
   });
@@ -37,12 +39,14 @@ class Data {
   Data.fromJson(Map<String, dynamic> json)
       : washStart = json['wash_start'] as String?,
         washEnd = json['wash_end'] as String?,
+        totalUsedMints = json['total_used_mints'] as String?,
         amount = json['amount'] as String?,
         address = json['address'] as String?;
 
   Map<String, dynamic> toJson() => {
         'wash_start': washStart,
         'wash_end': washEnd,
+        'total_used_mints': totalUsedMints,
         'amount': amount,
         'address': address,
       };

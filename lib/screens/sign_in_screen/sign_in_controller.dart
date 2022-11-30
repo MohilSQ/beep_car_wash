@@ -126,25 +126,11 @@ class SignInController extends GetxController {
       printAction('''
             Logged in!
 
-            token: ${accessToken.token}
-            facebook_id: ${accessToken.userId}
-            email = ${userData['email']};
-            name = ${userData['name']};
-            first_name = ${userData['first_name']};
-            last_name = ${userData['last_name']};
-            profilePic = ${userData['picture']['data']['url']};
+            Facebook Id: ${accessToken.userId}
+            Email: ${userData['email']};
+            Name: ${userData['name']};
+            Profile Pic: ${userData['picture']['data']['url']};
       ''');
-
-      // is_facebook = "1";
-      // facebook_id = accessToken.userId;
-      // is_google = "0";
-      // google_id = "";
-      // is_apple = "0";
-      // apple_id = "";
-      // socialEmail = userData['email'];
-      // fname = userData['first_name'];
-      // lname = userData['last_name'];
-      // profilePic = userData['picture']['data']['url'];
 
       // utils.isNetworkAvailable(context: context, showDialog: false).then((value) => checkNetwork(value, 'isRegister'));
     } else if (result.status == LoginStatus.cancelled) {
@@ -170,28 +156,15 @@ class SignInController extends GetxController {
       currentUser = account;
 
       if (account != null) {
-        // is_facebook = "0";
-        // facebook_id = "";
-        // is_google = "1";
-        // is_apple = "0";
-        // apple_id = "";
-        // google_id = account.id;
-        // socialEmail = account.email;
-        // fname = account.displayName ?? "";
-        // name = fname!.split(" ");
-        // fname = name![0];
-        // lname = name!.length > 1 ? name![1] : "";
-        // profilePic = account.photoUrl ?? "";
-        // printAction('''
-        //         Logged in!
-        //         token: ${account.authHeaders}
-        //         id = ${account.id}
-        //         displayName: ${account.displayName ?? ""}
-        //         email = ${account.email}
-        //         first_name = $fname
-        //         last_name = $lname
-        //         photoUrl = ${account.photoUrl ?? ""}
-        //     ''');
+      printAction('''
+          Google Logged in!
+
+          Google Id: ${account.id}
+          Email: ${account.email};
+          Name: ${account.displayName??""};
+          Profile Pic: ${account.photoUrl??""};
+      ''');
+
         await account.clearAuthCache();
         await googleSignIn.disconnect();
         await googleSignIn.signOut();

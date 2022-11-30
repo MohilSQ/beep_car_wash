@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Beep</string>
+
+    <string name="google_key">AIzaSyBXOkSkbXFoeyRXlZmmqBzxb9eGYY75LOE</string>
+
+    <string name="facebook_app_id">205759723541760</string>
+    <string name="fb_login_protocol_scheme">fb205759723541760</string>
+    <string name="facebook_client_token">11cd622330afa40efcf3fd16ddf29024</string>
+</resources>
