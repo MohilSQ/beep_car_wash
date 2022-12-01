@@ -158,7 +158,9 @@ class SignInScreen extends GetView<SignInController> {
                             backgroundColor: AppColors.transparentColor,
                             borderSide: BorderSide(color: AppColors.appColor),
                             elevation: 0,
-                            onPressed: () {},
+                            onPressed: () {
+                              controller.signInWithGoogle();
+                            },
                           ),
                           SizedBox(height: 2.2.h),
                           CustomButton(
@@ -169,7 +171,9 @@ class SignInScreen extends GetView<SignInController> {
                             backgroundColor: AppColors.transparentColor,
                             borderSide: BorderSide(color: AppColors.appColor),
                             elevation: 0,
-                            onPressed: () {},
+                            onPressed: () {
+                              controller.facebookLogin();
+                            },
                           ),
                           SizedBox(height: 2.2.h),
                           CustomButton(
@@ -180,7 +184,9 @@ class SignInScreen extends GetView<SignInController> {
                             backgroundColor: AppColors.transparentColor,
                             borderSide: BorderSide(color: AppColors.appColor),
                             elevation: 0,
-                            onPressed: () {},
+                            onPressed: () {
+                              controller.appleLogin();
+                            },
                           ),
                           SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),
                         ],

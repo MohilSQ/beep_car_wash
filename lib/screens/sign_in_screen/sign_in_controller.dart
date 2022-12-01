@@ -6,6 +6,10 @@ import 'package:beep_car_wash/commons/get_storage_data.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/model/responce_model/common_token_responce_model.dart';
+import 'package:beep_car_wash/model/responce_model/otp_verification_response_model.dart';
+import 'package:beep_car_wash/model/responce_model/user_data_model.dart';
+import 'package:beep_car_wash/screens/drawer_screen/drawer_binding.dart';
+import 'package:beep_car_wash/screens/drawer_screen/drawer_screen.dart';
 import 'package:beep_car_wash/screens/sign_in_otp_screen/sign_in_otp_binding.dart';
 import 'package:beep_car_wash/screens/sign_in_otp_screen/sign_in_otp_screen.dart';
 import 'package:country_calling_code_picker/picker.dart';
@@ -15,7 +19,7 @@ import 'package:get/get.dart' hide Response, FormData, MultipartFile;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:sizer/sizer.dart';
-import 'package:http/http.dart'as http;
+import 'package:http/http.dart' as http;
 
 class SignInController extends GetxController {
   Utils utils = Utils();
@@ -27,9 +31,17 @@ class SignInController extends GetxController {
 
   RxBool? isLoading = false.obs;
 
+  String id = "";
+  String email = "";
+  String name = "";
+  String photoUrl = "";
+
+  UserDataModel userDataModel = UserDataModel();
+
   @override
   void onInit() {
     initCountry();
+    successGoogle();
     super.onInit();
   }
 
@@ -114,7 +126,7 @@ class SignInController extends GetxController {
   }
 
   /// ---- Social Facebook Login ------------>>>
-   facebookLogin() async {
+  facebookLogin() async {
     final LoginResult result = await FacebookAuth.instance.login(permissions: ['email']);
 
     if (result.status == LoginStatus.success) {
@@ -132,7 +144,13 @@ class SignInController extends GetxController {
             Profile Pic: ${userData['picture']['data']['url']};
       ''');
 
-      // utils.isNetworkAvailable(context: context, showDialog: false).then((value) => checkNetwork(value, 'isRegister'));
+      id = accessToken.userId;
+      email = userData['email'];
+      name = userData['name'];
+      photoUrl = userData['picture']['data']['url'];
+      update();
+
+      socialLoginAPI();
     } else if (result.status == LoginStatus.cancelled) {
       utils.showSnackBar(message: 'Login cancelled by the user.', context: Get.context!);
     } else if (result.status == LoginStatus.failed) {
@@ -156,21 +174,27 @@ class SignInController extends GetxController {
       currentUser = account;
 
       if (account != null) {
-      printAction('''
+        printAction('''
           Google Logged in!
 
           Google Id: ${account.id}
           Email: ${account.email};
-          Name: ${account.displayName??""};
-          Profile Pic: ${account.photoUrl??""};
+          Name: ${account.displayName ?? ""};
+          Profile Pic: ${account.photoUrl ?? ""};
       ''');
+
+        id = account.id;
+        email = account.email;
+        name = account.displayName ?? "";
+        photoUrl = account.photoUrl ?? "";
+        update();
 
         await account.clearAuthCache();
         await googleSignIn.disconnect();
         await googleSignIn.signOut();
         currentUser = null;
 
-        // _utils!.isNetworkAvailable(showDialog: false, context: context).then((value) => checkNetwork(value, 'isRegister'));
+        socialLoginAPI();
       }
     });
   }
@@ -183,9 +207,9 @@ class SignInController extends GetxController {
         AppleIDAuthorizationScopes.fullName,
       ],
       webAuthenticationOptions: WebAuthenticationOptions(
-        clientId: 'com.aboutyou.dart_packages.sign_in_with_apple.example',
+        clientId: 'com.app.beepCarWash.appleLogin',
         redirectUri: Uri.parse(
-          'https://flutter-sign-in-with-apple-example.glitch.me/callbacks/sign_in_with_apple',
+          'https://com.app.beepCarWash.appleLogin/callbacks/sign_in_with_apple',
         ),
       ),
       nonce: 'example-nonce',
@@ -196,7 +220,7 @@ class SignInController extends GetxController {
     // via Sign in with Apple into a session in your system
     final signInWithAppleEndpoint = Uri(
       scheme: 'https',
-      host: 'flutter-sign-in-with-apple-example.glitch.me',
+      host: 'com.app.beepCarWash.appleLogin',
       path: '/sign_in_with_apple',
       queryParameters: <String, String>{
         'code': credential.authorizationCode,
@@ -207,27 +231,22 @@ class SignInController extends GetxController {
       },
     );
 
-    printAction("email: ------------->${credential.email}");
-    printAction("familyName: ------------->${credential.familyName}");
-    printAction("authorizationCode: ------------->${credential.authorizationCode}");
-    printAction("identityToken: ------------->${credential.identityToken}");
-    printAction("givenName: ------------->${credential.givenName}");
-    printAction("userIdentifier: ------------->${credential.userIdentifier}");
+    printAction('''
+          Apple Logged in!
 
-    // is_facebook = "0";
-    // facebook_id = "";
-    // is_google = "0";
-    // google_id = "";
-    // is_apple = "1";
-    // apple_id = credential.userIdentifier;
-    // socialEmail = credential.email;
-    // appleEmail = credential.email;
-    //
-    // fname = credential.givenName;
-    // lname = credential.familyName;
-    // appleFname = credential.givenName;
-    // appleLname = credential.familyName;
-    // _utils!.isNetworkAvailable(showDialog: false, context: context).then((value) => checkNetwork(value, 'isRegister'));
+          Google Id: ${credential.userIdentifier}
+          Email: ${credential.email};
+          Name: ${"${credential.givenName!} ${credential.familyName!}"};
+          Profile Pic: "";
+      ''');
+
+    id = credential.userIdentifier!;
+    email = credential.email!;
+    name = "${credential.givenName ?? ""} ${credential.familyName ?? ""}";
+    photoUrl = "";
+    update();
+
+    socialLoginAPI();
     final session = await http.Client().post(
       signInWithAppleEndpoint,
     );
@@ -235,4 +254,37 @@ class SignInController extends GetxController {
     return "";
   }
 
+  /// ---- Social Login Api ------------>>>
+  socialLoginAPI() async {
+    var formData = ({
+      'social_id': id,
+      'name': email,
+      'email': name,
+      'avatar': photoUrl,
+      'device_id': getStorage.readString(getStorage.deviceId),
+    });
+    final data = await APIFunction().postApiCall(
+      context: Get.context!,
+      apiName: Constants.socialLogin,
+      params: formData,
+    );
+
+    OTPVerificationResponseModel model = OTPVerificationResponseModel.fromJson(data);
+
+    if (model.code == 200) {
+      utils.showToast(context: Get.context!, message: model.msg!);
+      userDataModel.firstName = model.userDetail!.name!.split(" ").first;
+      userDataModel.lastName = model.userDetail!.name!.split(" ").last;
+      userDataModel.email = model.userDetail!.email;
+      userDataModel.cCode = "";
+      userDataModel.phoneNumber = "";
+      userDataModel.token = model.token;
+      userDataModel.profileImage = model.userDetail!.avatar!;
+      update();
+      getStorage.saveObject(getStorage.loginData, userDataModel);
+      Get.off(() => const DrawerScreen(), binding: DrawerBindings());
+    } else if (model.code == 201) {
+      utils.showSnackBar(context: Get.context!, message: model.msg!);
+    }
+  }
 }
