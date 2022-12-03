@@ -3,6 +3,7 @@ import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/map_service.dart';
 import 'package:beep_car_wash/commons/strings.dart';
+import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/nearest_beep_sheet/nearest_beep_sheet.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/find_a_beep_controller.dart';
 import 'package:beep_car_wash/widgets/custom_container.dart';
 import 'package:beep_car_wash/widgets/custom_text_field.dart';
@@ -43,7 +44,6 @@ class FindABeepScreen extends GetView<FindABeepController> {
                           compassEnabled: false,
                           myLocationButtonEnabled: false,
                           trafficEnabled: false,
-                          // initialCameraPosition: const CameraPosition(target: LatLng(40.7127753, -74.0059728), zoom: 18),
                           initialCameraPosition: CameraPosition(target: LatLng(Constants.latitude, Constants.longitude), zoom: 16),
                           markers: Set<Marker>.of(controller.markers),
                           onMapCreated: (GoogleMapController googleMapController) async {
@@ -188,6 +188,18 @@ class FindABeepScreen extends GetView<FindABeepController> {
                   ),
                 ],
               ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Obx(() {
+                return AnimatedContainer(
+                  // height: controller.bottomSheetHeight.value,
+                  duration: const Duration(milliseconds: 3000),
+                  child: NearestBeepSheet(
+                    machineData: controller.machinesResponseModel.data![controller.dataIndex.value],
+                  ),
+                );
+              }),
             ),
           ],
         );
