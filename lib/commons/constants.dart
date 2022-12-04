@@ -46,6 +46,7 @@ class Constants {
   static const String verifyCouponCode = 'verify_coupon_code';
   static const String saveCardPayment = 'save_card_payment';
   static const String socialLogin = 'social_login';
+  static const String checkJobStatus = 'check_job_status';
 
   // Location And Map .....
   static double latitude = 0.0;

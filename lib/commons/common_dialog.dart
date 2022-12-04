@@ -90,15 +90,14 @@ void alertActionDialog({
 }
 
 void messageDialog({
-  required BuildContext context,
   String? massage,
   String? btnName,
   GestureTapCallback? onBtnClick,
 }) async {
   Utils utils = Utils();
-  utils.hideKeyboard(context);
+  utils.hideKeyboard(Get.context!);
   showDialog(
-      context: context,
+      context: Get.context!,
       barrierColor: Colors.black26,
       barrierDismissible: true,
       builder: (BuildContext context) {

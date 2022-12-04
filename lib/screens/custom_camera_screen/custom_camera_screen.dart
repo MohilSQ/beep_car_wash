@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:beep_car_wash/commons/common_dialog.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
@@ -32,119 +33,129 @@ class CustomCameraScreen extends GetView<CustomCameraController> {
         controller.controller!.dispose();
       },
       builder: (logic) {
-        return Scaffold(
-          body: SafeArea(
-            bottom: false,
-            top: false,
-            child: Container(
-              color: AppColors.blackColor,
-              child: Stack(
-                children: [
-                  !controller.isCameraInitialized
-                      ? Container(color: AppColors.blackColor)
-                      : Container(
-                          height: 86.h,
-                          width: controller.controller!.value.previewSize!.width,
-                          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                          child: CameraPreview(controller.controller!),
-                        ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom + 3.h),
-                      child: Row(
-                        children: [
-                          const Expanded(child: SizedBox()),
-                          Expanded(
-                            child: InkWell(
-                              onTap: () async {
-                                XFile? rawImage = await controller.takePicture();
-                                File imageFile = File(rawImage!.path);
-                                controller.uploadMachinePhotoAPI(imageFile);
-                              },
-                              child: Image.asset(
-                                ImagePath.takeImage,
-                                height: 8.h,
-                                width: 8.h,
-                              ),
-                            ),
+        return WillPopScope(
+          onWillPop: () {
+            messageDialog(
+              massage: "Please first tack machine photo and complete the payment.",
+              btnName: "Ok",
+            );
+            return Future(() => false);
+          },
+          child: Scaffold(
+            body: SafeArea(
+              bottom: false,
+              top: false,
+              child: Container(
+                color: AppColors.blackColor,
+                child: Stack(
+                  children: [
+                    !controller.isCameraInitialized
+                        ? Container(color: AppColors.blackColor)
+                        : Container(
+                            height: 86.h,
+                            width: controller.controller!.value.previewSize!.width,
+                            padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                            child: CameraPreview(controller.controller!),
                           ),
-                          Expanded(
-                            child: InkWell(
-                              onTap: () {
-                                controller.isCameraInitialized = false;
-                                if (controller.cameraSelected.value == 0) {
-                                  controller.cameraSelected.value = 1;
-                                  controller.onNewCameraSelected(cameras[1]);
-                                } else {
-                                  controller.cameraSelected.value = 0;
-                                  controller.onNewCameraSelected(cameras[0]);
-                                }
-                                controller.update();
-                              },
-                              child: Container(
-                                padding: EdgeInsets.all(0.9.h),
-                                height: 6.h,
-                                width: 6.h,
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom + 3.h),
+                        child: Row(
+                          children: [
+                            const Expanded(child: SizedBox()),
+                            Expanded(
+                              child: InkWell(
+                                onTap: () async {
+                                  XFile? rawImage = await controller.takePicture();
+                                  File imageFile = File(rawImage!.path);
+                                  controller.uploadMachinePhotoAPI(imageFile);
+                                },
                                 child: Image.asset(
-                                  ImagePath.flipCamera,
-                                  color: Colors.white,
+                                  ImagePath.takeImage,
+                                  height: 8.h,
+                                  width: 8.h,
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 1.h, left: 2.h, right: 3.h),
-                        child: Row(
-                          children: [
-                            BackButton(
-                              color: AppColors.whiteColor,
-                            ),
-                            const Spacer(),
-                            GestureDetector(
-                              behavior: HitTestBehavior.opaque,
-                              onTap: () async {
-                                if (controller.controller!.value.flashMode == FlashMode.torch) {
-                                  controller.controller!.setFlashMode(FlashMode.off);
-                                } else {
-                                  controller.controller!.setFlashMode(FlashMode.torch);
-                                }
-                                controller.update();
-                              },
-                              child: Container(
-                                padding: EdgeInsets.all(1.h),
-                                height: 4.5.h,
-                                width: 4.5.h,
-                                child: Image.asset(
-                                  ImagePath.flashLight,
+                            Expanded(
+                              child: InkWell(
+                                onTap: () {
+                                  controller.isCameraInitialized = false;
+                                  if (controller.cameraSelected.value == 0) {
+                                    controller.cameraSelected.value = 1;
+                                    controller.onNewCameraSelected(cameras[1]);
+                                  } else {
+                                    controller.cameraSelected.value = 0;
+                                    controller.onNewCameraSelected(cameras[0]);
+                                  }
+                                  controller.update();
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(0.9.h),
+                                  height: 6.h,
+                                  width: 6.h,
+                                  child: Image.asset(
+                                    ImagePath.flipCamera,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
                           ],
                         ),
                       ),
-                      SizedBox(height: 6.h),
-                      Text(
-                        Strings.customCameraStr,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.whiteColor,
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 1.h, left: 2.h, right: 3.h),
+                          child: Row(
+                            children: [
+                              const Spacer(),
+                              GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+                                onTap: () async {
+                                  if (controller.controller!.value.flashMode == FlashMode.torch) {
+                                    controller.controller!.setFlashMode(FlashMode.off);
+                                  } else {
+                                    controller.controller!.setFlashMode(FlashMode.torch);
+                                  }
+                                  controller.update();
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(1.h),
+                                  height: 4.5.h,
+                                  width: 4.5.h,
+                                  child: Image.asset(
+                                    !controller.isCameraInitialized
+                                        ? ImagePath.flashLight
+                                        : controller.controller!.value.flashMode == FlashMode.torch
+                                            ? ImagePath.flashLightYellow
+                                            : ImagePath.flashLight,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      const Spacer(),
-                      SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),
-                    ],
-                  ),
-                ],
+                        SizedBox(height: 6.h),
+                        Text(
+                          Strings.customCameraStr,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.whiteColor,
+                          ),
+                        ),
+                        const Spacer(),
+                        SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

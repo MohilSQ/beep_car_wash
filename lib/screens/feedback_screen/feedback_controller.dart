@@ -1,5 +1,5 @@
 import 'package:beep_car_wash/commons/utils.dart';
-import 'package:beep_car_wash/model/responce_model/get_feedback_remark_responce_model.dart';
+import 'package:beep_car_wash/model/responce_model/get_feedback_remark_response_model.dart';
 import 'package:beep_car_wash/screens/drawer_screen/drawer_binding.dart';
 import 'package:beep_car_wash/screens/drawer_screen/drawer_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,6 +17,7 @@ class FeedbackController extends GetxController {
 
   RxList<String> list = <String>[].obs;
   RxList<String> options = <String>[].obs;
+  RxList<String> optionsID = <String>[].obs;
   RxString rating = "".obs;
 
   /// ---- FeedbackRemarks Api ------------>>>
@@ -36,8 +37,10 @@ class FeedbackController extends GetxController {
     if (model.code == 200) {
       getFeedbackRemarkModel = model;
       options.value = [];
+      optionsID.value = [];
       for (int i = 0; i < getFeedbackRemarkModel.data!.length; i++) {
         options.add(getFeedbackRemarkModel.data?[i].remark ?? "");
+        optionsID.add(getFeedbackRemarkModel.data?[i].id ?? "");
       }
       update();
     } else if (model.code == 201) {

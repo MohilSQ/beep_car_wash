@@ -79,7 +79,7 @@ class CustomCameraController extends GetxController {
     );
 
     if (data["code"] == 200) {
-      Get.to(() => const BillingScreen(), binding: BillingBinding(), arguments: [Get.arguments[0], Get.arguments[1]]);
+      Get.to(() => const BillingScreen(), binding: BillingBinding(), arguments: [Get.arguments[0], Get.arguments[1], Get.arguments[2]]);
     } else if (data["code"] == 201) {
       Utils().showSnackBar(context: Get.context!, message: data["msg"]);
     }

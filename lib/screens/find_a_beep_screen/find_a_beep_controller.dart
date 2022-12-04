@@ -14,20 +14,16 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_place/google_place.dart';
-import 'package:sizer/sizer.dart';
 
 class FindABeepController extends GetxController {
   Utils utils = Utils();
   TextEditingController searchController = TextEditingController();
 
-  RxDouble bottomSheetHeight= 0.0.obs;
-  RxInt dataIndex = 0.obs;
   MachinesResponseModel machinesResponseModel = MachinesResponseModel();
 
   RxBool mapView = false.obs;
   RxBool mapSearchView = false.obs;
   GoogleMapController? mapController;
-
   RxList<Marker> markers = <Marker>[].obs;
 
   GooglePlace? googlePlace;
@@ -92,17 +88,13 @@ class FindABeepController extends GetxController {
               markerId: MarkerId(i.toString()),
               position: LatLng(double.parse(model.data![i].lat!), double.parse(model.data![i].long!)),
               onTap: () async {
-                mapController!.animateCamera(CameraUpdate.newLatLngZoom(LatLng(double.parse(model.data![i].lat!), double.parse(model.data![i].long!)), 16));
-                dataIndex.value = i;
-                bottomSheetHeight.value = 30.h;
-                // markerClick(model: model, i: i);
+                markerClick(model: model, i: i);
               },
               icon: BitmapDescriptor.fromBytes(await getBytesFromAssets(ImagePath.marker, 160)),
             ),
           );
         }
-
-        // markerClick(model: model, i: 0);
+        markerClick(model: model, i: 0);
       }
     } else if (model.code == 201) {
       utils.showSnackBar(context: Get.context!, message: data["msg"]);

@@ -43,6 +43,7 @@ class ImagePath {
 
   /// ------ Scan QR Screen ------------------>>>>
   static String flashLight = "${base}flash_light.png";
+  static String flashLightYellow = "${base}flash_light_yellow.png";
 
   /// ------ Drawer Screen ------------------>>>>
   static String findABeep = "${base}find_a_beep.png";

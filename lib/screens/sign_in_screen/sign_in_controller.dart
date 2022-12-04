@@ -5,7 +5,7 @@ import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/get_storage_data.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/commons/utils.dart';
-import 'package:beep_car_wash/model/responce_model/common_token_responce_model.dart';
+import 'package:beep_car_wash/model/responce_model/common_token_response_model.dart';
 import 'package:beep_car_wash/model/responce_model/otp_verification_response_model.dart';
 import 'package:beep_car_wash/model/responce_model/user_data_model.dart';
 import 'package:beep_car_wash/screens/drawer_screen/drawer_binding.dart';
@@ -17,9 +17,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart' hide Response, FormData, MultipartFile;
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:sizer/sizer.dart';
-import 'package:http/http.dart' as http;
 
 class SignInController extends GetxController {
   Utils utils = Utils();

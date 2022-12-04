@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:beep_car_wash/api_repository/api_function.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/utils.dart';
@@ -12,7 +14,20 @@ class TimerController extends GetxController {
   Utils utils = Utils();
   Rx<CountDownController> countDownController = CountDownController().obs;
   Stopwatch stopwatch = Stopwatch();
-  RxInt remainTime = 0.obs;
+
+  Timer? timer;
+  RxInt start = 0.obs;
+
+  void startTimer() {
+    timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+      if (start.value == 0) {
+        timer.cancel();
+      } else {
+        start.value--;
+      }
+    });
+    update();
+  }
 
   /// ---- Stop Machine API ------------>>>
   stopMachineAPI(String washId) async {
@@ -30,7 +45,7 @@ class TimerController extends GetxController {
     StopMachineResponseModel model = StopMachineResponseModel.fromJson(data);
     if (model.code == 200) {
       countDownController.value.pause();
-      Get.to(() => const CustomCameraScreen(), binding: CustomCameraBinding(), arguments: [data, washId]);
+      Get.to(() => const CustomCameraScreen(), binding: CustomCameraBinding(), arguments: [data, washId, false]);
     } else if (model.code == 201) {
       utils.showSnackBar(context: Get.context!, message: data["msg"]);
     }

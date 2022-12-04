@@ -81,6 +81,7 @@ dependencies:
   sign_in_with_apple: ^4.2.0
 
   flutter_paypal: ^0.0.8
+  square_in_app_payments: ^1.7.5
 
   firebase_messaging: ^14.1.2
   firebase_core: ^2.3.0
@@ -115,7 +116,7 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/
-    - assets/map_json/
+    - assets/json_file/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

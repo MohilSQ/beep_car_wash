@@ -1,3 +1,4 @@
+import 'package:beep_car_wash/commons/common_dialog.dart';
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/model/responce_model/stop_machine_response_model.dart';
 import 'package:beep_car_wash/screens/biling_screen/billing_controller.dart';
@@ -23,14 +24,18 @@ class BillingScreen extends GetView<BillingController> {
     Utils.darkStatusBar();
     return GetBuilder<BillingController>(
       initState: (state) {
-        controller.stopMachineResponseModel = StopMachineResponseModel.fromJson(Get.arguments[0]);
+        controller.stopMachineResponseModel = Get.arguments[2] ? Get.arguments[0] : StopMachineResponseModel.fromJson(Get.arguments[0]);
         controller.washId.value = Get.arguments[1];
         controller.setMarker(double.parse(controller.stopMachineResponseModel!.data?.machineLat ?? ""), double.parse(controller.stopMachineResponseModel!.data?.machineLong ?? ""));
       },
       builder: (logic) {
         return WillPopScope(
-          onWillPop: () async {
-            return false;
+          onWillPop: () {
+            messageDialog(
+              massage: "Please first complete the payment.",
+              btnName: "Ok",
+            );
+            return Future(() => false);
           },
           child: Scaffold(
             body: SafeArea(
