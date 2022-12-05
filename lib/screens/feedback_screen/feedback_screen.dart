@@ -44,25 +44,40 @@ class FeedbackScreen extends GetView<FeedbackController> {
                       left: 4.w,
                     ),
                     children: [
-                      Text(
-                        "Give Feedback",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.blackColor,
-                        ),
-                      ),
-                      SizedBox(height: 3.h),
-                      Text(
-                        "How did we do?",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 10.sp,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.blackColor,
-                        ),
-                      ),
+                      controller.rating.value != "5"
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Give Feedback",
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.blackColor,
+                                  ),
+                                ),
+                                SizedBox(height: 3.h),
+                                Text(
+                                  "How did we do?",
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.blackColor,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Text(
+                              "How was our service today?",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.blackColor,
+                              ),
+                            ),
                       SizedBox(height: 2.h),
                       RatingBar.builder(
                         initialRating: 0,
@@ -106,18 +121,20 @@ class FeedbackScreen extends GetView<FeedbackController> {
                               choiceStyle: C2ChipStyle.toned(),
                             ),
                       SizedBox(height: 5.h),
-                      CustomTextField(
-                        isTitle: true,
-                        isHight: false,
-                        title: Strings.comment,
-                        hintText: Strings.writeAComment,
-                        textInputAction: TextInputAction.next,
-                        inputType: TextInputType.multiline,
-                        controller: controller.comment,
-                        minLines: 5,
-                        isMaxLines: true,
-                        padding: EdgeInsets.all(1.8.h),
-                      ),
+                      controller.rating.value != "5"
+                          ? CustomTextField(
+                              isTitle: true,
+                              isHight: false,
+                              title: Strings.comment,
+                              hintText: Strings.writeAComment,
+                              textInputAction: TextInputAction.next,
+                              inputType: TextInputType.multiline,
+                              controller: controller.comment,
+                              minLines: 5,
+                              isMaxLines: true,
+                              padding: EdgeInsets.all(1.8.h),
+                            )
+                          : Container(),
                       SizedBox(height: MediaQuery.of(context).padding.bottom + 2.h),
                     ],
                   ),

@@ -108,6 +108,7 @@ class FindABeepController extends GetxController {
       context: Get.context!,
       backgroundColor: AppColors.transparentColor,
       barrierColor: AppColors.transparentColor,
+      isScrollControlled: true,
       builder: (context) => NearestBeepSheet(
         machineData: model.data![i],
       ),

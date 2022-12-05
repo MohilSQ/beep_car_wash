@@ -10,7 +10,6 @@ import 'package:beep_car_wash/routes/app_pages.dart';
 import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:beep_car_wash/screens/drawer_screen/drawer_binding.dart';
 import 'package:beep_car_wash/screens/drawer_screen/drawer_screen.dart';
-import 'package:beep_car_wash/screens/notification_screen/notification_bindings.dart';
 import 'package:beep_car_wash/screens/on_boarding_screen/on_boarding_binding.dart';
 import 'package:beep_car_wash/screens/on_boarding_screen/on_boarding_screen.dart';
 import 'package:beep_car_wash/screens/splash_screen/splash_screen.dart';

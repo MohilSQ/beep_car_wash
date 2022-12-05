@@ -47,7 +47,7 @@ class TimerScreen extends GetView<TimerController> {
                   SizedBox(height: 4.h),
                   Obx(() {
                     return Text(
-                      "${Strings.yourRemainsTimeIs}${Duration(seconds: controller.start.value).inMinutes}${Strings.min}",
+                      "${Strings.yourRemainsTimeIs}${Duration(seconds: controller.start.value).toString().split(".").first.toString().replaceAll("0:", "")}${Strings.min}",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 15.sp,
