@@ -6,6 +6,7 @@ class UserDataModel {
   String? phoneNumber;
   String? email;
   String? token;
+   String? referralCode;
 
   UserDataModel({
     this.profileImage = "",
@@ -15,6 +16,7 @@ class UserDataModel {
     this.phoneNumber = "",
     this.email = "",
     this.token = "",
+  this.referralCode = "",
   });
 
   UserDataModel.fromJson(Map<String, dynamic> json)
@@ -24,7 +26,8 @@ class UserDataModel {
         cCode = json['cCode'] as String?,
         phoneNumber = json['phoneNumber'] as String?,
         email = json['email'] as String?,
-        token = json['token'] as String?;
+        token = json['token'] as String?,
+        referralCode = json['referral_code'] as String?;
 
   Map<String, dynamic> toJson() => {
         'profileImage': profileImage,
@@ -34,5 +37,6 @@ class UserDataModel {
         'phoneNumber': phoneNumber,
         'email': email,
         'token': token,
+    'referral_code': referralCode,
       };
 }

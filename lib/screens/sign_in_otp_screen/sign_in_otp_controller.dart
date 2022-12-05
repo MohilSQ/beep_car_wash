@@ -48,6 +48,7 @@ class SignInOTPController extends GetxController {
         userDataModel.phoneNumber = Get.arguments[1];
         userDataModel.token = model.token;
         userDataModel.profileImage = model.userDetail!.avatar!;
+        userDataModel.referralCode = model.userDetail!.referralCode!;
         update();
         getStorage.saveObject(getStorage.loginData, userDataModel);
         Get.off(() => const DrawerScreen(), binding: DrawerBindings());
