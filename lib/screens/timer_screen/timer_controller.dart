@@ -19,6 +19,7 @@ class TimerController extends GetxController {
   RxInt start = 0.obs;
 
   void startTimer() {
+
     timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       if (start.value == 0) {
         timer.cancel();

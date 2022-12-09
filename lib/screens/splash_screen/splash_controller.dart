@@ -1,4 +1,5 @@
 import 'package:beep_car_wash/api_repository/api_function.dart';
+import 'package:beep_car_wash/commons/common_dialog.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/model/responce_model/check_job_status_response_model.dart';
@@ -12,6 +13,8 @@ import 'package:beep_car_wash/screens/drawer_screen/drawer_binding.dart';
 import 'package:beep_car_wash/screens/drawer_screen/drawer_screen.dart';
 import 'package:beep_car_wash/screens/on_boarding_screen/on_boarding_binding.dart';
 import 'package:beep_car_wash/screens/on_boarding_screen/on_boarding_screen.dart';
+import 'package:beep_car_wash/screens/timer_screen/timer_binding.dart';
+import 'package:beep_car_wash/screens/timer_screen/timer_screen.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController {
@@ -19,13 +22,16 @@ class SplashController extends GetxController {
 
   @override
   void onReady() {
-    // if (Get.find<CommonController>().userDataAvailableOrNot()) {
-    //   Get.find<CommonController>().getUserData();
-    //   checkJobStatusAPI();
-    // } else {
-    //   Future.delayed(const Duration(seconds: 3), () => pageNavigation());
-    // }
-    Future.delayed(const Duration(seconds: 3), () => pageNavigation());
+    if (Get.find<CommonController>().userDataAvailableOrNot()) {
+      Get.find<CommonController>().getUserData();
+      checkJobStatusAPI();
+    } else {
+      Future.delayed(
+        const Duration(seconds: 3),
+        () => Get.offAll(() => const OnBoardingScreen(), binding: OnBoardingBindings()),
+      );
+    }
+    // Future.delayed(const Duration(seconds: 3), () => pageNavigation());
     super.onReady();
   }
 
@@ -53,9 +59,10 @@ class SplashController extends GetxController {
 
     CheckJobStatusResponseModel model = CheckJobStatusResponseModel.fromJson(data);
     if (model.code == 200) {
-      if (model.isProcess == 1) {
-        // Get.to(() => const TimerScreen(), binding: TimerBinding(), arguments: [data["data"]["data"]["wash_id"], data["data"]["data"]["wash_timer"]]);
-
+      if (model.isProcess == 0) {
+        Get.offAll(() => const DrawerScreen(), binding: DrawerBindings());
+      } else if (model.isProcess == 1) {
+        Get.to(() => const TimerScreen(), binding: TimerBinding(), arguments: [true, model.washId, model.totalTime, model.remainigTime]);
       } else if (model.isProcess == 2) {
         StopMachineResponseModel stopMachineResponseModel = StopMachineResponseModel(
           data: Data(
@@ -82,7 +89,7 @@ class SplashController extends GetxController {
         Get.to(() => const BillingScreen(), binding: BillingBinding(), arguments: [stopMachineResponseModel, model.washId, true]);
       }
     } else if (model.code == 201) {
-      utils.showSnackBar(context: Get.context!, message: data["msg"]);
+      Get.offAll(() => const DrawerScreen(), binding: DrawerBindings());
     }
   }
 }

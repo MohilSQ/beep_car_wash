@@ -44,7 +44,7 @@ class FeedbackScreen extends GetView<FeedbackController> {
                       left: 4.w,
                     ),
                     children: [
-                      controller.rating.value != "5"
+                      controller.rating.value != "5" && controller.rating.value != "4"
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -121,7 +121,7 @@ class FeedbackScreen extends GetView<FeedbackController> {
                               choiceStyle: C2ChipStyle.toned(),
                             ),
                       SizedBox(height: 5.h),
-                      controller.rating.value != "5"
+                      controller.rating.value != "5" && controller.rating.value != "4"
                           ? CustomTextField(
                               isTitle: true,
                               isHight: false,

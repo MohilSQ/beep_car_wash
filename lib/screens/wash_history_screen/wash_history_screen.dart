@@ -51,22 +51,14 @@ class WashHistoryScreen extends GetView<WashHistoryController> {
                                 ),
                                 SizedBox(width: 1.h),
                                 Text(
-                                  DateFormat("d MMMM yyyy").format(DateTime.parse(controller.utils.utcToLocal(obj.washStart!))),
+                                  DateFormat("d MMMM, yyyy - hh:mm a").format(DateTime.parse(controller.utils.utcToLocal(obj.washStart!))),
                                   style: TextStyle(
                                     color: AppColors.lightTextColor,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 11.sp,
                                   ),
                                 ),
-                                const Spacer(),
-                                Text(
-                                  DateFormat.Hm().format(DateTime.parse(controller.utils.utcToLocal(obj.washStart!))),
-                                  style: TextStyle(
-                                    color: AppColors.lightTextColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 11.sp,
-                                  ),
-                                ),
+
                               ],
                             ),
                             SizedBox(height: 1.h),

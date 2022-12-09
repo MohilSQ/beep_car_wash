@@ -17,6 +17,7 @@ import '../../../scan_qr_code_screen/scan_qr_code_screen.dart';
 
 class ReportSheet extends GetView<ReportController> {
   final String machineId;
+
   const ReportSheet({super.key, required this.machineId});
 
   @override
@@ -315,7 +316,7 @@ class ReportSheet extends GetView<ReportController> {
                 borderRadius: 0,
                 backgroundColor: AppColors.transparentColor,
                 text: Strings.selectAPhoto,
-                icon: Platform.isAndroid? Icons.image:CupertinoIcons.photo_on_rectangle,
+                icon: Platform.isAndroid ? Icons.image : CupertinoIcons.photo_on_rectangle,
                 iconColor: AppColors.lightTextColor,
                 widgetSpace: 1.5.h,
                 widgetMainAxis: MainAxisAlignment.start,
@@ -336,7 +337,7 @@ class ReportSheet extends GetView<ReportController> {
                 borderRadius: 0,
                 backgroundColor: AppColors.transparentColor,
                 text: Strings.takeAPicture,
-                icon: Platform.isAndroid?Icons.camera_alt: CupertinoIcons.camera,
+                icon: Platform.isAndroid ? Icons.camera_alt : CupertinoIcons.camera,
                 iconColor: AppColors.lightTextColor,
                 widgetSpace: 1.5.h,
                 widgetMainAxis: MainAxisAlignment.start,

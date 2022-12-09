@@ -2,6 +2,7 @@ import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
+import 'package:beep_car_wash/model/responce_model/check_job_status_response_model.dart';
 import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:beep_car_wash/screens/drawer_screen/drawer_controller.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
@@ -11,8 +12,11 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class DrawerScreen extends GetView<DrawerScreenController> {
-  const DrawerScreen({Key? key}) : super(key: key);
+  final CheckJobStatusResponseModel? checkJobStatusResponseModel;
+  const DrawerScreen( {Key? key,this.checkJobStatusResponseModel,}) : super(key: key);
+
   static const routeName = "/DrawerScreen";
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

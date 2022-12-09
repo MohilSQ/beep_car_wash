@@ -10,6 +10,7 @@ import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/report_she
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/reserve_sheet/reserve_sheet.dart';
 import 'package:beep_car_wash/screens/scan_qr_code_screen/scan_qr_code_binding.dart';
 import 'package:beep_car_wash/screens/scan_qr_code_screen/scan_qr_code_screen.dart';
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -18,10 +19,7 @@ import 'package:url_launcher/url_launcher.dart';
 class NearestBeepSheet extends GetView<NearestBeepController> {
   final MachineData? machineData;
 
-  const NearestBeepSheet({
-    super.key,
-    this.machineData,
-  });
+  const NearestBeepSheet({super.key, this.machineData});
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +42,7 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                   GestureDetector(
                     behavior: HitTestBehavior.opaque,
                     onVerticalDragStart: (details) {
-                      printOkStatus("details -------------->>>  $details");
-
+                      printOkStatus("onVerticalDragStart -------------->>>  $details");
                       if (controller.isExpand.value == 0) {
                         controller.isExpand.value = 1;
                       } else if (controller.isExpand.value == 1) {
@@ -213,13 +210,15 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                                   } else if (e.index == 1) {
                                     Get.to(() => const ScanQRCodeScreen(), binding: ScanQRCodeBinding(), arguments: ["Scan", machineData!.id!.toString()]);
                                   } else if (e.index == 2) {
-                                    showModalBottomSheet(
-                                      context: context,
-                                      backgroundColor: AppColors.transparentColor,
-                                      barrierColor: AppColors.transparentColor,
-                                      isScrollControlled: true,
-                                      builder: (context) => ReserveSheet(machineId: machineData!.id!.toString()),
-                                    );
+                                    if (machineData!.machineInUse != 1) {
+                                      showModalBottomSheet(
+                                        context: context,
+                                        backgroundColor: AppColors.transparentColor,
+                                        barrierColor: AppColors.transparentColor,
+                                        isScrollControlled: true,
+                                        builder: (context) => ReserveSheet(machineId: machineData!.id!.toString()),
+                                      );
+                                    }
                                   } else if (e.index == 3) {
                                     showModalBottomSheet(
                                       context: context,
@@ -234,29 +233,68 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                                   width: 22.w,
                                   child: Column(
                                     children: [
-                                      Container(
-                                        height: 6.6.h,
-                                        width: 6.6.h,
-                                        decoration: BoxDecoration(
-                                          color: e.index == 0 ? AppColors.appColorText : AppColors.whiteColor,
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: e.index == 0 ? AppColors.appColorText : AppColors.grayBorderColor,
-                                            width: 0.1.h,
-                                          ),
-                                        ),
-                                        child: Wrap(
-                                          runAlignment: WrapAlignment.center,
-                                          alignment: WrapAlignment.center,
-                                          children: [
-                                            Image.asset(
-                                              e.image!,
-                                              height: 3.2.h,
-                                              width: 3.2.h,
+                                      machineData!.machineInUse == 1 && e.index == 2
+                                          ? CircularCountDownTimer(
+                                              duration: 600,
+                                              initialDuration: 600 - int.parse(machineData!.remainingTime.toString()) ,
+                                              controller: controller.countDownController.value,
+                                              width: 6.6.h,
+                                              height: 6.6.h,
+                                              ringColor: AppColors.greyColor.withOpacity(0.2),
+                                              fillColor: AppColors.appColorText,
+                                              strokeWidth: 0.4.h,
+                                              strokeCap: StrokeCap.round,
+                                              textStyle: TextStyle(
+                                                fontSize: 10.sp,
+                                                color: AppColors.appColorText,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                              textFormat: CountdownTextFormat.MM_SS,
+                                              isReverse: false,
+                                              isReverseAnimation: false,
+                                              isTimerTextShown: true,
+                                              autoStart: true,
+                                              onStart: () {
+                                                printAction('Countdown Started');
+                                              },
+                                              onComplete: () {
+                                                printOkStatus('Countdown Ended');
+                                              },
+                                              onChange: (String timeStamp) {
+                                                printAction('Countdown Changed $timeStamp');
+                                                controller.update();
+                                              },
+                                              timeFormatterFunction: (defaultFormatterFunction, duration) {
+                                                if (duration.inSeconds == 0) {
+                                                  return "00:00";
+                                                } else {
+                                                  return Function.apply(defaultFormatterFunction, [duration]);
+                                                }
+                                              },
+                                            )
+                                          : Container(
+                                              height: 6.6.h,
+                                              width: 6.6.h,
+                                              decoration: BoxDecoration(
+                                                color: e.index == 0 ? AppColors.appColorText : AppColors.whiteColor,
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                  color: e.index == 0 ? AppColors.appColorText : AppColors.grayBorderColor,
+                                                  width: 0.1.h,
+                                                ),
+                                              ),
+                                              child: Wrap(
+                                                runAlignment: WrapAlignment.center,
+                                                alignment: WrapAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    e.image!,
+                                                    height: 3.2.h,
+                                                    width: 3.2.h,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ],
-                                        ),
-                                      ),
                                       SizedBox(height: 0.6.h),
                                       Text(
                                         e.title!,

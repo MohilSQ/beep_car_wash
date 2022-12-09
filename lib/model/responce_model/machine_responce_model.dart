@@ -23,6 +23,9 @@ class MachineData {
   final String? lat;
   final String? long;
   final String? address;
+  final String? isFareFixed;
+  final int? machineInUse;
+  final int? remainingTime;
   final String? tagline;
 
   MachineData({
@@ -31,6 +34,9 @@ class MachineData {
     this.lat,
     this.long,
     this.address,
+    this.isFareFixed,
+    this.machineInUse,
+    this.remainingTime,
     this.tagline,
   });
 
@@ -40,6 +46,9 @@ class MachineData {
         lat = json['lat'] as String?,
         long = json['long'] as String?,
         address = json['address'] as String?,
+        isFareFixed = json['is_fare_fixed'] as String?,
+        machineInUse = json['machine_in_use'] as int?,
+        remainingTime = json['remainig_time'] as int?,
         tagline = json['tagline'] as String?;
 
   Map<String, dynamic> toJson() => {
@@ -48,6 +57,9 @@ class MachineData {
         'lat': lat,
         'long': long,
         'address': address,
+        'is_fare_fixed': isFareFixed,
+        'machine_in_use': machineInUse,
+        'remainig_time': remainingTime,
         'tagline': tagline,
       };
 }

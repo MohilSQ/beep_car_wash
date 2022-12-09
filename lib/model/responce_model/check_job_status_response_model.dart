@@ -8,6 +8,9 @@ class CheckJobStatusResponseModel {
   final String? address;
   final String? machineLat;
   final String? machineLong;
+  final int? isFareFixed;
+  final int? totalTime;
+  final int? remainigTime;
 
   CheckJobStatusResponseModel({
     this.code,
@@ -19,6 +22,9 @@ class CheckJobStatusResponseModel {
     this.address,
     this.machineLat,
     this.machineLong,
+    this.isFareFixed,
+    this.totalTime,
+    this.remainigTime,
   });
 
   CheckJobStatusResponseModel.fromJson(Map<String, dynamic> json)
@@ -30,7 +36,10 @@ class CheckJobStatusResponseModel {
         paymentSourceType = json['payment_source_type'] as String?,
         address = json['address'] as String?,
         machineLat = json['machine_lat'] as String?,
-        machineLong = json['machine_long'] as String?;
+        machineLong = json['machine_long'] as String?,
+        isFareFixed = json['is_fare_fixed'] as int?,
+        totalTime = json['total_time'] as int?,
+        remainigTime = json['remainig_time'] as int?;
 
   Map<String, dynamic> toJson() => {
         'code': code,
@@ -42,5 +51,8 @@ class CheckJobStatusResponseModel {
         'address': address,
         'machine_lat': machineLat,
         'machine_long': machineLong,
+    'is_fare_fixed' : isFareFixed,
+    'total_time' : totalTime,
+    'remainig_time' : remainigTime,
       };
 }
