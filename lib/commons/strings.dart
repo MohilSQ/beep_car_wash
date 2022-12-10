@@ -125,7 +125,7 @@ class Strings {
 
   /// ------ Timer screen ------------------>>>>
   static const String timer = "Timer";
-  static const String yourRemainsTimeIs = "Your have ";
+  static const String yourRemainsTimeIs = "You have ";
   static const String min = " min remaining\non your wash";
   static const String stop = " Stop Wash";
 

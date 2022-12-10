@@ -38,6 +38,7 @@ class FeedbackController extends GetxController {
       getFeedbackRemarkModel = model;
       options.value = [];
       optionsID.value = [];
+      list.value = [];
       for (int i = 0; i < getFeedbackRemarkModel.data!.length; i++) {
         options.add(getFeedbackRemarkModel.data?[i].remark ?? "");
         optionsID.add(getFeedbackRemarkModel.data?[i].id ?? "");

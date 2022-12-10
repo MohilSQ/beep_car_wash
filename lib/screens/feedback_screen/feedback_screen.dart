@@ -21,6 +21,9 @@ class FeedbackScreen extends GetView<FeedbackController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<FeedbackController>(
+      initState: (state) {
+        controller.getFeedbackRemarksAPI("0");
+      },
       builder: (logic) {
         return WillPopScope(
           onWillPop: () {
@@ -44,44 +47,19 @@ class FeedbackScreen extends GetView<FeedbackController> {
                       left: 4.w,
                     ),
                     children: [
-                      controller.rating.value != "5" && controller.rating.value != "4"
-                          ? Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Give Feedback",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontSize: 18.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.blackColor,
-                                  ),
-                                ),
-                                SizedBox(height: 3.h),
-                                Text(
-                                  "How did we do?",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.blackColor,
-                                  ),
-                                ),
-                              ],
-                            )
-                          : Text(
-                              "How was our service today?",
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.blackColor,
-                              ),
-                            ),
+                      Text(
+                        "How was our service today?",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.blackColor,
+                        ),
+                      ),
                       SizedBox(height: 2.h),
                       RatingBar.builder(
                         initialRating: 0,
-                        minRating: 1,
+                        minRating: 0,
                         direction: Axis.horizontal,
                         allowHalfRating: false,
                         glowColor: Colors.amber,
@@ -120,8 +98,8 @@ class FeedbackScreen extends GetView<FeedbackController> {
                                   }),
                               choiceStyle: C2ChipStyle.toned(),
                             ),
-                      SizedBox(height: 5.h),
-                      controller.rating.value != "5" && controller.rating.value != "4"
+                      SizedBox(height: 3.h),
+                      controller.rating.value != "0"&&(controller.rating.value != "5" && controller.rating.value != "4")
                           ? CustomTextField(
                               isTitle: true,
                               isHight: false,

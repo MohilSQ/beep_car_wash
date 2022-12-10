@@ -90,8 +90,9 @@ class FindABeepController extends GetxController {
               onTap: () async {
                 markerClick(model: model, i: i);
               },
-              icon: BitmapDescriptor.fromBytes(await getBytesFromAssets(ImagePath.marker, 160)),
+              icon: BitmapDescriptor.fromBytes(i == 0 ? await getBytesFromAssets(ImagePath.selectMarker, 190) : await getBytesFromAssets(ImagePath.marker, 160)),
             ),
+
           );
         }
         markerClick(model: model, i: 0);

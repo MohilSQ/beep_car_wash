@@ -21,7 +21,7 @@ class TimerScreen extends GetView<TimerController> {
       assignId: true,
       dispose: (state) {},
       initState: (state) {
-        controller.start.value = int.parse(Get.arguments[2].toString());
+        controller.start.value =  Get.arguments[0] ? int.parse(Get.arguments[3].toString()) : int.parse(Get.arguments[2].toString());
         controller.startTimer();
       },
       builder: (logic) {
@@ -75,7 +75,7 @@ class TimerScreen extends GetView<TimerController> {
                       ),
                       child: CircularCountDownTimer(
                         duration: int.parse(Get.arguments[2].toString()),
-                        initialDuration: Get.arguments[0] ? int.parse(Get.arguments[3].toString()) : 0,
+                        initialDuration: Get.arguments[0] ? int.parse(Get.arguments[2].toString()) - int.parse(Get.arguments[3].toString()) : 0,
                         controller: controller.countDownController.value,
                         width: 60.w,
                         height: 60.w,
