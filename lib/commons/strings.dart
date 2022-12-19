@@ -142,7 +142,7 @@ class Strings {
   static const String enterCouponCodeDic = "Lorem ipsum dolor sit amet, consecrate disciplining elite, sed do usermod temper incident ut laborer";
 
   /// ------ Payment Screen ------------------>>>>
-  static const String us = "US \$ ";
+  static const String us = "US ";
   static const String expiresEnd = "Expires \nEnd";
   static const String mir = "MIR";
   static const String unionPay = "UnionPay";

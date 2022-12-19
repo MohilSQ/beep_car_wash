@@ -8,6 +8,7 @@ import 'package:beep_car_wash/widgets/custom_appbar.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:sizer/sizer.dart';
 
 class PaymentScreen extends GetView<PaymentController> {
@@ -43,14 +44,16 @@ class PaymentScreen extends GetView<PaymentController> {
                         color: AppColors.whiteColor,
                       ),
                       const Spacer(),
-                      Text(
-                        "${Strings.us}0.00",
-                        style: TextStyle(
-                          color: AppColors.whiteColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22.sp,
-                        ),
-                      ),
+                      Obx(() {
+                        return Text(
+                          Strings.us + controller.currentBalance!.value,
+                          style: TextStyle(
+                            color: AppColors.whiteColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22.sp,
+                          ),
+                        );
+                      }),
                       SizedBox(height: 0.4.h),
                       Text(
                         Strings.currentBalance,
@@ -130,8 +133,9 @@ class PaymentScreen extends GetView<PaymentController> {
                                         ),
                                       ),
                                       Image.asset(
-                                        ImagePath.mastercardLogo,
-                                        width: 15.w,
+                                        controller.getCardImage(controller.cardBrand!.value),
+                                        width: controller.getCardImage(controller.cardBrand!.value) == ImagePath.creditCard ? 10.w : 15.w,
+                                        color: controller.getCardImage(controller.cardBrand!.value) == ImagePath.creditCard ? AppColors.whiteColor : null,
                                       ),
                                     ],
                                   ),

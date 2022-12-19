@@ -13,6 +13,8 @@ class PaymentController extends GetxController {
   GetPaymentDetailsModel? getPaymentDetailsModel;
   RxString? noData = "".obs;
   RxString? cardLastNumber = "".obs;
+  RxString? cardBrand = "".obs;
+  RxString? currentBalance = "".obs;
 
   String getCardImage(String cardName) {
     switch (cardName) {
@@ -58,14 +60,17 @@ class PaymentController extends GetxController {
     GetPaymentDetailsModel model = GetPaymentDetailsModel.fromJson(data);
     if (model.code == 200) {
       getPaymentDetailsModel = model;
+      currentBalance!.value = getPaymentDetailsModel!.currnetBlance!;
       if (getPaymentDetailsModel!.data!.isEmpty) {
         noData!.value = "No payment detail found";
         cardLastNumber!.value = "****";
+        cardBrand!.value = "";
       } else {
         noData!.value = "";
         for (int i = 0; i < getPaymentDetailsModel!.data!.length; i++) {
           if (getPaymentDetailsModel!.data![i].primaryCard == "1") {
             cardLastNumber!.value = getPaymentDetailsModel!.data![i].last4!;
+            cardBrand!.value = getPaymentDetailsModel!.data![i].brand!.isEmpty ? getPaymentDetailsModel!.data![i].sourceType! :getPaymentDetailsModel!.data![i].brand! ;
             break;
           }
         }
@@ -100,6 +105,7 @@ class PaymentController extends GetxController {
       }
       getPaymentDetailsModel!.data![index!].primaryCard = "1";
       cardLastNumber!.value = getPaymentDetailsModel!.data![index].last4!;
+      cardBrand!.value = getPaymentDetailsModel!.data![index].brand!.isEmpty ? getPaymentDetailsModel!.data![index].sourceType! :getPaymentDetailsModel!.data![index].brand! ;
       update();
     } else {
       utils.showSnackBar(context: Get.context!, message: data["msg"]);
