@@ -35,6 +35,7 @@ class SignInController extends GetxController {
   String email = "";
   String name = "";
   String photoUrl = "";
+  String mediaName = "";
 
   UserDataModel userDataModel = UserDataModel();
 
@@ -148,6 +149,7 @@ class SignInController extends GetxController {
       email = userData['email'];
       name = userData['name'];
       photoUrl = userData['picture']['data']['url'];
+      mediaName = "facebook";
       update();
 
       socialLoginAPI();
@@ -187,6 +189,7 @@ class SignInController extends GetxController {
         email = account.email;
         name = account.displayName ?? "";
         photoUrl = account.photoUrl ?? "";
+        mediaName = "google";
         update();
 
         await account.clearAuthCache();
@@ -244,6 +247,7 @@ class SignInController extends GetxController {
     email = credential.email!;
     name = "${credential.givenName ?? ""} ${credential.familyName ?? ""}";
     photoUrl = "";
+    mediaName = "apple";
     update();
 
     socialLoginAPI();
@@ -258,10 +262,11 @@ class SignInController extends GetxController {
   socialLoginAPI() async {
     var formData = ({
       'social_id': id,
-      'name': email,
-      'email': name,
+      'name': name,
+      'email': email,
       'avatar': photoUrl,
       'device_id': getStorage.readString(getStorage.deviceId),
+      'media_name': mediaName ,
     });
     final data = await APIFunction().postApiCall(
       context: Get.context!,

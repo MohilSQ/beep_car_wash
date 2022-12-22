@@ -21,6 +21,7 @@ class Data {
   final String? address;
   final String? machineLat;
   final String? machineLong;
+  final int? isPaid;
 
   Data({
     this.washTime,
@@ -29,6 +30,7 @@ class Data {
     this.address,
     this.machineLat,
     this.machineLong,
+    this.isPaid,
   });
 
   Data.fromJson(Map<String, dynamic> json)
@@ -37,7 +39,15 @@ class Data {
         paymentSourceType = json['payment_source_type'] as String?,
         address = json['address'] as String?,
         machineLat = json['machine_lat'] as String?,
-        machineLong = json['machine_long'] as String?;
+        machineLong = json['machine_long'] as String?,
+        isPaid = json['isPaid'] as int?;
 
-  Map<String, dynamic> toJson() => {'wash_time': washTime, 'amount': amount, 'payment_source_type': paymentSourceType, 'address': address, 'machine_lat': machineLat, 'machine_long': machineLong};
+  Map<String, dynamic> toJson() => {
+        'wash_time': washTime,
+        'amount': amount,
+        'payment_source_type': paymentSourceType,
+        'address': address,
+        'machine_lat': machineLat,
+        'machine_long': machineLong,
+      };
 }

@@ -13,7 +13,7 @@ class ScanQrCodeController extends GetxController {
   Utils utils = Utils();
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
-  QRViewController? qrViewController;
+  QRViewController? qrViewController ;
   RxString screen = "".obs;
   RxString machineId = "".obs;
   TextEditingController code = TextEditingController();
@@ -23,13 +23,14 @@ class ScanQrCodeController extends GetxController {
     controller.resumeCamera();
     controller.scannedDataStream.listen((scanData) {
       result = scanData;
-      printAction(result!.code!);
+      printAction("scannedDataStream ----------------->>> ${result!.code!}");
       controller.pauseCamera();
       if (screen.value == "Report") {
         reportScanToStartAPI(false);
       } else {
         scanToStartAPI(false);
       }
+
       update();
     });
   }
