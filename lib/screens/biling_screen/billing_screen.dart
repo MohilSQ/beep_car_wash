@@ -173,12 +173,12 @@ class BillingScreen extends GetView<BillingController> {
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 3.h),
-                          child: CustomButton(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 3.h),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          CustomButton(
                             onPressed: () {
                               openBottomApplyCodeSheet(context);
                             },
@@ -188,19 +188,16 @@ class BillingScreen extends GetView<BillingController> {
                             elevation: 0,
                             borderSide: BorderSide(color: AppColors.lightGreyColor, width: 0.8),
                           ),
-                        ),
-                        SizedBox(height: 2.h),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 3.h),
-                          child: CustomButton(
+                          SizedBox(height: 2.h),
+                          CustomButton(
                             onPressed: () {
                               controller.saveWashBillByCreditCardAPI();
                             },
                             text: "Okay",
                           ),
-                        ),
-                        SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),
-                      ],
+                          SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),
+                        ],
+                      ),
                     ),
                   ),
                 ],
