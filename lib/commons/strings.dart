@@ -15,7 +15,7 @@ class Strings {
   static const String apply = "Apply";
   static const String submit = "submit";
   static const String search = "Search";
-  static const String logoutString = "Are you sure you want to logout";
+  static const String logoutString = "Are you sure you want to logout?";
   static const String noInternetAvailable = "No Internet available";
 
   /// ------ onBoarding Screen ------------------>>>>
