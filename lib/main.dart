@@ -166,7 +166,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    // TODO: implement initState
     bloc = CounterBlocProvider.of(context);
     firebaseInit();
     FlutterAppBadger.removeBadge();
@@ -198,50 +197,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-/*
- Navigator.of(context).push(
-  MaterialPageRoute(
-    builder: (BuildContext context) => UsePaypal(
-      sandboxMode: false,
-      clientId: "AW1TdvpSGbIM5iP4HJNI5TyTmwpY9Gv9dYw8_8yW5lYIbCqf326vrkrp0ce9TAqjEGMHiV3OqJM_aRT0",
-      secretKey: "EHHtTDjnmTZATYBPiGzZC_AZUfMpMAzj2VZUeqlFUrRJA_C0pQNCxDccB5qoRQSEdcOnnKQhycuOWdP9",
-      returnURL: "https://samplesite.com/return",
-      cancelURL: "https://samplesite.com/cancel",
-      transactions: const [
-        {
-          "amount": {
-            "total": '10.12',
-            "currency": "USD",
-            "details": {
-              "subtotal": '10.12',
-              "shipping": '0',
-              "shipping_discount": 20,
-            }
-          },
-          "description": "The payment transaction description.",
-          "item_list": {
-            "items": [
-              {
-                "name": "Beep Car Wash",
-                "price": '10.12',
-                "currency": "USD",
-              }
-            ],
-          }
-        }
-      ],
-      note: "Contact us for any questions on your car wash.",
-      onSuccess: (Map params) async {
-        printOkStatus("onSuccess: $params");
-      },
-      onError: (error) {
-        printError("onError: $error");
-      },
-      onCancel: (params) {
-        printWarning('cancelled: $params');
-      },
-    ),
-  ),
-);
-*/

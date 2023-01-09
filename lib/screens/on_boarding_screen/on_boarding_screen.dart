@@ -1,13 +1,11 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
-import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/screens/on_boarding_screen/on_boarding_controller.dart';
 import 'package:beep_car_wash/screens/sign_in_screen/sign_in_binding.dart';
 import 'package:beep_car_wash/screens/sign_in_screen/sign_in_screen.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_paypal/flutter_paypal.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 

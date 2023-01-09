@@ -5,6 +5,5 @@ class BillingBinding extends Bindings {
   @override
   void dependencies() {
     Get.put<BillingController>(BillingController());
-    // TODO: implement dependencies
   }
 }

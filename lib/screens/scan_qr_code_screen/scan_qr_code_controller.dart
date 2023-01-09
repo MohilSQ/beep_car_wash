@@ -13,7 +13,7 @@ class ScanQrCodeController extends GetxController {
   Utils utils = Utils();
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
-  QRViewController? qrViewController ;
+  QRViewController? qrViewController;
   RxString screen = "".obs;
   RxString machineId = "".obs;
   TextEditingController code = TextEditingController();
@@ -56,7 +56,7 @@ class ScanQrCodeController extends GetxController {
         utils.showToast(context: Get.context!, message: Strings.vMachineStart);
         qrViewController?.stopCamera();
         qrViewController!.dispose();
-        Get.to(() => const TimerScreen(), binding: TimerBinding(), arguments: [false,data["data"]["data"]["wash_id"], data["data"]["data"]["wash_timer"]]);
+        Get.to(() => const TimerScreen(), binding: TimerBinding(), arguments: [false, data["data"]["data"]["wash_id"], data["data"]["data"]["wash_timer"]]);
       }
     } else if (data["code"] == 201) {
       utils.showSnackBar(context: Get.context!, message: data["msg"]);
@@ -88,14 +88,12 @@ class ScanQrCodeController extends GetxController {
 
   @override
   void onClose() {
-    // TODO: implement onClose
     qrViewController?.dispose();
     super.onClose();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     qrViewController?.dispose();
     super.dispose();
   }

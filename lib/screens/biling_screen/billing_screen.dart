@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:pay/pay.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../commons/app_colors.dart';
@@ -189,6 +190,56 @@ class BillingScreen extends GetView<BillingController> {
                             borderSide: BorderSide(color: AppColors.lightGreyColor, width: 0.8),
                           ),
                           SizedBox(height: 2.h),
+                          ApplePayButton(
+                            paymentConfigurationAsset: 'apple_pay.json',
+                            paymentItems: const [
+                              PaymentItem(
+                                label: 'Total',
+                                amount: '99.99',
+                                status: PaymentItemStatus.final_price,
+                              )
+                            ],
+                            style: ApplePayButtonStyle.black,
+                            // type: ApplePayButtonType.,
+                            margin: const EdgeInsets.only(top: 15.0),
+                            onPaymentResult: (result) {
+                              printAction("result -------->>> $result");
+                            },
+                            loadingIndicator: const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
+                          SizedBox(height: 2.h),
+
+                          /// TODO: Google Pay Note
+                          /// NOTE: To live google pay change "environment": "TEST", To "environment": "PRODUCTION", in google_pay.json file
+                          /// And change test "merchantId" to your "merchantId" and test "merchantName" to your "merchantName"
+                          /// "merchantInfo": {
+                          ///     "merchantId": "01234567890123456789",
+                          ///     "merchantName": "Example Merchant Name"
+                          /// },
+                          GooglePayButton(
+                            paymentConfigurationAsset: 'google_pay.json',
+                            paymentItems: const [
+                              PaymentItem(
+                                label: 'Total',
+                                amount: '00.01',
+                                status: PaymentItemStatus.final_price,
+                              )
+                            ],
+                            type: GooglePayButtonType.pay,
+                            margin: const EdgeInsets.only(top: 15.0),
+                            onError: (error) {
+                              printError("result -------->>> $error");
+                            },
+                            onPaymentResult: (result) {
+                              printAction("result -------->>> $result");
+                            },
+                            loadingIndicator: const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
+                          SizedBox(height: 2.h),
                           CustomButton(
                             onPressed: () {
                               controller.saveWashBillByCreditCardAPI();
@@ -294,3 +345,48 @@ class BillingScreen extends GetView<BillingController> {
     );
   }
 }
+
+/*  Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (BuildContext context) => UsePaypal(
+        sandboxMode: true,
+        clientId: "AW1TdvpSGbIM5iP4HJNI5TyTmwpY9Gv9dYw8_8yW5lYIbCqf326vrkrp0ce9TAqjEGMHiV3OqJM_aRT0",
+        secretKey: "EHHtTDjnmTZATYBPiGzZC_AZUfMpMAzj2VZUeqlFUrRJA_C0pQNCxDccB5qoRQSEdcOnnKQhycuOWdP9",
+        returnURL: "https://samplesite.com/return",
+        cancelURL: "https://samplesite.com/cancel",
+        transactions: const [
+          {
+            "amount": {
+              "total": '0.1',
+              "currency": "USD",
+              "details": {
+                "subtotal": '0.1',
+                "shipping": '0',
+                "shipping_discount": 0,
+              }
+            },
+            "description": "The payment transaction description.",
+            // "item_list": {
+            //   "items": [
+            //     {
+            //       "name": "Beep Car Wash",
+            //       "price": '10.12',
+            //       "currency": "USD",
+            //     }
+            //   ],
+            // }
+          }
+        ],
+        note: "Contact us for any questions on your car wash.",
+        onSuccess: (Map params) async {
+          printOkStatus("onSuccess: $params");
+        },
+        onError: (error) {
+          printError("onError: $error");
+        },
+        onCancel: (params) {
+          printWarning('cancelled: $params');
+        },
+      ),
+    ),
+  );*/

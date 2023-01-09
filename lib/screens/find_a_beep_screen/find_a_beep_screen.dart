@@ -173,7 +173,7 @@ class FindABeepScreen extends GetView<FindABeepController> {
                                           ),
                                           title: Text(controller.predictions[index].description!),
                                           onTap: () {
-                                            FocusScope.of(context).unfocus();
+                                            FocusManager.instance.primaryFocus?.unfocus();
                                             controller.mapSearchView.value = false;
                                             controller.searchController.text = controller.predictions[index].description!;
                                             MapService.getLatLngFromAddress(address: controller.predictions[index].description!);

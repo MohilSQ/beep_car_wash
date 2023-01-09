@@ -86,4 +86,25 @@ class BillingController extends GetxController {
       utils.showSnackBar(context: Get.context!, message: data["msg"]);
     }
   }
+
+  /// ---- Save Wash Bill By Credit Card API ------------>>>
+  saveWashBillByUPIAPI() async {
+    var formData = ({
+      "token": Get.find<CommonController>().userDataModel.token,
+      "payment_id": washId.value,
+    });
+
+    final data = await APIFunction().postApiCall(
+      context: Get.context!,
+      apiName: Constants.saveCardPayment,
+      params: formData,
+    );
+
+    if (data["code"] == 200) {
+      Get.to(() => const FeedbackScreen(), binding: FeedbackBinding(), arguments: washId.value);
+      utils.showToast(context: Get.context!, message: data["msg"]);
+    } else if (data["code"] == 201) {
+      utils.showSnackBar(context: Get.context!, message: data["msg"]);
+    }
+  }
 }

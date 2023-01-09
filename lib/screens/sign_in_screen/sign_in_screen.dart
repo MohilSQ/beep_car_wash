@@ -1,8 +1,6 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
-import 'package:beep_car_wash/screens/drawer_screen/drawer_binding.dart';
-import 'package:beep_car_wash/screens/drawer_screen/drawer_screen.dart';
 import 'package:beep_car_wash/screens/sign_in_screen/sign_in_controller.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:beep_car_wash/widgets/custom_container.dart';
@@ -130,22 +128,22 @@ class SignInScreen extends GetView<SignInController> {
                               text: Strings.continueString,
                               isLoading: controller.isLoading!.value,
                               onPressed: () {
-                                controller.userDataModel.firstName = "Mohil";
-                                controller.userDataModel.lastName = "Thummar";
-                                controller.userDataModel.email = "mohil.0510@gmail.com";
-                                controller.userDataModel.cCode = "+91";
-                                controller.userDataModel.phoneNumber = "8140843697";
-                                controller.userDataModel.token = "28da9af4da99a8124cc52ffe83063e78";
-                                controller.userDataModel.profileImage = "http://machine.beepwash.com/assets/avatars/03b655398fda6a61d123f7db58e730bd.jpg";
-                                controller.userDataModel.referralCode = "843697";
-                                controller.update();
-                                controller.getStorage.saveObject(controller.getStorage.loginData, controller.userDataModel);
-                                Get.off(() => const DrawerScreen(), binding: DrawerBindings());
-                                // if (controller.validation()) {
-                                //   if (!controller.isLoading!.value) {
-                                //     controller.phoneVerificationAPI();
-                                //   }
-                                // }
+                                // controller.userDataModel.firstName = "Mohil";
+                                // controller.userDataModel.lastName = "Thummar";
+                                // controller.userDataModel.email = "mohil.0510@gmail.com";
+                                // controller.userDataModel.cCode = "+91";
+                                // controller.userDataModel.phoneNumber = "8140843697";
+                                // controller.userDataModel.token = "28da9af4da99a8124cc52ffe83063e78";
+                                // controller.userDataModel.profileImage = "http://machine.beepwash.com/assets/avatars/03b655398fda6a61d123f7db58e730bd.jpg";
+                                // controller.userDataModel.referralCode = "843697";
+                                // controller.update();
+                                // controller.getStorage.saveObject(controller.getStorage.loginData, controller.userDataModel);
+                                // Get.off(() => const DrawerScreen(), binding: DrawerBindings());
+                                if (controller.validation()) {
+                                  if (!controller.isLoading!.value) {
+                                    controller.phoneVerificationAPI();
+                                  }
+                                }
                               },
                             );
                           }),

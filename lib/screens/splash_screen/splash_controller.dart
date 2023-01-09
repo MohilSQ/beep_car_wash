@@ -1,5 +1,4 @@
 import 'package:beep_car_wash/api_repository/api_function.dart';
-import 'package:beep_car_wash/commons/common_dialog.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/model/responce_model/check_job_status_response_model.dart';

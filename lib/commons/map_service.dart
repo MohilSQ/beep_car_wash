@@ -46,6 +46,7 @@ class MapService {
       Constants.latitude = currentPosition!.latitude;
       Constants.longitude = currentPosition!.longitude;
       printOkStatus("currentPosition --------------->> Lat: ${Constants.latitude}, Long: ${Constants.longitude}");
+
       Get.find<FindABeepController>().mapView.value = true;
       Get.find<FindABeepController>().setMyLocationMarker();
       Get.find<FindABeepController>().getMachineAPI(Constants.getMachines);
