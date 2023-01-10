@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:beep_car_wash/commons/common_dialog.dart';
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/model/responce_model/stop_machine_response_model.dart';
@@ -190,62 +192,75 @@ class BillingScreen extends GetView<BillingController> {
                             borderSide: BorderSide(color: AppColors.lightGreyColor, width: 0.8),
                           ),
                           SizedBox(height: 2.h),
-                          ApplePayButton(
-                            paymentConfigurationAsset: 'apple_pay.json',
-                            paymentItems: const [
-                              PaymentItem(
-                                label: 'Total',
-                                amount: '99.99',
-                                status: PaymentItemStatus.final_price,
-                              )
-                            ],
-                            style: ApplePayButtonStyle.black,
-                            // type: ApplePayButtonType.,
-                            margin: const EdgeInsets.only(top: 15.0),
-                            onPaymentResult: (result) {
-                              printAction("result -------->>> $result");
-                            },
-                            loadingIndicator: const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          ),
-                          SizedBox(height: 2.h),
+                          if (controller.stopMachineResponseModel != null) ...[
+                            controller.stopMachineResponseModel!.data!.paymentSourceType! == "1"
+                                ? CustomButton(
+                                    onPressed: () {
+                                      controller.saveWashBillByCreditCardAPI();
+                                    },
+                                    text: "Okay",
+                                  )
+                                : controller.stopMachineResponseModel!.data!.paymentSourceType! == "2"
+                                    ? CustomButton(
+                                        onPressed: () {},
+                                        backgroundColor: AppColors.transparentColor,
+                                        text: "Pay Pal",
+                                        color: AppColors.appColorText,
+                                        elevation: 0,
+                                        borderSide: BorderSide(color: AppColors.lightGreyColor, width: 0.8),
+                                      )
+                                    : Platform.isIOS
+                                        ? ApplePayButton(
+                                            paymentConfigurationAsset: 'apple_pay.json',
+                                            paymentItems: const [
+                                              PaymentItem(
+                                                label: 'Total',
+                                                amount: '99.99',
+                                                status: PaymentItemStatus.final_price,
+                                              )
+                                            ],
+                                            height: 6.h,
+                                            width: MediaQuery.of(context).size.width,
+                                            style: ApplePayButtonStyle.black,
+                                            onPaymentResult: (result) {
+                                              printAction("result -------->>> $result");
+                                            },
+                                            loadingIndicator: const Center(
+                                              child: CircularProgressIndicator(),
+                                            ),
+                                          )
+                                        :
 
-                          /// TODO: Google Pay Note
-                          /// NOTE: To live google pay change "environment": "TEST", To "environment": "PRODUCTION", in google_pay.json file
-                          /// And change test "merchantId" to your "merchantId" and test "merchantName" to your "merchantName"
-                          /// "merchantInfo": {
-                          ///     "merchantId": "01234567890123456789",
-                          ///     "merchantName": "Example Merchant Name"
-                          /// },
-                          GooglePayButton(
-                            paymentConfigurationAsset: 'google_pay.json',
-                            paymentItems: const [
-                              PaymentItem(
-                                label: 'Total',
-                                amount: '00.01',
-                                status: PaymentItemStatus.final_price,
-                              )
-                            ],
-                            type: GooglePayButtonType.pay,
-                            margin: const EdgeInsets.only(top: 15.0),
-                            onError: (error) {
-                              printError("result -------->>> $error");
-                            },
-                            onPaymentResult: (result) {
-                              printAction("result -------->>> $result");
-                            },
-                            loadingIndicator: const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          ),
-                          SizedBox(height: 2.h),
-                          CustomButton(
-                            onPressed: () {
-                              controller.saveWashBillByCreditCardAPI();
-                            },
-                            text: "Okay",
-                          ),
+                                        /// TODO: Google Pay Note
+                                        /// NOTE: To live google pay change "environment": "TEST", To "environment": "PRODUCTION", in google_pay.json file
+                                        /// And change test "merchantId" to your "merchantId" and test "merchantName" to your "merchantName"
+                                        /// "merchantInfo": {
+                                        ///     "merchantId": "01234567890123456789",
+                                        ///     "merchantName": "Example Merchant Name"
+                                        /// },
+                                        GooglePayButton(
+                                            paymentConfigurationAsset: 'google_pay.json',
+                                            paymentItems: const [
+                                              PaymentItem(
+                                                label: 'Total',
+                                                amount: '00.01',
+                                                status: PaymentItemStatus.final_price,
+                                              )
+                                            ],
+                                            width: MediaQuery.of(context).size.width,
+                                            type: GooglePayButtonType.pay,
+                                            margin: const EdgeInsets.only(top: 15.0),
+                                            onError: (error) {
+                                              printError("result -------->>> $error");
+                                            },
+                                            onPaymentResult: (result) {
+                                              printAction("result -------->>> $result");
+                                            },
+                                            loadingIndicator: const Center(
+                                              child: CircularProgressIndicator(),
+                                            ),
+                                          ),
+                          ],
                           SizedBox(height: MediaQuery.of(context).padding.bottom + 1.6.h),
                         ],
                       ),
@@ -264,7 +279,6 @@ class BillingScreen extends GetView<BillingController> {
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.transparentColor,
-      barrierColor: AppColors.transparentColor,
       isScrollControlled: true,
       builder: (context) {
         return Padding(

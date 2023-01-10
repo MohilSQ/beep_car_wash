@@ -1,10 +1,12 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
+import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:beep_car_wash/screens/refer_and_earn_screen/refer_and_earn_controller.dart';
 import 'package:beep_car_wash/widgets/custom_appbar.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:sizer/sizer.dart';
 
 class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
@@ -232,7 +234,10 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
         ),
         SizedBox(height: 2.2.h),
         CustomButton(
-          onPressed: () {},
+          onPressed: () {
+            // Share.share('Here your refer code form Beep, Use this for your next beep payment and you will receive wash money.\nCODE: ${Get.find<CommonController>().userDataModel.referralCode}');
+            Share.share(Get.find<CommonController>().userDataModel.referralCode.toString());
+          },
           text: "Invite Friend",
         ),
         SizedBox(height: MediaQuery.of(Get.context!).padding.bottom),
