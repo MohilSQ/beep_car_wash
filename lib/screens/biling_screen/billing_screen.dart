@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:beep_car_wash/commons/common_dialog.dart';
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/model/responce_model/stop_machine_response_model.dart';
+import 'package:beep_car_wash/paypal_service/paypal_payment.dart';
 import 'package:beep_car_wash/screens/biling_screen/billing_controller.dart';
+import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:beep_car_wash/widgets/custom_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,6 +32,7 @@ class BillingScreen extends GetView<BillingController> {
         controller.stopMachineResponseModel = Get.arguments[2] ? Get.arguments[0] : StopMachineResponseModel.fromJson(Get.arguments[0]);
         controller.washId.value = Get.arguments[1];
         controller.setMarker(double.parse(controller.stopMachineResponseModel!.data?.machineLat ?? ""), double.parse(controller.stopMachineResponseModel!.data?.machineLong ?? ""));
+        controller.trxAmount.value = controller.stopMachineResponseModel!.data!.amount!;
       },
       builder: (logic) {
         return WillPopScope(
@@ -58,7 +61,7 @@ class BillingScreen extends GetView<BillingController> {
                     ),
                     children: [
                       Text(
-                        "Wash Completed!",
+                        "Wash Completed! ${Get.find<CommonController>().userDataModel.referralCode.toString()}",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 15.sp,
@@ -202,20 +205,30 @@ class BillingScreen extends GetView<BillingController> {
                                   )
                                 : controller.stopMachineResponseModel!.data!.paymentSourceType! == "2"
                                     ? CustomButton(
-                                        onPressed: () {},
-                                        backgroundColor: AppColors.transparentColor,
-                                        text: "Pay Pal",
+                                        onPressed: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (BuildContext context) => PaypalPayment(
+                                                onFinish: (number) async {
+                                                  debugPrint('order id: $number');
+                                                },
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        backgroundColor: const Color(0xFFffc439),
+                                       image: ImagePath.payPalLogo,
                                         color: AppColors.appColorText,
                                         elevation: 0,
-                                        borderSide: BorderSide(color: AppColors.lightGreyColor, width: 0.8),
+                                        borderRadius: 5,
                                       )
                                     : Platform.isIOS
                                         ? ApplePayButton(
                                             paymentConfigurationAsset: 'apple_pay.json',
-                                            paymentItems: const [
+                                            paymentItems: [
                                               PaymentItem(
                                                 label: 'Total',
-                                                amount: '99.99',
+                                                amount: controller.trxAmount.value,
                                                 status: PaymentItemStatus.final_price,
                                               )
                                             ],
@@ -223,7 +236,12 @@ class BillingScreen extends GetView<BillingController> {
                                             width: MediaQuery.of(context).size.width,
                                             style: ApplePayButtonStyle.black,
                                             onPaymentResult: (result) {
-                                              printAction("result -------->>> $result");
+                                              printAction("result -------->>> ${result["token"]}");
+                                              controller.trxId.value = result["token"];
+                                              // controller.saveWashBillByUPIAPI();
+                                            },
+                                            onError: (error) {
+                                              printError("result -------->>> $error");
                                             },
                                             loadingIndicator: const Center(
                                               child: CircularProgressIndicator(),
@@ -240,21 +258,22 @@ class BillingScreen extends GetView<BillingController> {
                                         /// },
                                         GooglePayButton(
                                             paymentConfigurationAsset: 'google_pay.json',
-                                            paymentItems: const [
+                                            paymentItems: [
                                               PaymentItem(
                                                 label: 'Total',
-                                                amount: '00.01',
+                                                amount: controller.trxAmount.value,
                                                 status: PaymentItemStatus.final_price,
                                               )
                                             ],
                                             width: MediaQuery.of(context).size.width,
                                             type: GooglePayButtonType.pay,
-                                            margin: const EdgeInsets.only(top: 15.0),
-                                            onError: (error) {
-                                              printError("result -------->>> $error");
-                                            },
                                             onPaymentResult: (result) {
                                               printAction("result -------->>> $result");
+                                              controller.trxId.value = result["paymentMethodData"]["tokenizationData"]["token"];
+                                              // controller.saveWashBillByUPIAPI();
+                                            },
+                                            onError: (error) {
+                                              printError("result -------->>> $error");
                                             },
                                             loadingIndicator: const Center(
                                               child: CircularProgressIndicator(),

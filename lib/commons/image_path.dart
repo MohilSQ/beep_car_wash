@@ -102,4 +102,5 @@ class ImagePath {
   static String date = "${base}date.png";
   static String cardSmall = "${base}ic_card_small.png";
   static String checkMark = "${base}check_mark.png";
+  static String payPalLogo = "${base}pay_pal.png";
 }

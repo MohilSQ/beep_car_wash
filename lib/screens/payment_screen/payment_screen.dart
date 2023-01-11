@@ -135,6 +135,7 @@ class PaymentScreen extends GetView<PaymentController> {
                                       Image.asset(
                                         controller.getCardImage(controller.cardBrand!.value),
                                         width: controller.getCardImage(controller.cardBrand!.value) == ImagePath.creditCard ? 10.w : 15.w,
+                                        height:  9.w ,
                                         color: controller.getCardImage(controller.cardBrand!.value) == ImagePath.creditCard ? AppColors.whiteColor : null,
                                       ),
                                     ],

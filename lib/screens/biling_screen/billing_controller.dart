@@ -20,6 +20,9 @@ class BillingController extends GetxController {
   RxString washId = "".obs;
   StopMachineResponseModel? stopMachineResponseModel;
   RxList<Marker> markers = <Marker>[].obs;
+  RxString trxAmount = "".obs;
+  RxString trxId = "".obs;
+
 
   /// ---- Converted Image To Marker Icon ------------>>>
   getBytesFromAssets(String path, int width) async {
@@ -87,16 +90,20 @@ class BillingController extends GetxController {
     }
   }
 
-  /// ---- Save Wash Bill By Credit Card API ------------>>>
+  /// ---- Save Wash Bill By UPI API ------------>>>
   saveWashBillByUPIAPI() async {
     var formData = ({
       "token": Get.find<CommonController>().userDataModel.token,
       "payment_id": washId.value,
+        "payment_method":  stopMachineResponseModel!.data!.paymentSourceType!,
+        "trx_id": trxId,
+        "trx_amount": trxAmount,
+        "trx_datetime":DateTime.now().toString(),
     });
 
     final data = await APIFunction().postApiCall(
       context: Get.context!,
-      apiName: Constants.saveCardPayment,
+      apiName: Constants.saveOtherMethodPayment,
       params: formData,
     );
 

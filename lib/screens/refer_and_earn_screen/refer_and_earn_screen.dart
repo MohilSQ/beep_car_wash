@@ -2,6 +2,8 @@ import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:beep_car_wash/screens/refer_and_earn_screen/refer_and_earn_controller.dart';
+import 'package:beep_car_wash/screens/terms_of_service_screen/terms_of_service_binding.dart';
+import 'package:beep_car_wash/screens/terms_of_service_screen/terms_of_service_screen.dart';
 import 'package:beep_car_wash/widgets/custom_appbar.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -223,12 +225,17 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
         SizedBox(height: 2.2.h),
         Align(
           alignment: Alignment.center,
-          child: Text(
-            "Terms apply",
-            style: TextStyle(
-              color: AppColors.appColorText,
-              fontWeight: FontWeight.bold,
-              fontSize: 12.sp,
+          child: TextButton(
+            onPressed: () {
+              Get.to(() => const TermsOfServiceScreen(), binding: TermsOfConditionBindings());
+            },
+            child: Text(
+              "Terms apply",
+              style: TextStyle(
+                color: AppColors.appColorText,
+                fontWeight: FontWeight.bold,
+                fontSize: 12.sp,
+              ),
             ),
           ),
         ),
@@ -424,18 +431,26 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
         SizedBox(height: 2.2.h),
         Align(
           alignment: Alignment.center,
-          child: Text(
-            "Terms apply",
-            style: TextStyle(
-              color: AppColors.appColorText,
-              fontWeight: FontWeight.bold,
-              fontSize: 12.sp,
+          child: TextButton(
+            onPressed: () {
+              Get.to(() => const TermsOfServiceScreen(), binding: TermsOfConditionBindings());
+            },
+            child: Text(
+              "Terms apply",
+              style: TextStyle(
+                color: AppColors.appColorText,
+                fontWeight: FontWeight.bold,
+                fontSize: 12.sp,
+              ),
             ),
           ),
         ),
         SizedBox(height: 2.2.h),
         CustomButton(
-          onPressed: () {},
+          onPressed: () {
+            // Share.share('Here your refer code form Beep, Use this for your next beep payment and you will receive wash money.\nCODE: ${Get.find<CommonController>().userDataModel.referralCode}');
+            Share.share(Get.find<CommonController>().userDataModel.referralCode.toString());
+          },
           text: "Invite Friend",
         ),
         SizedBox(height: MediaQuery.of(Get.context!).padding.bottom),
