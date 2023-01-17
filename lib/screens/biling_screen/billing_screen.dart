@@ -209,6 +209,8 @@ class BillingScreen extends GetView<BillingController> {
                                           Navigator.of(context).push(
                                             MaterialPageRoute(
                                               builder: (BuildContext context) => PaypalPayment(
+                                                sandboxMode: true,
+                                                amount: controller.trxAmount.value,
                                                 onFinish: (number) async {
                                                   debugPrint('order id: $number');
                                                 },
@@ -217,7 +219,7 @@ class BillingScreen extends GetView<BillingController> {
                                           );
                                         },
                                         backgroundColor: const Color(0xFFffc439),
-                                       image: ImagePath.payPalLogo,
+                                        image: ImagePath.payPalLogo,
                                         color: AppColors.appColorText,
                                         elevation: 0,
                                         borderRadius: 5,
@@ -238,7 +240,7 @@ class BillingScreen extends GetView<BillingController> {
                                             onPaymentResult: (result) {
                                               printAction("result -------->>> ${result["token"]}");
                                               controller.trxId.value = result["token"];
-                                              // controller.saveWashBillByUPIAPI();
+                                              controller.saveWashBillByUPIAPI();
                                             },
                                             onError: (error) {
                                               printError("result -------->>> $error");
@@ -270,7 +272,7 @@ class BillingScreen extends GetView<BillingController> {
                                             onPaymentResult: (result) {
                                               printAction("result -------->>> $result");
                                               controller.trxId.value = result["paymentMethodData"]["tokenizationData"]["token"];
-                                              // controller.saveWashBillByUPIAPI();
+                                              controller.saveWashBillByUPIAPI();
                                             },
                                             onError: (error) {
                                               printError("result -------->>> $error");

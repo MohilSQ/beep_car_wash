@@ -1,17 +1,18 @@
 import 'dart:async';
 import 'dart:core';
 import 'dart:io';
-import 'package:beep_car_wash/commons/app_colors.dart';
+
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/paypal_service/paypal_services.dart';
-import 'package:beep_car_wash/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class PaypalPayment extends StatefulWidget {
   final Function? onFinish;
+  final bool? sandboxMode;
+  final String? amount;
 
-  const PaypalPayment({super.key, this.onFinish});
+  const PaypalPayment({super.key, this.onFinish, this.sandboxMode, this.amount});
 
   @override
   State<StatefulWidget> createState() {
@@ -46,12 +47,10 @@ class PaypalPaymentState extends State<PaypalPayment> {
   void initState() {
     super.initState();
     services = PaypalServices(
-      sandboxMode: widget.sandboxMode,
-      clientId: widget.clientId,
-      secretKey: widget.secretKey,
+      sandboxMode: widget.sandboxMode!,
     );
     setState(() {
-      navUrl = widget.sandboxMode ? 'https://api.sandbox.paypal.com' : 'https://www.api.paypal.com';
+      navUrl = widget.sandboxMode! ? 'https://api.sandbox.paypal.com' : 'https://www.api.paypal.com';
     });
     // Enable hybrid composition.
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
@@ -100,7 +99,7 @@ class PaypalPaymentState extends State<PaypalPayment> {
         });
       }
     } catch (e) {
-      printError(e);
+      printError(e.toString());
       setState(() {
         loading = false;
         pageLoading = false;
@@ -159,75 +158,64 @@ class PaypalPaymentState extends State<PaypalPayment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color(0xFF272727),
-          leading: GestureDetector(
-            child: const Icon(Icons.arrow_back_ios),
-            onTap: () => Navigator.pop(context),
-          ),
-          elevation: 0,
+      appBar: AppBar(
+        backgroundColor: const Color(0xFFffffff),
+        leading: GestureDetector(
+          child: const Icon(Icons.arrow_back_ios),
+          onTap: () => Navigator.pop(context),
         ),
-        body: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: loading
-              ? const Expanded(child: Center(child: SingleChildScrollView()))
-              : loadingError
-                  ? Column(
-                      children: [
-                        Expanded(
-                          child: Center(
-                            child: NetworkError(loadData: loadPayment, message: "Something went wrong,"),
-                          ),
-                        ),
-                      ],
-                    )
-                  : Column(
-                      children: [
-                        Expanded(
-                          child: WebView(
-                            initialUrl: checkoutUrl,
-                            javascriptMode: JavascriptMode.unrestricted,
-                            gestureNavigationEnabled: true,
-                            onWebViewCreated: (WebViewController webViewController) {
-                              _controller.complete(webViewController);
-                            },
-                            javascriptChannels: <JavascriptChannel>{
-                              _toasterJavascriptChannel(context),
-                            },
-                            navigationDelegate: (NavigationRequest request) async {
-                              if (request.url.startsWith('https://www.youtube.com/')) {
-                                return NavigationDecision.prevent;
-                              }
-                              if (request.url.contains(widget.returnURL)) {
-                                // Navigator.pushReplacement(
-                                //   context,
-                                //   MaterialPageRoute(builder: (context) => CompletePayment(url: request.url, services: services, executeUrl: executeUrl, accessToken: accessToken, onSuccess: widget.onSuccess, onCancel: widget.onCancel, onError: printError)),
-                                // );
-                              }
-                              if (request.url.contains(widget.cancelURL)) {
-                                final uri = Uri.parse(request.url);
-                                await widget.onCancel(uri.queryParameters);
-                                Navigator.pop(context);
-                              }
-                              return NavigationDecision.navigate;
-                            },
-                            onPageStarted: (String url) {
-                              setState(() {
-                                pageLoading = true;
-                                loadingError = false;
-                              });
-                            },
-                            onPageFinished: (String url) {
-                              setState(() {
-                                navUrl = url;
-                                pageLoading = false;
-                              });
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-        ));
+        elevation: 0,
+      ),
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: loading
+            ? const Center(child: SingleChildScrollView())
+            : loadingError
+                ? const Center(child: Text("Something went wrong,"))
+                : WebView(
+                    initialUrl: checkoutUrl,
+                    javascriptMode: JavascriptMode.unrestricted,
+                    gestureNavigationEnabled: true,
+                    onWebViewCreated: (WebViewController webViewController) {
+                      _controller.complete(webViewController);
+                    },
+                    javascriptChannels: <JavascriptChannel>{
+                      _toasterJavascriptChannel(context),
+                    },
+                    navigationDelegate: (NavigationRequest request) async {
+                      if (request.url.contains(returnURL)) {
+                        final uri = Uri.parse(request.url);
+                        final payerID = uri.queryParameters['PayerID'];
+                        if (payerID != null) {
+                          services.executePayment(executeUrl, payerID, accessToken).then((id) {
+                            widget.onFinish!(id);
+                            Navigator.of(context).pop();
+                          });
+                        } else {
+                          Navigator.of(context).pop();
+                        }
+                        Navigator.of(context).pop();
+                      }
+                      if (request.url.contains(cancelURL)) {
+                        Navigator.of(context).pop();
+                      }
+                      return NavigationDecision.navigate;
+                    },
+                    onPageStarted: (String url) {
+                      setState(() {
+                        pageLoading = true;
+                        loadingError = false;
+                      });
+                    },
+                    onPageFinished: (String url) {
+                      setState(() {
+                        navUrl = url;
+                        pageLoading = false;
+                      });
+                    },
+                  ),
+      ),
+    );
   }
 }

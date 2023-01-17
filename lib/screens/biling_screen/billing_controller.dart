@@ -23,7 +23,6 @@ class BillingController extends GetxController {
   RxString trxAmount = "".obs;
   RxString trxId = "".obs;
 
-
   /// ---- Converted Image To Marker Icon ------------>>>
   getBytesFromAssets(String path, int width) async {
     ByteData data = await rootBundle.load(path);
@@ -95,10 +94,10 @@ class BillingController extends GetxController {
     var formData = ({
       "token": Get.find<CommonController>().userDataModel.token,
       "payment_id": washId.value,
-        "payment_method":  stopMachineResponseModel!.data!.paymentSourceType!,
-        "trx_id": trxId,
-        "trx_amount": trxAmount,
-        "trx_datetime":DateTime.now().toString(),
+      "payment_method": int.parse(stopMachineResponseModel!.data!.paymentSourceType!),
+      "trx_id": trxId.value.isEmpty ? "TestApplePay" : trxId.value,
+      "trx_amount": trxAmount.value,
+      "trx_datetime": DateTime.now().toString().split(".").first,
     });
 
     final data = await APIFunction().postApiCall(

@@ -12,6 +12,7 @@
       <root url="file://$PROJECT_DIR$/../../SDK/flutter3.3.8/.pub-cache/hosted/pub.dartlang.org/cloud_firestore_web-3.1.0" />
       <root url="file://$PROJECT_DIR$/../../SDK/flutter3.3.8/.pub-cache/hosted/pub.dartlang.org/webview_flutter_android-2.10.4" />
       <root url="file://$PROJECT_DIR$/../../SDK/flutter3.3.8/.pub-cache/hosted/pub.dartlang.org/pay_ios-1.0.7" />
+      <root url="file://$PROJECT_DIR$/../../SDK/flutter3.3.8/.pub-cache/hosted/pub.dartlang.org/webview_flutter-3.0.4" />
       <root url="file://$PROJECT_DIR$/../../SDK/flutter3.3.8/.pub-cache/hosted/pub.dartlang.org/pay-1.0.11" />
       <root url="file://$PROJECT_DIR$/../../SDK/flutter3.3.8/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.1.3" />
       <root url="file://$PROJECT_DIR$/../../SDK/flutter3.3.8/.pub-cache/hosted/pub.dartlang.org/flutter_app_badger-1.5.0" />
@@ -73,7 +74,6 @@
       <root url="file://$PROJECT_DIR$/../../SDK/flutter3.3.8/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.11" />
       <root url="file://$PROJECT_DIR$/../../SDK/flutter3.3.8/.pub-cache/hosted/pub.dartlang.org/google_sign_in_android-6.1.4" />
       <root url="file://$PROJECT_DIR$/../../SDK/flutter3.3.8/.pub-cache/hosted/pub.dartlang.org/sign_in_with_apple-4.2.0" />
-      <root url="file://$PROJECT_DIR$/../../SDK/flutter3.3.8/.pub-cache/hosted/pub.dartlang.org/webview_flutter-3.0.4" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
