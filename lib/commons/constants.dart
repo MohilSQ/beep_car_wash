@@ -57,6 +57,10 @@ class Constants {
   // Global Variable .....
   static final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  static final GlobalKey firstShowCase = GlobalKey();
+  static final GlobalKey secondShowCase = GlobalKey();
+  static final GlobalKey thirdShowCase = GlobalKey();
+  static final GlobalKey fourthShowCase = GlobalKey();
 
   // Notification Count .....
   static String notificationCount = '0';

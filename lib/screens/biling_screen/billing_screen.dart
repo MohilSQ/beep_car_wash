@@ -5,7 +5,6 @@ import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/model/responce_model/stop_machine_response_model.dart';
 import 'package:beep_car_wash/paypal_service/paypal_payment.dart';
 import 'package:beep_car_wash/screens/biling_screen/billing_controller.dart';
-import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:beep_car_wash/widgets/custom_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -61,7 +60,7 @@ class BillingScreen extends GetView<BillingController> {
                     ),
                     children: [
                       Text(
-                        "Wash Completed! ${Get.find<CommonController>().userDataModel.referralCode.toString()}",
+                        "Wash Completed!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 15.sp,

@@ -1,19 +1,26 @@
-
-import 'dart:convert';
-import 'dart:io';
-import 'package:beep_car_wash/commons/utils.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:beep_car_wash/commons/get_storage_data.dart';
 import 'package:get/get.dart';
 
-
 class OnBoardingController extends GetxController {
-  // String deviceId = "fgFKyqH6S0a2RcjCy4GQ6A:APA91bFuek6bjuVbWz3CiVTMLA-kmX8UpvOSEWalt2eqyu1Ks1AA9EFBVoYjMOc51Fv-AHFDaQVBfUknX4IaPRy0I6Wwlc2X73uY97xHDgTvP-RmVsW9EMtXQWXgzHQ6Bl4BG-ZXp9Ql";
+  GetStorageData getStorageData = GetStorageData();
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    userDataAvailableOrNot();
+    super.onInit();
+  }
+
+  userDataAvailableOrNot() {
+    if (!getStorageData.containKey(getStorageData.isFirst)) {
+      getStorageData.saveString(getStorageData.isFirst, "1");
+    }
+  }
+
+  // String deviceId = "dhR-lG_HSVWEHeHkSBEKPU:APA91bEF-x9SGoJa1dlq2zaazPoQhfw02oxrjOIqHhftDbY32jQTY2DjgHnhdVuEleFlVQK6olIRzwMU1RnJaq2wBpnYIDGOSO1Y5vDCJCwNZKaYoBC11scDvy2pq1ySuqd2ZXXbGzuM";
   //
   // /// Send Push Notification
   // void sendPush(String message) async {
-  //   String device = Platform.isAndroid ? "notification" : "data";
-  //
   //   http.Response response = await http.post(
   //     Uri.parse('https://fcm.googleapis.com/fcm/send'),
   //     headers: {

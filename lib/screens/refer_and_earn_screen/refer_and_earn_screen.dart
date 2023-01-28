@@ -242,8 +242,8 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
         SizedBox(height: 2.2.h),
         CustomButton(
           onPressed: () {
-            // Share.share('Here your refer code form Beep, Use this for your next beep payment and you will receive wash money.\nCODE: ${Get.find<CommonController>().userDataModel.referralCode}');
-            Share.share(Get.find<CommonController>().userDataModel.referralCode.toString());
+            Share.share('Here your refer code form Beep, Use this for your next beep payment and you will receive wash money.\nCODE: ${Get.find<CommonController>().userDataModel.referralCode.toString()}');
+            // Share.share(Get.find<CommonController>().userDataModel.referralCode.toString());
           },
           text: "Invite Friend",
         ),
@@ -448,8 +448,8 @@ class ReferAndEarnScreen extends GetView<ReferAndEarnController> {
         SizedBox(height: 2.2.h),
         CustomButton(
           onPressed: () {
-            // Share.share('Here your refer code form Beep, Use this for your next beep payment and you will receive wash money.\nCODE: ${Get.find<CommonController>().userDataModel.referralCode}');
-            Share.share(Get.find<CommonController>().userDataModel.referralCode.toString());
+            Share.share('Here your refer code form Beep, Use this for your next beep payment and you will receive wash money.\nCODE: ${Get.find<CommonController>().userDataModel.referralCode.toString()}');
+            // Share.share(Get.find<CommonController>().userDataModel.referralCode.toString());
           },
           text: "Invite Friend",
         ),
