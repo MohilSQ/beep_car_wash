@@ -114,6 +114,7 @@ class ReportSheet extends GetView<ReportController> {
                     onTap: () {
                       showModalBottomSheet(
                         context: context,
+                        isScrollControlled: true,
                         backgroundColor: AppColors.transparentColor,
                         builder: (context) => imageDialog(),
                       );
