@@ -111,6 +111,7 @@ class SettingsScreen extends GetView<SettingsController> {
                               onTap: () {
                                 showModalBottomSheet(
                                   context: context,
+                                  isScrollControlled: true,
                                   backgroundColor: AppColors.transparentColor,
                                   builder: (context) => imageDialog(),
                                 );

@@ -76,6 +76,7 @@ class FindABeepController extends GetxController {
           context: Get.context!,
           backgroundColor: AppColors.transparentColor,
           barrierColor: AppColors.transparentColor,
+          isScrollControlled: true,
           builder: (context) => const NotifyMeSheet(),
         );
       } else {
@@ -92,7 +93,6 @@ class FindABeepController extends GetxController {
               },
               icon: BitmapDescriptor.fromBytes(i == 0 ? await getBytesFromAssets(ImagePath.selectMarker, 190) : await getBytesFromAssets(ImagePath.marker, 160)),
             ),
-
           );
         }
         markerClick(model: model, i: 0);
@@ -109,6 +109,7 @@ class FindABeepController extends GetxController {
       context: Get.context!,
       backgroundColor: AppColors.transparentColor,
       barrierColor: AppColors.transparentColor,
+      isScrollControlled: true,
       builder: (context) => NearestBeepSheet(machineData: model.data![i]),
     );
   }
