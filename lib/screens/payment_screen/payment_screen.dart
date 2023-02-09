@@ -8,7 +8,6 @@ import 'package:beep_car_wash/widgets/custom_appbar.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:sizer/sizer.dart';
 
 class PaymentScreen extends GetView<PaymentController> {
@@ -135,7 +134,7 @@ class PaymentScreen extends GetView<PaymentController> {
                                       Image.asset(
                                         controller.getCardImage(controller.cardBrand!.value),
                                         width: controller.getCardImage(controller.cardBrand!.value) == ImagePath.creditCard ? 10.w : 15.w,
-                                        height:  9.w ,
+                                        height: 9.w,
                                         color: controller.getCardImage(controller.cardBrand!.value) == ImagePath.creditCard ? AppColors.whiteColor : null,
                                       ),
                                     ],

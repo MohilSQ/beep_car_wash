@@ -105,7 +105,7 @@ class CustomTextField extends StatelessWidget {
   Widget textField() {
     return TextField(
       controller: controller,
-      cursorColor: AppColors.appColor,
+      cursorColor: AppColors.appColorText,
       cursorWidth: 2,
       keyboardType: inputType,
       enabled: enabled,

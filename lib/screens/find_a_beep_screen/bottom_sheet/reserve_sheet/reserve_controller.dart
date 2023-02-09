@@ -2,8 +2,8 @@ import 'package:beep_car_wash/api_repository/api_function.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/commons/utils.dart';
-import 'package:beep_car_wash/model/responce_model/get_reserve_responce_model.dart';
-import 'package:beep_car_wash/model/responce_model/reserve_now_response_model.dart';
+import 'package:beep_car_wash/model/response_model/get_reserve_response_model.dart';
+import 'package:beep_car_wash/model/response_model/reserve_now_response_model.dart';
 import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:get/get.dart';
 
@@ -50,7 +50,7 @@ class ReserveController extends GetxController {
 
     ReserveNowResponseModel model = ReserveNowResponseModel.fromJson(data);
     if (model.code == 200) {
-      utils.showToast(context: Get.context!, message: Strings.reservationSuccessfully );
+      utils.showToast(context: Get.context!, message: Strings.reservationSuccessfully);
       Get.back();
       update();
     } else if (model.code == 201) {

@@ -1,4 +1,4 @@
-import 'package:beep_car_wash/screens/biling_screen/billing_controller.dart';
+import 'package:beep_car_wash/screens/billing_screen/billing_controller.dart';
 import 'package:get/get.dart';
 
 class BillingBinding extends Bindings {

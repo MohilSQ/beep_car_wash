@@ -1,5 +1,5 @@
 import 'package:beep_car_wash/commons/utils.dart';
-import 'package:beep_car_wash/model/responce_model/get_feedback_remark_response_model.dart';
+import 'package:beep_car_wash/model/response_model/get_feedback_remark_response_model.dart';
 import 'package:beep_car_wash/screens/drawer_screen/drawer_binding.dart';
 import 'package:beep_car_wash/screens/drawer_screen/drawer_screen.dart';
 import 'package:flutter/cupertino.dart';

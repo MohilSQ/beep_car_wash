@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/model/common_model.dart';
-import 'package:beep_car_wash/model/responce_model/report_respose_model.dart';
+import 'package:beep_car_wash/model/response_model/report_response_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';

@@ -1,7 +1,7 @@
 import 'dart:ui' as ui;
 
 import 'package:beep_car_wash/commons/utils.dart';
-import 'package:beep_car_wash/model/responce_model/stop_machine_response_model.dart';
+import 'package:beep_car_wash/model/response_model/stop_machine_response_model.dart';
 import 'package:beep_car_wash/screens/feedback_screen/feedback_binding.dart';
 import 'package:beep_car_wash/screens/feedback_screen/feedback_screen.dart';
 import 'package:flutter/cupertino.dart';

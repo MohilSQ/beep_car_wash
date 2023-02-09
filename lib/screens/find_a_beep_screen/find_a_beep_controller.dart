@@ -5,7 +5,7 @@ import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/utils.dart';
-import 'package:beep_car_wash/model/responce_model/machine_responce_model.dart';
+import 'package:beep_car_wash/model/response_model/machine_response_model.dart';
 import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/nearest_beep_sheet/nearest_beep_sheet.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/notify_me_sheet/notify_me_sheet.dart';
@@ -92,7 +92,6 @@ class FindABeepController extends GetxController {
               },
               icon: BitmapDescriptor.fromBytes(i == 0 ? await getBytesFromAssets(ImagePath.selectMarker, 190) : await getBytesFromAssets(ImagePath.marker, 160)),
             ),
-
           );
         }
         markerClick(model: model, i: 0);
@@ -116,7 +115,7 @@ class FindABeepController extends GetxController {
   /// ---- Auto Complete Search ------------>>>
   void autoCompleteSearch(String value) async {
     if (value.isNotEmpty) {
-      var result = await googlePlace!.autocomplete.get(value);
+      var result = await googlePlace!.autocomplete.get(value, components: [Component("country", "US")]);
       if (result != null && result.predictions != null) {
         predictions.value = result.predictions!;
         update();

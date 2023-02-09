@@ -1,7 +1,7 @@
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/model/common_model.dart';
-import 'package:beep_car_wash/model/responce_model/common_response_model.dart';
+import 'package:beep_car_wash/model/response_model/common_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

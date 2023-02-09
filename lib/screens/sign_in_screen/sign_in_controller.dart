@@ -5,9 +5,9 @@ import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/get_storage_data.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/commons/utils.dart';
-import 'package:beep_car_wash/model/responce_model/common_token_response_model.dart';
-import 'package:beep_car_wash/model/responce_model/otp_verification_response_model.dart';
-import 'package:beep_car_wash/model/responce_model/user_data_model.dart';
+import 'package:beep_car_wash/model/response_model/common_token_response_model.dart';
+import 'package:beep_car_wash/model/response_model/otp_verification_response_model.dart';
+import 'package:beep_car_wash/model/response_model/user_data_model.dart';
 import 'package:beep_car_wash/screens/drawer_screen/drawer_binding.dart';
 import 'package:beep_car_wash/screens/drawer_screen/drawer_screen.dart';
 import 'package:beep_car_wash/screens/sign_in_otp_screen/sign_in_otp_binding.dart';
@@ -266,7 +266,7 @@ class SignInController extends GetxController {
       'email': email,
       'avatar': photoUrl,
       'device_id': getStorage.readString(getStorage.deviceId),
-      'media_name': mediaName ,
+      'media_name': mediaName,
     });
     final data = await APIFunction().postApiCall(
       context: Get.context!,

@@ -1,7 +1,7 @@
 import 'package:beep_car_wash/api_repository/api_function.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/utils.dart';
-import 'package:beep_car_wash/model/responce_model/wash_history_response_model.dart';
+import 'package:beep_car_wash/model/response_model/wash_history_response_model.dart';
 import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:get/get.dart';
 

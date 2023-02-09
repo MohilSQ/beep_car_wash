@@ -2,7 +2,7 @@ import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
-import 'package:beep_car_wash/model/responce_model/check_job_status_response_model.dart';
+import 'package:beep_car_wash/model/response_model/check_job_status_response_model.dart';
 import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:beep_car_wash/screens/drawer_screen/drawer_controller.dart';
 import 'package:beep_car_wash/widgets/custom_button.dart';
@@ -13,7 +13,10 @@ import 'package:sizer/sizer.dart';
 
 class DrawerScreen extends GetView<DrawerScreenController> {
   final CheckJobStatusResponseModel? checkJobStatusResponseModel;
-  const DrawerScreen( {Key? key,this.checkJobStatusResponseModel,}) : super(key: key);
+  const DrawerScreen({
+    Key? key,
+    this.checkJobStatusResponseModel,
+  }) : super(key: key);
 
   static const routeName = "/DrawerScreen";
 
@@ -53,7 +56,7 @@ class DrawerScreen extends GetView<DrawerScreenController> {
                       child: Text(
                         "Hello, ${Get.find<CommonController>().userDataModel.firstName}",
                         style: TextStyle(
-                          color: AppColors.appColor,
+                          color: AppColors.appColorText,
                           fontWeight: FontWeight.bold,
                           fontSize: 19.sp,
                         ),

@@ -1,8 +1,8 @@
 import 'package:beep_car_wash/api_repository/api_function.dart';
 import 'package:beep_car_wash/commons/constants.dart';
-import 'package:beep_car_wash/map_service/map_service.dart';
 import 'package:beep_car_wash/commons/utils.dart';
-import 'package:beep_car_wash/model/responce_model/common_response_model.dart';
+import 'package:beep_car_wash/map_service/map_service.dart';
+import 'package:beep_car_wash/model/response_model/common_response_model.dart';
 import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response, FormData, MultipartFile;

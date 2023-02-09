@@ -6,7 +6,7 @@ import '../../api_repository/api_function.dart';
 import '../../commons/constants.dart';
 import '../../commons/strings.dart';
 import '../../commons/utils.dart';
-import '../../model/responce_model/get_payment_detail_model.dart';
+import '../../model/response_model/get_payment_detail_model.dart';
 
 class PaymentController extends GetxController {
   Utils utils = Utils();
@@ -70,7 +70,7 @@ class PaymentController extends GetxController {
         for (int i = 0; i < getPaymentDetailsModel!.data!.length; i++) {
           if (getPaymentDetailsModel!.data![i].primaryCard == "1") {
             cardLastNumber!.value = getPaymentDetailsModel!.data![i].last4!;
-            cardBrand!.value = getPaymentDetailsModel!.data![i].brand!.isEmpty ? getPaymentDetailsModel!.data![i].sourceType! :getPaymentDetailsModel!.data![i].brand! ;
+            cardBrand!.value = getPaymentDetailsModel!.data![i].brand!.isEmpty ? getPaymentDetailsModel!.data![i].sourceType! : getPaymentDetailsModel!.data![i].brand!;
             break;
           }
         }
@@ -105,7 +105,7 @@ class PaymentController extends GetxController {
       }
       getPaymentDetailsModel!.data![index!].primaryCard = "1";
       cardLastNumber!.value = getPaymentDetailsModel!.data![index].last4!;
-      cardBrand!.value = getPaymentDetailsModel!.data![index].brand!.isEmpty ? getPaymentDetailsModel!.data![index].sourceType! :getPaymentDetailsModel!.data![index].brand! ;
+      cardBrand!.value = getPaymentDetailsModel!.data![index].brand!.isEmpty ? getPaymentDetailsModel!.data![index].sourceType! : getPaymentDetailsModel!.data![index].brand!;
       update();
     } else {
       utils.showSnackBar(context: Get.context!, message: data["msg"]);

@@ -11,7 +11,19 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class TimerScreen extends GetView<TimerController> {
-  const TimerScreen({Key? key}) : super(key: key);
+  final String? isFrom;
+  final int? isFare;
+  final String? washId;
+  final int? totalTime;
+  final int? remainTime;
+  const TimerScreen({
+    Key? key,
+    this.isFrom,
+    this.isFare,
+    this.washId,
+    this.totalTime,
+    this.remainTime,
+  }) : super(key: key);
 
   static const routeName = "/TimerScreen";
 
@@ -21,7 +33,7 @@ class TimerScreen extends GetView<TimerController> {
       assignId: true,
       dispose: (state) {},
       initState: (state) {
-        controller.start.value =  Get.arguments[0] ? int.parse(Get.arguments[3].toString()) : int.parse(Get.arguments[2].toString());
+        controller.start.value = 8m, totalTime ;
         controller.startTimer();
       },
       builder: (logic) {

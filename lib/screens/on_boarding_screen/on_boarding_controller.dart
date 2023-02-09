@@ -1,11 +1,4 @@
-
-import 'dart:convert';
-import 'dart:io';
-import 'package:beep_car_wash/commons/utils.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-
 
 class OnBoardingController extends GetxController {
   // String deviceId = "fgFKyqH6S0a2RcjCy4GQ6A:APA91bFuek6bjuVbWz3CiVTMLA-kmX8UpvOSEWalt2eqyu1Ks1AA9EFBVoYjMOc51Fv-AHFDaQVBfUknX4IaPRy0I6Wwlc2X73uY97xHDgTvP-RmVsW9EMtXQWXgzHQ6Bl4BG-ZXp9Ql";

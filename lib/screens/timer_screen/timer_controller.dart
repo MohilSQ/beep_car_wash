@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:beep_car_wash/api_repository/api_function.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/utils.dart';
-import 'package:beep_car_wash/model/responce_model/stop_machine_response_model.dart';
+import 'package:beep_car_wash/model/response_model/stop_machine_response_model.dart';
 import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:beep_car_wash/screens/custom_camera_screen/custom_camera_binding.dart';
 import 'package:beep_car_wash/screens/custom_camera_screen/custom_camera_screen.dart';
@@ -19,7 +19,6 @@ class TimerController extends GetxController {
   RxInt start = 0.obs;
 
   void startTimer() {
-
     timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       if (start.value == 0) {
         timer.cancel();

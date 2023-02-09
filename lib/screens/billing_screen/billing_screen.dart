@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:beep_car_wash/commons/common_dialog.dart';
 import 'package:beep_car_wash/commons/utils.dart';
-import 'package:beep_car_wash/model/responce_model/stop_machine_response_model.dart';
+import 'package:beep_car_wash/model/response_model/stop_machine_response_model.dart';
 import 'package:beep_car_wash/paypal_service/paypal_payment.dart';
-import 'package:beep_car_wash/screens/biling_screen/billing_controller.dart';
+import 'package:beep_car_wash/screens/billing_screen/billing_controller.dart';
 import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:beep_car_wash/widgets/custom_container.dart';
 import 'package:flutter/material.dart';

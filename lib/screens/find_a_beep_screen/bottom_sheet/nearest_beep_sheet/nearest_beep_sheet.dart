@@ -4,7 +4,7 @@ import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/commons/utils.dart';
-import 'package:beep_car_wash/model/responce_model/machine_responce_model.dart';
+import 'package:beep_car_wash/model/response_model/machine_response_model.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/nearest_beep_sheet/nearest_beep_controller.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/report_sheet/report_sheet.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/reserve_sheet/reserve_sheet.dart';
@@ -236,7 +236,7 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                                       machineData!.machineInUse == 1 && e.index == 2
                                           ? CircularCountDownTimer(
                                               duration: 600,
-                                              initialDuration: 600 - int.parse(machineData!.remainingTime.toString()) ,
+                                              initialDuration: 600 - int.parse(machineData!.remainingTime.toString()),
                                               controller: controller.countDownController.value,
                                               width: 6.6.h,
                                               height: 6.6.h,

@@ -1,10 +1,10 @@
 import 'package:beep_car_wash/api_repository/api_function.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/utils.dart';
-import 'package:beep_car_wash/model/responce_model/check_job_status_response_model.dart';
-import 'package:beep_car_wash/model/responce_model/stop_machine_response_model.dart';
-import 'package:beep_car_wash/screens/biling_screen/billing_binding.dart';
-import 'package:beep_car_wash/screens/biling_screen/billing_screen.dart';
+import 'package:beep_car_wash/model/response_model/check_job_status_response_model.dart';
+import 'package:beep_car_wash/model/response_model/stop_machine_response_model.dart';
+import 'package:beep_car_wash/screens/billing_screen/billing_binding.dart';
+import 'package:beep_car_wash/screens/billing_screen/billing_screen.dart';
 import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:beep_car_wash/screens/custom_camera_screen/custom_camera_binding.dart';
 import 'package:beep_car_wash/screens/custom_camera_screen/custom_camera_screen.dart';
@@ -61,7 +61,11 @@ class SplashController extends GetxController {
       if (model.isProcess == 0) {
         Get.offAll(() => const DrawerScreen(), binding: DrawerBindings());
       } else if (model.isProcess == 1) {
-        Get.to(() => const TimerScreen(), binding: TimerBinding(), arguments: [true, model.washId, model.totalTime, model.remainigTime]);
+        if (model.isFareFixed == 0) {
+          Get.to(() => const TimerScreen(), binding: TimerBinding(), arguments: [true, model.washId, model.consumedTime, ""]);
+        } else {
+          Get.to(() => const TimerScreen(), binding: TimerBinding(), arguments: [true, model.washId, model.totalTime, model.remainigTime]);
+        }
       } else if (model.isProcess == 2) {
         StopMachineResponseModel stopMachineResponseModel = StopMachineResponseModel(
           data: Data(

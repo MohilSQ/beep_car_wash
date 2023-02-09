@@ -1,8 +1,8 @@
 import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
-import 'package:beep_car_wash/map_service/map_service.dart';
 import 'package:beep_car_wash/commons/strings.dart';
+import 'package:beep_car_wash/map_service/map_service.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/find_a_beep_controller.dart';
 import 'package:beep_car_wash/widgets/custom_container.dart';
 import 'package:beep_car_wash/widgets/custom_text_field.dart';
@@ -165,7 +165,7 @@ class FindABeepScreen extends GetView<FindABeepController> {
                                       itemBuilder: (context, index) {
                                         return ListTile(
                                           leading: CircleAvatar(
-                                            backgroundColor: AppColors.appColor,
+                                            backgroundColor: AppColors.appColorText,
                                             child: const Icon(
                                               Icons.pin_drop,
                                               color: Colors.white,
