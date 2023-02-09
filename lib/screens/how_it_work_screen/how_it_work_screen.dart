@@ -24,7 +24,7 @@ class HowItWorkScreen extends GetView<HowItWorkController> {
                       padding: EdgeInsets.symmetric(vertical: 3.h, horizontal: 6.w).copyWith(top: MediaQuery.of(context).padding.top + AppBar().preferredSize.height + 3.h),
                       child: HtmlWidget(
                         controller.htmlViewModel!.pageContent!,
-                        baseUrl: Uri.parse("https://codewithwaqas.com"),
+                        baseUrl: Uri.parse("http://machine.beepwash.com/"),
                       ),
                     )
                   : const SizedBox(),

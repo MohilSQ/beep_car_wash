@@ -61,7 +61,7 @@ class BillingScreen extends GetView<BillingController> {
                     ),
                     children: [
                       Text(
-                        "Wash Completed! ${Get.find<CommonController>().userDataModel.referralCode.toString()}",
+                        "Wash Completed!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 15.sp,

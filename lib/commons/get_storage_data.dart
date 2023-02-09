@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 class GetStorageData {
   String loginData = "LoginData";
   String deviceId = "deviceId";
+  String isFirst = "isFirst";
 
   /// <<< To save object data --------- >>>
   saveObject(String key, value) {
@@ -48,6 +49,4 @@ class GetStorageData {
     final box = GetStorage();
     return box.hasData(key);
   }
-
-
 }

@@ -1,8 +1,12 @@
+import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/model/common_model.dart';
+import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 class NearestBeepController extends GetxController {
   RxInt isExpand = 0.obs;
@@ -21,4 +25,30 @@ class NearestBeepController extends GetxController {
     CommonModel(index: 2, image: ImagePath.wind, title: "Air Dryer"),
     CommonModel(index: 3, image: ImagePath.vaccum, title: "Vacuum Cleaner"),
   ];
+
+  List showCaseKeyList = [
+    Constants.firstShowCase,
+    Constants.secondShowCase,
+    Constants.thirdShowCase,
+    Constants.fourthShowCase,
+  ];
+
+  List showCaseDesList = [
+    "Click here to get direction\nto Wash Machine",
+    "Click here to scan\nthe wash machine",
+    "Click here to order\na car wash",
+    "Click here to report\nan issue or problem",
+  ];
+
+  showCaseF(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => ShowCaseWidget.of(context).startShowCase([
+        Constants.firstShowCase,
+        Constants.secondShowCase,
+        Constants.thirdShowCase,
+        Constants.fourthShowCase,
+      ]),
+    );
+    Get.find<CommonController>().getStorageData.saveString(Get.find<CommonController>().getStorageData.isFirst, "0");
+  }
 }
