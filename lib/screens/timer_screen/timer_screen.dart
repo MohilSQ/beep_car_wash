@@ -33,7 +33,7 @@ class TimerScreen extends GetView<TimerController> {
       assignId: true,
       dispose: (state) {},
       initState: (state) {
-        controller.start.value = 8m, totalTime ;
+        controller.start.value = totalTime!;
         controller.startTimer();
       },
       builder: (logic) {

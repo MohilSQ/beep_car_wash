@@ -5,6 +5,7 @@ import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
 import 'package:beep_car_wash/commons/utils.dart';
 import 'package:beep_car_wash/model/response_model/machine_response_model.dart';
+import 'package:beep_car_wash/screens/common_controller.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/nearest_beep_sheet/nearest_beep_controller.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/report_sheet/report_sheet.dart';
 import 'package:beep_car_wash/screens/find_a_beep_screen/bottom_sheet/reserve_sheet/reserve_sheet.dart';
@@ -109,9 +110,9 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                             Obx(() {
                               return AnimatedContainer(
                                 duration: const Duration(milliseconds: 500),
-                                margin: EdgeInsets.symmetric(vertical: controller.isExpand.value == 1 || controller.isExpand.value == 2 ? 1.5.h : 0),
+                                margin: EdgeInsets.symmetric(vertical: controller.isExpand.value == 2 ? 1.5.h : 0),
                                 height: controller.isExpand.value == 1
-                                    ? 8.h
+                                    ? 12.h
                                     : controller.isExpand.value == 2
                                         ? 20.h
                                         : 0,
@@ -125,7 +126,7 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                                                       ImagePath.machine,
                                                       height: 16.h,
                                                     ),
-                                                    SizedBox(width: 6.w),
+                                                    SizedBox(width: 8.w),
                                                   ],
                                                 )
                                               : Container(),
@@ -134,9 +135,9 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                                               itemCount: controller.machineData.length,
                                               physics: const NeverScrollableScrollPhysics(),
                                               shrinkWrap: true,
-                                              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                                                maxCrossAxisExtent: 120,
-                                                childAspectRatio: 1.2,
+                                              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                                                maxCrossAxisExtent: 16.h,
+                                                mainAxisExtent: 10.h,
                                               ),
                                               itemBuilder: (context, index) => Column(
                                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -149,6 +150,7 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                                                   SizedBox(height: 0.4.h),
                                                   Text(
                                                     controller.isExpand.value == 1 ? controller.machineData[index].title!.replaceAll(" ", "\n") : controller.machineData[index].title!,
+                                                    maxLines: 2,
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                       fontSize: controller.isExpand.value == 1 ? 8.sp : 10.sp,
