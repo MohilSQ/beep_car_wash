@@ -16,6 +16,7 @@ class TimerScreen extends GetView<TimerController> {
   final String? washId;
   final int? totalTime;
   final int? remainTime;
+  final int? isFareFix;
   const TimerScreen({
     Key? key,
     this.isFrom,
@@ -23,6 +24,7 @@ class TimerScreen extends GetView<TimerController> {
     this.washId,
     this.totalTime,
     this.remainTime,
+    this.isFareFix,
   }) : super(key: key);
 
   static const routeName = "/TimerScreen";

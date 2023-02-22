@@ -136,7 +136,7 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                                               physics: const NeverScrollableScrollPhysics(),
                                               shrinkWrap: true,
                                               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                                                maxCrossAxisExtent: 16.h,
+                                                maxCrossAxisExtent: 12.h,
                                                 mainAxisExtent: 10.h,
                                               ),
                                               itemBuilder: (context, index) => Column(
