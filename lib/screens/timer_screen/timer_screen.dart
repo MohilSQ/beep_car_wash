@@ -12,19 +12,20 @@ import 'package:sizer/sizer.dart';
 
 class TimerScreen extends GetView<TimerController> {
   final String? isFrom;
-  final int? isFare;
   final String? washId;
   final int? totalTime;
   final int? remainTime;
   final int? isFareFix;
+  final int? consumedTime;
+
   const TimerScreen({
     Key? key,
     this.isFrom,
-    this.isFare,
     this.washId,
     this.totalTime,
     this.remainTime,
     this.isFareFix,
+    this.consumedTime,
   }) : super(key: key);
 
   static const routeName = "/TimerScreen";
@@ -35,7 +36,7 @@ class TimerScreen extends GetView<TimerController> {
       assignId: true,
       dispose: (state) {},
       initState: (state) {
-        controller.start.value = totalTime!;
+        controller.start.value = isFareFix == 0 ? consumedTime! : totalTime!;
         controller.startTimer();
       },
       builder: (logic) {
@@ -61,7 +62,7 @@ class TimerScreen extends GetView<TimerController> {
                   SizedBox(height: 4.h),
                   Obx(() {
                     return Text(
-                      "${Strings.yourRemainsTimeIs}${Duration(seconds: controller.start.value).toString().split(".").first.toString().replaceAll("0:", "")}${Strings.min}",
+                      "${Strings.yourRemainsTimeIs}${Duration(seconds: controller.start.value)}${Strings.min}",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 15.sp,
@@ -88,8 +89,12 @@ class TimerScreen extends GetView<TimerController> {
                         color: Color(0xFFD9F3EA),
                       ),
                       child: CircularCountDownTimer(
-                        duration: int.parse(Get.arguments[2].toString()),
-                        initialDuration: Get.arguments[0] ? int.parse(Get.arguments[2].toString()) - int.parse(Get.arguments[3].toString()) : 0,
+                        duration: isFareFix == 0 ? consumedTime! : totalTime!,
+                        initialDuration: isFrom == "SplashScreen"
+                            ? isFareFix == 0
+                                ? consumedTime!
+                                : (totalTime! - remainTime!)
+                            : 0,
                         controller: controller.countDownController.value,
                         width: 60.w,
                         height: 60.w,
@@ -112,7 +117,7 @@ class TimerScreen extends GetView<TimerController> {
                         },
                         onComplete: () {
                           printOkStatus('Countdown Ended');
-                          controller.stopMachineAPI(Get.arguments[1]);
+                          controller.stopMachineAPI(washId!);
                         },
                         onChange: (String timeStamp) {
                           printAction('Countdown Changed $timeStamp');
@@ -133,7 +138,7 @@ class TimerScreen extends GetView<TimerController> {
                     padding: EdgeInsets.symmetric(horizontal: 3.h),
                     child: CustomButton(
                       onPressed: () {
-                        controller.stopMachineAPI(Get.arguments[1]);
+                        controller.stopMachineAPI(washId!);
                       },
                       text: Strings.stop,
                     ),

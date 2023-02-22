@@ -56,7 +56,14 @@ class ScanQrCodeController extends GetxController {
         utils.showToast(context: Get.context!, message: Strings.vMachineStart);
         qrViewController?.stopCamera();
         qrViewController!.dispose();
-        Get.to(() => const TimerScreen(), binding: TimerBinding(), arguments: [false, data["data"]["data"]["wash_id"], data["data"]["data"]["wash_timer"]]);
+        Get.to(
+            () => TimerScreen(
+                  isFrom: "ScanQrCode",
+                  isFareFix: 1,
+                  washId: data["data"]["data"]["wash_id"],
+                  totalTime: data["data"]["data"]["wash_timer"],
+                ),
+            binding: TimerBinding());
       }
     } else if (data["code"] == 201) {
       utils.showSnackBar(context: Get.context!, message: data["msg"]);
