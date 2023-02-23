@@ -53,7 +53,7 @@ class CustomCameraScreen extends GetView<CustomCameraController> {
                         ? Container(color: AppColors.blackColor)
                         : Container(
                             height: 86.h,
-                            // width: controller.controller!.value.previewSize!.width,
+                            width: controller.controller!.value.previewSize!.width,
                             padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
                             child: CameraPreview(controller.controller!),
                           ),

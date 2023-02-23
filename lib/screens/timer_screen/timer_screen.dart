@@ -88,49 +88,47 @@ class TimerScreen extends GetView<TimerController> {
                         shape: BoxShape.circle,
                         color: Color(0xFFD9F3EA),
                       ),
-                      child: CircularCountDownTimer(
-                        duration: isFareFix == 0 ? consumedTime! : totalTime!,
-                        initialDuration: isFrom == "SplashScreen"
-                            ? isFareFix == 0
-                                ? consumedTime!
-                                : (totalTime! - remainTime!)
-                            : 0,
-                        controller: controller.countDownController.value,
-                        width: 60.w,
-                        height: 60.w,
-                        ringColor: AppColors.whiteColor,
-                        fillColor: AppColors.appColorText,
-                        strokeWidth: 0.6.h,
-                        strokeCap: StrokeCap.round,
-                        textStyle: TextStyle(
-                          fontSize: 20.sp,
-                          color: AppColors.appColorText,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textFormat: CountdownTextFormat.MM_SS,
-                        isReverse: false,
-                        isReverseAnimation: false,
-                        isTimerTextShown: true,
-                        autoStart: true,
-                        onStart: () {
-                          printAction('Countdown Started');
-                        },
-                        onComplete: () {
-                          printOkStatus('Countdown Ended');
-                          controller.stopMachineAPI(washId!);
-                        },
-                        onChange: (String timeStamp) {
-                          printAction('Countdown Changed $timeStamp');
-                          controller.update();
-                        },
-                        timeFormatterFunction: (defaultFormatterFunction, duration) {
-                          if (duration.inSeconds == 0) {
-                            return "00:00";
-                          } else {
-                            return Function.apply(defaultFormatterFunction, [duration]);
-                          }
-                        },
-                      ),
+                      child: isFareFix == 0
+                          ? const SizedBox()
+                          : CircularCountDownTimer(
+                              duration: totalTime!,
+                              initialDuration: isFrom == "SplashScreen" ? (totalTime! - remainTime!) : 0,
+                              controller: controller.countDownController.value,
+                              width: 60.w,
+                              height: 60.w,
+                              ringColor: AppColors.whiteColor,
+                              fillColor: AppColors.appColorText,
+                              strokeWidth: 0.6.h,
+                              strokeCap: StrokeCap.round,
+                              textStyle: TextStyle(
+                                fontSize: 20.sp,
+                                color: AppColors.appColorText,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textFormat: CountdownTextFormat.MM_SS,
+                              isReverse: false,
+                              isReverseAnimation: false,
+                              isTimerTextShown: true,
+                              autoStart: true,
+                              onStart: () {
+                                printAction('Countdown Started');
+                              },
+                              onComplete: () {
+                                printOkStatus('Countdown Ended');
+                                controller.stopMachineAPI(washId!);
+                              },
+                              onChange: (String timeStamp) {
+                                printAction('Countdown Changed $timeStamp');
+                                controller.update();
+                              },
+                              timeFormatterFunction: (defaultFormatterFunction, duration) {
+                                if (duration.inSeconds == 0) {
+                                  return "00:00";
+                                } else {
+                                  return Function.apply(defaultFormatterFunction, [duration]);
+                                }
+                              },
+                            ),
                     ),
                   ),
                   const Spacer(),

@@ -43,24 +43,21 @@ class PaypalPaymentState extends State<PaypalPayment> {
   String returnURL = 'return.example.com';
   String cancelURL = 'cancel.example.com';
 
+  // item name, price and quantity
+  String itemPrice = "0";
+  int quantity = 1;
+
   @override
   void initState() {
     super.initState();
-    services = PaypalServices(
-      sandboxMode: widget.sandboxMode!,
-    );
-    setState(() {
-      navUrl = widget.sandboxMode! ? 'https://api.sandbox.paypal.com' : 'https://www.api.paypal.com';
-    });
+    services = PaypalServices(sandboxMode: widget.sandboxMode!);
+    navUrl = widget.sandboxMode! ? 'https://api.sandbox.paypal.com' : 'https://www.api.paypal.com';
+    itemPrice = widget.amount!;
+    setState(() {});
     // Enable hybrid composition.
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
     loadPayment();
   }
-
-  // item name, price and quantity
-  String itemName = 'iPhone X';
-  String itemPrice = '1.99';
-  int quantity = 1;
 
   loadPayment() async {
     setState(() {
@@ -119,7 +116,7 @@ class PaypalPaymentState extends State<PaypalPayment> {
   Map<String, dynamic> getOrderParams() {
     List items = [
       {
-        "name": itemName,
+        "name": "Beep Car Wash",
         "quantity": quantity,
         "price": itemPrice,
         "currency": defaultCurrency["currency"],
