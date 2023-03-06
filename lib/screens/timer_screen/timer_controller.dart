@@ -18,12 +18,16 @@ class TimerController extends GetxController {
   Timer? timer;
   RxInt start = 0.obs;
 
-  void startTimer() {
+  void startTimer({int? isFareFix}) {
     timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
-      if (start.value == 0) {
-        timer.cancel();
+      if (isFareFix == 0) {
+        start.value++;
       } else {
-        start.value--;
+        if (start.value == 0) {
+          timer.cancel();
+        } else {
+          start.value--;
+        }
       }
     });
     update();

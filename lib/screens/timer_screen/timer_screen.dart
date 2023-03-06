@@ -12,19 +12,20 @@ import 'package:sizer/sizer.dart';
 
 class TimerScreen extends GetView<TimerController> {
   final String? isFrom;
-  final int? isFare;
   final String? washId;
   final int? totalTime;
   final int? remainTime;
   final int? isFareFix;
+  final int? consumedTime;
+
   const TimerScreen({
     Key? key,
     this.isFrom,
-    this.isFare,
     this.washId,
     this.totalTime,
     this.remainTime,
     this.isFareFix,
+    this.consumedTime,
   }) : super(key: key);
 
   static const routeName = "/TimerScreen";
@@ -35,8 +36,8 @@ class TimerScreen extends GetView<TimerController> {
       assignId: true,
       dispose: (state) {},
       initState: (state) {
-        controller.start.value = totalTime!;
-        controller.startTimer();
+        controller.start.value = isFareFix == 0 ? consumedTime! : totalTime!;
+        controller.startTimer(isFareFix: isFareFix);
       },
       builder: (logic) {
         return WillPopScope(
@@ -61,7 +62,7 @@ class TimerScreen extends GetView<TimerController> {
                   SizedBox(height: 4.h),
                   Obx(() {
                     return Text(
-                      "${Strings.yourRemainsTimeIs}${Duration(seconds: controller.start.value).toString().split(".").first.toString().replaceAll("0:", "")}${Strings.min}",
+                      isFareFix == 0 ? "You are using machine from ${Duration(seconds: controller.start.value).toString().split(".").first.replaceAll("0:", "")} min" : "${Strings.yourRemainsTimeIs}${Duration(seconds: controller.start.value).toString().split(".").first.replaceAll("0:", "")}${Strings.min}",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 15.sp,
@@ -71,69 +72,106 @@ class TimerScreen extends GetView<TimerController> {
                     );
                   }),
                   SizedBox(height: 5.h),
-                  Container(
-                    width: 72.w,
-                    height: 72.w,
-                    padding: EdgeInsets.all(6.w),
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xFFE7FBF4),
-                    ),
-                    child: Container(
-                      width: 76.w,
-                      height: 76.w,
-                      padding: EdgeInsets.all(6.w),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color(0xFFD9F3EA),
-                      ),
-                      child: CircularCountDownTimer(
-                        duration: int.parse(Get.arguments[2].toString()),
-                        initialDuration: Get.arguments[0] ? int.parse(Get.arguments[2].toString()) - int.parse(Get.arguments[3].toString()) : 0,
-                        controller: controller.countDownController.value,
-                        width: 60.w,
-                        height: 60.w,
-                        ringColor: AppColors.whiteColor,
-                        fillColor: AppColors.appColorText,
-                        strokeWidth: 0.6.h,
-                        strokeCap: StrokeCap.round,
-                        textStyle: TextStyle(
-                          fontSize: 20.sp,
-                          color: AppColors.appColorText,
-                          fontWeight: FontWeight.bold,
+                  isFareFix == 0
+                      ? Container(
+                          width: 72.w,
+                          height: 72.w,
+                          padding: EdgeInsets.all(6.w),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color(0xFFE7FBF4),
+                          ),
+                          child: Container(
+                            padding: EdgeInsets.all(6.w),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0xFFD9F3EA),
+                            ),
+                            child: Container(
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: AppColors.appColorText,
+                                  width: 0.6.h,
+                                ),
+                              ),
+                              child: Obx(() {
+                                return Text(
+                                  Duration(seconds: controller.start.value).toString().split(".").first.replaceAll("0:", ""),
+                                  style: TextStyle(
+                                    fontSize: 20.sp,
+                                    color: AppColors.appColorText,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                );
+                              }),
+                            ),
+                          ),
+                        )
+                      : Container(
+                          width: 72.w,
+                          height: 72.w,
+                          padding: EdgeInsets.all(6.w),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color(0xFFE7FBF4),
+                          ),
+                          child: Container(
+                            width: 76.w,
+                            height: 76.w,
+                            padding: EdgeInsets.all(6.w),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0xFFD9F3EA),
+                            ),
+                            child: CircularCountDownTimer(
+                              duration: totalTime!,
+                              initialDuration: isFrom == "SplashScreen" ? (totalTime! - remainTime!) : 0,
+                              controller: controller.countDownController.value,
+                              width: 60.w,
+                              height: 60.w,
+                              ringColor: AppColors.whiteColor,
+                              fillColor: AppColors.appColorText,
+                              strokeWidth: 0.6.h,
+                              strokeCap: StrokeCap.round,
+                              textStyle: TextStyle(
+                                fontSize: 20.sp,
+                                color: AppColors.appColorText,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textFormat: CountdownTextFormat.MM_SS,
+                              isReverse: false,
+                              isReverseAnimation: false,
+                              isTimerTextShown: true,
+                              autoStart: true,
+                              onStart: () {
+                                printAction('Countdown Started');
+                              },
+                              onComplete: () {
+                                printOkStatus('Countdown Ended');
+                                controller.stopMachineAPI(washId!);
+                              },
+                              onChange: (String timeStamp) {
+                                printAction('Countdown Changed $timeStamp');
+                                controller.update();
+                              },
+                              timeFormatterFunction: (defaultFormatterFunction, duration) {
+                                if (duration.inSeconds == 0) {
+                                  return "00:00";
+                                } else {
+                                  return Function.apply(defaultFormatterFunction, [duration]);
+                                }
+                              },
+                            ),
+                          ),
                         ),
-                        textFormat: CountdownTextFormat.MM_SS,
-                        isReverse: false,
-                        isReverseAnimation: false,
-                        isTimerTextShown: true,
-                        autoStart: true,
-                        onStart: () {
-                          printAction('Countdown Started');
-                        },
-                        onComplete: () {
-                          printOkStatus('Countdown Ended');
-                          controller.stopMachineAPI(Get.arguments[1]);
-                        },
-                        onChange: (String timeStamp) {
-                          printAction('Countdown Changed $timeStamp');
-                          controller.update();
-                        },
-                        timeFormatterFunction: (defaultFormatterFunction, duration) {
-                          if (duration.inSeconds == 0) {
-                            return "00:00";
-                          } else {
-                            return Function.apply(defaultFormatterFunction, [duration]);
-                          }
-                        },
-                      ),
-                    ),
-                  ),
                   const Spacer(),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 3.h),
                     child: CustomButton(
                       onPressed: () {
-                        controller.stopMachineAPI(Get.arguments[1]);
+                        controller.stopMachineAPI(washId!);
                       },
                       text: Strings.stop,
                     ),

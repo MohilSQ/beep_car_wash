@@ -62,9 +62,20 @@ class SplashController extends GetxController {
         Get.offAll(() => const DrawerScreen(), binding: DrawerBindings());
       } else if (model.isProcess == 1) {
         if (model.isFareFixed == 0) {
-          Get.to(() => const TimerScreen(), binding: TimerBinding(), arguments: [true, model.washId, model.consumedTime, ""]);
+          Get.to(() => TimerScreen(
+            isFrom: "SplashScreen",
+            isFareFix: 0,
+            washId: model.washId,
+            consumedTime: model.consumedTime,
+          ), binding: TimerBinding());
         } else {
-          Get.to(() => const TimerScreen(), binding: TimerBinding(), arguments: [true, model.washId, model.totalTime, model.remainigTime]);
+          Get.to(() =>  TimerScreen(
+            isFrom: "SplashScreen",
+            isFareFix: 1,
+            washId: model.washId,
+            totalTime: model.totalTime,
+            remainTime: model.remainigTime,
+          ), binding: TimerBinding());
         }
       } else if (model.isProcess == 2) {
         StopMachineResponseModel stopMachineResponseModel = StopMachineResponseModel(
