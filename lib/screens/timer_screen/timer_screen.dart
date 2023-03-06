@@ -37,7 +37,7 @@ class TimerScreen extends GetView<TimerController> {
       dispose: (state) {},
       initState: (state) {
         controller.start.value = isFareFix == 0 ? consumedTime! : totalTime!;
-        controller.startTimer();
+        controller.startTimer(isFareFix: isFareFix);
       },
       builder: (logic) {
         return WillPopScope(
@@ -62,7 +62,7 @@ class TimerScreen extends GetView<TimerController> {
                   SizedBox(height: 4.h),
                   Obx(() {
                     return Text(
-                      "${Strings.yourRemainsTimeIs}${Duration(seconds: controller.start.value)}${Strings.min}",
+                      isFareFix == 0 ? "You are using machine from ${Duration(seconds: controller.start.value).toString().split(".").first.replaceAll("0:", "")} min" : "${Strings.yourRemainsTimeIs}${Duration(seconds: controller.start.value).toString().split(".").first.replaceAll("0:", "")}${Strings.min}",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 15.sp,
@@ -72,25 +72,60 @@ class TimerScreen extends GetView<TimerController> {
                     );
                   }),
                   SizedBox(height: 5.h),
-                  Container(
-                    width: 72.w,
-                    height: 72.w,
-                    padding: EdgeInsets.all(6.w),
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xFFE7FBF4),
-                    ),
-                    child: Container(
-                      width: 76.w,
-                      height: 76.w,
-                      padding: EdgeInsets.all(6.w),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color(0xFFD9F3EA),
-                      ),
-                      child: isFareFix == 0
-                          ? const SizedBox()
-                          : CircularCountDownTimer(
+                  isFareFix == 0
+                      ? Container(
+                          width: 72.w,
+                          height: 72.w,
+                          padding: EdgeInsets.all(6.w),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color(0xFFE7FBF4),
+                          ),
+                          child: Container(
+                            padding: EdgeInsets.all(6.w),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0xFFD9F3EA),
+                            ),
+                            child: Container(
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: AppColors.appColorText,
+                                  width: 0.6.h,
+                                ),
+                              ),
+                              child: Obx(() {
+                                return Text(
+                                  Duration(seconds: controller.start.value).toString().split(".").first.replaceAll("0:", ""),
+                                  style: TextStyle(
+                                    fontSize: 20.sp,
+                                    color: AppColors.appColorText,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                );
+                              }),
+                            ),
+                          ),
+                        )
+                      : Container(
+                          width: 72.w,
+                          height: 72.w,
+                          padding: EdgeInsets.all(6.w),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color(0xFFE7FBF4),
+                          ),
+                          child: Container(
+                            width: 76.w,
+                            height: 76.w,
+                            padding: EdgeInsets.all(6.w),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0xFFD9F3EA),
+                            ),
+                            child: CircularCountDownTimer(
                               duration: totalTime!,
                               initialDuration: isFrom == "SplashScreen" ? (totalTime! - remainTime!) : 0,
                               controller: controller.countDownController.value,
@@ -129,8 +164,8 @@ class TimerScreen extends GetView<TimerController> {
                                 }
                               },
                             ),
-                    ),
-                  ),
+                          ),
+                        ),
                   const Spacer(),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 3.h),
