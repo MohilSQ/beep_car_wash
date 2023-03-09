@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:beep_car_wash/commons/constants.dart';
@@ -52,6 +53,15 @@ class NearestBeepController extends GetxController {
       ]),
     );
     Get.find<CommonController>().getStorageData.saveString(Get.find<CommonController>().getStorageData.isFirst, "0");
+  }
+
+  RxInt start = 0.obs;
+
+  void startTimer() {
+    Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+      start.value++;
+    });
+    update();
   }
 
   Uri createCoordinatesUri(String latitude, String longitude, [String? label]) {

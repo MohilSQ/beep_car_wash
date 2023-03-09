@@ -27,6 +27,7 @@ class MachineData {
   final int? machineInUse;
   final int? remainingTime;
   final String? tagline;
+  final int? consumedTime;
 
   MachineData({
     this.id,
@@ -38,6 +39,7 @@ class MachineData {
     this.machineInUse,
     this.remainingTime,
     this.tagline,
+    this.consumedTime,
   });
 
   MachineData.fromJson(Map<String, dynamic> json)
@@ -49,7 +51,8 @@ class MachineData {
         isFareFixed = json['is_fare_fixed'] as String?,
         machineInUse = json['machine_in_use'] as int?,
         remainingTime = json['remainig_time'] as int?,
-        tagline = json['tagline'] as String?;
+        tagline = json['tagline'] as String?,
+        consumedTime = json['consumed_time'] as int?;
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -61,5 +64,6 @@ class MachineData {
         'machine_in_use': machineInUse,
         'remainig_time': remainingTime,
         'tagline': tagline,
+        'consumed_time': consumedTime,
       };
 }

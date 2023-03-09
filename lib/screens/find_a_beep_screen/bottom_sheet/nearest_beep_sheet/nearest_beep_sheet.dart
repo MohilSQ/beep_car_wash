@@ -32,6 +32,11 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
             if (Get.find<CommonController>().getStorageData.readString(Get.find<CommonController>().getStorageData.isFirst) == "1") {
               controller.showCaseF(context);
             }
+
+            if (machineData!.isFareFixed == "0") {
+              controller.start.value = machineData!.consumedTime!;
+              controller.startTimer();
+            }
           },
           builder: (logic) {
             return Wrap(
@@ -233,44 +238,74 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                                             targetPadding: EdgeInsets.all(1.h),
                                             targetShapeBorder: const CircleBorder(),
                                             child: machineData!.machineInUse == 1 && e.index == 2
-                                                ? CircularCountDownTimer(
-                                                    duration: 600,
-                                                    initialDuration: 600 - int.parse(machineData!.remainingTime.toString()),
-                                                    controller: controller.countDownController.value,
-                                                    width: 6.6.h,
-                                                    height: 6.6.h,
-                                                    ringColor: AppColors.greyColor.withOpacity(0.2),
-                                                    fillColor: AppColors.appColorText,
-                                                    strokeWidth: 0.4.h,
-                                                    strokeCap: StrokeCap.round,
-                                                    textStyle: TextStyle(
-                                                      fontSize: 10.sp,
-                                                      color: AppColors.appColorText,
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
-                                                    textFormat: CountdownTextFormat.MM_SS,
-                                                    isReverse: false,
-                                                    isReverseAnimation: false,
-                                                    isTimerTextShown: true,
-                                                    autoStart: true,
-                                                    onStart: () {
-                                                      printAction('Countdown Started');
-                                                    },
-                                                    onComplete: () {
-                                                      printOkStatus('Countdown Ended');
-                                                    },
-                                                    onChange: (String timeStamp) {
-                                                      printAction('Countdown Changed $timeStamp');
-                                                      controller.update();
-                                                    },
-                                                    timeFormatterFunction: (defaultFormatterFunction, duration) {
-                                                      if (duration.inSeconds == 0) {
-                                                        return "00:00";
-                                                      } else {
-                                                        return Function.apply(defaultFormatterFunction, [duration]);
-                                                      }
-                                                    },
-                                                  )
+                                                ? machineData!.isFareFixed == "0"
+                                                    ? Container(
+                                                        width: 6.6.h,
+                                                        height: 6.6.h,
+                                                        padding: EdgeInsets.all(6.w),
+                                                        decoration: const BoxDecoration(
+                                                          shape: BoxShape.circle,
+                                                          color: Color(0xFFE7FBF4),
+                                                        ),
+                                                        child: Container(
+                                                          alignment: Alignment.center,
+                                                          decoration: BoxDecoration(
+                                                            shape: BoxShape.circle,
+                                                            border: Border.all(
+                                                              color: AppColors.appColorText,
+                                                              width: 0.6.h,
+                                                            ),
+                                                          ),
+                                                          child: Obx(() {
+                                                            return Text(
+                                                              Duration(seconds: controller.start.value).toString().split(".").first.replaceAll("0:", ""),
+                                                              style: TextStyle(
+                                                                fontSize: 10.sp,
+                                                                color: AppColors.appColorText,
+                                                                fontWeight: FontWeight.bold,
+                                                              ),
+                                                            );
+                                                          }),
+                                                        ),
+                                                      )
+                                                    : CircularCountDownTimer(
+                                                        duration: 600,
+                                                        initialDuration: 600 - machineData!.remainingTime!,
+                                                        controller: controller.countDownController.value,
+                                                        width: 6.6.h,
+                                                        height: 6.6.h,
+                                                        ringColor: AppColors.greyColor.withOpacity(0.2),
+                                                        fillColor: AppColors.appColorText,
+                                                        strokeWidth: 0.4.h,
+                                                        strokeCap: StrokeCap.round,
+                                                        textStyle: TextStyle(
+                                                          fontSize: 10.sp,
+                                                          color: AppColors.appColorText,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),
+                                                        textFormat: CountdownTextFormat.MM_SS,
+                                                        isReverse: false,
+                                                        isReverseAnimation: false,
+                                                        isTimerTextShown: true,
+                                                        autoStart: true,
+                                                        onStart: () {
+                                                          printAction('Countdown Started');
+                                                        },
+                                                        onComplete: () {
+                                                          printOkStatus('Countdown Ended');
+                                                        },
+                                                        onChange: (String timeStamp) {
+                                                          printAction('Countdown Changed $timeStamp');
+                                                          controller.update();
+                                                        },
+                                                        timeFormatterFunction: (defaultFormatterFunction, duration) {
+                                                          if (duration.inSeconds == 0) {
+                                                            return "00:00";
+                                                          } else {
+                                                            return Function.apply(defaultFormatterFunction, [duration]);
+                                                          }
+                                                        },
+                                                      )
                                                 : Container(
                                                     height: 6.6.h,
                                                     width: 6.6.h,
