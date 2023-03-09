@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:beep_car_wash/commons/constants.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
@@ -50,5 +52,21 @@ class NearestBeepController extends GetxController {
       ]),
     );
     Get.find<CommonController>().getStorageData.saveString(Get.find<CommonController>().getStorageData.isFirst, "0");
+  }
+
+  Uri createCoordinatesUri(String latitude, String longitude, [String? label]) {
+    Uri uri;
+
+    if (Platform.isAndroid) {
+      var query = '$latitude,$longitude';
+      if (label != null) query += '($label)';
+      uri = Uri(scheme: 'geo', host: '0,0', queryParameters: {'q': query});
+    } else if (Platform.isIOS) {
+      var params = {'ll': '$latitude,$longitude', 'q': label ?? '$latitude, $longitude'};
+      uri = Uri.https('maps.apple.com', '/', params);
+    } else {
+      uri = Uri.https('www.google.com', '/maps/search/', {'api': '1', 'query': '$latitude,$longitude'});
+    }
+    return uri;
   }
 }

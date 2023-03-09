@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:beep_car_wash/commons/app_colors.dart';
 import 'package:beep_car_wash/commons/image_path.dart';
 import 'package:beep_car_wash/commons/strings.dart';
@@ -202,19 +200,7 @@ class NearestBeepSheet extends GetView<NearestBeepController> {
                               .map((e) => GestureDetector(
                                     onTap: () async {
                                       if (e.index! == 0) {
-                                        String googleMapUrl;
-                                        if (Platform.isAndroid) {
-                                          googleMapUrl = "google.navigation:q=${machineData!.lat},${machineData!.long}&mode=d";
-                                        } else {
-                                          googleMapUrl = "https://www.google.com/maps/search/?api=1&query=${machineData!.lat},${machineData!.long}";
-                                        }
-
-                                        if (await canLaunchUrl(Uri.parse(googleMapUrl))) {
-                                          await launchUrl(Uri.parse(googleMapUrl));
-                                        } else {
-                                          Utils().showSnackBar(context: Get.context!, message: "Could not open the Map");
-                                          throw 'Could not open the Map';
-                                        }
+                                        launchUrl(controller.createCoordinatesUri(machineData!.lat!, machineData!.long!, "Beep Car wash"));
                                       } else if (e.index == 1) {
                                         Get.to(() => const ScanQRCodeScreen(), binding: ScanQRCodeBinding(), arguments: ["Scan", machineData!.id!.toString()]);
                                       } else if (e.index == 2) {
